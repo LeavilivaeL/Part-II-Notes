@@ -1,0 +1,303 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}[margin=1in]
+\usepackage{tikz}
+\usepackage[parfill]{parskip}
+\usepackage{subcaption}
+\usepackage{stmaryrd}
+\usepackage{textcomp}
+\newcommand{\st}{\text{ s.t. }}
+\newcommand{\contr}{\lightning}
+\newcommand{\im}{\mathfrak{i}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\upper}{upper}
+\DeclareMathOperator{\dom}{dom}
+\let\emph\relax
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+\newtheorem{t1}{Lemma}[section]
+\newtheorem{t2}[t1]{Corollary}	
+\newtheorem{thm13}[t1]{Theorem}
+\newtheorem{lem14}[t1]{Lemma}
+\newtheorem{thm15}[t1]{Theorem}
+
+\title{Automata and Formal Languages}
+\begin{document}
+\maketitle
+\section{Register Machines and Computability}
+\textbf{\underline{Books:}} PTJ (Chapter 4)
+
+\textsc{Note: Here $\N = \{0,1,2,\ldots\}$}
+
+A \emph{register machine (RM)} consists of:
+\begin{enumerate}
+\item A sequence of \emph{registers} $R_1, R_2, R_3, \ldots$ where at discrete time steps $t = 0,1,2,\ldots$ have $R_i(t) \in \N$, In fact, we only have finitely many registers, and regard $R_i \equiv 0$ for all $i\geq I$.
+\item A finite \emph{program} consisting of a fixed number of \emph{states} $S_0$ (\textsc{Halt}), $S_1$ (\textsc{Start}), $S_2,\ldots, S_n$. Each state comes with a fixed instruction performed when in state $S_i$. When the computer reaches \textsc{Halt}, we get the output from $R_1$. Otherwise, for $1\leq i\leq n$ we have $2$ types of \emph{commands}:
+\begin{enumerate}
+\item Increment $R_j$, then move to state $S_k$. We write this $S_i:(j,+,k)$.
+\item If $R_j \neq 0$ then decrement $R_j$, then move to state $S_k$. Otherwise move to state $S_l$. We write this $S_i:(j,-,k,l)$.
+\end{enumerate}
+\end{enumerate}
+
+A \emph{sequence of instructions} for a RM is the ordered list of the instructions for the program.\\
+An \emph{input} for a RM is, for some $k\geq 1$, a finite $k$-tuple $(n_1,\ldots,n_k)\in\N^k$ which are the initial values of $R_1,\ldots,R_k$. The other registers are set to 0.
+
+A \emph{program diagram} for a RM is a directed graph with vertices being the states of the machine and the labelled arrows denote the instructions: $S_i:(j,+,k) $
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\begin{center}
+\tikz{
+\node (i) at (0,0) [circle, draw] {$S_i$};
+\node (k) at (3,0) [circle, draw] {$S_k$};
+\draw (i) edge[->] node[above] {$R_j +1$} (k) ;
+}
+\end{center}
+\caption{$S_i:(j,+,k)$}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\begin{center}
+\tikz{
+\node (i) at (0,1) [circle, draw] {$S_i$};
+\node (k) at (3,1) [circle, draw] {$S_k$};
+\node (l) at (3,0) [circle, draw] {$S_l$};
+\draw (i) edge[->] node[above, midway] {$R_j -1$} (k);
+\draw (i) edge[dashed,->] (l);
+}
+\end{center}
+\caption{$S_i:(j,-,k,l)$}
+\end{subfigure}
+\end{figure}
+
+We can then use these to describe programs:
+\begin{figure}
+\begin{subfigure}{.8\textwidth}
+\centering
+\tikz{
+\node (0) at (0,0) [circle, draw] {$S_0$};
+\node (1) at (2,0) [circle, draw] {$S_1$};
+\draw[->] (1.-60) arc (220:220+285:6mm) node[midway, right] {$R_1 + 1$};
+}
+\caption{Repeatedly increment $R_1$, never halting}
+\end{subfigure}
+\begin{subfigure}{.8\textwidth}
+\centering
+\tikz{
+\node (0) at (0,0) [circle, draw] {$S_0$};
+\node (1) at (2,0) [circle, draw] {$S_1$};
+\node (2) at (4,0) [circle, draw] {$S_2$};
+\node (3) at (6,0) [circle, draw] {$S_3$};
+\draw (1) edge[bend left,->] node[above] {$R_2-1$} (2);
+\draw (2) edge[bend left,->] node[below] {$R_1-1$} (1);
+\draw (1) edge[dashed,->] (0);
+\draw (2) edge[dashed,->] (3);
+\draw[->] (3.-60) arc (220:220+285:6mm) node[right, midway] {$R_1 + 1$};
+}
+\caption{For input $(n_1,n_2)$ returns $n_1-n_2$ if $n_1\geq n_2$, else never halt}
+\end{subfigure}
+\begin{subfigure}{.8\textwidth}
+\centering
+\tikz{
+\node (0) at (1,0) [circle, draw] {$S_0$};
+\node (1) at (0,1.5) [circle, draw] {$S_1$};
+\node (2) at (2,1.5) [circle, draw] {$S_2$};
+\node (3) at (4,1.5) [circle, draw] {$S_3$};
+\draw[->] (1.120) arc (40:40+285:6mm) node[left, midway] {$R_j - 1$};
+\draw[dashed, ->] (1) edge (2);
+\draw (2) edge[->, bend left] node[above] {$R_i-1$} (3);
+\draw (3) edge[->, bend left] node[below] {$R_j+1$} (2);
+\draw (2) edge[->, dashed, bend left] (0);
+}
+\caption{Transfer $R_i$ to $R_j$, emptying $R_i$}
+\end{subfigure}
+\end{figure}
+
+For any $k>0$ a program $P$ \emph{halts} on input $(m_1, m_2, \ldots, m_k) \in \N^k$ if it ever reaches state $S_0$, written $P(m_1,\ldots,m_k)\downarrow$\\
+The \emph{halting set} $\Omega(P)$ is a set of inputs on which $P$ halts.
+\begin{align*}
+\Omega(P) = \cup_{k>0} \{(m_1,\ldots,m_k) : P(m_1,\ldots,m_k)\downarrow\}
+\end{align*}
+If $P$ does not halt, we write $P(m_1,\ldots,m_k)\uparrow$.
+
+For each program $P$, the \emph{upper register index} $\upper(P)$ is the largest index of a register appearing in the instructions for $P$. So if $i>\upper(P)$ then $R_i$ never changes.
+
+A \emph{partial function} $f:\N^k \rightarrow \N$ is one where the domain of $f$ is a subset of $\N^k$, and undefined otherwise. If $f$ is defined everywhere then we call it a \emph{total function}. This lets us define these programs as functions - we say $f$ is \emph{partial computable} by a program $P$ such that $\forall (m_1,\ldots,m_k) \in \dom(f)$ have $P(m_1,\ldots,m_k)\downarrow$ with $f(m_1,\ldots,m_k) = R_1$ on halting, and $\forall (m_1,\ldots,m_k)\notin \dom(f)$ we have $P(m_1,\ldots,m_k)\uparrow$. Hence any program $P$ and $k>0$ gives a partial function $f:\N^k \rightarrow \N$.
+
+\begin{t1}
+We can add $R_i$ to $R_j$ leaving $R_i$ unchanged.
+\end{t1}
+\begin{proof}
+\item
+\centering
+\tikz{
+\node (1) at (0,4) [circle,draw] {$S_1$};
+\node (2) at (2,4) [circle,draw] {$S_2$};
+\node (3) at (4,4) [circle,draw] {$S_3$};
+\node (4) at (1,2) [circle,draw] {$S_4$};
+\node (5) at (3,2) [circle,draw] {$S_5$};
+\node (0) at (0,0) [circle,draw] {$S_0$};
+\draw (1) edge[->] node[below] {$R_i-1$} (2);
+\draw (2) edge[->] node[below] {$R_n+1$} (3);
+\draw (1) edge[->, dashed] (4);
+\draw (3) edge[->, bend right] node[above] {$R_j+1$} (1);
+\draw (4) edge[->, bend left] node[above] {$R_n-1$} (5);
+\draw (5) edge[->, bend left] node[below] {$R_i+1$} (4);
+\draw (4) edge[->, dashed] (0);
+}\\
+Thus by setting ($i=2, j=1$) we see that $(n_1, n_2) \mapsto n_1 + n_2$ is total computable.
+\end{proof}
+We have already seen that the function $n\mapsto 0$ is also computable. This can be done with the machine:
+\begin{center}
+\tikz{
+\node (1) at (0,0) [circle, draw] {$S_1$};
+\node (0) at (2,0) [circle, draw] {$S_0$};
+\draw (1) edge[->, dashed] (0);
+\draw[->] (1.120) arc (40:40+285:6mm) node[left, midway] {$R_1 - 1$};
+}
+\end{center}
+\begin{t2}
+There exists a routine which can copy $R_i$ to $R_j$ leaving $R_i$ unchanged.
+\end{t2}
+\begin{proof}
+First empty $R_j$, then use \textbf{1.1} to add $R_i$ to $R_j$.
+\end{proof}
+We can use these as subroutines to join with other programs $P$. Use registers $R_n \st n> \upper(P)$ and largest input register. Then replace the halt state of $P$ with the start state of the subroutine. In fact we have already done this - if you look carefully at the adding machine, you can see that the middle section is the same as the machine in (c) of the examples - this is the part where we replace the value in $R_i$ from its temporary location in $R_n$.
+
+\subsection*{Partial Recursive Functions}
+Partial computable functions have good closure properties.
+\begin{thm13}
+\item
+\begin{enumerate}
+\item For $i\leq k$, the \emph{projection function} $(n_1, \ldots, n_k) \mapsto n_i$ is computable.
+\item The zero function $n\mapsto 0$ and \emph{successor function} $n\mapsto n+1$ are computable
+\item (Composition) If $f:\N^k\rightarrow \N$ and $g_1, \ldots, g_k:\N^{l} \rightarrow \N$ are all partial computable then so is the composition function $h(n_1,\ldots,n_l) = f(g_1(n_1,\ldots,n_l),\ldots,g_k(n_1,\ldots,n_l))$ where defined. If $f,g_1,\ldots,g_k$ are total functions, so is $h$.
+\item (Recursion) If $f$ on $k$ variables and $g$ on $k+2$ variables are partial computable, then so is the partial function $h:\N^{k+1}\rightarrow \N$ defined inductively as:
+\begin{align*}
+h(n_1,\ldots,n_k,0)&=f(n_1,\ldots,n_k)\\
+h(n_1,\ldots,n_k,n_{k+1}+1) &= g(n_1,\ldots,n_{k+1},h(n_1,\ldots,n_{k+1}))
+\end{align*}
+Moreover, $f,g$ total $\implies h$ total.
+\item (Minimisation) If $f$ on $k+1$ variables is partial computable then so is the partial function $g:\N^k\rightarrow \N$ defined by $g(n_1,\ldots,n_k) = n$ if $f(n_1,\ldots,n_k,n) = 0$ and $f(n_1,\ldots,n_k,m) > 0$ for all $m<n$, and is undefined if no zero is ever found. Note that $f$ total $\nRightarrow g$ total.
+\end{enumerate}
+\end{thm13}
+\begin{proof}\item
+\begin{enumerate}
+\item We can use the program Transfer $R_i$ to $R_1$, \textsc{Halt}.
+\item Zero function has already been seen. For successor function, use:
+\begin{center}
+\tikz{
+\node (1) at (0,0) [circle, draw] {$S_1$};
+\node (0) at (2,0) [circle, draw] {$S_2$};
+\draw (1) edge[->] node[above] {$R_1 +1$} (0);
+}
+\end{center}
+\item First transfer $R_1,\ldots, R_l$ to $R_{N+1},\ldots, R_{N+l}$ where $N$ is large enough to not be needed in other subroutines. Then for each $1\leq i\leq k$ in turn, copy $R_{N+1}, \ldots, R_{N+l}$ to $R_{k+1},\ldots, R_{k+l}$, perform $g_i$ but with all registers shifted up by $k$ and then transfer answer from $R_{k+1}$ to $R_{i}$, then clear $R_{k+2},\ldots,R_N$. Finally, apply $f$. 
+\item Copy $R_1,\ldots,R_k$ to $R_{N+1},\ldots,R_{N+k}$, transfer $R_{k+1}$ to $R_{N+k+2}$ (``counts down"), then do $f$. Then:
+\begin{center}
+\tikz{
+\node (0) at (0,3) [circle, draw] {$\cdot$};
+\node[draw] (1) at (7,2) {Transfer $R_1$ to $R_{k+2}$ then copy $R_{N+1},\ldots, R_{N+k+1}$ to $R_1,\ldots,R_{k+1}$};
+\node (2) at (5,0) [draw] {\textsc{Halt}$(g)$, clear $R_{k+2},\ldots,R_N$};
+\node (3) at (0,0) [draw] {\textsc{Halt}};
+\draw (0) edge[->, bend left] node[above] {$R_{N+k+2} -1$} (1);
+\draw (1) edge[->] node[right] {$g$} (2);
+\draw (2) edge[->, bend left] node[right] {$R_{N+k+1}+1$} (0);
+\draw (0) edge[->, dashed] (3);
+}
+\end{center}
+\item Copy $R_1, \ldots, R_k$ to $R_{N+1},\ldots,R_{N+k}$. Then
+\begin{center}
+\tikz{
+\node (0) at (1,2) [circle, draw] {$\cdot$};
+\node[draw] (1) at (2,4) {Copy $R_{N+1},\ldots,R_{N+k+1}$ to $R_1,\ldots,R_{k+1}. $ Clear $R_{k+2},\ldots, R_N$};
+\node (2) at (2,0) [draw] {\textsc{Halt}$(f)$};
+\node (3) at (6,0) [draw] {Transfer $R_{N+k+1}$ to $R_1$, \textsc{Halt}};
+\draw (0) edge[->] node[left] {$R_{N+k+1} +1$} (1);
+\draw (1) edge[->] node[right] {$f$} (2);
+\draw (2) edge[->] node[left] {$R_{i}-1$} (0);
+\draw (2) edge[->, dashed] (3);
+}
+\end{center}
+\end{enumerate}
+\end{proof}
+The class of \emph{partial recursive functions} is the smallest class of partial functions from $\N^k$ to $\N$ over all $k\geq 1$ closed under the operations \textbf{1.3} (1) to (5). That is, $f$ can be constructed from basic functions and applications of $(3), (4), (5)$ a finite number of times.
+
+So \textbf{1.3} says that partial recursive $\implies$ partial computable.
+
+A partial function is \emph{primitive recursive} if we never use \textbf{1.3} (5) its construction. Note that primitive recursive $\implies$ total recursive, as (5) was the only construction that breaks the totality of the function. \textlbrackdbl The converse implication is not true: the Ackermann function. \textrbrackdbl
+
+Example: $+$ and $\times$ are primitive recursive:
+\begin{itemize}
+\item[$+$:] Let $h(m,0) = m$, $h(m,n+1) = h(m,n) + 1 = g(m,n,h(m,n))$, where $g(x,y,z) = z+1$.
+\item[$\times$:] $H(m,0) = 0$, $H(m,n+1) = H(m,n) + m = g(m,n,H(m,n))$ for $g(x,y,z) = x+z$.
+\end{itemize}
+Example: $(m,n)\mapsto m^n$ is primitive recursive - left as exercise.
+
+We need to be able to ``encode" finite sequences of arbitrary length in $\N$. For $n>0$ and $i\in\N$, write $p_i$ for the $(i+1)th$ prime (so $p_0 = 2$). Write $(n)_i$ for the largest power of the prime $p_i$ that divides $n$.
+
+\begin{lem14}
+For each fixed $i$, the 1 variable function $(\cdot)_i : \N \rightarrow \N$ is primitive recursive.
+\end{lem14}
+
+\begin{proof}
+First note that, for any finite sequence $(m_0, m_1, \ldots, m_s)\subseteq\N^{s+1}$, the function\\ $f(n) = \begin{cases} m_n &n\leq s \\ 0 & n>s \end{cases}$ is primitive recursive.
+
+By induction on $s$ and recursion from \textbf{1.3} \textit{(4)}, for $k=0$ if $c$ constant and $g:\N^2 \rightarrow \N$ is primitive recursive, then so is $h(0) = c, h(n+1) = g(n, h(n))$.
+
+Thus, given $f:\N\rightarrow\N$ primitive recursive, let $g(n,m) \coloneqq f(n)$, which is primitive recursive. So $h(0)=c, h(n+1)=f(n)$ is primitive recursive, and we can repeat this process. 
+
+This includes for each \underline{fixed} k:
+\begin{enumerate}
+\item The step function $\text{Step}_k(n) = \begin{cases} 1 & 0\leq n\leq k-1 \\ 0 & \text{otherwise} \end{cases}$
+\item The delta function $\delta_k(n) = \begin{cases} 1 & n=k \\ 0 & n\neq k\end{cases}$ Let $\epsilon(n) = \delta_0(\delta_0(n)) = \begin{cases} 0 & n=0\\ 1 & n=1\end{cases}$ - this is also primitive recursive.
+\item The slope function $\text{Slope}_k(n) = \begin{cases} n+1 & 0\leq n \leq k-2 \\ 0 & \text{otherwise} \end{cases}$
+\item The remainder function $\text{Rem}_k(n) = n \mod k$ use recursion in the form $g(n,m) \coloneqq f(m)$, so $h(0) = 0$, $h(n+1)=f(h(n))$ primitive recursive if $f$ is. Here, $\text{Rem}_k(n+1) = \text{Slope}_k(\text{Rem}_k(n))$
+\item[*5.] $\text{Floor}_k(n) = \left\lfloor\frac{n}{k}\right\rfloor$
+\item[*6.] $\text{Divide}_k(n) = \begin{cases} n/k & n\equiv 0 \mod k \\ 0 & \text{otherwise} \end{cases}$
+\item[*7.] Division by powers $\text{Power}_k(n,m) = \begin{cases} n/k^m & n\equiv 0 \mod k^m \\ 0 & \text{otherwise} \end{cases}$
+\item[*8.] $\text{Maxpower}_k(n) = \begin{cases} 0 & n=0 \\ \text{largest power of k dividing n} & n\neq 0 \end{cases}$
+\end{enumerate}
+Proofs of *ed function are on example sheet 1.
+
+Now define by recursion $h(n,0) = 0$ and $h(n,m+1) = h(n,m) + \epsilon(\text{Power}_k(n,m+1))$.\\
+$\epsilon(\text{Power}_k(n,j)) = \begin{cases} 1 & k^j \text{ divides } n>0 \\ 0 & \text{otherwise} \end{cases}$, so is $0$ if $j\geq n$
+
+So $h(n,n) = \sum_{i=1}^n \epsilon(\text{Power}_k(n,1)) = \text{Maxpower}_k(n)$, so $h(n,n)$ is primitive recursive.
+\end{proof}
+
+\subsection*{Computable = Recursive}
+We have seen already that partial recursive $\implies$ partial computable.
+\begin{thm15}
+Every partial computable function $f:\N^k \rightarrow \N$ is partial recursive.
+\end{thm15}
+\begin{proof}
+From a program $P$ for $f$, define $g:\N^{k+2}\rightarrow \N$, ``what actually goes on in $P$", to be the function:
+\begin{center}
+$g(n_1,\ldots,n_k,0,t) $ is the state of $P$ after time $t$ with input $(n_1,\ldots,n_k)$
+\end{center}
+So $t=0$ gives $1$ and if halt at $t_0$ then gives $0$ for all $t \geq t_0$, and:
+\begin{center}
+$(n_1, \ldots, n_k, i, t)$ is the contents of $R_i$ at time $t$
+\end{center}
+So have $N$ (assume $>k$) such that $g(\cdots, i, \cdot) = 0 \forall i>N$. Note that $g$ is a total function.
+
+\underline{Suppose} that $g$ is recursive and define $q(n_1,\ldots, n_k) = \min\{t: g(n_1,\ldots,n_k,0,t)=0\}$. Then $q$ is partial recursive, and so $f(n_1, \ldots, n_k) = g(n_1, \ldots, n_k, 1, q(n_1, \ldots, n_k))$ is partial recursive.
+
+\underline{Proof that $g$ is recursive:}\\
+Fix $n_1, \ldots, n_k$ and $t$. For each $0\leq i \leq N$, $g$ gives $(g_0, \ldots, g_N) \in \N^{N+1}$, encode as $c(d_0, \ldots, d_N) = 2^{d_0}3^{d_1}\ldots p_N^{d_N} \in \N$ is primitive recursive. Also, $(c(d_0, \ldots, d_N))_i = d_i$ is primitive recursive. We will define $h:\N^{k+2}\rightarrow \N$ via recursion where $h(n_0, n_1, \ldots, n_k, t)$ is the coded integer of state and registers of $P$ at time $t$ for input $n_1, \ldots, n_k$ and start state $n_0$ (here $=1$).
+
+In particular, for $t=0, h=2^{n_0}3^{n_1}\ldots p_k^{n_k}$. For recursion for $h$, we need $s:\N\rightarrow\N$, the ``transition function", which computes in coded form the changes at each step.
+\end{proof}
+\end{document}

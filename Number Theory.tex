@@ -1,0 +1,273 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}[margin=1in]
+\usepackage{tikz}
+\usepackage[parfill]{parskip}
+\usepackage{subcaption}
+\usepackage{stmaryrd}
+\newcommand{\st}{\text{ s.t. }}
+\newcommand{\contr}{\lightning}
+\newcommand{\im}{\mathfrak{i}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\ord}{ord}
+\let\emph\relax
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+\newtheorem{divAlg}{Theorem}[section]
+\newtheorem{thm12}[divAlg]{Theorem}
+\newtheorem{corr13}[divAlg]{Corollary}
+\newtheorem{euclAlg}[divAlg]{Theorem}
+\newtheorem{corr15}[divAlg]{Lemma}
+\newtheorem{fundArith}[divAlg]{Theorem}
+\newtheorem{thm17}[divAlg]{Theorem}
+
+\newtheorem{lem21}{Lemma}[section]
+\newtheorem{cor22}[lem21]{Corollary}
+\newtheorem{thm23}[lem21]{Theorem}
+\newtheorem{thm24}[lem21]{Theorem}
+\newtheorem{thm25}[lem21]{Theorem}
+\newtheorem{cor26}[lem21]{Corollary}
+\newtheorem{cor27}[lem21]{Corollary}
+\newtheorem{lem28}[lem21]{Lemma}
+\newtheorem{thm29}[lem21]{Theorem}
+
+\title{Number Theory}
+\begin{document}
+\maketitle
+\section{Euclid's Algorithm}
+\begin{divAlg}[Division Algorithm]%fix this to be in brackets properly
+Given $a, b \in \Z, b > 0$, we can determine $\exists q, r \in \Z \st a = qb+r$ with $0 \leq r <b$.
+\end{divAlg}
+\begin{proof}
+Let $S = \{a-nb : n\in\Z\}$. $S$ contains some non-negative integer. Let $r$ be the least such integer, say $a-qb$. Then $a = qb + r$, so STP $r < b$.
+
+Suppose $b \leq r$. Then $0 < r-b = a-(q+1)b \in S$, and $r-b < r$. \contr (choice of r)
+\end{proof}
+
+If $r=0$, i.e. if $a=qb$ for some $q \in \Z$, then we write $b| a$ and say ``$b$ \emph{divides}
+$a$" or ``$b$ is a \emph{divisor} of $a$". If $r\neq 0$, then we instead write $b\nmid a$ and say ``$b$ does \emph{not divide} $a$".
+
+Given $a_1,\ldots, a_n \in \Z$ not all $0$, let $I=\{\lambda_1 a_1+\ldots+\lambda_n a_n : \lambda_i \in \Z\}$. Observe if $a,b \in I, \ell, m \in \Z$, then $\ell a + mb \in I$.
+
+\begin{thm12}
+$I = d\Z = \{dm:m\in\Z\}$ for some $d > 0$
+\end{thm12}
+\begin{proof}
+$I$ contains some positive integer. Let $d > 0$ be the least such. Then clearly $I \supseteq d\Z$.
+
+Conversely, let $a\in I$ and apply \textbf{1.1} to obtain $a = qd+r$ for some $q,r \in \Z$, $0\leq r < d$. Then $r=a-qd \in I \implies r = 0$, so $d\Z\supseteq I$
+
+\therefore $I = d\Z$
+\end{proof}
+
+Note that $a_i \in I \forall i$, so $d| a_i \forall i$. Conversely, if $c | a_i \forall i$ then $c$ divides every element of $I$, so in particular $c | d$.
+
+We write $d = \gcd(a_1, \ldots, a_n) = (a_1, \ldots, a_n)$, and say $d$ is the \emph{greatest common divisor} of the $a_i$.
+
+\begin{corr13}[B\'ezout]
+Let $a,b \in \Z$, $a,b$ not both $0$. Then $\exists x,y \in \Z \st ax+by=c \iff (a,b)| c$.
+\end{corr13}
+The division algorithm gives an efficient method for computing $(a,b)$.
+
+\begin{euclAlg}[Euclid's Algorithm]
+Suppose $a>b>0$. Then:
+\begin{align*}
+a &= q_1 b + r_1 \hspace{2cm} 0\leq r_1 < b\\
+b &= q_2 r_1 + r_2 \hspace{2cm} 0\leq r_2 < r_1\\
+r_1 &= q_3 r_2 + r_3 \hspace{2cm} 0\leq r_3 < r_2\\
+&\hspace{.8cm}\vdots\\
+r_{k-2} &= q_k r_{k-1} + r_k \hspace{2cm} r_k\neq 0\\
+r_{k-1} &= q_{k+1} r_k (+0)
+\end{align*}
+and $r_k = (a,b)$
+\end{euclAlg}
+\begin{proof}
+We have $r_k|r_{k-1} \implies \ldots \implies r_k|a, r_k|b \implies r_k|(a,b)$, so $r_k \leq (a,b)$. Note also that any $m \st m| a$ and $m| b$ also divides $r_k$. In particular, $(a,b)|r_k$, and thus $(a,b)\leq r_k$, hence $r_k = (a,b)$.
+\end{proof}
+Additionally, by working back up the algorithm, we can obtain a representation $(a,b) = \lambda a + \mu b$ where $\lambda, \mu \in \Z$
+
+An integer $n>1$ is \emph{prime} if its only positive divisors are $1$ and $n$. Otherwise, we say $n$ is \emph{composite}.
+\begin{corr15}
+Let $p$ be a prime, $a,b \in \Z$. Then $p|ab \iff p|a$ or $p|b$
+\end{corr15}
+\begin{proof}
+It is clear that if $p|a$ or $p|b$, then $p|ab$. Conversely, suppose $p|ab$ but $p\nmid a$. Them $(a,p) \neq p$. By definition, $(a,p)|p \implies (a,p) \in \{1,p\}$, so $(a,p)=1$. Now by \textbf{1.3} we can find $x,y\in\Z\st 1=ax+by \implies b = b(ax+py) = x(ab) + (by)p$, so $p|b$.
+\end{proof}
+
+\begin{fundArith}[The Fundamental Theorem of Arithmetic]
+Every integer $n>1$ can be written as a product of primes uniquely up to reordering
+\end{fundArith}
+\begin{proof}
+We have existence by strong induction.
+
+For uniqueness, $n$ is the least integer with two distinct such representations, say $=n=p_1\ldots p_s = q_1\ldots q_r$ for $p_i, q_j$ primes.\\
+Then $p_1|q_1\ldots q_r \implies p_1|q_j$ for some $j$. WLOG $j=1$. Since $p_1 > 1$ as $1$ is non-primes, $n/p_1 < n$, and $n/p_1 = p_2\ldots p_s = q_2\ldots q_r$ can be written in two distinct ways as a product of primes. \contr (choice of $n$)
+\end{proof}
+
+If $m = \Pi_{i=1}^k p_i^{\alpha_i}, n = \Pi_{i=1}^k p_i^{\beta_i}$ where $p_i$ are distinct primes, $\alpha_i, \beta_i \geq 0$, then $(m,n) = \Pi_{i=1}^k p_i^{\gamma_i}$ with $\gamma_i = \min\{\alpha_i, \beta_i\}$. However, if $m,n$ are large, it is much more ``efficient" to compute the gcd via Euclid's algorithm.
+
+An algorithm with input $N>0$ is said to run in \emph{polynomial time} if it takes at most $c(\log N)^k$ elementary operations to complete, where $c,k > 0$ are constants independent of $N$. If the algorithm takes inputs $N_1, N_2, \ldots, N_s$, the polynomial time means $c(\max\log N_i)^k$.
+
+Examples of polynomial time algorithms:
+\begin{itemize}
+\item Adding and multiplying integers
+\item The gcd of two numbers via Euclid's algorithm
+\item Testing of primality
+\end{itemize}
+On the other hand, factoring a number into prime factors does not have a polynomial time algorithm, and it is conjectured that one does not exist. For instance, if $N=p\cdot q$ with $p,q$ primes of $\sim 50$ digits each, to do trial division up to $\sqrt{N}$ at a rate of $2^9$ divisions per second, it would take approximately $\sqrt{10^{100}}/2^9$ seconds, or about $6\times 10^39$ years. However, we can compute the gcd in milliseconds using Euclid's algorithm.
+
+\begin{thm17}
+There are infinitely many primes. i.e. $\pi(x) \rightarrow \infty$ as $x\rightarrow \infty$
+\end{thm17}
+\begin{proof}
+Fix $N>1$, let $p$ be the largest prime $\leq N$. Let $q$ be a prime factor of $M = (2\times 3\times 5 \times\ldots \times p) +1$. Then $q > N$ since $q \notin \{2,3,\ldots, p\}$, but $N$ was arbitrary.
+\end{proof}
+
+\section{Congruences}
+Let $n\geq 1$ be an integer. We write $a\equiv b \mod n$ if $n|a-b$. This defines an equivalence relation on $\Z$, and we will write $\Z/n\Z$ for the equivalence classes induced by this relation, which are $a + n\Z$ for $0\leq a < n$. It is easy to check that $(a+n\Z) + (b+n\Z) = (a+b+n\Z)$ and that $(a+n\Z)\times (b+n\Z) = (ab+n\Z)$ are well defined operations, i.e $n\Z$ is an ideal, and $\Z/n\Z$ is the quotient ring. 
+
+\begin{lem21}
+Let $a \in \Z$. Then the following are equivalent:
+\begin{enumerate}
+\item $(a,n) = 1$
+\item $\exists b\in\Z\st ab\equiv b \mod n$
+\item The equivalence class of $a$ generates the group $(\Z/n\Z, +)$
+\end{enumerate}
+\end{lem21}
+
+\begin{proof}\item
+\begin{itemize}
+\item{$(1)\implies(2)$:} $(a,n) = 1 \implies \exists b, c \in \Z \st ab+cn=1$ by \textbf{1.3}, and hence $ab \equiv 1 \mod n$.
+\item{$(2)\implies(1)$:} $ab \equiv 1 \mod n \iff ab-1=kn$ for some $k \in \Z$, and so by \textbf{1.3} $(a,n) = 1$.
+\item{$(2)\iff (3)$:} $ab \equiv 1 \mod n \iff 1\in \langle a\rangle \leq \Z/n\Z \iff \langle a\rangle = \Z/n\Z$
+\end{itemize}
+\end{proof}
+
+We write $(\Z/n\Z)^\times$ for the set of \emph{units} (the elements with a multiplicative inverse) of $\Z/n\Z$.\\
+By \textbf{2.1}, $(\Z/n\Z)^{\times}$ contains precisely those classes $a+n\Z$ such that $(a,n) = 1$. Note that if $n>1$ then $\Z/n\Z$ is a field precisely when $n$ is prime.
+
+Let \emph{Euler's $\varphi$ function} be $\varphi(n) \coloneqq \left|(\Z/n\Z)^\times\right|$ for $n>1$, and let $\varphi(1)=1$. Observe that $\varphi(p) = p-1$ for $p$ prime. Moreover, $\varphi$ is a multiplicative function: $(m,n) = 1 \implies \varphi(mn) = \varphi(m)\varphi(n).$
+
+\begin{cor22}
+Let $G$ be a cyclic group of order $n\geq 1$. Then $\varphi(n) = |\{g\in G: \ord(g)=n\}| $, the number of generators of $G$.
+\end{cor22}
+
+\begin{thm23}[Euler-Fermat]
+IF $(a,n)=1$, $a,n \in\Z$, then $a^{\varphi(n)} \equiv 1 \mod n$
+\end{thm23}
+\begin{proof}
+By Lagrange's Theorem, the order of $a$ in the group $(\Z/n\Z)^\times$ divides the order of $(\Z/n\Z)^\times$, which is $\varphi(n)$
+\end{proof}
+
+\begin{thm24}[Fermat's Little Theorem]
+If $a, p \in \Z$ and $p$ is prime, then $a^p\equiv a \mod p$.
+\end{thm24}
+\begin{proof}
+If $p|a$, then this holds trivially. If $p\nmid a, (a,p) =1$ and so by \textbf{2.3} we have $a^{\varphi(p)} \equiv a^{p-1} \equiv 1 \mod p$
+\end{proof}
+
+\subsection*{Multiple Congruences}
+Can we find all $x\in \Z \st x \equiv 4 \mod 7$ and $x \equiv 5 \mod 12$?\\
+Suppose we can find $u,v\in\Z \st \begin{cases}u\equiv 1 \mod 7; & u\equiv 0 \mod 12 \\ v \equiv 0 \mod 7; & v\equiv 1 \mod 12\end{cases}$. Then we can write down that $x = 4u+5v$. Since $(7,12)=1$, by \textbf{1.3} there are some $m,n\in\Z$ with $7m+12n=1$, and from Euclid's algorithm we can determine these to be $m=-5, n=3$. Then we can find $u=12n=1-7m; v=7m=1-12n$, and substitution gives $u=36, v=-35$, and so a solution to the original problem is $4\times 36-5\times 35 = -31$. Now the lowest common multiple of $7$ and $12$ is $84$, and so our solution set is: $\{x\in\Z: x\equiv -31 \mod 84\}$.\\
+We can in fact generalise this process:
+\begin{thm25}[Chinese Remainder Theorem]
+Let $m_1,\ldots,m_k$ be pairwise coprime positive integers, and let $M = \Pi_{i=1}^k m_i$. Then given any integers $a_1,\ldots,a_k$ there is a solution $x$ to the the system of congruences:
+\begin{align*}
+x &\equiv a_1 \mod m_1\\
+x &\equiv a_2 \mod m_2\\
+&\hspace{1cm}\vdots\\
+x &\equiv a_k \mod m_k
+\end{align*}
+Moreover, this solution is unique modulo $M$.
+\end{thm25}
+Note that if $x$ satisfies this system of equations, then so does $x+tM$ for any $t\in\Z$, and so the complete set of solutions is $x+M\Z$.
+
+\begin{proof}\item
+\underline{Uniqueness:} If $x,y$ satisfy the system, then $m_i | x-y$ for all $i=1,\ldots, k$. Since no prime divides any tow the $m_i$, $M|x-y$ and hence $x\equiv y\mod M$.
+
+\underline{Existence:} Write $M_i = \frac{M}{m_i} = \Pi_{j\neq i} m_j$ for each $i=1,2,\ldots,k$. Since $(m_i,m_j)=1 \forall i\neq j$, $(m_i,M_i) = 1$ for all $i=1,2,\ldots, k$. Therefore, for each $i=1,2,\ldots,k$ we can find $b_i \in \Z$ such that $M_i b_i \equiv 1 \mod m_i$ and $M_i b_i \equiv 0 \mod m_j$ for $j\neq i$. Then $x=\sum_{i=1}^k a_ib_iM_i$ solves the system of congruences.
+\end{proof}
+
+If $m_1,\ldots,m_k$ are pairwise coprime, and $M=\Pi m_i$, then map $\theta:\Z/M\Z\rightarrow \Z/m_1\Z \times \ldots \times \Z/m_k\Z$, taking $x \mod M \mapsto (x\mod m_1, \ldots, x\mod m_k)$ is an isomorphism of rings. To see this, note that if $m_i|M$ then $x\mod m_i$ is determined by $x\mod M$ which implies that $\theta$ is well-defined. It is a homomorphism by the properties of $+,\times$ in $\Z/n\Z$, and \textbf{2.5} implies that $\theta$ is a bijection. In particular, if $n=p_1^{\alpha_1}\ldots p_k^{\alpha_k}$ for distinct primes $p_i$, then $\Z/n\Z \cong \Z/p_1^{\alpha_1}\Z\times\ldots\times\Z/p_k^{\alpha_k}\Z$.
+
+\begin{cor26}
+If $m_1,\ldots,m_k$ are pairwise coprime and $M = \Pi_{i=1}^k m_i$ and $a_1,\ldots,a_k \in \Z$ are such that $(a_i,m_i) = 1$ for each $i=1,2,\ldots,k$, then there is a solution to the system of congruences in \textbf{2.5}, and any such solution is in fact coprime to $M$.
+\end{cor26}
+
+\begin{proof}
+\textbf{2.5} gives us a solution, say $x\in\Z$. Suppose $(x,M)>1$. Then there is a prime $p$ such that $p|x$ and $p|M$ simultaneously. $p$ prime, so WLOG suppose that $p$ divides $m_1$. Since $x\equiv a_1\mod m_1$, we must have $p|a_1$, and so $p|(a_1,m_1)$ \contr.
+\end{proof}
+
+\begin{cor27}
+If $m_1,\ldots, m_k$ are pairwise coprime with $M=\Pi_{i=1}^k m_i$, then $\varphi(M)=\varphi(m_1)\cdot\ldots\cdot\varphi(m_k)$
+\end{cor27}
+A \emph{multiplicative function} is a function $f:\N\rightarrow\C$ such that, for all $m,n \in\N$ coprime, $f(mn)=f(m)f(n)$. A function $f:\N\rightarrow\C$ is said to be \emph{totally multiplicative} if for all $m,n\in\N$, $f(m,n)=f(m)f(n)$.
+
+Some multiplicative functions are:
+\begin{itemize}
+\item $\varphi(m)$
+\item $\tau(n) = $ the number of positive divisors of $n$
+\item $\sigma(n) = $ the sum of the positive divisors of $n$
+\item $\sigma_k(n) = \sum_{d|n} d^k$, so that $\sigma_0(n) = \tau(n), \sigma_1(n) = \sigma(n)$.
+\end{itemize}
+None of these are totally multiplicative however.
+
+\begin{lem28}
+Let $f$ be a multiplicative function. Then so is $g$, where $g(n) = \sum_{d|n} f(d)$.
+\end{lem28}
+\begin{proof}
+Let $m,n \in \N, (m,n)=1$. Then the divisors of $mn$ are precisely the integers of the form $d_1d_2$ where $d_1|m, d_2|n$ and $(d_1,d_2)=1$. This means that we can write down
+\begin{align*}
+g(mn) &= \sum_{d|mn} f(d)\\
+&= \sum_{d_1|m} \sum_{d_2|n} f(d_1d_2)\\
+&= \sum_{d_1|m}\sum_{d_2|n} f(d_1)f(d_2)\\
+&= \sum_{d_1|m} f(d_1) \sum_{d_2|n} f(d_2)\\
+&= g(m)g(n)
+\end{align*} 
+\end{proof}
+Then if we let $f(n) = n^k$ for some $k\in\N$. Then $g(n) = \sum_{d|n} d^k = \sigma_k(n)$. Later on, we shall see that we can recover $f$ from $g$ via M\"obius inversion.
+
+\begin{thm29}
+\item
+\begin{enumerate}
+\item If $p$ is a prime and $m\in\N$ then $\varphi(p^m) = p^{m-1}(p-1) = p^m\left(1-\frac{1}{p}\right)$
+\item $\forall n\in\N, \varphi(n)=n\cdot\Pi_{p|n}\left(1-\frac{1}{p}\right)$
+\item $\sum_{d|n} \varphi(d) = n$
+\end{enumerate}
+\end{thm29}
+\begin{proof}
+\item
+\begin{enumerate}
+\item 
+\begin{align*}
+\varphi(p^m) &= \left|\{1\leq a\leq p^m : (a,p^m)=1\}\right| \\
+&= p^m-p^{m-1}\\
+&= p^m\left(1-\frac{1}{p}\right)
+\end{align*}
+\item Let $n=\Pi_{i=1}^k p_i^{\alpha_i}$ for $p_i$ distinct primes, $\alpha_1 \geq 1$. Then:
+\begin{align*}
+varphi(n) &= \Pi_{i=1}^k \varphi(p_i^{\alpha_i})\\
+&= \Pi_{i=1}^k p_i^{\alpha_i} \left(1-\frac{1}{p_i}\right)\\
+&= n\cdot\Pi_{p|n}\left(1-\frac{1}{p}\right)
+\end{align*}
+\item $\varphi$ is multiplicative and so is $n\mapsto n$, so it suffices to check that both sides agree when $n$ is a prime power. Let $p$ be a prime $m\in\N$. Then:
+\begin{align*}
+\sum_{d|p^m} \varphi(d) &= \varphi(1) + \varphi(p) +\ldots +\varphi(p^m)\\
+&= 1+ (p-1) + (p^2-p) + \ldots + (p^m-p^{m-1}) \\
+&= p^m
+\end{align*}
+\end{enumerate}
+\end{proof}
+\end{document}

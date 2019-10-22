@@ -1,52 +1,5 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{geometry}[margin=1in]
-\usepackage{tikz}
-\usepackage[parfill]{parskip}
-\usepackage{subcaption}
-\usepackage{stmaryrd}
-\usepackage{float}
-\usetikzlibrary{decorations.pathmorphing,topaths,shapes}
-\newcommand{\st}{\text{ s.t. }}
-\newcommand{\contr}{\lightning}
-\newcommand{\im}{\mathfrak{i}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{\mathbb{F}}
-\newcommand{\K}{\mathbb{K}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\let\emph\relax
-\DeclareTextFontCommand{\emph}{\bfseries\em}
-
-\newtheorem{treeprops}{Theorem}[section]
-\newtheorem{cor12}[treeprops]{Corollary}
-\newtheorem{handshaking}[treeprops]{Lemma}
-\newtheorem{thm14}[treeprops]{Theorem}
-\newtheorem{cor15}[treeprops]{Corollary}
-\newtheorem{cor16}[treeprops]{Corollary}
-\newtheorem{thm17}[treeprops]{Theorem}
-\newtheorem{thm18}[treeprops]{Theorem}
-\newtheorem{thm19}[treeprops]{Theorem}
-\newtheorem{thm110}[treeprops]{Theorem}
-\newtheorem{thm111}[treeprops]{Theorem}
-\newtheorem{thm112}[treeprops]{Theorem}
-
-\newtheorem{thm21}{Theorem}[section]
-\newtheorem{cor22}[thm21]{Corollary}
-\newtheorem{cor23}[thm21]{Corollary}
-\newtheorem{cor24}[thm21]{Corollary}
-
-\tikzset{sketch/.style={decorate,
- decoration={random steps, amplitude=1pt, segment length=5pt}, 
- line join=round, draw=black!80, very thick, fill=#1
-}}
+\input{./preamble.tex}
 
 \title{Graph Theory}
 \begin{document}
@@ -182,14 +135,14 @@ A \emph{forest} is a graph containing no circuit.\\
 A \emph{tree} is a connected forest, i.e. the components of a forest are trees.\\
 Equivalently, a tree is a connected circuit-free graph. This bring us on to our first theorem of the course:
 
-\begin{treeprops}
+\begin{theorem}
 The following are equivalent:
 \begin{enumerate}
 \item $G$ is a tree
 \item $G$ is a minimal connected (connected, but the removal of any edge kills connectivity)
 \item $G$ is maximal circuit-free (the addition of any edge creates a circuit)
 \end{enumerate}
-\end{treeprops}
+\end{theorem}
 
 \begin{proof}
 \subsubsection*{$(a) \implies (b)$}
@@ -208,9 +161,9 @@ Let $G$ be maximal circuit free. Let $u,v \in V(G)$. Either $uv \in E(G)$ or $G+
 \end{proof}
 
 A subgraph $T$ of a graph $G$ is said to be \emph{spanning} if $V(T) = V(G)$, i.e. the subgraph touches every vertex of $G$
-\begin{cor12}
+\begin{corollary}
 A graph is connected if and only if it has a spanning tree.
-\end{cor12}
+\end{corollary}
 \begin{proof}
 \item
 \begin{itemize}
@@ -225,25 +178,25 @@ The minimum and maximum degrees in $G$ are denoted by $\delta(G)$ and $\Delta(G)
 If $\delta(G) = \Delta(G) = k$, i.e. $d(v)=k \forall v$ we say $G$ is \emph{$k$-regular}. A \emph{regular} graph is one that is $k$-regular for some $k$. If a graph is $3$-regular, it is called \emph{cubic}.\\
 The degrees of the graph written in some order form a \emph{degree sequence} of $G$.
 
-\begin{handshaking}[Handshaking Lemma]
+\begin{lemma}[lemma Lemma]
 \begin{align*}
 \sum_{v\in G} d(v) = 2e(G)
 \end{align*}
-\end{handshaking}
+\end{lemma}
 \begin{proof}
 Each edge has $2$ vertices at the end, so contributes $2$ to the sum of all degrees.
 \end{proof}
 A \emph{leaf} is a vertex of degree $1$.
-\begin{thm14}
+\begin{theorem}
 Every tree $T$ with $|T|\geq 2$ has at least two leaves.
-\end{thm14}
+\end{theorem}
 \begin{proof}
 We note $T$ is connected so $\delta(T) \geq 1$. Let $x_1$ be a vertex (a leaf if there is one). Let $x_1x_2\ldots x_k$ be a maximal path from $x_1$. $T$ is circuit-free so none of $x_1,\ldots,x_{k-2}$ is in $\Gamma(x_k)$, and $x_k$ has no other neighbours except for $x_{k-1}$, otherwise this path can be extended, hence $\Gamma(x_k) = \{x_{k-1}\}$, so $x_k$ is a leaf. Repeat the proof starting at $x_k$ for a second leaf.
 \end{proof}
 
-\begin{cor15}
+\begin{corollary}
 A tree of order $n$ has size $n-1$
-\end{cor15}
+\end{corollary}
 \begin{proof}
 \item
 This is true for $n = 1, 2$ by inspection, as there is only 1 tree:
@@ -269,14 +222,14 @@ This is true for $n = 1, 2$ by inspection, as there is only 1 tree:
 Let $|T| \geq 3$. By \textbf{1.3} $T$ has a leaf $v$. Then $T-v$ is certainly circuit free and connected, because the $x-y$ path in $T$ uses $v$ if and only if $x$ or $y$ is $v$. Hence the corollary follows by induction.
 \end{proof}
 
-\begin{cor16}
+\begin{corollary}
 The following are equivalent for a graph $G$ of order $n$:
 \begin{enumerate}
 \item $G$ is a tree
 \item $G$ is connected and $e(G) = n-1$
 \item $G$ is acyclic and $e(G) = n-1$
 \end{enumerate}
-\end{cor16}
+\end{corollary}
 \begin{proof}\item
 \begin{itemize}
 \item{$(1) \implies (2),(3)$:} True by definition and \textbf{1.5}.
@@ -369,9 +322,9 @@ There are $2^{\binom{n}{2}}$ \emph{labelled} graphs of order $n$ - $\binom{n}{2}
 However, there are only $4$ unlabelled graphs of order $3$ - all the graphs of the same colour are essentially the same, just with different labels given to the vertices. In general we must count the number of orbits amongst labelled graphs under the action of a group, using Burnside's Lemma. In fact, it turns out this number is asymptotic to $2^{\binom{n}{2}}/n!$
 
 \subsection*{How many trees of order $n$ are there?}
-\begin{thm17}[Cayley]
+\begin{theorem}[Cayley]
 There are $n^{n-2}$ labelled tress of order $n$.
-\end{thm17}
+\end{theorem}
 \begin{proof}(Pr\"ufer, Non-examinable)\\
 We construct a bijection between trees strings length $n-2$ over the alphabet $n$.
 \begin{itemize}
@@ -404,9 +357,9 @@ Here, we would get the string $3, 8, 11, 8, 5, 8, 3, 5, 10$. Each vertex is writ
 \end{proof}
 
 A graph is \emph{$r$-partite} if its vertices can be partitioned into $r$ classes so that no edge lies within a class. In the special case where $r=2$ we call the graph \emph{bipartite}. Remarkably, we can characterise all bipartite graphs.
-\begin{thm18}
+\begin{theorem}
 A graph is bipartite if and only if it contains no odd circuit.
-\end{thm18}
+\end{theorem}
 \begin{proof}
 For the ``only if" part, in a bipartite graph the vertices of a circuit alternate between the two classes, otherwise an edge would lie in a class. Hence any circuit must be of even length.
 
@@ -455,9 +408,9 @@ An \emph{Euler cycle} as a ``walk" around all the edges of a graph returning to 
 \end{figure}
 
 A graph is \emph{Eulerian} if it is a single vertex or has an Euler cycle.
-\begin{thm19}
+\begin{theorem}
 A graph is Eulerian if and only if it is connected and every vertex has even degree
-\end{thm19}
+\end{theorem}
 \begin{proof}
 The forwards direction is clear: an Eulerian graph must be connected, and for every time we enter a vertex along an edge we must also leave that vertex, so each vertex has even degree.
 
@@ -495,9 +448,9 @@ E.g.:
 
 These two graphs are the same planar graph, but are different plane graphs. Note that we include the outer infinite face. There are no analytical/topological difficulties involved. Any planar graph can be drawn with piecewise linear edges, and in fact with straight line edge (see example sheet 1), so any issues are purely combinatorial.
 
-\begin{thm110}[Euler]
+\begin{theorem}[Euler]
 Let $G$ be a connected plane graph with $n$ vertices, $m$ edges, and $f$ faces. Then $n-m+f = 2$.
-\end{thm110}
+\end{theorem}
 \begin{proof}
 $G$ has a spanning tree with $n-1$ edges, so $m\geq n-1$. If $m=n-1$ then $G$ is a tree, in which case $f=1$ so done. We now proceed by induction on $m$. If $m>n-1$, there is a circuit $C$. If we remove an edge from this circuit, then we obtain a graph with 1 fewer edge and 1 fewer face, and so by the induction hypothesis, $n-(m-1)+(f-1)=2 \implies n-m+f=2$.
 \end{proof}
@@ -506,17 +459,17 @@ A \emph{bridge} (or \emph{isthmus}) is an edge whose removal increases the numbe
 
 The \emph{girth} of a graph is the length of its shortest circuit.
 
-\begin{thm111}
+\begin{theorem}
 Let $G$ be a connected bridgeless planar graph of girth $g$, order $n$, size $m$. Then:
 \begin{align*}
 m\leq \frac{g}{g-2}(n-2)
 \end{align*}
 In particular, every planar graph of order $n\geq 3$ has size at most $3n-6$ and contains a vertex of degree $\leq 5$.
-\end{thm111}
+\end{theorem}
 \begin{proof}
 Draw $G$ in the plane, with $f_i$ faces of length $i$. Then $2n = \sum_i if_i \geq g\sum_i f_i = gf$. By \textbf{1.10}, $n-2=m-f \geq m-\frac{2}{g}m = m\frac{g-2}{g}$, establishing the claimed formula.
 
-Now given any planar graph, add edges if necessary to make it connected and bridgeless. Since the girth $g\geq 3$, $m\leq 3n-6$. By the handshaking lemma, the average degree is less than 6.
+Now given any planar graph, add edges if necessary to make it connected and bridgeless. Since the girth $g\geq 3$, $m\leq 3n-6$. By the lemma lemma, the average degree is less than 6.
 \end{proof}
 \subsection*{Some Planar Graphs}
 \begin{figure}[h]
@@ -622,9 +575,9 @@ Take any graph $G$. A \emph{subdivision} or \emph{topological} $G$ is any graph 
 \end{subfigure}
 \end{figure}
 Kuratowski (1930) and Pontryagin (much earlier, unpublished) characterised planar graphs:
-\begin{thm112}[Kuratowski]
+\begin{theorem}[Kuratowski]
 $G$ is planar if and only if it contains no $TK_5$ and no $TK_{3,3}$.
-\end{thm112}
+\end{theorem}
 We will not prove this here.
 
 Given a plane graph, we can draw a new graph, the \emph{dual graph}, by placing a dual vertex inside each original face and adding a dual edge for every original edge separating the two faces. 
@@ -656,13 +609,13 @@ Let $G$ be a bipartite graph with vertex classes $X, Y$. A \emph{matching} from 
 If $|X| = |Y|$, such a matching is also a matching of $Y$ to $X$. We call it a \emph{1-factor} (i.e. a \emph{1-regular} spanning subgraph). We can think of this in terms of arranged marriages of things in $X$ and $Y$, but I'm not sure why you would. A matching from $X$ to $Y$ does not always exist (for instance, if $|X|>|Y|$), but remarkably, a simple necessary condition is also sufficient.
 
 Firstly, given $A\subset V(G)$ define $\Gamma(A) = \cup_{a\in A}\Gamma(a)$. Then we can say:
-\begin{thm21}[Hall's Marriage Theorem]
+\begin{theorem}[Hall's Marriage Theorem]
 Let $G$ be a bipartite graph with bipartition $X, Y$. Then there is a matching from $X$ to $Y$ if and only if:
 \begin{align*}
 |\Gamma(A)| \geq |A| \; \forall \. A \subseteq X
 \end{align*}
 This condition is known as Hall's condition.
-\end{thm21}
+\end{theorem}
 \begin{proof}
 The ``only if" part is immediate. We will prove the ``if" part in several ways:
 
@@ -679,26 +632,53 @@ Let $G_1 = G[B \cup \Gamma(B)], G_2 = G[(X\setminus B)\cup (Y \setminus \Gamma(B
 Remove edges to get a minimal graph where Hall's Condition holds. If $d(a)=1$ for all $a\in X$, then what's left is a matching. If not, then some $a\in X$ has two neighbours $b_1, b_2$ and sets $A_1, A_"$ such that $|\Gamma(A_i)| = |A_i|$, and $\Gamma(a)-b_i \subset \Gamma(A_i)$. So $|\Gamma(A_1 \cup A_2 \cup \{a\}) = \Gamma(A_1\cup A_2)$, and $|\Gamma(A_1 \cup A_2 \cup \{a\})| = |\Gamma(A_1\cup A_2)| = |\Gamma(A_1)\cup\Gamma(A_2)| = |\Gamma(A_1)|+|\Gamma(A_2)|-|\Gamma(A_1)\cap \Gamma(A_2)| \leq |\Gamma(A_1)| + |\Gamma(A_2)| - |\Gamma(A_1 \cap A_2)| \leq |A_1| + |A_2| - |A_1\cap A_2| = |A_1 \cup A_2| < |A_1 \cup A_2 \cup \{a\}|$ \contr.
 \end{proof}
 
-\begin{cor22}[Defect Form]
+\begin{corollary}[Defect Form]
 Let $G$ be a bipartite graph with bipartition $X, Y$ and let $d\in\N$. Then $G$ has $|X|-d$ independent edges if and only if $|\Gamma(A)| \geq |A| - d \;\forall\. A\subset X$.
-\end{cor22}
+\end{corollary}
 \begin{proof}
 Introduce $d$ members of $Y$ with edges to all of $X$. Now Hall's condition holds, so there is a matching in this new graph by \textbf{2.1}. Then remove the extra vertices.
 \end{proof}
 
-\begin{cor23}[Polyandrous version]
+\begin{corollary}[Polyandrous version]
 Let $G$ be a bipartite graph, $d \in \N$. Then each woman can have $d$ husbands (i.e for each member of $X$ we can assign $d$ members of $Y$ so that none of those members of $Y$ are shared among members of $X$) if and only if $|\Gamma(A)| \geq d|A|$
-\end{cor23}
+\end{corollary}
 \begin{proof}
 Clone $X$ $d$ times (so that all the clones have the same edges to $Y$ as their original). Hall's condition holds for the clones, so we marry the clones to the men, then give the clones' husbands to the original women.
 \end{proof}
 
-Given a family of subsets of $Y$, say $\mathfrak{F} = \{F_1, F_2, \ldots, F_n\} \subseteq \mathcal{P}(Y)$, a \emph{transversal} or \emph{set of distinct representations} is a collection $\{y_1, \ldots, y_n\}$ with $y_i \in F_i$
-\begin{cor24}
+Given a family of subsets of $Y$, say $\mathfrak{F} = \{F_1, F_2, \ldots, F_n\} \subseteq \powset(Y)$, a \emph{transversal} or \emph{set of distinct representations} is a collection $\{y_1, \ldots, y_n\}$ with $y_i \in F_i$
+\begin{corollary}
 There exists a set of distinct representations if and only if $|\cup_{i\in I} F_i | \geq |I| \; \forall\. I\subset [n]$.
-\end{cor24}
+\end{corollary}
 \begin{proof}
 Construct the bipartite graph with $X = \mathfrak{F}$ and $E = \{Fy : y\in F\}$. Then apply Hall's theorem.
 \end{proof}
 
+A graph $G$ is \emph{k-connected} if it has more than $k$ vertices and $G-S$ is connected for every subset $S \subseteq V(G)$ such that $|S|<k$. Note that $k$-connected $implies$ $k-1$-connected and so on.
+
+The \emph{vertex connectivity} of $G$ is $\kappa(G) = \max\{k:G $ is $k$-connected$\}$. If $G$ is not complete, $\kappa(G) = \min\{|S|: G-S$ disconnected$\}$.
+
+Let $a,b \in V(G), ab\notin E(G)$. Then we can define their \emph{local connectivity} $\kappa(a,b;G) = \min\{|S|:S\subseteq V(G)\setminus\{a,b\}, $ there is no $a-b$ path in $G-S\}$, i.e. the fewest vertices we can remove to separate $a$ from $b$. Then, if $G$ is not complete, $\kappa(G) = \min_{a,b\notin E(G)} \kappa(a,b; G)$.
+
+There are corresponding edge-connectivities: $\lambda(G) = \min\{|F|:F\subseteq E(G), G-F $ disconnected$\}$.
+
+Given $a,b \in V(G)$, a set $\{P_1, P_2, \ldots, P_t\}$ of $a-b$ paths is \emph{vertex disjoint} if $P_i$ and $P_j$ have no vertex in common except for $a$ and $b$. How large can a set of vertex disjoint $a-b$ paths be? Certainly, the answer is at most $\kappa(a,b;G)$, since any set $S$ must include at least one vertex from each path in order for $G-S$ to have no $a-b$ path.
+
+\begin{theorem}[Menger]
+Let $a,b\in V(G)$ and $ab \notin E(G)$. Then there exists a set of $\kappa(a,b;G)$ vertex disjoint $a-b$ paths, and no larger set.
+\end{theorem}
+\begin{proof}
+We've already noted that there is no larger set. Note also that the theorem is immediate if $\kappa(a,b;G) = 0$ or $1$. If you know the Max Flow-Min Cut theorem, the result is immediate, but we will prove it by hand:
+
+Suppose not, i.e. that there is no set of $\kappa(a,b;G)$ vertex disjoint $a-b$ paths for some $G, a, b$. Then let $G, a, b$ be a minimal counterexample (where minimal means firstly over vertices, then over edges). Let $k = \kappa(a,b;G) \geq 2$.
+
+We then say $S \subseteq V(G) - \{a,b\}$ \emph{separates} $a$ from $b$ if there is no $a-b$ path in $G-S$.  Suppose there is a separator $S$ with $|S|=k$ with $S\nsubseteq \Gamma(a)$ and $S \nsubseteq \Gamma(b)$. Let $C$ be the component of $G-S$ containing $a$. Form a new graph $G_a$ by ``contracting $C$ to a point", i.e. taking $G-C$ and add a new vertex $a^\star$ joined to all of $S$.
+\begin{center}
+%draw graph blob C with a in connected to S connected to blob with b in called G
+%draw graph same but wiht C replaced by astar$
+\end{center}
+Note that every vertex of $S$ has a neighbour in $C$, else a proper subset of $S$ separates $a$ from $b$. Since $S\nsubseteq \Gamma(a)$ we have $e(G_a) < e(G)$, so the theorem holds for $G_a$. Note that any set separating $a^\star$ from $b$ in $G_a$ separates $a$ from $b$ in $G$, so $\kappa(a^\star, b; G_a) \geq k$, and so by the theorem there is a set of vertex disjoint $a^\star-b$ paths in $g_a$, giving a set of $k$ paths $P_1, \ldots, P_k$ from $S$ to $b$ in $G$, disjoint except at $b$. Similarly, we can define $G_b$ and $k$ paths $Q_1, \ldots, Q_k$ from $S$ to $a$, disjoint except at $a$. Note that $P_i$ has no vertex in common with $Q_j$ except in $S$, so we can concatenate them together to get $k$ vertex-disjoint $a-b$ paths.
+
+Hence, for every separator $S$ of size $k$, satisfies $S\subseteq \Gamma(a)$ or $S\subseteq \Gamma(b)$. Now if $\exists x \in \Gamma(a) \cap \Gamma(b)$ than $\kappa(a,b;G-x) \geq k-1$, so by minimality $G-x$ has a set of $k-1$ vertex disjoint $a-b$ paths which with $axb$ gives a set of $K$ vertex disjoint paths in $G$, and so the only case left to consider is $\Gamma(a) \cap \Gamma(b) = \emptyset$.
+\end{proof}
 \end{document}

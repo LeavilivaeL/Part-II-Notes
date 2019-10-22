@@ -1,39 +1,5 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{geometry}[margin=1in]
-\usepackage{tikz}
-\usetikzlibrary{arrows}
-\usepackage[parfill]{parskip}
-\usepackage{subcaption}
-\usepackage{stmaryrd}
-\newcommand{\st}{\text{ s.t. }}
-\newcommand{\contr}{\lightning}
-\newcommand{\im}{\mathfrak{i}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{\mathbb{F}}
-\newcommand{\K}{\mathbb{K}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\DeclareMathOperator{\id}{id}
-\let\emph\relax
-\DeclareTextFontCommand{\emph}{\bfseries\em}
-\setcounter{section}{-1}
-
-\newtheorem{ctsDiscToSphere}{Theorem}[section]
-\newtheorem{lem11}{Lemma}[section]
-\newtheorem{lem12}[lem11]{Lemma}
-\newtheorem{thm13}[lem11]{Theorem}
-\newtheorem{lem14}[lem11]{Lemma}
-\newtheorem{lem15}[lem11]{Lemma}
-\newtheorem{lem16}[lem11]{Lemma}
-\newtheorem{lem17}[lem11]{Lemma}
+\input{./preamble.tex}
 
 \title{Algebraic Topology}
 \begin{document}
@@ -42,6 +8,7 @@
 \section{Introduction}
 The fundamental problem of topology is to establish whether or not there exist continuous functions $f, g$ going from a topological space $X$ to another space $Y$ and back again. For example, in the case of this torus and double-torus, we know from Geometry that such functions cannot exist by considering the Euler characteristic, but in general this is a hard problem.
 \begin{center}
+\scalebox{0.9}{
 \begin{tikzpicture}
 \draw (-7,0) .. controls (-7,1) and (-4.4,1) .. (-4,1);
 \draw (-7,0) .. controls (-7,-1) and (-4.4,-1) .. (-4,-1);
@@ -60,7 +27,7 @@ The fundamental problem of topology is to establish whether or not there exist c
 \draw (-0.8,0.2) edge[bend left, ->] node[above] {$f$} (0.8,0.2);
 \draw (0.8,-0.2) edge[bend left, ->] node[below] {$g$} (-0.8,-0.2);
 \node at (0,-1.2) {$f \circ g = \id$};
-\end{tikzpicture}
+\end{tikzpicture}}
 \end{center}
 If such $f, g$ continuous functions exist, then we say the two spaces are homeomorphic. Basic idea of algebraic topology is that we want to associate to any topological space $X$ a group $G(X)$, and for every continuous function $f:X \rightarrow Y$ a group homomorphism $G(f): G(X) \rightarrow G(Y)$ with $G(\id) = \id$ and $G(f\circ g)=G(f)\circ G(g)$. Thus if $f:X\rightarrow Y$ is a homeomorphism with inverse $g:Y\rightarrow X$, then $G(g)\circ G(f)=\id, G(f)\circ G(g) = \id$, so $G(f)$ is an is an isomorphism.
 
@@ -75,10 +42,10 @@ If such $f, g$ continuous functions exist, then we say the two spaces are homeom
 \draw (A) edge[->] node[below] {$f$} (Y);
 }
 \end{center}
-\begin{ctsDiscToSphere}
+\begin{theorem}
 There is no continuous function
 \begin{center} $f:D^n \rightarrow S^{n-1}$ with $f|_{S^{n-1}} = \id$\end{center}
-\end{ctsDiscToSphere}
+\end{theorem}
 By hand, we can see why this fails for e.g. $n=1, 2$, but it gets hard to generalise. Eventually, we will construct $G$ with $G(D^n) = 0, G(S^{n-1}) = \Z$. Then, if we have $S^{n-1} \rightarrow D^n \rightarrow S^{n-1}$ with composition being the identity, then we have maps $\Z \rightarrow 0 \rightarrow \Z$ being the identity.
 
 \subsection*{Conventions}
@@ -130,9 +97,9 @@ If $f_0$ is homotopic to $f_1$, we write $f_0 \simeq f_1$, or $f_0 \simeq_F f_1$
 
 Suppose $f_0 \simeq_F f_1$, both functions $X \rightarrow Y$. If $Z\subseteq X$ and $f_0(z)=F(z,t) = f_1(z) \forall z \in Z, t \in I$, then we say $f_0$ is homotopic to $f_1$ \emph{relative to} $Z$.
 
-\begin{lem11}
+\begin{lemma}
 Let $Z\subseteq X, Y$ be spaces. Then $\simeq$ relative to $Z$ is an equivalence relation on the set of maps $X\rightarrow Y$.
-\end{lem11}
+\end{lemma}
 \begin{proof}
 \item
 \begin{itemize}
@@ -162,9 +129,9 @@ Examples:
 If $X\simeq \ast$, then we say $X$ is \emph{contractible}.\\
 Let $f:X\rightarrow Y, g:Y\rightarrow X$ be maps. If $g\circ f=\id_X$, then we say $X$ is a \emph{retract} of $Y$, and $g$ is a \emph{retraction}. If in addition $f\circ g\simeq \id_Y$ relative to $f(X)$, then we say $X$ is a \emph{deformation retract} of $Y$. Hence, in example 2, we see that $S^{n-1}$ is a deformation retract of $\R^n$.
 
-\begin{lem12}
+\begin{lemma}
 Homotopy equivalence of spaces is an equivalence relation.
-\end{lem12}
+\end{lemma}
 \begin{proof}
 Reflexivity and symmetry are trivial from the definition.
 
@@ -223,14 +190,14 @@ If $X$ is a space with points $x,y,z \in X$, and $\gamma_1$ is a path from $x$ t
 }
 \end{center}
 
-\begin{thm13}
+\begin{theorem}
 Let $X$ be space, and $x_0 \in X$. Let $\pi_1(X,x_0)$ be the set of homotopy classes of loops in $X$ with endpoint $x_0$ (we say they are \emph{based} at $x_0$). Then $\pi_1(X,x_0)$ forms a group under the product $[\gamma_1][\gamma_2] = [\gamma_1\cdot\gamma_2]$, with identity $c_{x_0}$ and inverses $[\gamma_1]^{-1} = [\overline{\gamma_1}]$.
 
 This group is called the \emph{fundamental group} of $X$ (based at $x_0$).
-\end{thm13}
+\end{theorem}
 
 To prove this, we will need the following lemmas:
-\begin{lem14}
+\begin{lemma}
 If $\gamma_0\simeq \gamma_1$ to $y$ and $\delta_0\simeq \delta_1$ from $y$, then $\gamma_0 \cdot \delta_0 \simeq \gamma_1\cdot \delta_1$ and $\overline{\gamma_0} \simeq \overline{\gamma_1}$
 \begin{center}
 \tikz{
@@ -243,7 +210,7 @@ If $\gamma_0\simeq \gamma_1$ to $y$ and $\delta_0\simeq \delta_1$ from $y$, then
 \draw (y) edge[bend left, red!60!black, ->] node[above, red!60!black] {$\delta_0$} (z);
 }
 \end{center}
-\end{lem14}
+\end{lemma}
 \begin{proof}
 Suppose $\gamma_0\simeq_F \gamma_1$, and $\delta_0\simeq_G \delta_1$. Set:
 \begin{align*}
@@ -254,7 +221,7 @@ Then $\gamma_0\cdot\delta_0 \simeq_H \gamma_1\cdot \delta_1$
 Let $F'(s,t) = F(1-s,t)$. Then $\overline{\gamma_0} \simeq_{F'} \overline{\gamma_1}$.
 \end{proof}
 
-\begin{lem15}
+\begin{lemma}
 Let $\alpha, \beta, \gamma$ be paths from $w$ to $x$ to $y$ to $z$ in $X$. 
 \begin{center}
 \tikz{
@@ -273,7 +240,7 @@ Then:
 \item $\alpha\cdot c_x \simeq \alpha \simeq c_w \cdot \alpha$
 \item $\alpha \cdot \overline{\alpha} \simeq c_w$
 \end{enumerate}
-\end{lem15}
+\end{lemma}
 
 \begin{proof}
 First, given a path $\delta:I\rightarrow X$, a \emph{reparametrization} of $\delta$ is a path $\delta \circ \phi$ where $\phi:I\rightarrow I$ is a map with $\phi(0) = 0, \phi(1) = 1$. Note that $\phi$ needn't be monotonic, and that $\delta \simeq \delta \circ \phi$ via $F(s,t) = \delta(t\phi(s) + (1-t)s)$, and this homotopy is relative to $\{0,1\}$. 
@@ -313,7 +280,7 @@ Then theorem \textbf{1.3} giving the existence of $\pi_1(X, x_0)$ follows from t
 \underline{Example:} $X=\R^n, x_0 = 0$. If $\gamma$ is a loop based at $0$, then $\gamma\simeq c_0$ via the straight line homotopy, and so $\pi_1(\R^n, 0) = 0$.
 
 \subsection*{Formal Properties of $\pi_1$}
-\begin{lem16}
+\begin{lemma}
 Let $f:X\rightarrow Y$ be a map with $f(x_0) = y_0$. Then there is a homomorphism $f_{\ast}:\pi_1(X,x_0)\rightarrow\pi_1(Y,y_0)$ given by $f_\ast([\gamma]) = [f\circ \gamma]$.
 
 Furthermore:
@@ -322,7 +289,7 @@ Furthermore:
 \item If $g:Y\rightarrow Z$ with $g(y_0) = z_0$, then $g_\ast \circ f_\ast = (g\circ f)_\ast$
 \item $(\id_X)_\ast = \id_{\pi_1(X,x_0)}$
 \end{enumerate}
-\end{lem16}
+\end{lemma}
 
 \begin{proof}
 $f_\ast$ is well-defined: if $\gamma_1 \simeq_F \gamma_2$, then $f\circ\gamma_1 \simeq_{f\circ F} f\circ \gamma_2$. Then $f\circ(\gamma_1\cdot \gamma_2) = (f\circ \gamma_1)\cdot(f\circ \gamma_2)$ by definition, and so we have a group homomorphism.
@@ -332,7 +299,7 @@ $f_\ast$ is well-defined: if $\gamma_1 \simeq_F \gamma_2$, then $f\circ\gamma_1 
 \end{enumerate}
 \end{proof}
 
-\begin{lem17}
+\begin{lemma}
 let $X$ be a space, $x_0, x_1 \in X$ and $\alpha$ a path from $x_0$ to $x_1$. Then there is a group isomorphism $\alpha_\#:\pi_1(X,x_0)\rightarrow\pi_1(X,x_1)$ via $\alpha_\#([\gamma]) = [\bar{\alpha}\cdot\gamma\cdot\alpha]$.
 \begin{center}
 \tikz{
@@ -351,7 +318,7 @@ Furthermore,
 \item If $\beta$ is a path from $x_2$ to $x_2$, then $(\alpha\cdot\beta)_\# = \beta_\#\circ \alpha_\#$
 \item If $f:X\rightarrow Y$ and $y_1=f(x_1)$, then $(f\circ\alpha)_\#\circ f_\ast = f_\ast\circ\alpha_\#$.
 \end{enumerate}
-\end{lem17}
+\end{lemma}
 
 \begin{proof}
 Well-defined: If $\gamma_1\simeq_F\gamma_2$ then $\bar{\alpha}\cdot\gamma_1\cdot\alpha\simeq\bar{\alpha}\cdot\gamma_2\cdot\alpha$ via:
@@ -409,6 +376,154 @@ gives $\alpha_\#(\gamma)\simeq\alpha_\#'(\gamma)$
 \end{enumerate}
 \end{proof}
 
+A path connected space $X$ is \emph{simply connected} if $\pi_1(x, x_0) = 0$ for any, and hence all, $x_0 \in X$.
 
+Our aim here is to prove that $\pi_1$ is a \emph{homotopy invariant}, i.e. that homotopy equivalent spaces have the same fundamental group. We will start with the following lemma:
 
+\begin{lemma}
+Let $x_0 \in X$ and $f, g:X\rightarrow Y$ with $f\simeq_F g$. Set $x(t) = F(x_0, t)$ so that $\alpha(0)=f(x_0)$ and $\alpha(1) = g(x_0$. Then the diagram:
+\begin{center}
+\tikz{
+\node (a) at (0,0) {$\pi_1(x,x_0)$};
+\node (b) at (4,1) {$\pi_1(Y, f(x_0))$};
+\node (c) at (4,-1) {$\pi_1(Y, g(x_0))$};
+\draw[->] (a) -- node[above] {$f_\ast$} (b);
+\draw[->] (a) -- node[below] {$g_\ast$} (c);
+\draw[->] (b) -- node[right] {$\alpha_\#$} (c);
+}
+\end{center}
+commutes, i.e. we have $\alpha_\# \circ f_\ast = g_\ast$.
+\end{lemma}
+\begin{proof}
+We need to check that, for a loop $\gamma$ based at $x_0$, $\overline{\alpha}\cdot(f\circ \gamma) \cdot \alpha \simeq g\circ\gamma$.
+
+Let $G:I\times I\rightarrow Y$ defined by $G(s,t) = F(\gamma(s), t)$. For $t=0$, this is $f\circ \gamma$, and for $t=1$, this is $g\circ \gamma$. Now consider two paths in $I\times I$: 
+\begin{align*}
+a(t) &= (t,1); b = b_1 \cdot b_2 \cdot b_3\text{ where:}\\
+b_1(t) &= (0,1-t), b_2(t)=(t,0), b_3(t)=(1,t)
+\end{align*}
+
+Then $(G\circ a)(s) = G(s,1) = g\circ \gamma(s)$, whilst $G \circ b = \overline{\alpha} \cdot (f\circ \gamma)\cdot \alpha$.
+
+Now, since $I\times I$ is convex, we have that $a\simeq_H b$, and so $G\circ H$ is the desired homotopy between $g\circ \gamma$ and $\overline{\alpha}\cdot (f\circ \gamma) \cdot \alpha$.
+\end{proof}
+
+\begin{theorem}
+If $f:X\rightarrow Y$ is a homotopy equivalence, then $f_\ast : \pi_1(X, x_0) \rightarrow \pi_1(Y, f(x_0))$ is a homomorphism for any $x_0 \in X$.
+\end{theorem}
+\begin{proof}
+We'll show that $f_\ast$ is a bijection:
+
+Let $g:Y\rightarrow X$ be a homotopic inverse to $f$, with $\id_X\simeq_F g\circ f$. Let $\alpha:I\rightarrow X$ given by $\alpha(t)=F(x_0, t)$.
+
+Note that $f_\ast:\pi_1(X, x_0) \rightarrow \pi_1(Y, f(x_0)); g:\pi_1(Y, f(x_0))\rightarrow \pi_1(X, g(f(x_0)))$
+
+Then $g_\ast\circ f_\ast = (g\circ f)_\ast = \alpha_\#\circ (\id_X)_\ast = \alpha_\#$. $\alpha_\#$ is an isomorphism, and so $f_\ast$ is injective.
+
+If $\id_Y \simeq_G f\circ g$ let $\beta(t) = G(f(x_0), t)$ Then $f_\ast\circ g_\ast = (g\circ f)_\ast = \beta_\#\circ (\id_Y)_\ast = \beta_\#$, an isomorphism, and hence $f_\ast$ is surjective.
+\end{proof}
+
+\begin{corollary}
+Contractible spaces are simple connected.
+\end{corollary}
+\begin{proof}
+If $X$ is contractible, there exists some $x_0 \in X$ and a homotopy $F$ between $\id_X$ and $X \rightarrow \{x_0\}$. So $F(x, \cdot)$ is a path from any $x\in X$ to $x_0$, so $X$ is path connected. Since $X$ is homotopic to $\{x_0\}$, $\pi_1(X, x_0)\cong \pi_1(\{x_0\},x_0) = 0$.
+\end{proof}
+
+\subsection*{Covering Spaces}
+Let $p:\hat{X}\rightarrow X$ be a map. An open set $U\subseteq X$ is \emph{evenly covered} if there exists a set $\Delta_U$ with the discrete topology and there is a homeomorphism:
+\begin{center}
+\tikz{
+\node (a) at (0,0) {$p^{-1}(U)$};
+\node (b) at (4,0) {$U\times \Delta_U$};
+\draw[->] (a) -- node[above] {$\cong$} (b);
+\node (c) at (0,-1) {such that the following diagram commutes:};
+\node (d) at (0,-2) {$p^{-1}(U)$};
+\node (e) at (4,-2) {$U\times \Delta_U$};
+\node (f) at (2,-3) {$U$};
+\draw[->] (d) -- node[above] {$\cong$} (e);
+\draw[->] (d) -- node[below] {$p$} (f);
+\draw[->] (e) -- node[below right] {$(x,\delta)\mapsto x$} (f);
+}
+\end{center}
+
+We write, for $\delta \in \Delta_0$, $U_\delta = U\times \{\delta\}$ and $p_\delta = p|_{U_\delta}$. So $p_\delta: U_\delta \rightarrow U$ is a homeomorphism.
+
+Note that we can canonically identify $\Delta_U$ with $p^{-1}(x)$ for any $x\in U$, Note also that $p^{-1}(U) \cong \coprod_{\delta \in \Delta_U} U_\delta$, where $\coprod$ denotes disjoint union.
+
+If every point of $X$ has an open neighbourhood which is evenly covered, then we say that $p$ is a \emph{covering map} and $\hat{X}$ is a \emph{covering space} of $X$.
+
+\begin{center}
+\tikz{
+\node (xhat) at (0,3) {$\hat{X}$};
+\node (x) at (0,0) {$X$};
+\draw (4,3) ellipse (2 and 1);
+\foreach \x in {(3,3.3), (3.5,2.7), (4,3.3), (4.5,2.7), (5,3.3)}{
+	\draw[fill=gray] \x circle (0.2);
+}
+\draw (4,0) ellipse (2 and 1);
+\draw[fill=gray] (3.5,0) circle (0.4);
+\node at (4.2,0) {$U$};
+\draw[->] (xhat) -- (x);
+\draw[->] (4,1.8) -- (4,1.2);
+}
+\end{center}
+\underline{Examples:}
+\begin{enumerate}
+\setcounter{enumi}{0}
+\item $\hat{X} = X\times \Delta$ for $\Delta$ a set with the discrete topology, e.g. $\hat{I} = I\times\{1,2,3\}$. Then $\hat{X}$ is a covering space of $X$, the identity map on the first element is a covering map.
+
+\item $\hat{X} = \R, X = S^1 \subseteq \C$, the unit circle, with $p:\R\rightarrow S^1$ and $p(t) = \exp(2\pi\im\cdot t)$. Them $p$ is a covering map:\\
+let $U = S\setminus \{p\}$. We can define a branch of the logarithm $\log:\C\setminus \{rp : r \geq 0\} \rightarrow \C$. Then every point $\hat{z}\in p^{-1}(U)$ can be written uniquely as $\hat{z} = k + \frac{\log z}{2\pi\im}$ for some $k\in\Z$.
+
+Thus $p^{-1}(U) \cong U\times \Z$, via $\hat{z} \mapsto \left(\frac{\log z}{2\pi\im}, k\right)$, and so each proper subset of $S^{1}$ is evenly covered, however $S^1$ as a whole is not evenly covered, since $p^{-1}(S^1)$ is not a union of copies of $S^1$.
+
+\item $\hat{X}=X = S^1 \subseteq \C$, the unit circle, with $p(z) = z^n$.
+
+$p$ is a covering map by choosing a branch of the $n$th root on proper open subsets of $S^1$
+
+\item Let $\hat{X} = S^2$, and let  $G = \Z/2\Z$  act on $S^2$ by the antipodal map $z \mapsto -z$. Then let $X = \hat{X}/G = \hat{X}/\sim$, where $x\sim y \iff x = \pm y$.
+
+Then $X$ is $\R\mathbb{P}^2$, the real projective plane. If $x\in X$, let $U$ be an open neighbourhood of $x$ disjoint from its negation. Then the image of $U$ in $X$ is evenly covered.
+\end{enumerate}
+
+We say a covering map $p:\hat{X} \rightarrow X$ is \emph{n-sheeted} if $\#p^{-1}(x) = n$ for all $x\in X$, and call $n$ the \emph{degree} of $p$.
+
+\subsection*{Lifting Properties}
+Let $p:\hat{X} \rightarrow X$ be a covering map, and $f:Y\rightarrow X$ b a mp. A \emph{lift} of $f$ to $\hat{X}$ is a map $\hat{f}:Y\rightarrow \hat{X}$ such that the following diagram commutes:
+\begin{center}
+\tikz{
+\node (y) at (0,0) {$Y$};
+\node (xhat) at (4,1) {$\hat{X}$};
+\node (x) at (4,-1) {$X$};
+\draw[->] (y) -- node[above] {$\hat{f}$} (xhat);
+\draw[->] (y) -- node[below] {$f$} (x);
+\draw[->] (xhat) -- node[right] {$p$} (x);
+}
+\end{center}
+A space $X$ is \emph{locally path connected} if for every $x\in X$ and $U \subseteq X$ open neighbourhood of $x$, there exists a neighbourhood $V\subseteq U$ of $x$ which is path connected.
+
+\begin{lemma}[Uniqueness of Lifting]
+Let $p:\hat{X}\rightarrow X$ be a covering map and $\hat{f_1}, \hat{f_2}:Y\rightarrow \hat{X}$ be two lifts of $f:Y\rightarrow X$ with $Y$ connected and locally path connected. 
+
+If there exists some $x_0 \in Y$ with $\hat{f_1}(x_0) = \hat{f_2}(x_0)$, then $\hat{f_1} = \hat{f_2}$.
+\end{lemma}
+\begin{proof}
+We will show that the set $S \coloneqq \{y\in Y : \hat{f_1}(y) = \hat{f_2}(y)\}$ is both open and closed. By assumption we have $x_0 \in S$, so $S \neq \emptyset$. Since $Y$ is connected, we must have then that $S = Y$ as otherwise $S$ and $Y\setminus S$ would disconnect $Y$.
+
+Let $y_1 \in Y$ be an arbitrary point, and let $U\subseteq X$ be an open neighbourhood of $f(y_1)$ which is evenly covered by $p$. Let $V\subseteq f^{-1}(U)$ be an open neighbourhood of $y_1$ which is path connected. We then want to show that, if $y_1 \in S$ then all of $V \subseteq S$, and otherwise $V \subseteq Y\setminus S$.
+
+Let $y\in V$ be arbitrary and let $\alpha$ be a path from $y_1 \rightarrow y$. Then $\hat{f_i}\circ \alpha$ is a path from $\hat{f_i}(y_1) \rightarrow \hat{f_i}(y)$ for $i=1,2$.
+
+Note that $p\circ \hat{f_1} \circ \alpha(t) = f(\alpha(t)) \in U$, and so $\hat{f_i}(y)$ and $\hat{f_i}(y_1)$ lie in the same component of $p^{-1}(U)$, say $U_{\delta_i}$
+
+If $y_1 \in S$, then $\hat{f_1}(y_1) = \hat{f_2}(y_1)$, so $\delta_1 = \delta_2$, and so $\hat{f_1}(y) = p^{-1}_{\delta_1}(f(y)) = p^{-1}_{\delta_2}(f(y)) = \hat{f_2}(y)$, so $y\in S$, and hence all of $V \subseteq S$.
+
+Otherwise $y_1\notin S$ , then $\hat{f_1}(y_1) \neq \hat{f_2}(y_1)$. Each $U_{\delta_i}$ contains a unique point of $p^{-1}(\{f(y_1)\})$, and we must have $\delta_1 \neq \delta_2$.\\
+So $\hat{f_1}(y) \neq \hat{f_2}(y)$, so $y\notin S$, and in general $V\subseteq Y\setminus S$.
+
+Hence $S$ is open, $Y\setminus S$ is open, and we are done
+\end{proof}
+
+%Let $\gamma:I\rightarrow X$ be a path from $x_0\in X$ and $p:\hat{X}\rightarrow X$ be a covering map. A lift of $\gamma$ at (or from) $\hat{x_0}$ is a lift $\hat{\gamma}$ of $\gamma$ with $\hat{x_0} = \hat{\gamma}(0)$. In particular, $p(\hat{x_0}) = p(\hat{\gamma}(0)) = \gamma(0) = x_0$.
 \end{document}

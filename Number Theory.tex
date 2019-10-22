@@ -20,36 +20,23 @@
 \newcommand{\K}{\mathbb{K}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\nequiv}{\not\equiv}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\ord}{ord}
 \let\emph\relax
 \DeclareTextFontCommand{\emph}{\bfseries\em}
 
-\newtheorem{divAlg}{Theorem}[section]
-\newtheorem{thm12}[divAlg]{Theorem}
-\newtheorem{corr13}[divAlg]{Corollary}
-\newtheorem{euclAlg}[divAlg]{Theorem}
-\newtheorem{corr15}[divAlg]{Lemma}
-\newtheorem{fundArith}[divAlg]{Theorem}
-\newtheorem{thm17}[divAlg]{Theorem}
-
-\newtheorem{lem21}{Lemma}[section]
-\newtheorem{cor22}[lem21]{Corollary}
-\newtheorem{thm23}[lem21]{Theorem}
-\newtheorem{thm24}[lem21]{Theorem}
-\newtheorem{thm25}[lem21]{Theorem}
-\newtheorem{cor26}[lem21]{Corollary}
-\newtheorem{cor27}[lem21]{Corollary}
-\newtheorem{lem28}[lem21]{Lemma}
-\newtheorem{thm29}[lem21]{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{theorem}[lemma]{Theorem}
 
 \title{Number Theory}
 \begin{document}
 \maketitle
 \section{Euclid's Algorithm}
-\begin{divAlg}[Division Algorithm]%fix this to be in brackets properly
+\begin{theorem}[Division Algorithm]%fix this to be in brackets properly
 Given $a, b \in \Z, b > 0$, we can determine $\exists q, r \in \Z \st a = qb+r$ with $0 \leq r <b$.
-\end{divAlg}
+\end{theorem}
 \begin{proof}
 Let $S = \{a-nb : n\in\Z\}$. $S$ contains some non-negative integer. Let $r$ be the least such integer, say $a-qb$. Then $a = qb + r$, so STP $r < b$.
 
@@ -61,9 +48,9 @@ $a$" or ``$b$ is a \emph{divisor} of $a$". If $r\neq 0$, then we instead write $
 
 Given $a_1,\ldots, a_n \in \Z$ not all $0$, let $I=\{\lambda_1 a_1+\ldots+\lambda_n a_n : \lambda_i \in \Z\}$. Observe if $a,b \in I, \ell, m \in \Z$, then $\ell a + mb \in I$.
 
-\begin{thm12}
+\begin{theorem}
 $I = d\Z = \{dm:m\in\Z\}$ for some $d > 0$
-\end{thm12}
+\end{theorem}
 \begin{proof}
 $I$ contains some positive integer. Let $d > 0$ be the least such. Then clearly $I \supseteq d\Z$.
 
@@ -76,12 +63,12 @@ Note that $a_i \in I \forall i$, so $d| a_i \forall i$. Conversely, if $c | a_i 
 
 We write $d = \gcd(a_1, \ldots, a_n) = (a_1, \ldots, a_n)$, and say $d$ is the \emph{greatest common divisor} of the $a_i$.
 
-\begin{corr13}[B\'ezout]
+\begin{corollary}[B\'ezout]
 Let $a,b \in \Z$, $a,b$ not both $0$. Then $\exists x,y \in \Z \st ax+by=c \iff (a,b)| c$.
-\end{corr13}
+\end{corollary}
 The division algorithm gives an efficient method for computing $(a,b)$.
 
-\begin{euclAlg}[Euclid's Algorithm]
+\begin{theorem}[Euclid's Algorithm]
 Suppose $a>b>0$. Then:
 \begin{align*}
 a &= q_1 b + r_1 \hspace{2cm} 0\leq r_1 < b\\
@@ -92,23 +79,23 @@ r_{k-2} &= q_k r_{k-1} + r_k \hspace{2cm} r_k\neq 0\\
 r_{k-1} &= q_{k+1} r_k (+0)
 \end{align*}
 and $r_k = (a,b)$
-\end{euclAlg}
+\end{theorem}
 \begin{proof}
 We have $r_k|r_{k-1} \implies \ldots \implies r_k|a, r_k|b \implies r_k|(a,b)$, so $r_k \leq (a,b)$. Note also that any $m \st m| a$ and $m| b$ also divides $r_k$. In particular, $(a,b)|r_k$, and thus $(a,b)\leq r_k$, hence $r_k = (a,b)$.
 \end{proof}
 Additionally, by working back up the algorithm, we can obtain a representation $(a,b) = \lambda a + \mu b$ where $\lambda, \mu \in \Z$
 
 An integer $n>1$ is \emph{prime} if its only positive divisors are $1$ and $n$. Otherwise, we say $n$ is \emph{composite}.
-\begin{corr15}
+\begin{corollary}
 Let $p$ be a prime, $a,b \in \Z$. Then $p|ab \iff p|a$ or $p|b$
-\end{corr15}
+\end{corollary}
 \begin{proof}
 It is clear that if $p|a$ or $p|b$, then $p|ab$. Conversely, suppose $p|ab$ but $p\nmid a$. Them $(a,p) \neq p$. By definition, $(a,p)|p \implies (a,p) \in \{1,p\}$, so $(a,p)=1$. Now by \textbf{1.3} we can find $x,y\in\Z\st 1=ax+by \implies b = b(ax+py) = x(ab) + (by)p$, so $p|b$.
 \end{proof}
 
-\begin{fundArith}[The Fundamental Theorem of Arithmetic]
+\begin{theorem}[The Fundamental Theorem of Arithmetic]
 Every integer $n>1$ can be written as a product of primes uniquely up to reordering
-\end{fundArith}
+\end{theorem}
 \begin{proof}
 We have existence by strong induction.
 
@@ -128,9 +115,9 @@ Examples of polynomial time algorithms:
 \end{itemize}
 On the other hand, factoring a number into prime factors does not have a polynomial time algorithm, and it is conjectured that one does not exist. For instance, if $N=p\cdot q$ with $p,q$ primes of $\sim 50$ digits each, to do trial division up to $\sqrt{N}$ at a rate of $2^9$ divisions per second, it would take approximately $\sqrt{10^{100}}/2^9$ seconds, or about $6\times 10^39$ years. However, we can compute the gcd in milliseconds using Euclid's algorithm.
 
-\begin{thm17}
+\begin{theorem}
 There are infinitely many primes. i.e. $\pi(x) \rightarrow \infty$ as $x\rightarrow \infty$
-\end{thm17}
+\end{theorem}
 \begin{proof}
 Fix $N>1$, let $p$ be the largest prime $\leq N$. Let $q$ be a prime factor of $M = (2\times 3\times 5 \times\ldots \times p) +1$. Then $q > N$ since $q \notin \{2,3,\ldots, p\}$, but $N$ was arbitrary.
 \end{proof}
@@ -138,14 +125,14 @@ Fix $N>1$, let $p$ be the largest prime $\leq N$. Let $q$ be a prime factor of $
 \section{Congruences}
 Let $n\geq 1$ be an integer. We write $a\equiv b \mod n$ if $n|a-b$. This defines an equivalence relation on $\Z$, and we will write $\Z/n\Z$ for the equivalence classes induced by this relation, which are $a + n\Z$ for $0\leq a < n$. It is easy to check that $(a+n\Z) + (b+n\Z) = (a+b+n\Z)$ and that $(a+n\Z)\times (b+n\Z) = (ab+n\Z)$ are well defined operations, i.e $n\Z$ is an ideal, and $\Z/n\Z$ is the quotient ring. 
 
-\begin{lem21}
+\begin{lemma}
 Let $a \in \Z$. Then the following are equivalent:
 \begin{enumerate}
 \item $(a,n) = 1$
 \item $\exists b\in\Z\st ab\equiv b \mod n$
 \item The equivalence class of $a$ generates the group $(\Z/n\Z, +)$
 \end{enumerate}
-\end{lem21}
+\end{lemma}
 
 \begin{proof}\item
 \begin{itemize}
@@ -160,20 +147,20 @@ By \textbf{2.1}, $(\Z/n\Z)^{\times}$ contains precisely those classes $a+n\Z$ su
 
 Let \emph{Euler's $\varphi$ function} be $\varphi(n) \coloneqq \left|(\Z/n\Z)^\times\right|$ for $n>1$, and let $\varphi(1)=1$. Observe that $\varphi(p) = p-1$ for $p$ prime. Moreover, $\varphi$ is a multiplicative function: $(m,n) = 1 \implies \varphi(mn) = \varphi(m)\varphi(n).$
 
-\begin{cor22}
+\begin{corollary}
 Let $G$ be a cyclic group of order $n\geq 1$. Then $\varphi(n) = |\{g\in G: \ord(g)=n\}| $, the number of generators of $G$.
-\end{cor22}
+\end{corollary}
 
-\begin{thm23}[Euler-Fermat]
+\begin{theorem}[Euler-Fermat]
 IF $(a,n)=1$, $a,n \in\Z$, then $a^{\varphi(n)} \equiv 1 \mod n$
-\end{thm23}
+\end{theorem}
 \begin{proof}
 By Lagrange's Theorem, the order of $a$ in the group $(\Z/n\Z)^\times$ divides the order of $(\Z/n\Z)^\times$, which is $\varphi(n)$
 \end{proof}
 
-\begin{thm24}[Fermat's Little Theorem]
+\begin{theorem}[Fermat's Little Theorem]
 If $a, p \in \Z$ and $p$ is prime, then $a^p\equiv a \mod p$.
-\end{thm24}
+\end{theorem}
 \begin{proof}
 If $p|a$, then this holds trivially. If $p\nmid a, (a,p) =1$ and so by \textbf{2.3} we have $a^{\varphi(p)} \equiv a^{p-1} \equiv 1 \mod p$
 \end{proof}
@@ -182,7 +169,7 @@ If $p|a$, then this holds trivially. If $p\nmid a, (a,p) =1$ and so by \textbf{2
 Can we find all $x\in \Z \st x \equiv 4 \mod 7$ and $x \equiv 5 \mod 12$?\\
 Suppose we can find $u,v\in\Z \st \begin{cases}u\equiv 1 \mod 7; & u\equiv 0 \mod 12 \\ v \equiv 0 \mod 7; & v\equiv 1 \mod 12\end{cases}$. Then we can write down that $x = 4u+5v$. Since $(7,12)=1$, by \textbf{1.3} there are some $m,n\in\Z$ with $7m+12n=1$, and from Euclid's algorithm we can determine these to be $m=-5, n=3$. Then we can find $u=12n=1-7m; v=7m=1-12n$, and substitution gives $u=36, v=-35$, and so a solution to the original problem is $4\times 36-5\times 35 = -31$. Now the lowest common multiple of $7$ and $12$ is $84$, and so our solution set is: $\{x\in\Z: x\equiv -31 \mod 84\}$.\\
 We can in fact generalise this process:
-\begin{thm25}[Chinese Remainder Theorem]
+\begin{theorem}[Chinese Remainder Theorem]
 Let $m_1,\ldots,m_k$ be pairwise coprime positive integers, and let $M = \Pi_{i=1}^k m_i$. Then given any integers $a_1,\ldots,a_k$ there is a solution $x$ to the the system of congruences:
 \begin{align*}
 x &\equiv a_1 \mod m_1\\
@@ -191,7 +178,7 @@ x &\equiv a_2 \mod m_2\\
 x &\equiv a_k \mod m_k
 \end{align*}
 Moreover, this solution is unique modulo $M$.
-\end{thm25}
+\end{theorem}
 Note that if $x$ satisfies this system of equations, then so does $x+tM$ for any $t\in\Z$, and so the complete set of solutions is $x+M\Z$.
 
 \begin{proof}\item
@@ -202,17 +189,17 @@ Note that if $x$ satisfies this system of equations, then so does $x+tM$ for any
 
 If $m_1,\ldots,m_k$ are pairwise coprime, and $M=\Pi m_i$, then map $\theta:\Z/M\Z\rightarrow \Z/m_1\Z \times \ldots \times \Z/m_k\Z$, taking $x \mod M \mapsto (x\mod m_1, \ldots, x\mod m_k)$ is an isomorphism of rings. To see this, note that if $m_i|M$ then $x\mod m_i$ is determined by $x\mod M$ which implies that $\theta$ is well-defined. It is a homomorphism by the properties of $+,\times$ in $\Z/n\Z$, and \textbf{2.5} implies that $\theta$ is a bijection. In particular, if $n=p_1^{\alpha_1}\ldots p_k^{\alpha_k}$ for distinct primes $p_i$, then $\Z/n\Z \cong \Z/p_1^{\alpha_1}\Z\times\ldots\times\Z/p_k^{\alpha_k}\Z$.
 
-\begin{cor26}
+\begin{corollary}
 If $m_1,\ldots,m_k$ are pairwise coprime and $M = \Pi_{i=1}^k m_i$ and $a_1,\ldots,a_k \in \Z$ are such that $(a_i,m_i) = 1$ for each $i=1,2,\ldots,k$, then there is a solution to the system of congruences in \textbf{2.5}, and any such solution is in fact coprime to $M$.
-\end{cor26}
+\end{corollary}
 
 \begin{proof}
 \textbf{2.5} gives us a solution, say $x\in\Z$. Suppose $(x,M)>1$. Then there is a prime $p$ such that $p|x$ and $p|M$ simultaneously. $p$ prime, so WLOG suppose that $p$ divides $m_1$. Since $x\equiv a_1\mod m_1$, we must have $p|a_1$, and so $p|(a_1,m_1)$ \contr.
 \end{proof}
 
-\begin{cor27}
+\begin{corollary}
 If $m_1,\ldots, m_k$ are pairwise coprime with $M=\Pi_{i=1}^k m_i$, then $\varphi(M)=\varphi(m_1)\cdot\ldots\cdot\varphi(m_k)$
-\end{cor27}
+\end{corollary}
 A \emph{multiplicative function} is a function $f:\N\rightarrow\C$ such that, for all $m,n \in\N$ coprime, $f(mn)=f(m)f(n)$. A function $f:\N\rightarrow\C$ is said to be \emph{totally multiplicative} if for all $m,n\in\N$, $f(m,n)=f(m)f(n)$.
 
 Some multiplicative functions are:
@@ -224,9 +211,9 @@ Some multiplicative functions are:
 \end{itemize}
 None of these are totally multiplicative however.
 
-\begin{lem28}
+\begin{lemma}
 Let $f$ be a multiplicative function. Then so is $g$, where $g(n) = \sum_{d|n} f(d)$.
-\end{lem28}
+\end{lemma}
 \begin{proof}
 Let $m,n \in \N, (m,n)=1$. Then the divisors of $mn$ are precisely the integers of the form $d_1d_2$ where $d_1|m, d_2|n$ and $(d_1,d_2)=1$. This means that we can write down
 \begin{align*}
@@ -239,14 +226,14 @@ g(mn) &= \sum_{d|mn} f(d)\\
 \end{proof}
 Then if we let $f(n) = n^k$ for some $k\in\N$. Then $g(n) = \sum_{d|n} d^k = \sigma_k(n)$. Later on, we shall see that we can recover $f$ from $g$ via M\"obius inversion.
 
-\begin{thm29}
+\begin{theorem}
 \item
 \begin{enumerate}
 \item If $p$ is a prime and $m\in\N$ then $\varphi(p^m) = p^{m-1}(p-1) = p^m\left(1-\frac{1}{p}\right)$
 \item $\forall n\in\N, \varphi(n)=n\cdot\Pi_{p|n}\left(1-\frac{1}{p}\right)$
 \item $\sum_{d|n} \varphi(d) = n$
 \end{enumerate}
-\end{thm29}
+\end{theorem}
 \begin{proof}
 \item
 \begin{enumerate}
@@ -270,4 +257,133 @@ varphi(n) &= \Pi_{i=1}^k \varphi(p_i^{\alpha_i})\\
 \end{align*}
 \end{enumerate}
 \end{proof}
+
+Polynomials over $\Z/n\Z$ can have varying numbers of solutions, e.g.:
+\begin{enumerate}
+\item $x^2+2 \equiv 0 \mod 5$ has no solutions
+\item $x^3 + 1 \equiv 0 \mod 7$ has three solutions
+\item $x^2-1 \equiv 0 \mod 8$ has four solutions
+\end{enumerate}
+
+Let $R \in \{\Z, \Q, \Z/n\Z\}$ be a ring. Then we define $R[x]$ to be the ring of polynomials with coefficients in $R$, with addition and multiplication given in the usual way.
+
+\textsc{Warning:} Two polynomials are \emph{equal} if their coefficients are all equal, however the map from $R[x]$ to the set of all functions $R\rightarrow R$ is not necessarily injective. For instance, if $R=\Z/p\Z$ for some prime $\Z$, then under this map $x^p-x$ is the zero function by Fermat's little theorem.
+
+\begin{theorem}[Division Algorithm for Polynomials]
+Let $f, g \in R[x]$, and suppose that the leading coefficient of $g$ is a unit (i.e. has a multiplicative inverse) in $R$. Then $\exists q, r \in R[x]$ such that $f = q\cdot g + r$ where $\deg r < \deg g$.
+\end{theorem}
+\begin{proof}
+We prove this by induction on $n=\deg f$. If $\deg f < \deg g$, then just take $q = 0, r = f$. Otherwise, $f(x) = ax^n + \ldots; g(x) = bx^m + \ldots$ for $a, b\neq 0, n\geq m, b=c^{-1}$ for some $c\in R$.
+
+Then define $f'(x) = f(x) - acx^{n-m}g(x)$ has degree $< n$. By the induction hypothesis, there is some $q, r \in R[x]$ such that $f'(x) = q(x)g(x) + r(x)$, with $\deg r < \deg g$.\\
+But now $f(x) = (q(x) + acx^{n-m}) g(x) + r(x)$, and we are done.
+\end{proof}
+
+\begin{theorem}[Remainder Theorem]
+let $f\in R[x], \alpha \in R$. Then there is some $q \in R[x]$ such that:
+\begin{align*}
+f(x) = (x-\alpha)q(x) + f(\alpha)
+\end{align*}
+\end{theorem}
+\begin{proof}
+By \textbf{2.10} with $g(x) = x-\alpha$, there is some $q \in R[x]$ and $r \in R$ such that $f(x) = (x-\alpha)q(x) + r$. But now $f(\alpha) = r$, and the required equality holds.
+\end{proof}
+A (non-zero) ring $R$ is said to be an \emph{integral domain} if it doesn't have any zero divisors, i.e. $ab=0 \iff a=0 \text{ or } b=0$. Note that $\Z$ and $\Q$ are integral domains, whilst $\Z/n\Z$ is an integral domain if and only if $n$ is prime (if $n=pq$ is a proper factorization, then $pq = 0$ in $\Z/n\Z$).
+
+\begin{theorem}
+Let $R$ be an integral domain, and let $f\in R[x]$ be a non-zero polynomial of degree $n\geq 0$. Then $f$ has at most $n$ roots in $R$.
+\end{theorem}
+\begin{theorem}[Lagrange]
+Lt $p$ be a prime, and let $f(x)=a_n x^n+\ldots + a_1 x + a_0 \in \Z[x]$ be a polynomial of degree $n$ such that $p\nmid p$. Then the congruence $f(x) = 0 \mod p$ has  at most $n$ distinct solutions.
+\end{theorem}
+
+\begin{proof}[Of 2.12]
+By induction on $n$. Check $n=0$ - trivial.
+
+Suppose $n>0$. If $f$ has no roots the we're done. Otherwise there exists $\alpha \in R$ such that $f(\alpha) = 0$, and so by the remainder theorem, $f(x) = (x-\alpha)q(x)$ with $\deg q < \deg f = n$. So by the induction hypothesis, we know that $q$ has at most $n-1$ roots. But if $\beta \in R$ is such that $f(\beta) = 0$, then $0 = (\beta-\alpha)q(\beta)$, and since $R$ is an integral domain, we must have $\beta = \alpha$ or $q(\beta) = 0$, and so $f$ has at most $n$ roots.
+\end{proof}
+
+\emph{Example:} Let $p$ be a prime, $G = \Z/p\Z$, and let $f(x) = x^{p-1} - 1 - \Pi_{\alpha \in G} (x-\alpha)$. Observe that $\alpha = 1,2, \ldots, p-1$, then $f(\alpha) = \alpha^{p-1} - 1 \equiv 0 \mod p$, so $f$ has at least $p-1$ roots.
+
+But $\deg f < p-1$ because the coefficient of $x^{p-1} = 0$. This means that $f$ must be the zero polynomial, and hence $0 = f(0) = -1-(p-1)! \mod p$, and we have Wilson's theorem, that $(p-1)! \equiv -1 \mod p$.
+
+\underline{Example:} Consider $(\Z/7\Z)^\times$.\\
+$3 \in (\Z/7\Z)^\times$ since $3\cdot 5 \equiv 1 \mod 7$, $3^6 \equiv 1 \mod 7$, so $3$ generates $(\Z/7\Z)^\times$, and $(\Z/7\Z)^\times$ is cyclic.
+
+\begin{theorem}
+If $p$ is a prime, then $G = (\Z/p\Z)^\times$ is cyclic and of order $p-1$.
+\end{theorem}
+\begin{proof}
+$|G| = \varphi(p) = p-1 = \sum_{d|p-1} \varphi(d)$
+
+By Lagrange's Theorem, $|G| = \sum_{a\mid |G|} N_a$ where $N_a = |\{g\in G : \ord(g)=d\}|$. Suppose $G$ is not cyclic, so $G$ does not contain an element of order $p-1$, so $N_{p-1} = 0 < \varphi(p-1)$, and so there must be some $d$ for which $N_d > \varphi(d)$. Let $\alpha$ be an element of order for such a $d$. Then $\langle\alpha\rangle \leq G$ is cyclic of order $d$, so it has precisely $\varphi(d)$ elements of order $d$. Since $N_d > \phi(d), \exists \beta \notin \langle\alpha\rangle \st \ord(\beta)=d$. This implies that the polynomial $x^d-1$ has $d+1$ roots, namely $1, \alpha,\ldots, \alpha^{d-1}, \beta$ \contr \textbf{2.12}.
+\end{proof}
+
+A positive integer is said to be a \emph{primitives root modulo n} if $\langle g \rangle = (\Z/n\Z)^\times$. Hence \textbf{2.14} says that primitive roots exist modulo $p$ for all primes $p$.
+
+For instance, take $p=19$, and let $d = \ord(2)$ in $(\Z/19\Z)^\times$. Then $d|\varphi(19) = 18$, so $d=18$ or $d|6$ or $d|9$. $2^6 = 64 \nequiv 1 \mod 19$, and $2^9 = 512 \nequiv 1 \mod 19$, so $d=18$, and $2$ is a primitive room modulo $19$.
+
+There are many open problems concerning primitive roots:
+\begin{enumerate}
+\item \underline{Artin's Primitive Root Conjecture:}\\
+Given $g\geq 1$ does there exist infinitely many primes $p$ such that $g$ is a primitive root modulo $p$. We do know that there are infinitely many primes for which one of $\{2,3,5\}$ is a primitive root.
+\item \underline{How large is the smallest primitive root modulo $p$?}\\
+We can prove that it is $\leq cp^{1/4 + \epsilon}$ for some constant $c>0$ and for any $\epsilon > 0$. However, conditional on the Generalised Riemann Hypothesis (GRH), it is $\leq c\log^6 p$ for constant $c > 0$
+\end{enumerate}
+
+Now consider $(\Z/8\Z)^\times = \{\pm 1, \pm 3\}$. All of these have order $1$ or $2$, and hence $(\Z/8\Z)^\times$ is not cyclic. In fact, let $\theta: (\Z/2^k\Z)^\times \rightarrow (\Z/8\Z)^\times$ map $x \mod 2^k$ onto $x \mod 8$. Since $(a,2^k) =1 \iff (a,8) = 1$, $\theta$ is surjective. Hence, for $k\geq 3$ we have that $(\Z/2^k\Z)^\times$ is not cyclic, since a generator would map to a generator.
+
+\begin{theorem}
+If $p>2$, $(\Z/p^k\Z)^\times$ is cyclic for $k\geq 1$.
+\end{theorem}
+\begin{lemma}
+Let $p>2, k\geq 1, y \in \Z$. Then
+\begin{enumerate}
+\item If $x\equiv 1+p^ky \mod p^{k+1}$, then $x^p \equiv 1+p^{k+1}y \mod p^{k+2}$
+\item $(1+yp)^{p^k} \equiv 1+p^{k+1}y \mod p^{k+2}$
+\end{enumerate}
+\end{lemma}
+\begin{proof}\item
+\begin{enumerate}
+\item $x^p = (1+p^ky)^p = \sum_{j=0}^p \binom{p}{j} (p^ky)^j = 1 + p^{k+1}y+\ldots+p^{pk}y^p$.
+
+For $2\leq j\leq p-1$, $p|\binom{p}{j}$, so $\binom{p}{j}(p^ky)^j \equiv 0 \mod p^{2k+2}$, and so $\equiv 0 \mod p^{k+2}$.
+
+Since $p\geq 2, pk\geq k+2$, so $p^{pk}y^p \equiv 0 \mod p^{k+2}$, and therefore $x^p\equiv 1+p^{k+1}y \mod p^{k+2}$
+
+\item Let $x = 1+py$ and apply part 1 $k$ times.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+Let $p>2, k\geq 1$. If $g$ is a primitive root $\mod p$, and $g^{p-1} \nequiv 1 \mod p^2$, then $g$ generates $(\Z/p^k\Z)^\times$ for all $k\geq 1$.
+\end{lemma}
+\begin{proof}
+Let $d = \ord g$ as a member of $(\Z/p^k\Z)^\times$. Note that $\varphi(p^k) = p^{k-1}(p-1)$, and so $d|p^{k-1}(p-1)$.
+
+If $g$ is not a generator of $(\Z/p^k\Z)^\times$, then one of the following holds:
+\begin{enumerate}
+\item $d|p^{k-2}(p-1)$
+\item $d=p^{k-1}e$ where $e|p-1, e\neq p-1$
+\end{enumerate}
+We tackle each of these cases individually, and will see that they cannot be the case:
+\begin{enumerate}
+\item We thus have $g^{p^{k-2}(p-1} \equiv 1 \mod p^k$. We've already seen that $g^{p-1} \equiv 1 \mod p$ and $g^{p-1} \nequiv 1 \mod p^2$, and so there exists some $y\nequiv 0$ such that $x \coloneqq g^{p-1} = 1+py$.
+
+Then we have $x^{p^{k-2}} \equiv 1+p^{k-1}y \mod p^k \implies g^{p^{k-2}(p-1)}\equiv 1+p^{k-1}y \mod p^k \nequiv 1 \mod p^k$ \contr.
+
+\item Here, we have $g^{p^{k-1}e} \equiv 1 \mod p^k$. Fermat tells us that $g^p \equiv g \mod p$, and so $g^{p^{k-1}} \equiv g \mod p \implies g^{p^{k-1}e} \equiv g^e \mod p$. However, $e < p$, and so this is not $1 \mod p$, and hence $g^{p^{k-1}e} \nequiv 1 \mod p$ \contr.
+\end{enumerate}
+Hence the only case left is that $g$ is a generator of $(\Z/p^k\Z)^\times$.
+\end{proof}
+
+\begin{proof}[Proof of 2.15]
+Let $g$ be a primitive root modulo $p$. If $g^{p-1} \nequiv 1 \mod p^2$, then $(\Z/p^k\Z)^\times = \langle g \rangle \;\forall\.k\geq 1$.
+
+Otherwise, $g^p\equiv g \mod p^2$. Let $h = (1+p)g$, so that $h^p \equiv (1+p)^p g^p \equiv g \mod p^2$. Observe that $g\nequiv h \mod p^2$, as $g$ is a primitive root modulo $p$, so that $(g,p)=1$. 
+
+So $h^p\nequiv h \mod p^2$, and so $\langle h\rangle = (\Z/p^k\Z)^\times\;\forall\.k\geq 1$.
+\end{proof}
+
+\textbf{2.16} fails for $p=2$ because of the $k=1$ case in \textit{1.} However, it does hold if $p=2, k\geq 2$. In particular, $(1+4)^{2^{k-1}} \equiv 1+2^{k+1}\mod 2^{k+2}$. So we have $(\Z/2^k\Z)^\times = \langle -1,5\rangle \cong \Z/2^{k-2}\Z \times \Z/2\Z$ for $k\geq 3$.
 \end{document}

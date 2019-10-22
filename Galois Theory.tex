@@ -1,50 +1,7 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{geometry}[margin=1in]
-\usepackage{tikz}
-\usepackage[parfill]{parskip}
-\usepackage{subcaption}
-\usepackage{stmaryrd}
-\newcommand{\st}{\text{ s.t. }}
-\newcommand{\contr}{\lightning}
-\newcommand{\im}{\mathfrak{i}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{\mathbb{F}}
-\newcommand{\K}{\mathbb{K}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\let\emph\relax
-\DeclareTextFontCommand{\emph}{\bfseries\em}
-\DeclareMathOperator{\charr}{char}
-\DeclareMathOperator{\Image}{im}
+\input{./preamble.tex}
 
 \setcounter{section}{-1}
-\newtheorem{fieldextprops}{Corollary}[section]
-\newtheorem{lem11}{Lemma}[section]
-\newtheorem{prp12}[lem11]{Proposition}
-\newtheorem{prp13}[lem11]{Proposition}
-\newtheorem{tower}[lem11]{Theorem}
-\newtheorem{prp15}[lem11]{Proposition}
-\newtheorem{cor16}[lem11]{Corollary}
-\newtheorem{cor17}[lem11]{Corollary}
-\newtheorem{cor18}[lem11]{Corollary}
-\newtheorem{prp19}[lem11]{Proposition}
-
-\newtheorem{lem21}{Lemma}[section]
-\newtheorem{prp22}[lem21]{Proposition}
-\newtheorem{prp23}[lem21]{Proposition}
-\newtheorem{thm24}[lem21]{Theorem}
-\newtheorem{cor25}[lem21]{Corollary}
-
-\newtheorem{lem31}{Lemma}[section]
-
 \title{Galois Theory}
 \begin{document}
 \maketitle
@@ -76,7 +33,7 @@ Underline{Exercise:} If $R$ is an integral domain then $R[x]$ is an integral dom
 If $K$ is a field then $K[x]$ is a Euclidean domain.\\
 If $a,b \in K[x]$ then $\exists q,r$ such that $a = qb + r$ with $\deg r < \deg b, b \neq 0$
 
-\begin{fieldextprops}
+\begin{corollary}
 \item
 \begin{enumerate}
 \item $K[x]$ is a principal ideal domain (PID)
@@ -85,7 +42,7 @@ If $a,b \in K[x]$ then $\exists q,r$ such that $a = qb + r$ with $\deg r < \deg 
 \item For $a, b \in K[x], (a)+(b)$ is an ideal and so is of the form $(g)$ for some $g \in K[x]$. $g = \gcd(a,b)$, and is unique up to a unit.
 \item If $f\in K[x]\setminus\{0\}$ then $f$ has at most $\deg f$ roots in $K$.\footnote{We say $\alpha$ is a root of $f \iff f(\alpha) = 0$}
 \end{enumerate}
-\end{fieldextprops}
+\end{corollary}
 
 \begin{proof}
 Left as an exercise
@@ -106,9 +63,9 @@ A field $K$ always has a smallest subfield. There is a ring homomorphism $\Z \ri
 
 $K$ is a \emph{finite field} if $\#K < \infty$, where $\#K$ denotes the number of elements of $K$.
 
-\begin{lem11}
+\begin{lemma}
 If $F$ is a finite field then $\charr F = p$ for some prime $p$, and $\#F = p^n$ for some $n \geq 1$.
-\end{lem11}
+\end{lemma}
 \begin{proof}
 If $\#F < \infty$ then the map $\Z \rightarrow F$ is not injective, so $\F_p \subseteq F$ and $F$ is a finite dimensional vector space over $\F_p$, and hence as a $\F_p$-vector pace $F\cong \F_p^n$, and hence has $p^n$ elements.
 \end{proof}
@@ -128,11 +85,11 @@ $f$ is irreducible - if $f = gh$, then $f(\alpha) = g(\alpha)h(\alpha) = 0$, but
 \begin{align*}
 \alpha^{-1} = \frac{1}{a_0}\left(\alpha^{n-1}+a_{n-1}\alpha^{n-2}+\ldots+a^1\right)
 \end{align*}
-\begin{prp12}
+\begin{proposition}
 $\alpha$ is transcendental over $K$ if and only if $\phi:K[x] \rightarrow K[\alpha]$ an isomorphism which extends to an isomorphism $K(x)\rightarrow K(\alpha)$. In particular, all transcendental extensions $K(\alpha)$ are mutually isomorphic, being isomorphic to $K(x)$.
-\end{prp12}
+\end{proposition}
 To summarise:
-\begin{prp13}
+\begin{proposition}
 Given a field extension $L/K$ and $\alpha \in L$, the following are all equivalent:
 \begin{enumerate}
 \item $\alpha$ is algebraic over $K$
@@ -142,7 +99,7 @@ Given a field extension $L/K$ and $\alpha \in L$, the following are all equivale
 \item $K[\alpha]$ is a field
 \end{enumerate}
 When these hold, $[K(\alpha) : K] = \deg_K \alpha$
-\end{prp13}
+\end{proposition}
 \begin{proof}
 Let $d = \deg_K \alpha = \deg f$, where $f$ is the minimal polynomial of $\alpha$ over $K$. Observe $1, \alpha, \alpha^2, \ldots, \alpha^d$ span $K(\alpha)$, and the minimality of the degree of $f$ imply that $1, \alpha, \ldots, \alpha^{d-1}$ are linearly independent.
 \end{proof}
@@ -153,13 +110,13 @@ Let $d = \deg_K \alpha = \deg f$, where $f$ is the minimal polynomial of $\alpha
 \item The minimal polynomial is dependent on $K$ - e.g. $\alpha = \sqrt{\im} = (1+\im)\frac{\sqrt{2}}{2}$. The minimal polynomial of $\alpha$ over $\Q$ is $x^4+1$, whilst over $\Q(\im)$ it is $x^2 - \im$. Note that in this example $[\Q(\im):\Q] = 2; [\Q(\alpha):\Q(\im)] = 2; [\Q(\alpha):\Q] = 4$, and $2\times 2=4$, illustrating the \emph{tower law}.
 \end{enumerate}
 
-\begin{tower}[Tower Law]
+\begin{theorem}[Tower Law]
 Given field extensions $M/L/K$, then $M/L$ is finite if and only if $M/K$ and $L/K$ are finite. In that case, $[M:K]=[M:L][L:K]$.
-\end{tower}
+\end{theorem}
 This can be deduced from the following proposition:
-\begin{prp15}
+\begin{proposition}
 Suppose $L/K$ is a finite field extension, and $V$ is a vector space over $L$. Then $V$ is finite dimensional over $L$ if and only if $V$ is finite dimensional over $K$ and $\dim_K V = \dim_L V\times[L:K]$
-\end{prp15}
+\end{proposition}
 \begin{proof}[Proof that Prop. 1.5 $\implies$ the tower law]
 If $L/K$ is not finite then $M/K$ is not a finite extension. Otherwise, apply \textbf{1.5} with $V=M$.
 \end{proof}
@@ -172,9 +129,9 @@ If $\dim_L V = d$, take a $L$-vector space basis of $V$, say $\{\alpha_1, \ldots
 Hence, $\dim_K V = n\times d = \dim_L V\times[L:K]$
 \end{proof}
 
-\begin{cor16}
+\begin{corollary}
 If $L/K$ is a finite extension $\alpha \in L$, then $\alpha$ is algebraic over $K$ and $\deg_K \alpha | [L:K]$.
-\end{cor16}
+\end{corollary}
 \begin{proof}
 Immediate from the Tower Law: $L/K(\alpha)/K$ are field extensions.
 \end{proof}
@@ -189,7 +146,7 @@ $L \supseteq \Q(\sqrt[3]{2}).$ But $[\Q(\sqrt[3]{2}):\Q] = 3$, since the minimal
 \end{proof}
 \item Let $\omega = e^{2\pi\im/p}$ where $p$ is an odd prime, and let $\alpha =\omega + \omega^{-1} = e^{2\pi\im/p} + e^{-2\pi\im/p}$. What is $\deg_{\Q} \alpha$? Observe that $\omega$ is a root of $f(x)=1+x+\ldots+x^{p-1}$, which is irreducible by application of Eisenstein to $f(x+1)$. So $[\Q(\omega):\Q] = p-1$. Now clearly $\alpha = \omega + \omega^{-1} \in \Q(\omega)$, so we have field extensions $\Q(\omega)/\Q(\alpha)/\Q$, and hence $\deg_{\Q} \alpha|p-1$. If we consider $[\Q(\omega):\Q(\alpha)]$, we can note that $\alpha\omega = \omega^2 + 1$, so $\omega$ is a root of $x^2-\alpha x+1$, hence $[\Q(\omega):\Q(\alpha)] = 1$ or $2$. It is not 1 as $\omega \notin \Q(\alpha)$, and so $\deg_{\Q} \alpha = \frac{p-1}{2}$.
 \end{enumerate}
-\begin{cor17}\item
+\begin{corollary}\item
 \begin{enumerate}
 \item $\alpha_1, \alpha_2, \ldots, \alpha_n$ are algebraic over $K$ if and only if $[K(\alpha_1, \alpha_2, \ldots, \alpha_n):K] < \infty$
 \item If $\alpha, \beta$ algebraic over $K$ then $\alpha \pm \beta, \alpha\beta, \alpha/\beta$ (if $\beta \neq 0$) are algebraic over $K$.
@@ -205,11 +162,11 @@ Hence by induction $[K(\alpha_1, \ldots, \alpha_n):K] < \infty$, as it is produc
 \item This is immediate from \textit{1} as $\alpha\pm \beta, \alpha\beta, \alpha/\beta \in K(\alpha,\beta)$, which is a finite extension of $K$.
 \end{enumerate}
 \end{proof}
-\end{cor17}
+\end{corollary}
 
-\begin{cor18}
+\begin{corollary}
 The elements of $L$ which are algebraic over $K$ form a subfield of $L$.
-\end{cor18}
+\end{corollary}
 \underline{Example:} Let $a,b \in K$, and set $\alpha=\sqrt{a}, \beta=\sqrt{b}$. Let's try to define a polynomial satisfied by $\alpha+\beta=\gamma$. Compare powers of $\gamma$ and use that $\alpha^2 = a, \beta^2 = b$ to simplify and look for linear relationships.
 \begin{align*}
 \gamma^2 &= \alpha^2 + 2\alpha\beta + \beta^2 = a+b+2\alpha\beta\\
@@ -227,14 +184,14 @@ An extension $L/K$ is an \emph{algebraic extension} if every $\alpha \in L$ is a
 
 \underline{Example:} $\overline{\Q} \coloneqq \{\alpha \in \C: \alpha$ algebraic over $\Q\}$ is an algebraic extension of $\Q$, but is not a finite extension of $\Q$, as $\sqrt[n]{2} \in \overline{\Q}$ so $[\overline{\Q}:\Q] \geq n$ for all integers $n$.
 
-\begin{prp19}
+\begin{proposition}
 \item
 \begin{enumerate}
 \item A finite extension is algebraic
 \item $K(\alpha) / K$ is an algebraic extension $\implies \alpha$ is algebraic over $K$
 \item If $M/L/K$ are extensions then $M/K$ is algebraic if and only if $M/L$ and $L/K$ are algebraic
 \end{enumerate}
-\end{prp19}
+\end{proposition}
 \begin{proof}
 \item
 \begin{enumerate}
@@ -330,24 +287,24 @@ Things we can do here:
 \end{enumerate}
 \newpage
 As a corollary of these, we can introduce Cartesian coordinates in the plane given our original two points, defining them to be the coordinates $(0,0)$ and $(0,1)$. We say that $\lambda\in\R$ is \emph{constructible} if a line segment of length $|\lambda|$ is the distance between $2$ constructible points.
-\begin{lem21}
+\begin{lemma}
 $p=(a,b)$ is constructible if and only if $a,b \in \R$ are constructible.
-\end{lem21}
+\end{lemma}
 \begin{proof}
 The forwards implication is trivial - simply drop perpendiculars onto both axes. Conversely, if $a,b,$ are constructible, we can erect perpendicular on both axes distances of $a, b$ from the origin, whose intersection is $p$.
 \end{proof}
-\begin{prp22}
+\begin{proposition}
 Constructible numbers form a subfield of $\R$.
-\end{prp22}
+\end{proposition}
 \begin{proof}
 Suppose $a,b \in \R$ are constructible. Then $a+b$ is constructible by construction (3), as is $-a$.
 
 We can also construct $ab$ and $a/b$ using similar triangles %draw diagram of this.
 \end{proof}
 
-\begin{prp23}
+\begin{proposition}
 If $a>0$ is constructible, so is $\sqrt{a}$.
-\end{prp23}
+\end{proposition}
 \begin{proof}
 \item
 \begin{center}
@@ -360,19 +317,19 @@ If $a>0$ is constructible, so is $\sqrt{a}$.
 \end{center}
 \end{proof}
 
-\begin{thm24}
+\begin{corollary}
 Let $\Q \subseteq F_0 \subseteq F_1 \subseteq \ldots \subseteq F_n = K \subseteq \R$ be a chain of subfields of $\R$ such that, for each $n\geq 0$, $F_{n+1}$ is obtained from $F_n$ but adjoining $\sqrt{r}$ for some $r \in F_n$ which is not a square in $F_n$. Then every element of $K$ is constructible.
 
 Conversely, if $a_1, \ldots, a_n \in \R$ are constructible numbers, there is a chain of subfields as above with each $a_i \in K$.
-\end{thm24}
+\end{corollary}
 
 \begin{proof}
 By the preceding constructions, every element of $K$ is constructible. For the converse, we start with $(0,0), (0,1) \in \F_0^2$. It is enough to show that the coordinates of the intersections of circles and lines either lie in the same field, or produce a field extension by adding $\sqrt{r}$ for some $r$.
 \end{proof}
 
-\begin{cor25}
+\begin{corollary}
 If $a \in \R$ is constructible, then $a$ is algebraic, and $\deg_{\Q} a = 2^n$ for some $n\in \N_{0}$.
-\end{cor25}
+\end{corollary}
 
 The consequences of this are:
 \begin{enumerate}
@@ -385,20 +342,101 @@ The consequences of this are:
 Let $f\in K[x]$ be irreducible. Then $K[x]/(f)$ is a field, and we denote it by $K_f$. Then $K_f/K$ is a field extension. We write $\alpha = x+(f)$ for the image of $x$ in $K_f$. If $d = \deg(f)$, then $1, \alpha, \alpha^2, \ldots, \alpha^{d-1}$ form a basis of $K_f/K$, and $f(\alpha) = f(x) + (f) = (f) = 0$ in $K_f$, so $K_f = K(\alpha)$, and $\alpha$ is a root of $f$ in $K_f$. We say $K_f$ is \emph{obtained from K by adjoining a root of f.}
 
 Let $L/K, M/K$ be two field extensions of the same field $K$. A homomorphism of fields $\phi:L\hookrightarrow M$ which is the identity on $K$ is called a \emph{K-homomorphism}. For instance, $\C\rightarrow \C; z\mapsto \overline{z}$ is an $\R$-homomorphism but not a $\C$-homomorphism.
-\begin{lem31}
+\begin{lemma}
 Let $L/K$ be an extension of fields, and $f\in K[x]$ be irreducible. There is a bijection:
-%\begin{align*}
-%\{K-$homomorphisms$ \phi:K_f \rightarrow L\} \leftrightarrow $roots of $f$ in $L = \{\tilde{\alpha}\in L|f(\tilde{\alpha}) = 0 \}
-%\end{align*}
-\end{lem31}
+\begin{align*}
+\{K-\text{homomorphisms } \phi:K_f \rightarrow L\} \longleftrightarrow\text{ roots of $f$ in }L = \{\tilde{\alpha}\in L|f(\tilde{\alpha}) = 0 \}
+\end{align*}
+\end{lemma}
 \begin{proof}
 A $K$-homomorphism $K[x]/(f) \rightarrow L$ is the same thing as a ring homomorphism $\phi:K[x]\rightarrow L$ such that $\phi(r) = r$ for $r\in K$ and $\ker\phi = (f)$. But such a $\phi$ is determined by $\phi(x)$ as $\phi(\sum r_ix^i) = \sum r_i \phi(x)^i$.
 
 Note that this shows $\phi(f(x)) = f(\phi(x))$, and so $\phi(f) = 0 \iff \ker \phi \supseteq (f) \iff \ker \phi = (f)$, as $f$ is irreducible, so $(f)$ is maximal.
 
-Hence, if $\phi K_f \rightarrow L$ is a $K$-homomorphism, put $\tilde{\alpha} = \phi(x) = \phi(x+(f))$. Then $\phi(f) = f(\tilde{\alpha}) = 0$, so $\tilde{\alpha}$ is a root of $f$ in $L$, giving a map LHS $rightarrow$ RHS.
+Hence, if $\phi: K_f \rightarrow L$ is a $K$-homomorphism, put $\tilde{\alpha} = \phi(x) = \phi(x+(f))$. Then $\phi(f) = f(\tilde{\alpha}) = 0$, so $\tilde{\alpha}$ is a root of $f$ in $L$, giving a map LHS $\rightarrow$ RHS.
 
 Conversely, if $\tilde{\alpha}$ is a root of $f$ in $L$, we've just showed there is a map $K[x]\rightarrow L$ sending $x\mapsto \tilde{\alpha}$, and it is clear that if $\tilde{\beta} \neq \tilde{\alpha}$ is another such root, the maps constructed are different.
 \end{proof}
 In particular, the number of $K$-homomorphisms $K_f\rightarrow L$ is finite, and equal to the number of distinct roots of $f$ in $L$, which is $\leq \deg f$.
+
+\begin{corollary}
+if $\alpha, \beta \in L$ are algebraic, then they have the same minimal polynomial over $K$ if and only if there is a $K$-isomorphism $K(\alpha) \rightarrow K(\beta)$ sending $\alpha$ to $\beta$
+\end{corollary}
+\begin{proof}
+$K(\alpha)\tilde{\longleftarrow} K_f = K[x]/f(x)$, where $f$ is the minimal polynomial of $\alpha$.
+\begin{itemize}
+\item{$\Longrightarrow$} If $\beta$ has the same minimal polynomial, then $K(\beta) \tilde{\longleftarrow} K_f$ also
+
+\item{$\Longleftarrow$} If there exists a $K$-isomorphism $\theta:K(\alpha) \tilde{\longrightarrow} K(\beta)$ sending $\alpha$ to $\beta$, then this gives a $K$-homomorphism $K_f \rightarrow K(\beta)$, such that $f(\beta) = 0$, by the previous lemma. So if $g$ is the minimal polynomial of $\beta$, then $g|f$. But $\alpha, \beta$ interchangeable, so $f|g$, and they are the same polynomial up to a unit.
+\end{itemize}
+\end{proof}
+
+\underline{Example:} $f(x) = x^3-2 \in \Q[x]$ irreducible. Let $\alpha=\sqrt[3]{2}$ be the real cube root of $2$, and let $\omega = e^{2\pi\im/3} \in C$, so $\alpha, \alpha\omega, \alpha\omega^2$ are both roots of $f$. Then there is a $\Q$-isomorphism $\Q(\alpha)\tilde{\longrightarrow} \Q(\alpha\omega)$, sending $\alpha$ to $\alpha\omega$. However, $\Q(\alpha)\subseteq \R$ whilst $\Q(\omega\alpha) \nsubseteq \R$. This is \textsc{not} a contradiction: the isomorphism sees the internal structure of the field, and not how they sit as subfields of $\C$.
+
+Let $f\in K[x]$. A \emph{splitting field} for $f$ is a field extension $L/K$ such that:
+\begin{enumerate}
+\item $f$ splits into linear factors in $L[x]$
+\item $L=K(\alpha_1, \ldots, \alpha_d)$ where $\alpha_1, \ldots, \alpha_d$ are the roots of $f$ in $L$. Equivalently, $f$ does not split into linear factors in any proper subfield of $L$ containing $K$.
+\end{enumerate}
+
+\underline{Examples:} $K = \Q$
+\begin{enumerate}
+\item $f(x) = x^2+1 = (x+\im)(x-\im) \implies \Q(\im)$ is a splitting field for $f$.
+\item $f(x) = x^3-2$. Claim: a splitting field is $\Q(\alpha, \alpha\omega) = \Q(\alpha,\omega)$.\\
+We can see this as $[\Q(\alpha,\omega):\Q]$ is divisible by $[\Q(\alpha):\Q]=3, [\Q(\omega):\Q] = 2$, and so divisible by $6$, but the degree must be $\leq 6$ as $\{1, \omega, \alpha, \alpha\omega, \alpha^2, \alpha^2\omega\}$ span $\Q(\alpha,\omega)$ as a $\Q$-vector space, and so $[\Q(\alpha,\omega):\Q]=6$, but adjoining any single root of $f$ will by definition give an extension of degree $3$.
+\item The splitting field of any quadratic polynomial can be obtained by adjoining one root - exercise for the interested reader.
+\item $f(x) = \frac{x^p-1}{x-1}, \omega = e^{2\pi\im/p}$. Then $\Q(\omega)$ is a splitting field for $f$ over $\Q$.
+\end{enumerate}
+
+\begin{theorem}
+Splitting fields exist, and are unique, but are not ``uniquely unique".
+\end{theorem}
+\begin{proof}[Proof of existence.]
+Let $f \in K[x]$. Then a splitting field for $f$ exists, by adjoining all roots of $f$. More precisely: we induct on $\deg f$, assuming that for any field a polynomial of degree $< \deg f$ has a splitting field. If $\deg f = 1$, we are done as $f$ is a product of linear factors in $K[x]$. Otherwise, let $g$ be an irreducible factor of $f$, and $K_g = K[t]/(g) = K(\alpha)$ where $\alpha=t+(g)$, so $f(\alpha=0$ in $K_g$, i.e. $f(x)=(x-\alpha)f_1(x) \in K_g[x]$, and $\deg f_1 = \deg f -1 <\deg f$. By the inductive hypothesis, a splitting field exists for $f_1$ over $K_g$, say $L = K_g(\alpha_2, \ldots, \alpha_n)$. Then we claim $L$ is a splitting field for $f$ over $K$, as $f$ factors over $L$ as $(f-\alpha)(f-\alpha_2)\ldots(f-\alpha_n)$. Moreover, $L=K(\alpha,\alpha_2, \ldots, \alpha_n)$.
+\end{proof}
+\underline{Example:} $K=\R$ and we want to construct $\C$. Let $f(x) = x^2 +1$.
+\begin{enumerate}
+\item The usual way is to let $\C = \R_f = \R[x]/(x^2+1)$ builds $\C$ with a distinguished element $\im$, which is the image of $x$.
+\item Let $g(y) = y^2 + 2y + 2 = (y+1-\im)(y+1+\im)$. Then we could let $\C = \R_g = \R[y]/(y^2+2y+2)$, with a distinguished element, the image of $y$. However, there is no canonical way to choose what $y$ is: it could be $-1+\im$ or $-1-\im$. 
+\end{enumerate}
+ Hence we have two $\R$-homomorphisms $\R[y]/(y^2+2y+2) \tilde{\longrightarrow} \R[x]/(x^2+1)$, as we can map $y\mapsto -x-1$ or $y\mapsto x-1$, and we have no reason to prefer one over the other. In general, we will show that whilst the splitting fields might be unique, the $K$-homomorphisms to these splitting fields are not unique.
+ 
+\begin{proof}[Proof of uniqueness.]
+Let $f\in K[x]$, and $L$ be the splitting field for $f$. Suppose $\phi:K\hookrightarrow M$ is the inclusion map of fields where $M\supseteq L$, and $\phi(f)$ splits in $M$.
+
+Then we can extend $\phi$ to a homomorphism  $\overline{\phi}:L\rightarrow M$, factoring $K\hookrightarrow M$:
+\begin{center}
+\tikz{
+\node (k) at (0,2) {$K$};
+\node (m) at (2,2) {$M$};
+\node (l) at (0,0) {$L$};
+\draw[right hook->] (k) -- (m);
+\draw[right hook->] (k) -- (l);
+\draw[dashed, ->] (l) -- node[below right] {$\overline{\phi}$} (m);
+}
+\end{center}
+Moreover,
+\begin{enumerate}
+\item The number of such extensions is $\leq [L:K]$, and equals $[L:K]$ if $f$ does not have multiple roots (note $f$ has multiple roots in $M$ if and only if $f$ has multiple roots in $L$).
+\item If $M$ is a splitting field, any such $\overline{\phi}$ is an isomorphism, which we prove by induction on $[L:K]$:
+
+If $f$ splits into linear factors over $K$, i.e. $[L:K] = 1$, we are done. Otherwise, let $\alpha_1 \in L\setminus K$ be a root of $$, and $$ be the minimal polynomial of $\alpha_1$ over $K$, so that $g|f$. Then by lemma \textbf{3.1}, there is a bijection between the $K$-homomorphisms with $K(\alpha_1) \rightarrow M$ and the roots of $\phi(g)$ in $M$. So, since $\phi(f)$ splits in $M$, $\phi(g)$ also splits, and tehre are $\leq [K(\alpha_1:K]$ such homomorphisms, with equality if there are no repeated roots of $g$.
+
+Now, by the induction hypothesis, 
+\begin{center}
+\tikz{
+\node (k) at (0,2) {$K(\alpha)$};
+\node (m) at (2,2) {$M$};
+\node (l) at (0,0) {$L$};
+\draw[right hook->] (k) -- node[above] {$\tilde{\phi}$} (m);
+\draw[right hook->] (k) -- (l);
+\draw[dashed, ->] (l) -- (m);
+}
+\end{center}
+where $[L:K(\alpha)] < [L:K]$, there exists an extension $\overline{\phi}$ of $\tilde{\phi}$, and the number of such extensions is $\leq [L:K(\alpha)]$. Hence, the total number of such extensions is $\leq [L:K(\alpha)][K(\alpha:K] = [L:K]$ by the tower law, with equality if there is no repeated roots.
+
+\item If $M$ is a splitting field, $M = K(\beta_1, \ldots, \beta_d)$ where $\beta_l$ are roots of $f$. But, if $\overline{\phi}:L\rightarrow M$ are extensions as above, and $\alpha_1, \ldots, \alpha_d$ are roots of $f$ in $L$, then $\overline{\phi}(\alpha_1), \ldots, \overline{\phi}(\alpha_d)$ are the roots of $f$ in $M$, so are exactly $\beta_1, \ldots, \beta_d$ and hence $\overline{\phi}$ is surjective. It is injective, as homomorphisms of fields are injective.
+\end{enumerate}
+
+\end{proof}
 \end{document}

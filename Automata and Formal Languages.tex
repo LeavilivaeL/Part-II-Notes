@@ -1,37 +1,5 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{geometry}[margin=1in]
-\usepackage{tikz}
-\usepackage[parfill]{parskip}
-\usepackage{subcaption}
-\usepackage{stmaryrd}
-\usepackage{textcomp}
-\newcommand{\st}{\text{ s.t. }}
-\newcommand{\contr}{\lightning}
-\newcommand{\im}{\mathfrak{i}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{\mathbb{F}}
-\newcommand{\K}{\mathbb{K}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\DeclareMathOperator{\id}{id}
-\DeclareMathOperator{\upper}{upper}
-\DeclareMathOperator{\dom}{dom}
-\let\emph\relax
-\DeclareTextFontCommand{\emph}{\bfseries\em}
-
-\newtheorem{t1}{Lemma}[section]
-\newtheorem{t2}[t1]{Corollary}	
-\newtheorem{thm13}[t1]{Theorem}
-\newtheorem{lem14}[t1]{Lemma}
-\newtheorem{thm15}[t1]{Theorem}
+\input{./preamble.tex}
 
 \title{Automata and Formal Languages}
 \begin{document}
@@ -135,9 +103,9 @@ For each program $P$, the \emph{upper register index} $\upper(P)$ is the largest
 
 A \emph{partial function} $f:\N^k \rightarrow \N$ is one where the domain of $f$ is a subset of $\N^k$, and undefined otherwise. If $f$ is defined everywhere then we call it a \emph{total function}. This lets us define these programs as functions - we say $f$ is \emph{partial computable} by a program $P$ such that $\forall (m_1,\ldots,m_k) \in \dom(f)$ have $P(m_1,\ldots,m_k)\downarrow$ with $f(m_1,\ldots,m_k) = R_1$ on halting, and $\forall (m_1,\ldots,m_k)\notin \dom(f)$ we have $P(m_1,\ldots,m_k)\uparrow$. Hence any program $P$ and $k>0$ gives a partial function $f:\N^k \rightarrow \N$.
 
-\begin{t1}
+\begin{lemma}
 We can add $R_i$ to $R_j$ leaving $R_i$ unchanged.
-\end{t1}
+\end{lemma}
 \begin{proof}
 \item
 \centering
@@ -167,9 +135,9 @@ We have already seen that the function $n\mapsto 0$ is also computable. This can
 \draw[->] (1.120) arc (40:40+285:6mm) node[left, midway] {$R_1 - 1$};
 }
 \end{center}
-\begin{t2}
+\begin{corollary}
 There exists a routine which can copy $R_i$ to $R_j$ leaving $R_i$ unchanged.
-\end{t2}
+\end{corollary}
 \begin{proof}
 First empty $R_j$, then use \textbf{1.1} to add $R_i$ to $R_j$.
 \end{proof}
@@ -177,7 +145,7 @@ We can use these as subroutines to join with other programs $P$. Use registers $
 
 \subsection*{Partial Recursive Functions}
 Partial computable functions have good closure properties.
-\begin{thm13}
+\begin{theorem}
 \item
 \begin{enumerate}
 \item For $i\leq k$, the \emph{projection function} $(n_1, \ldots, n_k) \mapsto n_i$ is computable.
@@ -191,7 +159,7 @@ h(n_1,\ldots,n_k,n_{k+1}+1) &= g(n_1,\ldots,n_{k+1},h(n_1,\ldots,n_{k+1}))
 Moreover, $f,g$ total $\implies h$ total.
 \item (Minimisation) If $f$ on $k+1$ variables is partial computable then so is the partial function $g:\N^k\rightarrow \N$ defined by $g(n_1,\ldots,n_k) = n$ if $f(n_1,\ldots,n_k,n) = 0$ and $f(n_1,\ldots,n_k,m) > 0$ for all $m<n$, and is undefined if no zero is ever found. Note that $f$ total $\nRightarrow g$ total.
 \end{enumerate}
-\end{thm13}
+\end{theorem}
 \begin{proof}\item
 \begin{enumerate}
 \item We can use the program Transfer $R_i$ to $R_1$, \textsc{Halt}.
@@ -236,7 +204,7 @@ The class of \emph{partial recursive functions} is the smallest class of partial
 
 So \textbf{1.3} says that partial recursive $\implies$ partial computable.
 
-A partial function is \emph{primitive recursive} if we never use \textbf{1.3} (5) its construction. Note that primitive recursive $\implies$ total recursive, as (5) was the only construction that breaks the totality of the function. \textlbrackdbl The converse implication is not true: the Ackermann function. \textrbrackdbl
+A partial function is \emph{primitive recursive} if we never use \textbf{1.3} (5) its construction. Note that primitive recursive $\implies$ total recursive, as (5) was the only construction that breaks the totality of the function. [The converse implication is not true: the Ackermann function.]
 
 Example: $+$ and $\times$ are primitive recursive:
 \begin{itemize}
@@ -245,11 +213,11 @@ Example: $+$ and $\times$ are primitive recursive:
 \end{itemize}
 Example: $(m,n)\mapsto m^n$ is primitive recursive - left as exercise.
 
-We need to be able to ``encode" finite sequences of arbitrary length in $\N$. For $n>0$ and $i\in\N$, write $p_i$ for the $(i+1)th$ prime (so $p_0 = 2$). Write $(n)_i$ for the largest power of the prime $p_i$ that divides $n$.
+We need to be able to ``encode" finite sequences of arbitrary length in $\N$. For $n>0$ and $i\in\N$, write $p_i$ for the $(i+1)\th$ prime (so $p_0 = 2$). Write $(n)_i$ for the largest power of the prime $p_i$ that divides $n$.
 
-\begin{lem14}
+\begin{lemma}
 For each fixed $i$, the 1 variable function $(\cdot)_i : \N \rightarrow \N$ is primitive recursive.
-\end{lem14}
+\end{lemma}
 
 \begin{proof}
 First note that, for any finite sequence $(m_0, m_1, \ldots, m_s)\subseteq\N^{s+1}$, the function\\ $f(n) = \begin{cases} m_n &n\leq s \\ 0 & n>s \end{cases}$ is primitive recursive.
@@ -279,9 +247,9 @@ So $h(n,n) = \sum_{i=1}^n \epsilon(\text{Power}_k(n,1)) = \text{Maxpower}_k(n)$,
 
 \subsection*{Computable = Recursive}
 We have seen already that partial recursive $\implies$ partial computable.
-\begin{thm15}
+\begin{theorem}
 Every partial computable function $f:\N^k \rightarrow \N$ is partial recursive.
-\end{thm15}
+\end{theorem}
 \begin{proof}
 From a program $P$ for $f$, define $g:\N^{k+2}\rightarrow \N$, ``what actually goes on in $P$", to be the function:
 \begin{center}
@@ -300,4 +268,120 @@ Fix $n_1, \ldots, n_k$ and $t$. For each $0\leq i \leq N$, $g$ gives $(g_0, \ldo
 
 In particular, for $t=0, h=2^{n_0}3^{n_1}\ldots p_k^{n_k}$. For recursion for $h$, we need $s:\N\rightarrow\N$, the ``transition function", which computes in coded form the changes at each step.
 \end{proof}
+
+\subsection*{Algorithms and Recursive Sets}
+A function $f:\N^k \rightarrow \N$ is \emph{recursive} or \emph{computable} if it is total. If it s not even partial recursive, then it is \emph{incomputable}.
+
+A subset $X\subseteq \N^k$, (often $X\subseteq \N$) is \emph{recursive} or \emph{computable} or \emph{decidable} if the characteristic function $\chi_X(n) = \begin{cases} 1 & n\in X \\ 0 & n \notin X\end{cases}$ is computable, i.e. if we can program a computer to tell us if a given number is in it or not.
+
+An \emph{algorithm} is any process which takes an input in $\N^k$ for some specified $k$, or a recursive subset $X\subseteq \N^k$, and returns an output in $\N$ which is simulated by a register machine.
+
+A \emph{total algorithm} terminates for all elements in $X$, whilst a \emph{partial algorithm} may fail to terminate for some choices of input.
+
+\begin{lemma}
+For each $k\geq 1$, there is some total function $f:\N^k \to \N$ which is incomputable.
+\end{lemma}
+\begin{proof}
+Each computable program comes from a finite program with $n+1$ states for some $n$. Since there are only countably many finite programs, but $\powset(\N)$ is uncountable, hence one of these sets is not computable. Then its indicator function is not computable.
+\end{proof}
+
+For given $m$, the \emph{shortlex} ordering on $\N^m$ is $(n_1,\ldots, n_m) < (n_1', \ldots, n_m')$ if $\sum n_i < \sum n_i'$ or $\sum n_i = \sum n_i$ and there is some $j$ with $n_i = n_i'$ for $i<j$, but $n_{j+1} > n'_{j+1}$.
+
+This gives us a bijection to $\N$, as there are only finitely many $k$-tuples of naturals with sum less than $N \in \N$.
+
+If a register machine $P$, then for the $i$\th instruction, let $t_i = \begin{cases} 2^j \cdot 5^k & \text{if it is } (j, +, k) \\ 2^j\cdot 3\cdot 5^k \cdot 7^l & \text{if it is } (j,-,k,l)\end{cases}$. We can then encode the tuple $(t_1, t_2, \ldots, t_n)$ as $m=2^n\cdot 3^{t_1}\cdot 5^{t_2} \cdot\ldots \cdot p_n^{t_{n-1}}$. We denote the program encoded by the number $m$ as $P_m$, if $m$ is a valid encoding of a program. For these $m$, we say $m$ \emph{codes} a program, and $P_m$ is the \emph{m\th machine}.
+
+The input for a register machine is a $k$-tuple for varying $k$, so we define $f_{n,k}$ for the $k$-variable function computed by the $n$\th machine if $P_n$ exists.
+
+Here is an explicit total function which is not recursive:
+\begin{lemma}
+Consider the following function $g:\N\to\N$ given by:
+\begin{align*}
+g(n) \coloneqq \begin{cases} f_{n,1}(n) + 1 & \text{if $n$ codes a program and if $f_{n,1}(n)$ is defined} \\ 0 & \text{else}\end{cases}
+\end{align*}
+Then $g$ is not recursive.
+\end{lemma}
+\begin{proof}
+If $g$ is recursive then it is computed by some machine. So there exists an $N$ such that $g = f_{N,1}$ is total. But then $f_{N,1}(N) = g(N) = f_{N,1}(N) + 1$ \contr.
+\end{proof}
+
+\subsection*{Church's Thesis}
+The two key figures in this chapter are Alonzo Church and Alan Turing, doing this work around 1936.
+
+An \emph{executable process} is a step-by-step deterministic process with finite description at each step, a finite set of rules, and a finite amount of input and output.
+
+An \emph{abstract theory of finite computation} is a theory of computation consisting of these executable processes.
+
+\begin{theorem}[Church's Thesis]\item
+\begin{enumerate}
+\item In any abstract theory of finite computation, $\mathscr{C}$, the $\mathscr{C}$-partial computable function $f:\N^k \to \N$ gives at most the partial recursive functions.
+\item Any informal description of an executable process starting with input in $\N^k$ and output in $\N$ or never halting is equivalent to a register machine, so we don't need to worry about all the details of the machine.
+\item There is a total algorithm, that, given the encoding (e.g. shortlex) of a description of an algorithm, returns a code for a register machine that carries out this process.
+\end{enumerate}
+\end{theorem}
+This is not so much one theorem as many different independent theorems. It has however been proven that all the following abstract theories of finite computation are equivalent:
+\begin{itemize}
+\item Church's $\lambda$-calculus
+\item Turing machines
+\item Register machines
+\item Standard languages
+\item Quantum/DNA-computers
+\end{itemize}
+From now on, we will refer to these three statements as ``Church's thesis" or even just ``Church". 
+
+\begin{lemma}
+Let $h:\N\rightarrow \N$ be:
+\begin{align*}
+h(n) = \begin{cases}f_{n,1} (n) + 1 & \text{if $n$ codes a program and $f_{n,1}(n)$ defined} \\ \text{undefined} & \text{otherwise}\end{cases}
+\end{align*}
+Then $h$ is partial recursive.
+\end{lemma}
+
+\begin{proof}
+For input $n$, check if $n$ codes a program - this is total recursive. If so, run the program with input $n$. If it then halts, add $1$ to $R_1$ and halt, and so by Church $h$ is partial computable = partial recursive.
+\end{proof}
+
+\subsection*{Recursively Enumerable Sets}
+Given a partial recursive function $f:\N^k \to \N$ with domain $X\subseteq \N^k$, suppose we input $7$. If $f(7)\downarrow$, then we can run the machine and get the answer within finite time. However, if $f(7)\uparrow$, then we will be waiting forever. By the halting problem, there is no way to know in advance what will happen.
+
+Now suppose we ask: ``Does $f$ halt on either $7$ or $9$?" Then the answer is yes, but if we are unlucky and start with $9$, we will never know if we na\"ively compute $f(9)$, then $f(7)$. 
+
+So instead, we zig-zag: we do one step of each alternately.\\
+Let $P_n^t(x)$ be the $t\th$ step of $P_n$ with input $x$. Then we can do:
+\begin{center}
+\tikz{
+\node (1) at (0,3) {$P_n^1(7)$};
+\node (2) at (4,3) {$P_n^1(9)$};
+\node (3) at (0,2) {$P_n^2(7)$};
+\node (4) at (4,2) {$P_n^2(9)$};
+\node (5) at (0,1) {$P_n^3(7)$};
+\node (6) at (4,1) {$P_n^3(9)$};
+\node (7) at (0.5,0.2) {};
+\draw[->] (1) edge (2) (2) edge (3) (3) edge (4) (4) edge (5) (5) edge (6);
+\draw[dotted, ->] (6) edge (7);
+}
+\end{center}
+We can clearly extend this to any set of finite size. We can even do infinite sets, by following a path similar to in the textbook enumeration of $\Q$:
+\begin{center}
+\tikz{
+\node (1) at (0,3) {$P_n^1(1)$};
+\node (2) at (2,3) {$P_n^1(2)$};
+\node (3) at (0,2) {$P_n^2(1)$};
+\node (4) at (0,1) {$P_n^3(1)$};
+\node (5) at (2,2) {$P_n^2(2)$};
+\node (6) at (4,3) {$P_n^1(3)$};
+\node (7) at (4,2) {$P_n^2(3)$};
+\node (8) at (2.5,1.2) {};
+\draw[->] (1) edge (2) (2) edge (3) (3) edge (4) (4) edge (5) (5) edge (6) (6) edge (7);
+\draw[dotted, ->] (7) edge (8);
+}
+\end{center}
+We can even alternate between different machines, and this process can be extended to any countable set. Then by Church, we can write a program that returns $1$ for input $x \in \N^k, k < \infty$ if some partial recursive function $f$ halts on input of $x$.
+
+We say a set $E\subseteq \N^k$ is \emph{recursively enumerable} if the function
+\begin{align*}
+\phi_E(n) \coloneqq \begin{cases} 1 & n\in E \\ \uparrow&  \text{else}\end{cases}
+\end{align*}
+
+The idea behind this definition is that, compared to a recursive set, here we can only say that $x$ is in $E$, whereas in a recursive set we can say if $x \in E$ or $x \notin E$. A consequence of this is that, by applying the above process for $\phi_E$ on all of $\N^k$, we will eventually get out all the elements of $E$, but we will not know when this has happened (indeed, it might take infinitely long to get all the elements, but we will eventually be notified that any given element is in $E$), so we can ``recursively enumerate" $E$. Conversely, recursive sets are often called \emph{decidable} - we can always decide whether or not $x \in E$.
 \end{document}

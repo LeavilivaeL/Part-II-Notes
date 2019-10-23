@@ -1,34 +1,5 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{geometry}[margin=1in]
-\usepackage{tikz}
-\usepackage[parfill]{parskip}
-\usepackage{subcaption}
-\usepackage{stmaryrd}
-\newcommand{\st}{\text{ s.t. }}
-\newcommand{\contr}{\lightning}
-\newcommand{\im}{\mathfrak{i}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{\mathbb{F}}
-\newcommand{\K}{\mathbb{K}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\nequiv}{\not\equiv}
-\DeclareMathOperator{\id}{id}
-\DeclareMathOperator{\ord}{ord}
-\let\emph\relax
-\DeclareTextFontCommand{\emph}{\bfseries\em}
-
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{corollary}[lemma]{Corollary}
-\newtheorem{theorem}[lemma]{Theorem}
+\input{./preamble.tex}
 
 \title{Number Theory}
 \begin{document}
@@ -56,7 +27,7 @@ $I$ contains some positive integer. Let $d > 0$ be the least such. Then clearly 
 
 Conversely, let $a\in I$ and apply \textbf{1.1} to obtain $a = qd+r$ for some $q,r \in \Z$, $0\leq r < d$. Then $r=a-qd \in I \implies r = 0$, so $d\Z\supseteq I$
 
-\therefore $I = d\Z$
+\therefore $\;I = d\Z$
 \end{proof}
 
 Note that $a_i \in I \forall i$, so $d| a_i \forall i$. Conversely, if $c | a_i \forall i$ then $c$ divides every element of $I$, so in particular $c | d$.
@@ -386,4 +357,92 @@ So $h^p\nequiv h \mod p^2$, and so $\langle h\rangle = (\Z/p^k\Z)^\times\;\foral
 \end{proof}
 
 \textbf{2.16} fails for $p=2$ because of the $k=1$ case in \textit{1.} However, it does hold if $p=2, k\geq 2$. In particular, $(1+4)^{2^{k-1}} \equiv 1+2^{k+1}\mod 2^{k+2}$. So we have $(\Z/2^k\Z)^\times = \langle -1,5\rangle \cong \Z/2^{k-2}\Z \times \Z/2\Z$ for $k\geq 3$.
+
+\section{Quadratic Residues}
+Let $p$ be an odd prime, and let $a \in \Z$ such that $a \nequiv 0\mod p$. We say that $a$ is a \emph{quadratic residue modulo p} if the congruence $x^2 \equiv a \mod p$ has a solution.  Otherwise, we say that $a$ is a \emph{quadratic non-residue modulo p}. So $a$ is a quadratic residue mod $p$ if and only if its residue class in $(\Z/p\Z)^\times$ is a square.
+
+\begin{conjecture}[Open]
+Let $n(p)$ be the least quadratic non-residue modulo $p$. We can show that $n(p) \leq cp^\theta$ for any $\theta > \frac{1}{4}\sqrt{e}$ for some constant $c>0$, and, conditional on GRH, $n(p)\leq c\log^2 p$ for some $c> 0$
+\end{conjecture}
+
+For instance, let $p=7$. We have \begin{tabular}{c|c|c|c|c|c|c}
+$x$ & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+$x^2$ & 1 & 4 & 2 & 2 & 4 & 1
+\end{tabular}.\\
+and so the quadratic residues module $7$ are $\{1,2,4\}$, whilst $\{3,5,7\}$ are non-residues.
+
+\begin{lemma}
+Let $p$ be an odd prime. Then there are precisely $\frac{p-1}{2}$ quadratic residues modulo $p$.
+\end{lemma}
+\begin{proof}
+Let $\sigma: (\Z/p\Z)^\times \to (\Z/p\Z)^\times; x \mapsto x^2$.
+
+It suffices to show that $\sigma$ is $2-to-1$:
+\begin{align*}
+x^2 \equiv y^2 \mod p &\iff (x+y)(x-y) \equiv 0 \mod p
+&\iff x \equiv \pm y \mod p
+\end{align*}
+as $p$ is prime and $\Z/p\Z$ is an integral domain. Hence there are precisely $\frac{p-1}{2}$ elements in the image of $\sigma$
+\end{proof}
+\begin{proof}[Alternative]
+Let $g$ be a primitive root mod $p$, i.e. $(\Z/p\Z)^\times = \{1,g,g^2, \ldots g^{p-2}\}$, and so $\{x^2:x \in (\Z/p\Z)^\times\} = \{1,g^2,g^4,\ldots, g^{p-3}, g^{p-1}, g^{p+1}, \ldots, g^{2p-4}\}$. But $g^{p-1} \equiv 1 \mod p$, and so the second half of this set is the same as the first half, and hence only half the elements are squares.
+\end{proof}
+
+Let $p$ be an odd prime and $a\in\Z$. We define \emph{Legendre's symbol} ``$a$ on $p$" to be:
+\begin{align*}
+\legendre{a}{p} \coloneqq \begin{cases} 0 & p|a \\ +1 & a $ is a quadratic residue mod $p \\ -1 & a $ is not a quadratic residue mod $p\end{cases}
+\end{align*}
+
+\begin{theorem}[Euler's Criterion]
+Let $p>2, a \in \Z$. Then $\legendre{a}{p} \equiv a^{\frac{p-1}{2}} \mod p$
+\end{theorem}
+Since $p>2$, the elements $0,1,-1$ are distinct mod $p$, so this congruence determines $\legendre{a}{p}$ uniquely.
+\begin{proof}
+If $a \equiv 0 \mod p$, then the result is trivial. Suppose therefore that $(a,p) = 1$. Then by Fermat, $a^{p-1} \equiv 1 \mod p$, which means that $a^{\frac{p-1}{2}} \equiv \pm 1 \mod p$. Observe further that, if $a = x^2 \mod p$, then $a^{\frac{p-1}{2}} \equiv x^{p-1} \equiv 1 \mod p$.
+By \textbf{3.2}, there are precisely $\frac{p-1}{2}$ quadratic residues, so the congruence $a^{\frac{p-1}{2}} \equiv 1 \mod p$ has at least $\frac{p-1}{2}$ solutions. However, this is a polynomial in $a$ of degree $\frac{p-1}{2}$, and so it can only have at most this many solutions, and hence every solution is a quadratic residue. So whenever $\legendre{a}{p} = -1$ we must have $a^{\frac{p-1}{2}} \equiv -1 \mod p$.
+\end{proof}
+\begin{corollary}
+Let $p>2$, $a,b \in \Z$. Then $\legendre{a}{p}\cdot \legendre{b}{p} = \legendre{ab}{p}$
+\end{corollary}
+\begin{proof}
+\begin{align*}
+\legendre{ab}{p} &\equiv (ab)^{\frac{p-1}{2}} \mod p\\
+&\equiv a^{\frac{p-1}{2}}b^{\frac{p-1}{2}} \mod p\\
+&\equiv \legendre{a}{p}\cdot \legendre{b}{p} \mod p
+\end{align*}
+\end{proof}
+This implies that
+\begin{enumerate}
+\item The map $(\Z/p\Z)^\times \to \{\pm 1\}$; $a\mapsto \legendre{a}{p}$ is a homomorphism.
+\item Let $R$ be any residue, $N$ any non-residue. Then $R\times R = R; N\times N = N; R\times N = N$
+\item There is a polynomial time algorithm for computing $\legendre{a}{p}$ for odd $p$, because we can efficiently compute $a^n \mod p$ via binary modular exponentiation.
+\end{enumerate}
+\begin{corollary}
+Let $p > 2$. Then $\legendre{-1}{p} = \begin{cases} +1 & p\equiv 1 \mod 4 \\ -1 & p\equiv -1 \mod 4\end{cases}$
+\end{corollary}
+\begin{proof}
+$p \equiv \begin{cases} +1 & p\equiv 1 \mod 4 \\ -1 & p\equiv -1 \mod 4\end{cases} \iff \frac{p-1}{2} \equiv \begin{cases} 0 & \mod 2 \\ 1 & \mod 2\end{cases}$, and hence $(-1)^{\frac{p-1}{2}} \equiv \begin{cases} +1 & p\equiv 1 \mod 4\\ -1 &p\equiv 3 \mod 4\end{cases}$, and so by Euler's criterion, $\legendre{-1}{p} = (-1)^{\frac{p-1}{2}}$
+\end{proof}
+We can think about this in another way, by considering an alternative proof of Fermat's little theorem:\\
+Observe that multiplying by $a$ simply permutes the elements of the multiplicative group mod $p$ as $a$ is a generator, hence:\\
+$(p-1)! = \Pi_{j=1}^{p-1} j \equiv \Pi_{j=1}^{p-1} (aj) = a^{p-1} \Pi_{j=1}^{p-1} j = a^{p-1}(p-1)!$, and hence $a^{p-1} \equiv 1 \mod p$.
+
+Similarly, $\Pi_{j=1}^{\frac{p-1}{2}} (aj) = a^{\frac{p-1}{2}} \Pi_{j=1}^{\frac{p-1}{2}} j = a^{\frac{p-1}{2}}(\frac{p-1}{2})!$ Write $aj \equiv \epsilon_j c_j \mod p$ with $c_j \in \{1,2,\ldots, \frac{p-1}{2}\}$, and $\epsilon_j \in \{\pm 1\}$.
+
+We claim that, if $1\leq j \lneqq k \leq \frac{p-1}{2}$, then $c_j \neq c_k$.
+
+Indeed, if $c_j = c_k$, then $\frac{aj}{\epsilon_j}\equiv \frac{ak}{\epsilon_k} \mod p$, i.e. $j\epsilon_k \equiv k\epsilon_j \mod p iff j \equiv \pm k \mod p$.
+
+Hence, $a^{\frac{p-1}{2}}(\frac{p-1}{2})! = \Pi_{j=1}^{\frac{p-1}{2}}(aj) \equiv \Pi_{j=1}^{\frac{p-1}{2}} (\epsilon_j c_j) \mod p \equiv \left(\Pi_{j=1}^{\frac{p-1}{2}} \epsilon_j\right)(\frac{p-1}{2})! \mod p$, and hence $a^{\frac{p-1}{2}} \equiv \Pi_{j=1}^{\frac{p-1}{2}} \epsilon_j \mod p$. This brings us onto:
+
+\begin{lemma}[Gauss's Lemma]
+Let $p>2, a\in \Z$. Then:
+\begin{align*}
+\legendre{a}{p} = (-1)^\mu
+\end{align*}
+Where $\mu = \left|\left\{ 1\leq j\leq \frac{p-1}{2} | aj\equiv k \mod p \text{ for some } \frac{p+1}{2} \leq k \leq p-1\right\}\right|$
+\end{lemma}
+\begin{proof}
+By the above and observe that $\mu = |\{n \leq j\leq \frac{p-1}{2} : \epsilon_j = -n \}|$, and hence $(-m)^\mu = \Pi_{j=n}^{\frac{p-1}{2}} \epsilon_j$.
+\end{proof}
 \end{document}

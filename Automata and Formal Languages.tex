@@ -383,5 +383,66 @@ We say a set $E\subseteq \N^k$ is \emph{recursively enumerable} if the function
 \phi_E(n) \coloneqq \begin{cases} 1 & n\in E \\ \uparrow&  \text{else}\end{cases}
 \end{align*}
 
-The idea behind this definition is that, compared to a recursive set, here we can only say that $x$ is in $E$, whereas in a recursive set we can say if $x \in E$ or $x \notin E$. A consequence of this is that, by applying the above process for $\phi_E$ on all of $\N^k$, we will eventually get out all the elements of $E$, but we will not know when this has happened (indeed, it might take infinitely long to get all the elements, but we will eventually be notified that any given element is in $E$), so we can ``recursively enumerate" $E$. Conversely, recursive sets are often called \emph{decidable} - we can always decide whether or not $x \in E$.
+The idea behind this definition is that, compared to a recursive set, here we can only say that $x$ is in $E$, whereas in a recursive set we can say if $x \in E$ or $x \notin E$. A consequence of this is that, by applying the above process for $\phi_E$ on all of $\N^k$, we will eventually get out all the elements of $E$, but we will not know when this has happened (indeed, it might take infinitely long to get all the elements, but we will eventually be notified that any given element is in $E$), so we can ``recursively enumerate" $E$. Conversely, recursive sets are often called \emph{decidable} - we can always decide whether or not $x \in E$. We will cement this discussion into a few theorems now:
+
+\begin{theorem}
+The following are equivalent for any subset $E \subseteq \N$:
+\begin{enumerate}
+\item $E$ is the range of some partial recursive function on some number of variables, i.e.\\ $E = \{f_{n,k}(\mathbf{x}) : \mathbf{x} \in \N^k\}$
+\item $E$ is the domain of definition of some partial recursive function on $1$ variable, i.e.:
+$\exists n \st E = \{m\in\N : f_{n,1}(m)\downarrow\}$
+\item $E$ is recursively enumerable
+\item The function $\psi_E(n) = \begin{cases} n & n \in E \\ \uparrow & \ow \end{cases}$ is partial recursive. i.e. we can enumerate the elements of $E$ in a recursive fashion.
+\end{enumerate}
+\end{theorem}
+\begin{proof}\item
+\begin{itemize}
+\item{\imp{2}{3}} Given a program $P_n$ for computing $f_{n,1}$, modifying at end so it empties $R_1$ then adds $1$.
+\item{\imp{3}{4}} Similarly, we start by copying $R_1$ to $R_N$ for large enough $N$, then at the end empty $R_1$ and copy $R_N$ to $R_1$.
+\item{\imp{4}{1}} Immediate as $f_{n,k} = \psi_E$ for some choice of $n$, $k=1$.
+\item{\imp{1}{2}} Given a program $P_n$ for computing $f_{n,k}:\N^k \to \N$ with range $E$, do the following process $Q$ by Church:
+
+Given an input $x\in \N$ for $Q$, run a zig-zag procedure having ordered $\N^k$ to compute $f_{n,k}(\cdot)$ for each input $\cdot \in \N^k$. Each time, $f_{n,k}(m_1,\ldots, m_k)$ halts, run the total subroutine comparing the output to $x$ wand halt with output $1$ if equal. If not, return to the zig-zag process. So $Q$ will return $1$ if $x$ is in the range $f_{n,k}$, and if not will run forever, because we would never get an output equalling $x$.
+\end{itemize}
+\end{proof}
+
+\subsection*{Properties of Recursively Enumerable Sets}
+In \textbf{1.10}(\textit{1.}), can we have a total recursive function?
+\begin{theorem}
+If $E \neq \emptyset$ and $E\subseteq \N$, then $E$ is recursively enumerable if and only if $E$ is the range of a total recursive function $f:\N \to \N$.
+\end{theorem}
+\begin{proof}
+For $E = \{e_0, \ldots, e_{k-1}\}$ finite, define $f(n)\coloneqq \begin{cases} e_n & n <k \\ e_{k-1} & \ow\end{cases}$. This is total recursive.
+
+In the case of infinite $E \subseteq \N$ which is the domain of a partial recursive function $g:\N \to \N$, run a zig-zag process to perform the steps of computing $g(0), g(1), \ldots$. Define a total function $f:\N\to\N$ as $f(0)$ is the first input number $i$ for which the computation of $g(i)$ halts in this process (not necessarily the smallest), $f(1)$ the second, and so on. Thus the range of $f$ is $E$ and $f$ is recursive by Church.
+\end{proof}
+
+So each program $P_n$ corresponds to a recursively enumerable set which is the domain of $f_{n,1}$. Thus let $W_n = \{x\in\N : f_{n,1}(x) \downarrow \}$ if $n$ encodes a program, and the empty set otherwise. We say $W_n$ is the \emph{n\th recursively enumerable set}, though the labelling is not unique, i.e. it could be that $W_n = W_m$ for some $n\neq m$.
+
+Every recursive subset is recursively enumerable by definition. However:
+\begin{theorem}
+For any $E\subseteq \N$, $E$ is recursive if and only if $E$ and $\N\setminus E$ is recursively enumerable.
+\end{theorem}
+\begin{proof}\item
+\begin{itemize}
+\item{\underline{$\implies$}} As $\chi_E$ is total recursive, $\phi_E$ is partial recursive because when $\chi_E$ halts, if the output is 1 then halt, otherwise enter an infinite loop. We can do the same for $\N\setminus E$, to get $\phi_E, \phi_{\N\setminus E}$.
+\item{\underline{$\impliedby$}} As $\phi_E$ and $\phi_{\N\setminus E}$ are both partial recursive, we can do a zig-zag process between the two. Then, if $\phi_E(x)$ halts, return $1$, otherwise if $\phi_{\N\setminus E}(x)$ halts, return $0$. Since $E \cup \N\setminus E = \N$, exactly one of these will halt, and so this gives $\chi_E$ which is total recursive.
+\end{itemize}
+\end{proof}
+
+\begin{theorem}\item
+\begin{enumerate}
+\item If $I \subseteq \N$ is recursively enumerable, then the union $\cup_{n\in I} W_n$ is recursively enumerable.
+\item If $J \subseteq \N$ is finite, then $\cap_{n\in J} W_n$ is recursively enumerable.
+\end{enumerate}
+\end{theorem}
+\begin{proof}\item
+\begin{itemize}
+\item[\textit{1.}] We want a process that, given an input $x \in \N$, halts if $x \in \cup_{n\in I}W_n$, and not if $x \notin \cup_I W_n$.
+
+By a big zig-zag process, start outputting elements $n$ of $I$, test if $n$ codes a program $P_n$, move on if not but if so, start to run $P_n$ on this input $x$. One of these subprocesses halts if and only if $x \in W_n$ for some $n \in I$, in which case halt the whole process. However, if $x \notin \cup_I W_n$, then the process will run forever.
+
+\item[\textit{2.}] First check all the $j \in J$ code a program, else we have $\emptyset$. Then run these $|J|$ programs in parallel, each with input $x$. If/when all of these halt, then halt. Then we halt if and only if $x \in \cap_J W_n$.;;
+\end{itemize}
+\end{proof}
 \end{document}

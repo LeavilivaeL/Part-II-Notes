@@ -525,5 +525,51 @@ So $\hat{f_1}(y) \neq \hat{f_2}(y)$, so $y\notin S$, and in general $V\subseteq 
 Hence $S$ is open, $Y\setminus S$ is open, and we are done
 \end{proof}
 
-%Let $\gamma:I\rightarrow X$ be a path from $x_0\in X$ and $p:\hat{X}\rightarrow X$ be a covering map. A lift of $\gamma$ at (or from) $\hat{x_0}$ is a lift $\hat{\gamma}$ of $\gamma$ with $\hat{x_0} = \hat{\gamma}(0)$. In particular, $p(\hat{x_0}) = p(\hat{\gamma}(0)) = \gamma(0) = x_0$.
+Let $\gamma:I\rightarrow X$ be a path from $x_0\in X$ and $p:\hat{X}\rightarrow X$ be a covering map. A lift of $\gamma$ at (or from) $\hat{x_0}$ is a lift $\hat{\gamma}$ of $\gamma$ with $\hat{x_0} = \hat{\gamma}(0)$. In particular, $p(\hat{x_0}) = p(\hat{\gamma}(0)) = \gamma(0) = x_0$.
+
+\begin{lemma}[Path Lifting Lemma]
+Let $p:\hat{X} \to X$ be a covering map, and let $\gamma:I\to X$ be a path from $x_0$. Then for any choice of $\hat{x_0}\in p^{-1}(x_0)$, there exists a unique lift $\hat{\gamma}$ of $\gamma$ from $\hat{x_0}$.
+\end{lemma}
+\begin{proof}
+Uniqueness follows from the previous lemma showing uniqueness of lifts. For existence, let $S = \{t\in I |\gamma|_{[0,t]} \text{ lifts to path from $\hat{x_0}$ in $\hat{X}$}\}$. Note $o \in S$. If we show that $S$ is open and closed, then since $I$ is connected, $S=I$. Note that if $t \in S$, then $[0,t]\subseteq S$. 
+
+Let $t_0 \in I$, and let $U$ be an evenly covered neighbourhood of $\gamma(t_0)$. Let $V\subseteq \gamma^{-1}(U)$ be an open interval containing $t_0$. Let $t\in V$ and suppose first that $t_0 \in S$. If $t\leq t_0$, then $t\in S$, so instead assume that $t > t_0$. Since $\gamma|_{[0,t_0]}$ has a lift $\hat{\gamma}:[0, t_0]\to \hat{X}$, and we have $\hat{\gamma}(t_0) \in U_{\delta}$ for some $\delta \in \Delta_U$.
+
+Recall that we have a homeomorphism $p_{\delta} : U_{\delta} \to U$ where $p_{\delta} = p|_{U_\delta}$. Hence the path:
+\begin{align*}
+s \mapsto \begin{cases} \hat{\gamma}(s) & 0 \leq s \leq t_0 \\ p_{\delta}^{-1}\circ \gamma & t_0 \leq s \leq t \end{cases}
+\end{align*}
+is a lift of $\gamma|_{[0,t]}$. Hence $t\in S$, and so $V \subseteq S$, and so $S$ is open.
+
+If $t_0 \notin S$, $t \in V$, $t\geq t_0$ and $t \in S$, contradicting $t_0 \notin S$. If $t <t_0$ by the previous argument above we have a contradiction as then $t_0 \in S$. So $V\subseteq I\setminus S$, and hence $S$ must also be closed.
+\end{proof}
+
+\begin{corollary}
+Let $p:\hat{X}\to X$ be a covering map with $X$ path connected. Then $p$ is $n$-sheeted for some $n \in \N\cup \{\infty\}$. In fact, $p^{-1}(x)$ and $p^{-1}(y)$ have the same cardinality for all pairs $x,y \in X$.
+\end{corollary}
+\begin{proof}
+Let $\gamma$ be a path from $x$ to $y$ in $X$. If $\hat{x} \in p^{-1}(x)$, let $\hat{\gamma}_{\hat{x}}$ be the lift of $\gamma$ from $x$. Then map $\hat{x}$ to $\hat{\gamma}_{\hat{x}}(1)$. The path $\overline{\gamma}$ similarly gives a map $p^{-1}(y)\to p^{-1}(x)$, inverse to the first map.
+
+For example to show that the composition $p^{-1}(x)\to p^{-1}(y) \to p^{-1}(x)$ is the identity, we need to show that, for $\hat{x} \in p^{-1}(x)$, $\hat{(\overline{\gamma})}_{\hat{\gamma}_{\hat{x}}(1)}(1) = \hat{x}$. But $\hat{\gamma}_{\hat{x}}\cdot \hat{(\overline{\gamma})}_{\overline{\gamma}_{\hat{x}} (1)}$ is a lift of $\gamma\cdot \overline{\gamma}$, and $\hat{\gamma}_{\hat{x}}\cdot \overline{(\hat{\gamma}_{\hat{x}})}$ is also a lift of $\gamma\cdot \overline{\gamma}$, and so by uniqueness, $\hat{(\overline{\gamma})}_{\overline{\gamma}_{\hat{x}}(1)} = \overline{\hat{\gamma}_{\hat{x}}}$. Hence $\hat{(\overline{\gamma})}_{\hat{\gamma}_{\hat{x}}(1)}(1) = \overline{\hat{\gamma}}_{\hat{x}}(1) = \hat{\gamma}_{\hat{x}}(0) = \hat{x}$.
+\end{proof}
+\begin{lemma}[Homotopy Lifting Lemma]
+Let $p:\hat{X}\to X$ be a covering map and $g_0:Y\to X$ a map with $Y$ locally path connected. Let $F:Y\times I \to X$ be a homotopy with $F(y,0) = f_0(y)$ for all $y \in Y$. Let $\hat{f}_0:Y \to \hat{X}$ be a lift of $Y$. Then there is a unique lit $\hat{F}$ of $F$ to $\hat{X}$ so that $\hat{F}(y,0) = \hat{f}_0(y)$.
+\end{lemma}
+\begin{proof}
+For each $y \in Y$, we obtain a path $\gamma_y$ given by $\gamma_y(t) = F(y,t)$ from $f_0(y)$. By the path lifting lemma, each $\gamma_y$ lifts uniquely to a path $\hat{\gamma}_y$ from $\hat{f_0}(y)$. Now define:
+\begin{align*}
+\hat{F}(y, t) = \hat{\gamma}_y(t)
+\end{align*}
+This clearly is a lift of $F$ in the sense that
+\begin{align*}
+(p\circ \hat{F})(y,t) = p(\hat{\gamma}_y(t)) = \gamma_y(t) = F(y,t)
+\end{align*}
+but is $\hat{F}$ continuous.
+
+We will construct a different map $\tilde{F}:Y\times I \to \hat{X}$ which is continuous by construction, and then we will show that $\hat{F} = \tilde{F}$.
+
+Fix $y_0 \in Y$. The for each $t\in I$ we have an evenly covered neighbourhood $U_t$ of $F(y_0, t) \in X$. Then $F^{-1}(U_t) \subseteq Y\times I$ is an open neighbourhood of $(y_0, t)$. We can find an open neighbourhood of $(y_0, t)$ in $F^{-1}(U_t)$ of the form $V_t \times (t-\epsilon_t, t+ \epsilon_t)$ with $V_t$ path connected.
+
+Note that these neighbourhoods cover $Y\times I$, and as $\{y_0\}\times I$ is compact, there is a finite subcover $\{J_i\}$ of $\{(t-\epsilon_t, t+\epsilon_t)| t\in I\}$. Then, if $J_i = (t_i-\epsilon_{t_i}, t_i + \epsilon_{t_i})$, we can find a path connected subset $V\subseteq \cap_i V_{t_i}$ containing $y_0$. Hence we may assume there is a path-connected neighbourhood $V$ of $y_0$ in $Y$, and a finite number of intervals $J_i$ covering $I$ such that $F(V\times J_i)$ is contained in an evenly covered neighbourhood $U_i$ of $X$.
+\end{proof}
 \end{document}

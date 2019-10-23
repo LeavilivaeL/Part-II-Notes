@@ -27,10 +27,17 @@
 \newcommand{\nequiv}{\not\equiv}
 \newcommand{\powset}{\mathcal{P}}
 \renewcommand{\th}[1][th]{\textsuperscript{#1}\xspace}
+\newcommand{\from}{\leftarrow}
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\ow}{\text{otherwise}}
+\newcommand{\imp}[2]{\underline{\textit{#1.}$\implies$\textit{#2.}}}
+\let\oldexists\exists
+\renewcommand{\exists}{\oldexists\;}
 
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\upper}{Upper}
 \DeclareMathOperator{\dom}{dom}
+
 \DeclareMathOperator{\charr}{char}
 \DeclareMathOperator{\Image}{im}
 \DeclareMathOperator{\ord}{ord}
@@ -41,6 +48,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
 
 \tikzset{sketch/.style={decorate,
  decoration={random steps, amplitude=1pt, segment length=5pt}, 

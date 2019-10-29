@@ -1,0 +1,71 @@
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{geometry}[margin=1in]
+\usepackage{xspace}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{shapes, arrows, decorations.pathmorphing}
+\usepackage[parfill]{parskip}
+\usepackage{subcaption}
+\usepackage{stmaryrd}
+\usepackage{marvosym}
+\usepackage{dsfont}
+
+\newcommand{\st}{\text{ s.t. }}
+\newcommand{\contr}{\lightning}
+\newcommand{\im}{\mathfrak{i}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\H}{\mathds{H}}
+\newcommand{\nequiv}{\not\equiv}
+\newcommand{\powset}{\mathcal{P}}
+\renewcommand{\th}[1][th]{\textsuperscript{#1}\xspace}
+\newcommand{\from}{\leftarrow}
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\ow}{\text{otherwise}}
+\newcommand{\imp}[2]{\underline{\textit{#1.}$\implies$\textit{#2.}}}
+\let\oldexists\exists
+\renewcommand{\exists}{\oldexists\;}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\newcommand{\one}{\mathds{1}}
+\newcommand{\under}{\backslash}
+\newcommand{\injection}{\hookrightarrow}
+\newcommand{\surjection}{\twoheadrightarrow}
+\newcommand{\jacobi}{\legendre}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+
+\DeclareMathOperator{\ex}{ex}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\upper}{Upper}
+\DeclareMathOperator{\dom}{dom}
+
+\DeclareMathOperator{\charr}{char}
+\DeclareMathOperator{\Image}{im}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\lcm}{lcm}
+\let\emph\relax
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\tikzset{sketch/.style={decorate,
+ decoration={random steps, amplitude=1pt, segment length=5pt}, 
+ line join=round, draw=black!80, very thick, fill=#1
+}}

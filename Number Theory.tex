@@ -1,0 +1,578 @@
+\documentclass[10pt,a4paper]{article}
+\input{./preamble.tex}
+
+\title{Number Theory}
+\begin{document}
+\maketitle
+\section{Euclid's Algorithm}
+\begin{theorem}[Division Algorithm]%fix this to be in brackets properly
+Given $a, b \in \Z, b > 0$, we can determine $\exists q, r \in \Z \st a = qb+r$ with $0 \leq r <b$.
+\end{theorem}
+\begin{proof}
+Let $S = \{a-nb : n\in\Z\}$. $S$ contains some non-negative integer. Let $r$ be the least such integer, say $a-qb$. Then $a = qb + r$, so STP $r < b$.
+
+Suppose $b \leq r$. Then $0 < r-b = a-(q+1)b \in S$, and $r-b < r$. \contr (choice of r)
+\end{proof}
+
+If $r=0$, i.e. if $a=qb$ for some $q \in \Z$, then we write $b| a$ and say ``$b$ \emph{divides}
+$a$" or ``$b$ is a \emph{divisor} of $a$". If $r\neq 0$, then we instead write $b\nmid a$ and say ``$b$ does \emph{not divide} $a$".
+
+Given $a_1,\ldots, a_n \in \Z$ not all $0$, let $I=\{\lambda_1 a_1+\ldots+\lambda_n a_n : \lambda_i \in \Z\}$. Observe if $a,b \in I, \ell, m \in \Z$, then $\ell a + mb \in I$.
+
+\begin{theorem}
+$I = d\Z = \{dm:m\in\Z\}$ for some $d > 0$
+\end{theorem}
+\begin{proof}
+$I$ contains some positive integer. Let $d > 0$ be the least such. Then clearly $I \supseteq d\Z$.
+
+Conversely, let $a\in I$ and apply \textbf{1.1} to obtain $a = qd+r$ for some $q,r \in \Z$, $0\leq r < d$. Then $r=a-qd \in I \implies r = 0$, so $d\Z\supseteq I$
+
+\therefore $\;I = d\Z$
+\end{proof}
+
+Note that $a_i \in I \forall i$, so $d| a_i \forall i$. Conversely, if $c | a_i \forall i$ then $c$ divides every element of $I$, so in particular $c | d$.
+
+We write $d = \gcd(a_1, \ldots, a_n) = (a_1, \ldots, a_n)$, and say $d$ is the \emph{greatest common divisor} of the $a_i$.
+
+\begin{corollary}[B\'ezout]
+Let $a,b \in \Z$, $a,b$ not both $0$. Then $\exists x,y \in \Z \st ax+by=c \iff (a,b)| c$.
+\end{corollary}
+The division algorithm gives an efficient method for computing $(a,b)$.
+
+\begin{theorem}[Euclid's Algorithm]
+Suppose $a>b>0$. Then:
+\begin{align*}
+a &= q_1 b + r_1 \hspace{2cm} 0\leq r_1 < b\\
+b &= q_2 r_1 + r_2 \hspace{2cm} 0\leq r_2 < r_1\\
+r_1 &= q_3 r_2 + r_3 \hspace{2cm} 0\leq r_3 < r_2\\
+&\hspace{.8cm}\vdots\\
+r_{k-2} &= q_k r_{k-1} + r_k \hspace{2cm} r_k\neq 0\\
+r_{k-1} &= q_{k+1} r_k (+0)
+\end{align*}
+and $r_k = (a,b)$
+\end{theorem}
+\begin{proof}
+We have $r_k|r_{k-1} \implies \ldots \implies r_k|a, r_k|b \implies r_k|(a,b)$, so $r_k \leq (a,b)$. Note also that any $m \st m| a$ and $m| b$ also divides $r_k$. In particular, $(a,b)|r_k$, and thus $(a,b)\leq r_k$, hence $r_k = (a,b)$.
+\end{proof}
+Additionally, by working back up the algorithm, we can obtain a representation $(a,b) = \lambda a + \mu b$ where $\lambda, \mu \in \Z$
+
+An integer $n>1$ is \emph{prime} if its only positive divisors are $1$ and $n$. Otherwise, we say $n$ is \emph{composite}.
+\begin{corollary}
+Let $p$ be a prime, $a,b \in \Z$. Then $p|ab \iff p|a$ or $p|b$
+\end{corollary}
+\begin{proof}
+It is clear that if $p|a$ or $p|b$, then $p|ab$. Conversely, suppose $p|ab$ but $p\nmid a$. Them $(a,p) \neq p$. By definition, $(a,p)|p \implies (a,p) \in \{1,p\}$, so $(a,p)=1$. Now by \textbf{1.3} we can find $x,y\in\Z\st 1=ax+by \implies b = b(ax+py) = x(ab) + (by)p$, so $p|b$.
+\end{proof}
+
+\begin{theorem}[The Fundamental Theorem of Arithmetic]
+Every integer $n>1$ can be written as a product of primes uniquely up to reordering
+\end{theorem}
+\begin{proof}
+We have existence by strong induction.
+
+For uniqueness, $n$ is the least integer with two distinct such representations, say $=n=p_1\ldots p_s = q_1\ldots q_r$ for $p_i, q_j$ primes.\\
+Then $p_1|q_1\ldots q_r \implies p_1|q_j$ for some $j$. WLOG $j=1$. Since $p_1 > 1$ as $1$ is non-primes, $n/p_1 < n$, and $n/p_1 = p_2\ldots p_s = q_2\ldots q_r$ can be written in two distinct ways as a product of primes. \contr (choice of $n$)
+\end{proof}
+
+If $m = \Pi_{i=1}^k p_i^{\alpha_i}, n = \Pi_{i=1}^k p_i^{\beta_i}$ where $p_i$ are distinct primes, $\alpha_i, \beta_i \geq 0$, then $(m,n) = \Pi_{i=1}^k p_i^{\gamma_i}$ with $\gamma_i = \min\{\alpha_i, \beta_i\}$. However, if $m,n$ are large, it is much more ``efficient" to compute the gcd via Euclid's algorithm.
+
+An algorithm with input $N>0$ is said to run in \emph{polynomial time} if it takes at most $c(\log N)^k$ elementary operations to complete, where $c,k > 0$ are constants independent of $N$. If the algorithm takes inputs $N_1, N_2, \ldots, N_s$, the polynomial time means $c(\max\log N_i)^k$.
+
+Examples of polynomial time algorithms:
+\begin{itemize}
+\item Adding and multiplying integers
+\item The gcd of two numbers via Euclid's algorithm
+\item Testing of primality
+\end{itemize}
+On the other hand, factoring a number into prime factors does not have a polynomial time algorithm, and it is conjectured that one does not exist. For instance, if $N=p\cdot q$ with $p,q$ primes of $\sim 50$ digits each, to do trial division up to $\sqrt{N}$ at a rate of $2^9$ divisions per second, it would take approximately $\sqrt{10^{100}}/2^9$ seconds, or about $6\times 10^39$ years. However, we can compute the gcd in milliseconds using Euclid's algorithm.
+
+\begin{theorem}
+There are infinitely many primes. i.e. $\pi(x) \rightarrow \infty$ as $x\rightarrow \infty$
+\end{theorem}
+\begin{proof}
+Fix $N>1$, let $p$ be the largest prime $\leq N$. Let $q$ be a prime factor of $M = (2\times 3\times 5 \times\ldots \times p) +1$. Then $q > N$ since $q \notin \{2,3,\ldots, p\}$, but $N$ was arbitrary.
+\end{proof}
+
+\section{Congruences}
+Let $n\geq 1$ be an integer. We write $a\equiv b \mod n$ if $n|a-b$. This defines an equivalence relation on $\Z$, and we will write $\Z/n\Z$ for the equivalence classes induced by this relation, which are $a + n\Z$ for $0\leq a < n$. It is easy to check that $(a+n\Z) + (b+n\Z) = (a+b+n\Z)$ and that $(a+n\Z)\times (b+n\Z) = (ab+n\Z)$ are well defined operations, i.e $n\Z$ is an ideal, and $\Z/n\Z$ is the quotient ring. 
+
+\begin{lemma}
+Let $a \in \Z$. Then the following are equivalent:
+\begin{enumerate}
+\item $(a,n) = 1$
+\item $\exists b\in\Z\st ab\equiv b \mod n$
+\item The equivalence class of $a$ generates the group $(\Z/n\Z, +)$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}\item
+\begin{itemize}
+\item{$(1)\implies(2)$:} $(a,n) = 1 \implies \exists b, c \in \Z \st ab+cn=1$ by \textbf{1.3}, and hence $ab \equiv 1 \mod n$.
+\item{$(2)\implies(1)$:} $ab \equiv 1 \mod n \iff ab-1=kn$ for some $k \in \Z$, and so by \textbf{1.3} $(a,n) = 1$.
+\item{$(2)\iff (3)$:} $ab \equiv 1 \mod n \iff 1\in \langle a\rangle \leq \Z/n\Z \iff \langle a\rangle = \Z/n\Z$
+\end{itemize}
+\end{proof}
+
+We write $(\Z/n\Z)^\times$ for the set of \emph{units} (the elements with a multiplicative inverse) of $\Z/n\Z$.\\
+By \textbf{2.1}, $(\Z/n\Z)^{\times}$ contains precisely those classes $a+n\Z$ such that $(a,n) = 1$. Note that if $n>1$ then $\Z/n\Z$ is a field precisely when $n$ is prime.
+
+Let \emph{Euler's $\varphi$ function} be $\varphi(n) \coloneqq \left|(\Z/n\Z)^\times\right|$ for $n>1$, and let $\varphi(1)=1$. Observe that $\varphi(p) = p-1$ for $p$ prime. Moreover, $\varphi$ is a multiplicative function: $(m,n) = 1 \implies \varphi(mn) = \varphi(m)\varphi(n).$
+
+\begin{corollary}
+Let $G$ be a cyclic group of order $n\geq 1$. Then $\varphi(n) = |\{g\in G: \ord(g)=n\}| $, the number of generators of $G$.
+\end{corollary}
+
+\begin{theorem}[Euler-Fermat]
+IF $(a,n)=1$, $a,n \in\Z$, then $a^{\varphi(n)} \equiv 1 \mod n$
+\end{theorem}
+\begin{proof}
+By Lagrange's Theorem, the order of $a$ in the group $(\Z/n\Z)^\times$ divides the order of $(\Z/n\Z)^\times$, which is $\varphi(n)$
+\end{proof}
+
+\begin{theorem}[Fermat's Little Theorem]
+If $a, p \in \Z$ and $p$ is prime, then $a^p\equiv a \mod p$.
+\end{theorem}
+\begin{proof}
+If $p|a$, then this holds trivially. If $p\nmid a, (a,p) =1$ and so by \textbf{2.3} we have $a^{\varphi(p)} \equiv a^{p-1} \equiv 1 \mod p$
+\end{proof}
+
+\subsection*{Multiple Congruences}
+Can we find all $x\in \Z \st x \equiv 4 \mod 7$ and $x \equiv 5 \mod 12$?\\
+Suppose we can find $u,v\in\Z \st \begin{cases}u\equiv 1 \mod 7; & u\equiv 0 \mod 12 \\ v \equiv 0 \mod 7; & v\equiv 1 \mod 12\end{cases}$. Then we can write down that $x = 4u+5v$. Since $(7,12)=1$, by \textbf{1.3} there are some $m,n\in\Z$ with $7m+12n=1$, and from Euclid's algorithm we can determine these to be $m=-5, n=3$. Then we can find $u=12n=1-7m; v=7m=1-12n$, and substitution gives $u=36, v=-35$, and so a solution to the original problem is $4\times 36-5\times 35 = -31$. Now the lowest common multiple of $7$ and $12$ is $84$, and so our solution set is: $\{x\in\Z: x\equiv -31 \mod 84\}$.\\
+We can in fact generalise this process:
+\begin{theorem}[Chinese Remainder Theorem]
+Let $m_1,\ldots,m_k$ be pairwise coprime positive integers, and let $M = \Pi_{i=1}^k m_i$. Then given any integers $a_1,\ldots,a_k$ there is a solution $x$ to the the system of congruences:
+\begin{align*}
+x &\equiv a_1 \mod m_1\\
+x &\equiv a_2 \mod m_2\\
+&\hspace{1cm}\vdots\\
+x &\equiv a_k \mod m_k
+\end{align*}
+Moreover, this solution is unique modulo $M$.
+\end{theorem}
+Note that if $x$ satisfies this system of equations, then so does $x+tM$ for any $t\in\Z$, and so the complete set of solutions is $x+M\Z$.
+
+\begin{proof}\item
+\underline{Uniqueness:} If $x,y$ satisfy the system, then $m_i | x-y$ for all $i=1,\ldots, k$. Since no prime divides any tow the $m_i$, $M|x-y$ and hence $x\equiv y\mod M$.
+
+\underline{Existence:} Write $M_i = \frac{M}{m_i} = \Pi_{j\neq i} m_j$ for each $i=1,2,\ldots,k$. Since $(m_i,m_j)=1 \forall i\neq j$, $(m_i,M_i) = 1$ for all $i=1,2,\ldots, k$. Therefore, for each $i=1,2,\ldots,k$ we can find $b_i \in \Z$ such that $M_i b_i \equiv 1 \mod m_i$ and $M_i b_i \equiv 0 \mod m_j$ for $j\neq i$. Then $x=\sum_{i=1}^k a_ib_iM_i$ solves the system of congruences.
+\end{proof}
+
+If $m_1,\ldots,m_k$ are pairwise coprime, and $M=\Pi m_i$, then map $\theta:\Z/M\Z\rightarrow \Z/m_1\Z \times \ldots \times \Z/m_k\Z$, taking $x \mod M \mapsto (x\mod m_1, \ldots, x\mod m_k)$ is an isomorphism of rings. To see this, note that if $m_i|M$ then $x\mod m_i$ is determined by $x\mod M$ which implies that $\theta$ is well-defined. It is a homomorphism by the properties of $+,\times$ in $\Z/n\Z$, and \textbf{2.5} implies that $\theta$ is a bijection. In particular, if $n=p_1^{\alpha_1}\ldots p_k^{\alpha_k}$ for distinct primes $p_i$, then $\Z/n\Z \cong \Z/p_1^{\alpha_1}\Z\times\ldots\times\Z/p_k^{\alpha_k}\Z$.
+
+\begin{corollary}
+If $m_1,\ldots,m_k$ are pairwise coprime and $M = \Pi_{i=1}^k m_i$ and $a_1,\ldots,a_k \in \Z$ are such that $(a_i,m_i) = 1$ for each $i=1,2,\ldots,k$, then there is a solution to the system of congruences in \textbf{2.5}, and any such solution is in fact coprime to $M$.
+\end{corollary}
+
+\begin{proof}
+\textbf{2.5} gives us a solution, say $x\in\Z$. Suppose $(x,M)>1$. Then there is a prime $p$ such that $p|x$ and $p|M$ simultaneously. $p$ prime, so WLOG suppose that $p$ divides $m_1$. Since $x\equiv a_1\mod m_1$, we must have $p|a_1$, and so $p|(a_1,m_1)$ \contr.
+\end{proof}
+
+\begin{corollary}
+If $m_1,\ldots, m_k$ are pairwise coprime with $M=\Pi_{i=1}^k m_i$, then $\varphi(M)=\varphi(m_1)\cdot\ldots\cdot\varphi(m_k)$
+\end{corollary}
+A \emph{multiplicative function} is a function $f:\N\rightarrow\C$ such that, for all $m,n \in\N$ coprime, $f(mn)=f(m)f(n)$. A function $f:\N\rightarrow\C$ is said to be \emph{totally multiplicative} if for all $m,n\in\N$, $f(m,n)=f(m)f(n)$.
+
+Some multiplicative functions are:
+\begin{itemize}
+\item $\varphi(m)$
+\item $\tau(n) = $ the number of positive divisors of $n$
+\item $\sigma(n) = $ the sum of the positive divisors of $n$
+\item $\sigma_k(n) = \sum_{d|n} d^k$, so that $\sigma_0(n) = \tau(n), \sigma_1(n) = \sigma(n)$.
+\end{itemize}
+None of these are totally multiplicative however.
+
+\begin{lemma}
+Let $f$ be a multiplicative function. Then so is $g$, where $g(n) = \sum_{d|n} f(d)$.
+\end{lemma}
+\begin{proof}
+Let $m,n \in \N, (m,n)=1$. Then the divisors of $mn$ are precisely the integers of the form $d_1d_2$ where $d_1|m, d_2|n$ and $(d_1,d_2)=1$. This means that we can write down
+\begin{align*}
+g(mn) &= \sum_{d|mn} f(d)\\
+&= \sum_{d_1|m} \sum_{d_2|n} f(d_1d_2)\\
+&= \sum_{d_1|m}\sum_{d_2|n} f(d_1)f(d_2)\\
+&= \sum_{d_1|m} f(d_1) \sum_{d_2|n} f(d_2)\\
+&= g(m)g(n)
+\end{align*} 
+\end{proof}
+Then if we let $f(n) = n^k$ for some $k\in\N$. Then $g(n) = \sum_{d|n} d^k = \sigma_k(n)$. Later on, we shall see that we can recover $f$ from $g$ via M\"obius inversion.
+
+\begin{theorem}
+\item
+\begin{enumerate}
+\item If $p$ is a prime and $m\in\N$ then $\varphi(p^m) = p^{m-1}(p-1) = p^m\left(1-\frac{1}{p}\right)$
+\item $\forall n\in\N, \varphi(n)=n\cdot\Pi_{p|n}\left(1-\frac{1}{p}\right)$
+\item $\sum_{d|n} \varphi(d) = n$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\item
+\begin{enumerate}
+\item 
+\begin{align*}
+\varphi(p^m) &= \left|\{1\leq a\leq p^m : (a,p^m)=1\}\right| \\
+&= p^m-p^{m-1}\\
+&= p^m\left(1-\frac{1}{p}\right)
+\end{align*}
+\item Let $n=\Pi_{i=1}^k p_i^{\alpha_i}$ for $p_i$ distinct primes, $\alpha_1 \geq 1$. Then:
+\begin{align*}
+varphi(n) &= \Pi_{i=1}^k \varphi(p_i^{\alpha_i})\\
+&= \Pi_{i=1}^k p_i^{\alpha_i} \left(1-\frac{1}{p_i}\right)\\
+&= n\cdot\Pi_{p|n}\left(1-\frac{1}{p}\right)
+\end{align*}
+\item $\varphi$ is multiplicative and so is $n\mapsto n$, so it suffices to check that both sides agree when $n$ is a prime power. Let $p$ be a prime $m\in\N$. Then:
+\begin{align*}
+\sum_{d|p^m} \varphi(d) &= \varphi(1) + \varphi(p) +\ldots +\varphi(p^m)\\
+&= 1+ (p-1) + (p^2-p) + \ldots + (p^m-p^{m-1}) \\
+&= p^m
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+Polynomials over $\Z/n\Z$ can have varying numbers of solutions, e.g.:
+\begin{enumerate}
+\item $x^2+2 \equiv 0 \mod 5$ has no solutions
+\item $x^3 + 1 \equiv 0 \mod 7$ has three solutions
+\item $x^2-1 \equiv 0 \mod 8$ has four solutions
+\end{enumerate}
+
+Let $R \in \{\Z, \Q, \Z/n\Z\}$ be a ring. Then we define $R[x]$ to be the ring of polynomials with coefficients in $R$, with addition and multiplication given in the usual way.
+
+\textsc{Warning:} Two polynomials are \emph{equal} if their coefficients are all equal, however the map from $R[x]$ to the set of all functions $R\rightarrow R$ is not necessarily injective. For instance, if $R=\Z/p\Z$ for some prime $\Z$, then under this map $x^p-x$ is the zero function by Fermat's little theorem.
+
+\begin{theorem}[Division Algorithm for Polynomials]
+Let $f, g \in R[x]$, and suppose that the leading coefficient of $g$ is a unit (i.e. has a multiplicative inverse) in $R$. Then $\exists q, r \in R[x]$ such that $f = q\cdot g + r$ where $\deg r < \deg g$.
+\end{theorem}
+\begin{proof}
+We prove this by induction on $n=\deg f$. If $\deg f < \deg g$, then just take $q = 0, r = f$. Otherwise, $f(x) = ax^n + \ldots; g(x) = bx^m + \ldots$ for $a, b\neq 0, n\geq m, b=c^{-1}$ for some $c\in R$.
+
+Then define $f'(x) = f(x) - acx^{n-m}g(x)$ has degree $< n$. By the induction hypothesis, there is some $q, r \in R[x]$ such that $f'(x) = q(x)g(x) + r(x)$, with $\deg r < \deg g$.\\
+But now $f(x) = (q(x) + acx^{n-m}) g(x) + r(x)$, and we are done.
+\end{proof}
+
+\begin{theorem}[Remainder Theorem]
+let $f\in R[x], \alpha \in R$. Then there is some $q \in R[x]$ such that:
+\begin{align*}
+f(x) = (x-\alpha)q(x) + f(\alpha)
+\end{align*}
+\end{theorem}
+\begin{proof}
+By \textbf{2.10} with $g(x) = x-\alpha$, there is some $q \in R[x]$ and $r \in R$ such that $f(x) = (x-\alpha)q(x) + r$. But now $f(\alpha) = r$, and the required equality holds.
+\end{proof}
+A (non-zero) ring $R$ is said to be an \emph{integral domain} if it doesn't have any zero divisors, i.e. $ab=0 \iff a=0 \text{ or } b=0$. Note that $\Z$ and $\Q$ are integral domains, whilst $\Z/n\Z$ is an integral domain if and only if $n$ is prime (if $n=pq$ is a proper factorization, then $pq = 0$ in $\Z/n\Z$).
+
+\begin{theorem}
+Let $R$ be an integral domain, and let $f\in R[x]$ be a non-zero polynomial of degree $n\geq 0$. Then $f$ has at most $n$ roots in $R$.
+\end{theorem}
+\begin{theorem}[Lagrange]
+Lt $p$ be a prime, and let $f(x)=a_n x^n+\ldots + a_1 x + a_0 \in \Z[x]$ be a polynomial of degree $n$ such that $p\nmid p$. Then the congruence $f(x) = 0 \mod p$ has  at most $n$ distinct solutions.
+\end{theorem}
+
+\begin{proof}[Of 2.12]
+By induction on $n$. Check $n=0$ - trivial.
+
+Suppose $n>0$. If $f$ has no roots the we're done. Otherwise there exists $\alpha \in R$ such that $f(\alpha) = 0$, and so by the remainder theorem, $f(x) = (x-\alpha)q(x)$ with $\deg q < \deg f = n$. So by the induction hypothesis, we know that $q$ has at most $n-1$ roots. But if $\beta \in R$ is such that $f(\beta) = 0$, then $0 = (\beta-\alpha)q(\beta)$, and since $R$ is an integral domain, we must have $\beta = \alpha$ or $q(\beta) = 0$, and so $f$ has at most $n$ roots.
+\end{proof}
+
+\emph{Example:} Let $p$ be a prime, $G = \Z/p\Z$, and let $f(x) = x^{p-1} - 1 - \Pi_{\alpha \in G} (x-\alpha)$. Observe that $\alpha = 1,2, \ldots, p-1$, then $f(\alpha) = \alpha^{p-1} - 1 \equiv 0 \mod p$, so $f$ has at least $p-1$ roots.
+
+But $\deg f < p-1$ because the coefficient of $x^{p-1} = 0$. This means that $f$ must be the zero polynomial, and hence $0 = f(0) = -1-(p-1)! \mod p$, and we have Wilson's theorem, that $(p-1)! \equiv -1 \mod p$.
+
+\underline{Example:} Consider $(\Z/7\Z)^\times$.\\
+$3 \in (\Z/7\Z)^\times$ since $3\cdot 5 \equiv 1 \mod 7$, $3^6 \equiv 1 \mod 7$, so $3$ generates $(\Z/7\Z)^\times$, and $(\Z/7\Z)^\times$ is cyclic.
+
+\begin{theorem}
+If $p$ is a prime, then $G = (\Z/p\Z)^\times$ is cyclic and of order $p-1$.
+\end{theorem}
+\begin{proof}
+$|G| = \varphi(p) = p-1 = \sum_{d|p-1} \varphi(d)$
+
+By Lagrange's Theorem, $|G| = \sum_{a\mid |G|} N_a$ where $N_a = |\{g\in G : \ord(g)=d\}|$. Suppose $G$ is not cyclic, so $G$ does not contain an element of order $p-1$, so $N_{p-1} = 0 < \varphi(p-1)$, and so there must be some $d$ for which $N_d > \varphi(d)$. Let $\alpha$ be an element of order for such a $d$. Then $\langle\alpha\rangle \leq G$ is cyclic of order $d$, so it has precisely $\varphi(d)$ elements of order $d$. Since $N_d > \phi(d), \exists \beta \notin \langle\alpha\rangle \st \ord(\beta)=d$. This implies that the polynomial $x^d-1$ has $d+1$ roots, namely $1, \alpha,\ldots, \alpha^{d-1}, \beta$ \contr \textbf{2.12}.
+\end{proof}
+
+A positive integer is said to be a \emph{primitives root modulo n} if $\langle g \rangle = (\Z/n\Z)^\times$. Hence \textbf{2.14} says that primitive roots exist modulo $p$ for all primes $p$.
+
+For instance, take $p=19$, and let $d = \ord(2)$ in $(\Z/19\Z)^\times$. Then $d|\varphi(19) = 18$, so $d=18$ or $d|6$ or $d|9$. $2^6 = 64 \nequiv 1 \mod 19$, and $2^9 = 512 \nequiv 1 \mod 19$, so $d=18$, and $2$ is a primitive room modulo $19$.
+
+There are many open problems concerning primitive roots:
+\begin{enumerate}
+\item \underline{Artin's Primitive Root Conjecture:}\\
+Given $g\geq 1$ does there exist infinitely many primes $p$ such that $g$ is a primitive root modulo $p$. We do know that there are infinitely many primes for which one of $\{2,3,5\}$ is a primitive root.
+\item \underline{How large is the smallest primitive root modulo $p$?}\\
+We can prove that it is $\leq cp^{1/4 + \epsilon}$ for some constant $c>0$ and for any $\epsilon > 0$. However, conditional on the Generalised Riemann Hypothesis (GRH), it is $\leq c\log^6 p$ for constant $c > 0$
+\end{enumerate}
+
+Now consider $(\Z/8\Z)^\times = \{\pm 1, \pm 3\}$. All of these have order $1$ or $2$, and hence $(\Z/8\Z)^\times$ is not cyclic. In fact, let $\theta: (\Z/2^k\Z)^\times \rightarrow (\Z/8\Z)^\times$ map $x \mod 2^k$ onto $x \mod 8$. Since $(a,2^k) =1 \iff (a,8) = 1$, $\theta$ is surjective. Hence, for $k\geq 3$ we have that $(\Z/2^k\Z)^\times$ is not cyclic, since a generator would map to a generator.
+
+\begin{theorem}
+If $p>2$, $(\Z/p^k\Z)^\times$ is cyclic for $k\geq 1$.
+\end{theorem}
+\begin{lemma}
+Let $p>2, k\geq 1, y \in \Z$. Then
+\begin{enumerate}
+\item If $x\equiv 1+p^ky \mod p^{k+1}$, then $x^p \equiv 1+p^{k+1}y \mod p^{k+2}$
+\item $(1+yp)^{p^k} \equiv 1+p^{k+1}y \mod p^{k+2}$
+\end{enumerate}
+\end{lemma}
+\begin{proof}\item
+\begin{enumerate}
+\item $x^p = (1+p^ky)^p = \sum_{j=0}^p \binom{p}{j} (p^ky)^j = 1 + p^{k+1}y+\ldots+p^{pk}y^p$.
+
+For $2\leq j\leq p-1$, $p|\binom{p}{j}$, so $\binom{p}{j}(p^ky)^j \equiv 0 \mod p^{2k+2}$, and so $\equiv 0 \mod p^{k+2}$.
+
+Since $p\geq 2, pk\geq k+2$, so $p^{pk}y^p \equiv 0 \mod p^{k+2}$, and therefore $x^p\equiv 1+p^{k+1}y \mod p^{k+2}$
+
+\item Let $x = 1+py$ and apply part 1 $k$ times.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+Let $p>2, k\geq 1$. If $g$ is a primitive root $\mod p$, and $g^{p-1} \nequiv 1 \mod p^2$, then $g$ generates $(\Z/p^k\Z)^\times$ for all $k\geq 1$.
+\end{lemma}
+\begin{proof}
+Let $d = \ord g$ as a member of $(\Z/p^k\Z)^\times$. Note that $\varphi(p^k) = p^{k-1}(p-1)$, and so $d|p^{k-1}(p-1)$.
+
+If $g$ is not a generator of $(\Z/p^k\Z)^\times$, then one of the following holds:
+\begin{enumerate}
+\item $d|p^{k-2}(p-1)$
+\item $d=p^{k-1}e$ where $e|p-1, e\neq p-1$
+\end{enumerate}
+We tackle each of these cases individually, and will see that they cannot be the case:
+\begin{enumerate}
+\item We thus have $g^{p^{k-2}(p-1} \equiv 1 \mod p^k$. We've already seen that $g^{p-1} \equiv 1 \mod p$ and $g^{p-1} \nequiv 1 \mod p^2$, and so there exists some $y\nequiv 0$ such that $x \coloneqq g^{p-1} = 1+py$.
+
+Then we have $x^{p^{k-2}} \equiv 1+p^{k-1}y \mod p^k \implies g^{p^{k-2}(p-1)}\equiv 1+p^{k-1}y \mod p^k \nequiv 1 \mod p^k$ \contr.
+
+\item Here, we have $g^{p^{k-1}e} \equiv 1 \mod p^k$. Fermat tells us that $g^p \equiv g \mod p$, and so $g^{p^{k-1}} \equiv g \mod p \implies g^{p^{k-1}e} \equiv g^e \mod p$. However, $e < p$, and so this is not $1 \mod p$, and hence $g^{p^{k-1}e} \nequiv 1 \mod p$ \contr.
+\end{enumerate}
+Hence the only case left is that $g$ is a generator of $(\Z/p^k\Z)^\times$.
+\end{proof}
+
+\begin{proof}[Proof of 2.15]
+Let $g$ be a primitive root modulo $p$. If $g^{p-1} \nequiv 1 \mod p^2$, then $(\Z/p^k\Z)^\times = \langle g \rangle \;\forall\.k\geq 1$.
+
+Otherwise, $g^p\equiv g \mod p^2$. Let $h = (1+p)g$, so that $h^p \equiv (1+p)^p g^p \equiv g \mod p^2$. Observe that $g\nequiv h \mod p^2$, as $g$ is a primitive root modulo $p$, so that $(g,p)=1$. 
+
+So $h^p\nequiv h \mod p^2$, and so $\langle h\rangle = (\Z/p^k\Z)^\times\;\forall\.k\geq 1$.
+\end{proof}
+
+\textbf{2.16} fails for $p=2$ because of the $k=1$ case in \textit{1.} However, it does hold if $p=2, k\geq 2$. In particular, $(1+4)^{2^{k-1}} \equiv 1+2^{k+1}\mod 2^{k+2}$. So we have $(\Z/2^k\Z)^\times = \langle -1,5\rangle \cong \Z/2^{k-2}\Z \times \Z/2\Z$ for $k\geq 3$.
+
+\section{Quadratic Residues}
+Let $p$ be an odd prime, and let $a \in \Z$ such that $a \nequiv 0\mod p$. We say that $a$ is a \emph{quadratic residue modulo p} if the congruence $x^2 \equiv a \mod p$ has a solution.  Otherwise, we say that $a$ is a \emph{quadratic non-residue modulo p}. So $a$ is a quadratic residue mod $p$ if and only if its residue class in $(\Z/p\Z)^\times$ is a square.
+
+\begin{conjecture}[Open]
+Let $n(p)$ be the least quadratic non-residue modulo $p$. We can show that $n(p) \leq cp^\theta$ for any $\theta > \frac{1}{4}\sqrt{e}$ for some constant $c>0$, and, conditional on GRH, $n(p)\leq c\log^2 p$ for some $c> 0$
+\end{conjecture}
+
+For instance, let $p=7$. We have \begin{tabular}{c|c|c|c|c|c|c}
+$x$ & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+$x^2$ & 1 & 4 & 2 & 2 & 4 & 1
+\end{tabular}.\\
+and so the quadratic residues module $7$ are $\{1,2,4\}$, whilst $\{3,5,7\}$ are non-residues.
+
+\begin{lemma}
+Let $p$ be an odd prime. Then there are precisely $\frac{p-1}{2}$ quadratic residues modulo $p$.
+\end{lemma}
+\begin{proof}
+Let $\sigma: (\Z/p\Z)^\times \to (\Z/p\Z)^\times; x \mapsto x^2$.
+
+It suffices to show that $\sigma$ is $2-to-1$:
+\begin{align*}
+x^2 \equiv y^2 \mod p &\iff (x+y)(x-y) \equiv 0 \mod p
+&\iff x \equiv \pm y \mod p
+\end{align*}
+as $p$ is prime and $\Z/p\Z$ is an integral domain. Hence there are precisely $\frac{p-1}{2}$ elements in the image of $\sigma$
+\end{proof}
+\begin{proof}[Alternative]
+Let $g$ be a primitive root mod $p$, i.e. $(\Z/p\Z)^\times = \{1,g,g^2, \ldots g^{p-2}\}$, and so $\{x^2:x \in (\Z/p\Z)^\times\} = \{1,g^2,g^4,\ldots, g^{p-3}, g^{p-1}, g^{p+1}, \ldots, g^{2p-4}\}$. But $g^{p-1} \equiv 1 \mod p$, and so the second half of this set is the same as the first half, and hence only half the elements are squares.
+\end{proof}
+
+Let $p$ be an odd prime and $a\in\Z$. We define \emph{Legendre's symbol} ``$a$ on $p$" to be:
+\begin{align*}
+\legendre{a}{p} \coloneqq \begin{cases} 0 & p|a \\ +1 & a $ is a quadratic residue mod $p \\ -1 & a $ is not a quadratic residue mod $p\end{cases}
+\end{align*}
+
+\begin{theorem}[Euler's Criterion]
+Let $p>2, a \in \Z$. Then $\legendre{a}{p} \equiv a^{\frac{p-1}{2}} \mod p$
+\end{theorem}
+Since $p>2$, the elements $0,1,-1$ are distinct mod $p$, so this congruence determines $\legendre{a}{p}$ uniquely.
+\begin{proof}
+If $a \equiv 0 \mod p$, then the result is trivial. Suppose therefore that $(a,p) = 1$. Then by Fermat, $a^{p-1} \equiv 1 \mod p$, which means that $a^{\frac{p-1}{2}} \equiv \pm 1 \mod p$. Observe further that, if $a = x^2 \mod p$, then $a^{\frac{p-1}{2}} \equiv x^{p-1} \equiv 1 \mod p$.
+By \textbf{3.2}, there are precisely $\frac{p-1}{2}$ quadratic residues, so the congruence $a^{\frac{p-1}{2}} \equiv 1 \mod p$ has at least $\frac{p-1}{2}$ solutions. However, this is a polynomial in $a$ of degree $\frac{p-1}{2}$, and so it can only have at most this many solutions, and hence every solution is a quadratic residue. So whenever $\legendre{a}{p} = -1$ we must have $a^{\frac{p-1}{2}} \equiv -1 \mod p$.
+\end{proof}
+\begin{corollary}
+Let $p>2$, $a,b \in \Z$. Then $\legendre{a}{p}\cdot \legendre{b}{p} = \legendre{ab}{p}$
+\end{corollary}
+\begin{proof}
+\begin{align*}
+\legendre{ab}{p} &\equiv (ab)^{\frac{p-1}{2}} \mod p\\
+&\equiv a^{\frac{p-1}{2}}b^{\frac{p-1}{2}} \mod p\\
+&\equiv \legendre{a}{p}\cdot \legendre{b}{p} \mod p
+\end{align*}
+\end{proof}
+This implies that
+\begin{enumerate}
+\item The map $(\Z/p\Z)^\times \to \{\pm 1\}$; $a\mapsto \legendre{a}{p}$ is a homomorphism.
+\item Let $R$ be any residue, $N$ any non-residue. Then $R\times R = R; N\times N = N; R\times N = N$
+\item There is a polynomial time algorithm for computing $\legendre{a}{p}$ for odd $p$, because we can efficiently compute $a^n \mod p$ via binary modular exponentiation.
+\end{enumerate}
+\begin{corollary}
+Let $p > 2$. Then $\legendre{-1}{p} = \begin{cases} +1 & p\equiv 1 \mod 4 \\ -1 & p\equiv -1 \mod 4\end{cases}$
+\end{corollary}
+\begin{proof}
+$p \equiv \begin{cases} +1 & \mod 4 \\ -1 & \mod 4\end{cases} \iff \frac{p-1}{2} \equiv \begin{cases} 0 & \mod 2 \\ 1 & \mod 2\end{cases}$, \\and hence $(-1)^{\frac{p-1}{2}} \equiv \begin{cases} +1 & p\equiv 1 \mod 4\\ -1 &p\equiv 3 \mod 4\end{cases}$, and so by Euler's criterion, $\legendre{-1}{p} = (-1)^{\frac{p-1}{2}}$
+\end{proof}
+We can think about this in another way, by considering an alternative proof of Fermat's little theorem:\\
+Observe that multiplying by $a$ simply permutes the elements of the multiplicative group mod $p$ as $a$ is a generator, hence:\\
+$(p-1)! = \Pi_{j=1}^{p-1} j \equiv \Pi_{j=1}^{p-1} (aj) = a^{p-1} \Pi_{j=1}^{p-1} j = a^{p-1}(p-1)!$, and hence $a^{p-1} \equiv 1 \mod p$.
+
+Similarly, $\Pi_{j=1}^{\frac{p-1}{2}} (aj) = a^{\frac{p-1}{2}} \Pi_{j=1}^{\frac{p-1}{2}} j = a^{\frac{p-1}{2}}(\frac{p-1}{2})!$ Write $aj \equiv \epsilon_j c_j \mod p$ with $c_j \in \{1,2,\ldots, \frac{p-1}{2}\}$, and $\epsilon_j \in \{\pm 1\}$.
+
+We claim that, if $1\leq j \lneqq k \leq \frac{p-1}{2}$, then $c_j \neq c_k$.
+
+Indeed, if $c_j = c_k$, then $\frac{aj}{\epsilon_j}\equiv \frac{ak}{\epsilon_k} \mod p$, i.e. $j\epsilon_k \equiv k\epsilon_j \mod p iff j \equiv \pm k \mod p$.
+
+Hence, $a^{\frac{p-1}{2}}(\frac{p-1}{2})! = \Pi_{j=1}^{\frac{p-1}{2}}(aj) \equiv \Pi_{j=1}^{\frac{p-1}{2}} (\epsilon_j c_j) \mod p \equiv \left(\Pi_{j=1}^{\frac{p-1}{2}} \epsilon_j\right)(\frac{p-1}{2})! \mod p$, and hence $a^{\frac{p-1}{2}} \equiv \Pi_{j=1}^{\frac{p-1}{2}} \epsilon_j \mod p$. This brings us onto:
+
+\begin{lemma}[Gauss's Lemma]
+Let $p>2, a\in \Z$. Then:
+\begin{align*}
+\legendre{a}{p} = (-1)^\mu
+\end{align*}
+Where $\mu = \left|\left\{ 1\leq j\leq \frac{p-1}{2} : aj\equiv k \mod p \text{ for some } \frac{p+1}{2} \leq k \leq p-1\right\}\right|$
+\end{lemma}
+\begin{proof}
+By the above and observe that $\mu = |\{n \leq j\leq \frac{p-1}{2} : \epsilon_j = -n \}| = |\{1\leq j \leq \frac{p-1}{2} : \epsilon_j = -1\}|$, and hence $(-1)^\mu = \Pi_{j=n}^{\frac{p-1}{2}} \epsilon_j$.
+\end{proof}
+\underline{Examples}
+\begin{enumerate}
+\item Let $a=-1$. Then $aj=-j$ for all $j \in \{1, \ldots, \frac{p-1}{2}\}$, and so $\mu = \frac{p-1}{2}$, and $\legendre{-1}{p} = (-1)^{\frac{p-1}{2}}$ as we saw in \textbf{3.5}.
+
+\item Let $a=2$. Then $\{2j: 1 \leq j \leq \frac{p-1}{2}\} = \{2,4,\ldots, p-1\}$.\\
+If $0<j<\frac{p}{4}$, then $2j \in \{1,\ldots, \frac{p-1}{2}\}$, so $\epsilon_j = 1$.\\
+If $\frac{p}{4} < j <\frac{p}{2}$ then $\frac{p}{2} < 2j < p$, so $\epsilon_j = -1$.
+
+Hence $\mu = |\{1\leq j\leq \frac{p-1}{2} : \frac{p}{4} < j < \frac{p}{2}\}| = \lfloor\frac{p}{2}\rfloor - \lfloor \frac{p}{4}\rfloor$.
+
+The precise value depends on $p\mod 8$:
+\begin{corollary}
+Let $p$ be an odd prime. Then:
+\begin{align*}
+\legendre{2}{p} = \begin{cases} +1 & p\equiv \pm 1\mod 8 \\ -1 & p \equiv \pm 3 \mod 8 \end{cases}  = (-1)^{\frac{p^2-1}{8}}
+\end{align*}
+\end{corollary}
+
+\item Let $a=3$. Consider $\{3j: 1\leq j\leq \frac{p-1}{2}\}$. We can check that $\mu = |\{1\leq j\leq \frac{p-1}{2} : \frac{p}{6} < j < \frac{p}{3}\}|$, and that it's parity depends on $p \mod 12$.
+\end{enumerate}
+In general, we see that $\mu = \sum_{m\in \Z} |\{1\leq j\leq \frac{p-1}{2} : (m-\frac{1}{2} \frac{p}{a} < j < m\frac{p}{a}\}|$. Observe that $0<m < \frac{1}{2} + \frac{aj}{p} < \frac{a+1}{2}$. In particular, if $a$ is odd, then $m\leq \frac{a-1}{2}$.
+
+\begin{theorem}[Gauss's Law of Quadratic Reciprocity]
+Let $p, q$ be odd primes. Then:
+\begin{align*}
+\legendre{p}{q}\cdot \legendre{q}{p} = (-1)^{\frac{p-1}{2}\cdot \frac{q-1}{2}}
+\end{align*}
+Equivalently, $\legendre{q}{p} = \begin{cases} -\legendre{p}{q} & p \equiv q \equiv 3 \mod 4 \\ \legendre{p}{q} & \ow\end{cases}$
+\end{theorem}
+\underline{Examples}
+\begin{enumerate}
+\item Let $p\geq 5$. Then $\legendre{3}{p} = (-1)^{\frac{p-1}{2}\cdot \frac{3-1}{2}} \legendre{p}{3}$. 
+
+Now $(-1)^{\frac{p-1}{2}} = 1 \iff p \equiv 1 \mod 4$, and $\legendre{p}{3} = 1 \iff p\equiv 1 \mod 3$, so $\legendre{3}{p} = \begin{cases} +1 & p\equiv \pm 1\mod 12 \\ -1 & p \equiv \pm 5 \mod 12 \end{cases}$.
+
+\item $\legendre{19}{73} = +1 \times \legendre{73}{19} = \legendre{16}{19} = 1$ as $16=4^2$.
+
+\item $\legendre{34}{97} = \frac{2}{17} \times \frac{17}{97} = +1 \times \legendre{17}{97} = +1 \times \legendre{97}{17} = \legendre{12}{17} = \legendre{3}{17} = -1$ as $17 \equiv 5 \mod 12$.
+
+\item 
+\begin{align*}
+\legendre{7411}{9283} &= -\legendre{9283}{7411}\\
+&= -\legendre{1872}{7411}\\
+&= -\legendre{13}{7411} \text{ as $1872=2^4\cdot 3^2\cdot 13$, and $2, 4$ are even powers}\\
+&= -\legendre{7411}{13}\\
+&= -\legendre{1}{13}\\
+&= -1
+\end{align*}
+\end{enumerate}
+\begin{proof}[Proof of Gauss's Lemma]
+$\legendre{q}{p}=(-1)^\mu$ where $\mu = |\{(j,m) \in S : (m-\frac{1}{2})\frac{p}{q} < j < m\frac{p}{q}\}|$ where $S = \{(j,m) : 1\leq j\leq \frac{p-1}{2}, 1 \leq m \leq \frac{q-1}{2}\}$.
+
+Rewriting, $\mu = |\{(j,m) \in S : 0 < mp-jq < \frac{p}{2}\}|$.\\
+Similarly, $\legendre{p}{q} = (-1)^\eta$, where $\eta = |\{(j,m) \in S : 0 < jq - mp < \frac{q}{2}\}|$.
+
+Observe that $\legendre{q}{p} \legendre{p}{q} = (-1)^{\mu+\eta}$. Now $|S| = \frac{p-1}{2}\frac{q-1}{2} = \mu + \eta + |A| + |B|$, where:
+\begin{align*}
+A &= \{(j,m)\in S : mp-jq > \frac{p}{2}\}\\
+B &= \{(j,m)\in S : jq-mp > \frac{q}{2}\}
+\end{align*}
+Given $(j,m) \in S$, let $j' = \frac{p+1}{2}-j, m' = \frac{q+1}{2}-m$. Note that $(j',m') \in S$. We now claim that $(j,m) \in A \iff (j', m') \in B$.
+
+Indeed, note that $j'q-m'p = (\frac{p+1}{2}-j)q - (\frac{q+1}{2}-m)p = mp-jq-\frac{p}{2}+\frac{q}{2}$. Hence $j'q-m'p > \frac{q}{2} \iff mp-jq > \frac{p}{2}$.
+
+Hence $|A| = |B|$, and so these terms do not affect the sign of $(-1)^{\mu+\eta + |A|+|B|}$, and hence:
+\begin{align*}
+\legendre{p}{q}\legendre{q}{b} = (-1)^{\mu+\eta}=(-1)^{\frac{p-1}{2}\frac{q-1}{2}}
+\end{align*}
+\end{proof}
+
+This is a very powerful theorem, however in example 4., we still had to factorise 1872 which is, in general, very hard to do. To get around this problem, we will extend the Legendre symbol.
+
+Given $n \geq 1$ an odd number, and $n=p_1 \cdot \ldots p_k$ where the $p_k$ are not necessarily distinct, we can define the \emph{Jacobi symbol} $\jacobi{a}{m} = \Pi_{i=1}^k \legendre{a}{p_1}$, and $\jacobi{a}{1} = 1$. Note that if $(a,n)=1$ then $\jacobi{a}{n} = 0$.
+
+\begin{proposition}
+Let $m,n \geq 1$ be odd, and let $a,b \in \Z$. Then:
+\begin{enumerate}
+\item If $a \equiv b \mod n$, then $\jacobi{a}{n} = \jacobi{b}{n}$
+\item $\jacobi{ab}{n} = \jacobi{a}{n}\jacobi{b}{n}$ and $\jacobi{a}{mn} = \jacobi{a}{m}\jacobi{a}{n}$
+\item $\jacobi{-1}{n} = (-1)^{\frac{n-1}{2}}$
+\item $\jacobi{2}{n} = (-1)^{\frac{n^2-1}{8}}$
+\end{enumerate}
+\end{proposition}
+\begin{proof}\item
+\begin{enumerate}
+\item Note that if $a\equiv b \mod n$, then $a\equiv b\mod p_i$ for all $i$ by the Chinese remainder theorem, and hence $\jacobi{a}{p_i} = \jacobi{b}{p_i}$.
+\item $\jacobi{ab}{p} = \jacobi{a}{p}\jacobi{b}{p}$ for each odd prime $p$, and so the first part follows from the definition. The second part is immediate from the definition.
+\item This is true for $n$ prime, and so by \textit{2.} it is sufficient to check that if $m,n$ are odd, then $(-1)^{\frac{m-1}{2}}(-1)^{\frac{n-1}{2}} = (-1)^{\frac{mn-1}{2}}$ and $(-1)^{\frac{m^2-1}{8}}(-1)^{\frac{n^2-1}{2}}=(-1)^{\frac{m^2n^2-1}{2}}$. 
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Quadratic Reciprocity for Jacobi Symbols]
+Let $m,n \geq 1$ be odd. Then:
+\begin{align*}
+\jacobi{m}{n} = (-1)^{\frac{m-1}{2}\frac{n-1}{2}}\jacobi{n}{m}
+\end{align*}
+If $(m,n) = 1$, then $\jacobi{m}{n}\jacobi{n}{m} = (-1)^{\frac{m-1}{2}\frac{n-1}{2}}$
+\end{theorem}
+\begin{proposition}
+If $(m,n) > 1$, then both sides are $0$ and we're done.
+
+Suppose $(m,n) = 1$, with $m = \Pi_{i=1}^k p_i$, $n=\Pi_{j=1}^\ell q_j$, with the $\{p_i\}, \{q_j\}$ not necessarily distinct but $\{p_i\}\cap\{q_j\} = \emptyset$.
+
+Then:
+\begin{align*}
+jacobi{m}{n} &= \Pi_{i=1}^k \Pi_{j=1}^\ell \jacobi{p_i}{q_j} \\
+&= \Pi_{i=1}^k \Pi_{j=1}^\ell (-1)^{\frac{p_i-1}{2}\frac{q_j-1}{2}} \jacobi{q_j}{p_i} \\
+&= (-1)^{rs} \Pi_{i=1}^k \Pi_{j=1}^\ell \jacobi{q_j}{p_i} \\
+&= (-1)^{rs} \jacobi{n}{m}
+\end{align*}
+where $r = |\{i: p_i \equiv 3 \mod 4\}|, s = |\{j: q_j \equiv 3 \mod 4\}|$.
+
+But $\frac{m-1}{2}\frac{n-1}{2}\equiv 1 \mod 2 \iff m\equiv n\equiv 3 \mod 4 \iff r\equiv s \equiv 1 \mod 2$, and hence the result follows.
+\end{proposition}
+
+\textsc{Important Remark:} Let $p$ be an odd prime and $a \in \Z$ with $(a,b)=1$. Then $\jacobi{a}{p} = 1$ if and only if $a$ is a square mod $p$, however this is not the case in general for composite $n$:
+
+Let $n$ be an odd integer, and let $a \in Z$ with $(a,n) = 1$. Then if $a$ is a square mod $n$, say $a=x^2 \mod n$, then $\jacobi{a}{n} = \jacobi{x^2}{n} = \jacobi{x}{n}^2 = 1$. The converse is \textsc{not} the case: $\jacobi{2}{15} = \jacobi{2}{3}\cdot \jacobi{2}{5} = 1$, but $2$ is not a square mod $15$.
+
+More generally, let $p\neq q$ be odd primes, and $a \in \Z$ with $(a, pq)=1$. Then by the Chinese Remainder Theorem:
+\begin{center}
+$a$ is a square mod $pq$ if and only if $a$ is a square mod $p$ and mod $q$.
+\end{center}
+Then if $\jacobi{a}{pq}=-1$, then $a$ is not a square mod $pq$, but if $\jacobi{a}{pq}=+1$ then all we know is $\jacobi{a}{p} = \jacobi{a}{q}$.
+
+\underline{Examples:}
+\begin{enumerate}
+\item $\jacobi{33}{73} = \jacobi{73}{33} = \jacobi{7}{33} = \jacobi{33}{7} = \jacobi{5}{7}=-1$.
+\item $\jacobi{66}{73} = \jacobi{2}{73}\jacobi{33}{73} = -1$
+\end{enumerate}
+\end{document}

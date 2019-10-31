@@ -553,5 +553,44 @@ If $\emptyset$ does not have $\rho$ (i.e. $\rho(\emptyset) = 0$) then take any r
 h(n,x) = \begin{cases} 1 & n\in \K \text{ and } x \in E \\ \uparrow & \ow \end{cases}
 \end{align*}
 By (s-m-n) we get a total recursive function $\tau:\N \to \N$ such that $h(n,x) = f_{\tau(n),1}(x)$. Now $n\in\K$ implies that $f_{\tau(n),1} = \phi_E$, $W_{\tau(n)} = E$, and so $W_{\tau(n)}$ has $\rho$. $n\notin \K$ implies that $W_{\tau(n)} = \emptyset$ implies $W_{\tau(n)}$ does not have $\rho$, and so $\K \leq_m I_{\rho}$ via $\tau$.
+
+If $\emptyset$ has $\rho$ and there is some recursively enumerable set $E$ without $\rho$. Take the same $h$ and argument as before to  get that $n \in \K \iff W_{\tau(n)}$ does not have $\rho$. So $\K\leq_m \N \setminus I_{\rho}$ via $\tau$.
 \end{proof}
+\begin{corollary}
+If $\rho$ is a non-trivial property of recursively enumerable sets, then $I_\rho$ is non-recursive/
+\end{corollary}
+\begin{proof}
+Suppose $I_\rho$ is recursive. Then so is $\N \setminus I_\rho$. As $\K \leq_m I_\rho or \N\setminus I_\rho$, and so $\K$ is recursive \contr.
+\end{proof}
+So in general, we cannot decide \textit{any} non-trivial property of recursively enumerable sets. Of course you might for some inputs, but cannot do it algorithmically for arbitrary inputs.
+
+
+\section{Regular Languages and Finite-State Automata}
+\subsection*{Deterministic Finite State Automata}
+We've seen the most general type of computing, but it did require handling arbitrary integers. We now consider a weaker by more practical theory.
+
+An \emph{alphabet} $\Sigma$ is a finite non-empty set - think of the elements as \emph{symbols}, or even \emph{letters}. 
+
+A \emph{word} or \emph{string} of length n over $\Sigma$ is a collection of $n$ letters from $\Sigma$. We denote the set of all words over $\Sigma$ of length $n$ by $\Sigma^n$.
+
+We denote the \emph{empty word} as $\epsilon$ (at least if $\epsilon$ is not a letter of $\Sigma$), and so $\Sigma^0 = \{\epsilon\}$.
+
+Let $\Sigma^\ast = \cup_{n\in\N} \Sigma^n$ including $\epsilon$ be all words over $\Sigma$.
+
+A \emph{language} $L$ over $\Sigma$ is any subset of $\Sigma^\ast$. For instance, $\Sigma = \{a,b,\ldots,z\}, L = \{$all words in your dictionary$\}$.
+
+If $\Sigma = \{0\}$ then we can think of any $L \subseteq \N = \Sigma^\ast$.
+
+We can now give a computational method to determine some languages:\\
+A \emph{deterministic finite-state automaton (DFA)} is a structure $D = (Q, \Sigma, \delta, q_0, F)$ consisting of:
+\begin{enumerate}
+\item A finite non-empty set of states $Q$
+\item A finite non-empty alphabet $\Sigma$
+\item A transition function $\delta: Q \times \Sigma \to Q$
+\item A start state $q_0 \in Q$
+\item A subset $F \subseteq Q$ of accept states
+\end{enumerate}
+The idea is that an input to a DFA $D$ over $\Sigma$ is any word $w \in \Sigma^\ast$. The DFA starts in state $q_0$ and reads the 1\th[st] letter $x_1$ of $w$. It moves to state $\delta(q_0, x_1)$ and reads $x_2$, then moves to state $\delta(\delta(q_0, x_1),x_2)$, etc.
+
+When all of $w$ is read, if the DFA is in an accept state then $w$ is accepted. Otherwise it is rejected.
 \end{document}

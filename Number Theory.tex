@@ -575,4 +575,60 @@ Then if $\jacobi{a}{pq}=-1$, then $a$ is not a square mod $pq$, but if $\jacobi{
 \item $\jacobi{33}{73} = \jacobi{73}{33} = \jacobi{7}{33} = \jacobi{33}{7} = \jacobi{5}{7}=-1$.
 \item $\jacobi{66}{73} = \jacobi{2}{73}\jacobi{33}{73} = -1$
 \end{enumerate}
+\section{Binary Quadratic Forms}
+Which integers can be represented as the sum of two integer squared?
+\begin{theorem}
+Let $N \in \N$. Then $N$ is the sum of two squares if an only if every prime $p \equiv 3 \mod 4$ divides $N$ to some even power. 
+\end{theorem}
+\begin{proof}
+Suppose $N=x^2+y^2$, and $p|N, p \equiv 3 \mod 4$. 
+
+Then $x^2 \equiv -y^2 \mod p$ and $\legendre{-1}{p}=-1$, and so we must have $x \equiv y \equiv 0 \mod p$. Hence $p^2 | N$. Now repeat the argument with $(N/p^2, x/p, y/p)$ until $p\nmid N$.
+
+Conversely, write $N=M^2 K$ where $K$ is the product of distinct primes, each either $2$ or congruent to $1 \mod 4$. Then it suffices to show that we can represent $K=x^2+y^2$ with $x,y \in \Z$ since then $N = (Mx)^2 +(My)^2$. Now observe $(x^2+y^2)(z^2+w^2) = (xz-yw)^2 + (xw+yz)^2$, and $2=1^2+1^2$, it is enough to show that a prime $p \equiv 1 \mod 4$ can be written as a sum of two squares. We will show this next week.
+\end{proof}
+
+A \emph{binary quadratic form} with integer coefficients is of the form $f(x,y) = ax^2 + bxy + cy^2$ for $a,b,c \in \Z$. We say that \emph{f represents n} for $n \in \N$ if there are integers $x,y$ such that $n = f(x,y)$. We sometimes write $(a,b,c)$ in place of $f$.
+
+It can also be helpful to regard $f$ as a matrix:
+$f(x,y) = \begin{pmatrix}
+x & y
+\end{pmatrix} \begin{pmatrix}
+a & b/2 \\ b/2 & c
+\end{pmatrix} \begin{pmatrix}
+x \\ y
+\end{pmatrix}$
+
+A \emph{unimodular substitution} is a change of variable of the form $X = \alpha x + \gamma y; Y = \beta x + \delta y$ with $\alpha, \beta, \gamma, \delta \in \Z$ and $\alpha\delta-\beta\gamma=1$. We say that two binary quadratic forms $f$ and $g$ are \emph{equivalent} if $f(X,Y) = g(x,y)$ for some unimodular substitution $(x,y) \mapsto (X,Y)$. Note that equivalence of binary quadratic forms is an equivalence relation (example sheet).
+
+Note that the set of unimodular substitutions is $SL_2(\Z)$, a group under matrix multiplications acting on the set of binary quadratic forms via unimodular substitutions. The orbits of this action are precisely the equivalence classes of binary quadratic forms. To see that this is a group action, we need to check that $I \cdot f = f$ and $A\cdot (B\cdot f) = (AB)\cdot f$.
+
+Note that if $f = (a,b,c)$ and $Af = g = (a',b',c')$, one can check via manual substitution that $\begin{pmatrix}
+a' & b'/2 \\ b'/2 & c' \end{pmatrix} = A \begin{pmatrix}
+a & b/2 \\ b/2 & c
+\end{pmatrix}
+A^T$.
+
+The \emph{discriminant} of a binary quadratic form $(a,b,c)$ is defined to be $\disc f = b^2-4ac = -4 \det \begin{pmatrix}a & b/2 \\ b/2 & c\end{pmatrix}$.
+
+\begin{lemma}
+Equivalent BQFs have the same discriminant.
+\end{lemma}
+\begin{proof}
+If $g=Af$, then:
+\begin{align*}
+\disc g &= -4 \det (A M A^T) \\
+&= -4 \det M \det A \det A^T \\
+&= -4 \det M \\
+&= \disc f
+\end{align*}
+\end{proof}
+
+Note that BQFs can have the same discriminant and not be equivalent, e.g. $x^2 + 6y^2$ and $2x^2+3y^2$ both have discriminant $-24$.
+\begin{lemma}
+There exists a BQF $f$ with $\disc f = d$ if and only if $d\equiv 0$ or $1 \mod 4$.
+\end{lemma}
+\begin{proof}
+If $d \equiv 0 \mod 4$ take $f = (1,0,-d/4)$. If $d\equiv 1 \mod 4$ take $f = (
+\end{proof}
 \end{document}

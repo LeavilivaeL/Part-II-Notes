@@ -832,14 +832,42 @@ In general, it is hard to get an exact answer, but sometimes we can get exact fo
 Note that $t_r(n) = (1-\frac{1}{r})\binom{n}{2} + O(n)$, so in the case $F=K_{r+1}$ this limit is $1-\frac{1}{r}$. The basis of further progress is the remarkable Erd\"os-Stone theorem, saying that if $e(G)$ is a bit more than $t_r(n)$, then $G$ contains not just $K_{r+1}$ but $K_{r+1}(t) = T_{r+1}((r+1)t)$, the complete $(r+1)$-partite graph with $t$ vertices in each class. Note that $K_{r+1}(1) = K_{r+1}$. This theorem holds for $n$ ``sufficiently large". we first prove a weaker version with large minimum degree, but it's the heart of the proof of E-S.
 
 \begin{lemma}
-Let $r,t \geq 1$ be integers, and let $\epsilon >0$ be real. If $n$ is sufficiently large, then every graph $G$ with $|G|=n$ and $\delta(G) \geq (1-\frac{1}{r}+\epsilon)n$ contains $K_{r+1}(t)$.
+Let $r,t \geq 1$ be integers $\geq 0$, and let $\epsilon >0$ be real. If $n$ is sufficiently large, then every graph $G$ with $|G|=n$ and $\delta(G) \geq (1-\frac{1}{r}+\epsilon)n$ contains $K_{r+1}(t)$.
 \end{lemma}
 \begin{proof}
 Pick some large $T$ depending on $r, t, \epsilon$. $T(r\epsilon)^t \geq t$ is enough. We will:
 \begin{enumerate}
 \item Show $G$ contains $K_r(T)$ which we call $K$.
-\item There are $T$ vertices of $G-K$ joined to $K$ in such a way as to form $K_{r+1}(t)$.
+\item There are $t$ vertices of $G-K$ joined to $K$ in such a way as to form $K_{r+1}(t)$.
 \end{enumerate}
-\end{proof}
+For the first part, we do induction on $r$. For $r=1$ we just need $n_1 \geq T$.For $r\geq 2$ note that $\delta(G) \geq \left(1-\frac{1}{r-1}+\frac{1}{r(r-1)}\right)n$, just pick $n_1(r,\epsilon,t) \geq n_1(r-1, \frac{1}{r(r-1)}, T)$, and so $G \supset K_r(T)$. Now choose one of these $K_r(T)$ and call it $K$.
 
+Now for the second part, suppose $G\not\supset K_{r+1}(t)$. We estimate in two ways the number of pairs $(P,Q)$ where $P$ is a set of $r$ vertices of $K$, one from each class, and $Q$ is a set of $t$ vertices of $G-K$ where everything in $P$ is adjacent to everything in $Q$.
+
+There are $\leq \binom{n}{t}$ choices for $Q$. Given some $Q$, since $G\not\supset K_{r+1}(t)$ there is some class of $K$ in which $Q$ has $\leq t-1$ common neighbours. So there are $\leq (t-1)T^{r-1}$ sets $P$ such that $(P,$ this $Q)$ is a pair. Hence there are $\leq (t-1)T^{r-1}\binom{n}{t} = (t-1)T^{r-1}\frac{n^r}{t!} + O(n^{t-1})$.
+
+On the other hand, given a set $P$, each vertex of $P$ has at most $(1/r - \epsilon)n$ non-neighbours, so $P$ has at least $n-r(1/r - \epsilon)n = r\epsilon n$ common neighbours. Hence there are at least $\binom{r\epsilon n - |K|}{t}$ pairs $($this $P,Q)$. There are $T^r$ sets $P$, so at least $T^r \binom{r\epsilon n - |K|}{t} = T^r \frac{(t\epsilon)^t}{t!}n^t + O(n^{t-1})$ pairs $(P,Q)$. But this is a lower bound exceeding the upper bound for large $n$ \contr.
+\end{proof}
+\begin{theorem}[Erd\"os-Stone, 1946]
+Let $r,t \geq 1$ be integers and $\epsilon > 0$. Then if $n$ is large enough and $G$ is a graph with $n$ vertices and $\geq (1-1/r + \epsilon)n$ edges then $G \supset K_{r+1}(t)$.
+\end{theorem}
+\begin{proof}
+It's enough to show that $G$ contains a large subgraph $H$ with $\delta(H) \geq (1-\frac{1}{r}+\frac{\epsilon}{2})|H|$. Our argument will give such a $H$ with $|H|\geq h = \floor{\frac{\sqrt{\epsilon}n}{2}}$. Hence if we make sure that $n_0(r,t,\epsilon) \geq \frac{2}{\sqrt{\epsilon}}n_1(r,t,\frac{\epsilon}{2})$ then applying \textbf{3.6} to $H$ gives the required $K_{r+1}(t)$. We also choose $n_0$ so that $\binom{h+1}{2}>n$ which we can do as $h = O(n)$.
+
+If there is no such $H$ then there is a sequence of subgraphs $G = G_n \supsetneq G_{n-1} \supsetneq \ldots \supsetneq G_h$ where $|G_j|=j$ and $G_{j-1}$ is obtained from $G_j$ by removing a vertex of degree $\delta(G_j) \leq (1-\frac{1}{r}+\frac{\epsilon}{2})j$ from $G_j$.
+
+Then $e(G_n) \geq (1-\frac{1}{r}+\epsilon)\binom{n}{2} - \sum_{j=h+1}^n (1-\frac{1}{r}+\frac{\epsilon}{2})j > \binom{h}{2}$, but $|G_h| = h$ so we have too many vertices. 
+\end{proof}
+Given $F$, the \emph{chromatic number} $\chi(F)$ is the smallest number of colours such that the vertices can be coloured with no edge joining two vertices of the same colour. This is exactly the smallest $r$ such that $F$ is $r$-partite.
+\begin{corollary}
+\begin{align*}
+\lim_{n\to \infty} \frac{\ex(n,F)}{\binom{n}{2}} = 1-\frac{1}{\chi(F)-1}
+\end{align*}
+\end{corollary}
+\begin{proof}
+Let $\chi(F) = r+1$ so that $r\geq 1$. Since $T_r(n)$ is $r$-partite it does not contain $F$. So $\ex(n,F) \geq t_r(n) = (1-\frac{1}{r})\binom{n}{2}$. Hence the limit is $\geq 1-\frac{1}{r}$.
+
+Now let $\epsilon>0$. If $|G| = n$ and $e(G) \geq (1-\frac{1}{r}+\epsilon)\binom{n}{2}$ then by E-S for large enough $n$ we have $G \supset K_{r+1}(|F|) \supset F$. And so the limit must also be $\leq 1-\frac{1}{r}+\epsilon$, and this holds for all $\epsilon > 0$.
+\end{proof}
+Note that if $F$ is bipartite then this says only $ex(n,F) = o(n^2)$ whereas for otehr $F$ it gives $\ex(n,F)$ asymptotically). The natural bipartite analogue of Tur\'an is to consider $F=K_{t,t}$. Even more natural now is to consider $z(n,t) = \max\{e(G):G n\times n $ bipartite $ G \not\supset K_{t,t}\}$ where $n\times n$ bipartite means $G$ has two vertex classes $X,Y$ of order $n$ and all edges of $G$ lie between $X$ and $Y$.
 \end{document}

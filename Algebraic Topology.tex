@@ -717,4 +717,68 @@ to be a map for any $R \geq 0$. Note that the straight line homotopy is a homoto
 \end{align*}
 which is necessarily multiplication by some integer $d$. For $R = 0$, we have that $(f_R)_\ast = 0$. For $R$ very large, the top degree term $z^d$ dominates and $g$ is given by multiplication by $d$. Hence $d=0$ since $g$ is the same in both cases, and so $f$ is constant.
 \end{proof}
+
+We say a space $X$ is \emph{locally simply connected} if for all $x\in X$ and $U \subseteq X$ an open neighbourhood of $x$, there is some open neighbourhood $V \subseteq U$ of $x$ with $V$ simply connected.
+\begin{theorem}[Existence of Universal Covers]
+Let $X$ be a path connected and locally simply connected. Then there exists a universal cover $p:\hat{X} \to X$.
+\end{theorem}
+For example, if $X = \cup_{n=1}^\infty \{(x,y) : (x-\frac{1}{\sqrt{n}})^2 + y^2 = 1/n\} \subseteq \R^2$, the ``Hawaiian Earring". Then $X$ is not locally simply connected at $(0,0)$.
+
+\begin{proof}[Sketch proof, non-examinable.]
+Fix $x_0 \in X$ and let $\chi = \{\gamma:I \to X | \gamma$ a path from $x_0\}$.
+
+We then define $\hat{X} = \chi/\simeq$, identifying paths which are homotopic, and then we have a covering map $[\gamma] \mapsto \gamma(1)$.
+\end{proof}
+
+\subsection*{The Galois Correspondence}
+The goal of this course is to classify all covering spaces of a space $X$ using subgroups of $\pi_1(X,x)$.
+
+Let $X$ be a path connected space and $p_1:\hat{X}_1 \to X, p_2:\hat{X}_2 \to X$ be covering spaces. Then an \emph{isomorphism of covering spaces} is a homeomorphism $\phi:\hat{X}_1 \to \hat{X}_2$ with $p_" \circ \phi = p$, i.e.:
+\begin{center}
+\tikz{
+\node (1) at (0,0) {$\hat{X}_1$};
+\node (2) at (3,0) {$\hat{X}_2$};
+\node (3) at (1.5,-2) {$X$};
+\draw[->] (1) -- node[above] {$\phi$} (2);
+\draw[->] (2) -- node[below right]{$p_2$} (3);
+\draw[->] (1) -- node[below left] {$p_1$} (3);
+}
+\end{center}
+Note that $\phi^{-1}$ is also an isomorphism of covering spaces. If $\hat{X}_i$ is equipped with a basepoint $\hat{x_i}$ and $\phi(\hat{x_1}) = \hat{x_2}$, then we say $\phi$ is \emph{based}.
+
+Note that $\phi$ is a lift $p_1$ to $\hat{X}_2$, and so if $\hat{X}_1$ is path connected then $\phi$ is uniquely determined by $\phi(\hat{x}_1)$ by uniqueness of lifting.
+
+\begin{theorem}[Galois Correspondence with Basepoints]
+Let $X$ be path connected and locally simply connected, with basepoint $x_0$. The map which associates a covering map $p:\hat{X} \to X$ with basepoint $\hat{x}_0 \in p^{-1}(x_0)$ to the subgroup $p_\ast(\pi_1(\hat{X},\hat{x}_0)) \leq \pi_1(X,x_0)$ induces a bijection between based isomorphism classes of path connected covering spaces and subgroups of $pi_1(X,x_0)$.
+\end{theorem}
+\begin{proof}
+Omitted and non-examinable.
+\end{proof}
+\underline{Example}: as $\pi_1(S^1, 1) = \Z$ has subgroups $n\Z$ for $n$ a non-negative integer, we 1 cover for each $n$. $n=0$ gives the universal cover. For $n>0$ we have $p_n:S^1 \to S^1, p_n(z)=z^n$. Hence every based covering space is based isomorphic to $p$ or $p_n$.
+\begin{corollary}
+Let $X$ be path connected and locally simply connected. Any two universal covers are (based) isomorphic.
+\end{corollary}
+\begin{proof}
+Let $p_1:\hat{X}_1 \to X, p_2:\hat{X}_2 \to X$ be two universal covers. Pick $x \in X, \hat{x}_1 \in p_1^{-1}(x), \hat{x}_2 \in p_2^{-1}(x)$. Since $\pi_1(\hat{X}_i, \hat{x}_i) = 0$, these correspond to the $0$ group in $\pi_1(X,x)$, and so by the Galois correspondence these two covering spaces are based isomorphic.
+\end{proof}
+\begin{corollary}[Galois Correspondence without Base Points]
+Let $X$ be path connected and locally simply connected, with basepoint $x_0 \in X$. The map that sends a covering space $p:\hat{X} \to X$ with a basepoint $\hat{x}_0 \in p^{-1}(x_0)$ to the subgroup $p_\ast \pi_1(\hat{X}, \hat{x}_0) \subseteq \pi_1(X,x_0)$ induces a bijection between isomorphism classes os path connected covering spaces without a base point and conjugace classes of subgroups of $\pi_1(X,x_0)$.
+\end{corollary}
+\begin{proof}
+The map is surjective by the Galois correspondence with basepoints.
+
+To see that this map is injective, we need to show that if, given $p_1:\hat{X}_1 \to X, p_2:\hat{X}_2 \to X, \hat{x}_i \in p^{-1}(x_0)$ and if $p_{1\ast} \pi_1(\hat{X}_1, \hat{x}_1)$ is conjugate to $p_{2\ast} \pi_1(\hat{X}_2, \hat{x}_2)$, then $p_1, p_2$ are isomorphic covering spaces.
+
+So suppose $p_{1\ast}\pi_1(\hat{X}_1, \hat{x}_1) = [\gamma](p_{2\ast}\pi_1(\hat{X}_2, \hat{x}_2))[\bar{\gamma}]$ for some $[\gamma]\in \pi_1(X, x_0)$.
+
+Then let $\hat{\bar{\gamma}}$ be the lift of $\bar{\gamma}$ from $\hat{x}_2$. In particular, $\hat{\bar{\gamma}}$ is a path in $\hat{X}_2$. Let $\hat{x}_2' = \hat{\bar{\gamma}}(1)$, so that $p_2(\hat{x}_2') = x_0$.
+
+Then $[\gamma](p_{2\ast}\pi_1(\hat{X}_2, \hat{x}_2))[\bar{\gamma}] = \bar{gamma}_{\#} = p_{2\ast}(\hat{\bar{\gamma}}_{\#}(\pi_1(\hat{X}^2, \hat{x}^2)) = p_{2\ast}(\pi_1(\hat{X}_2, \hat{x}_2'))$.
+
+And so, by the Galois correspondence with base points there is a based isomorphism between $\hat{X}_1$ and $\hat{X}_2$ with basepoints $\hat{x}_1, \hat{x}_2'$. And so $\hat{X}_1, \hat{X}_2$ are isomorphic as covering spaces.
+\end{proof}
+
+\section{The Seifert - van Kampen Theorem}
+\subsection*{Presentation of a Group}
+Let $D_{2n}$ be the dihedral group of order $2n$. We can represent $D_{2n} = \langle r,s | r^n = 1, s^2 = 1, srs = r^{-1}\rangle$.
 \end{document}

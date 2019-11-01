@@ -9,7 +9,7 @@
 \usepackage{xspace}
 \usepackage{tikz}
 \usepackage{mathrsfs}
-\usetikzlibrary{shapes, arrows, decorations.pathmorphing}
+\usetikzlibrary{shapes, arrows, decorations.pathmorphing, ducks, automata}
 \usepackage[parfill]{parskip}
 \usepackage{subcaption}
 \usepackage{stmaryrd}
@@ -46,17 +46,20 @@
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\renewcommand{\angle}[1]{\langle #1 \rangle}
+\newcommand{\dbangle}[1]{\angle{\angle{#1}}}
 
 \DeclareMathOperator{\ex}{ex}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\upper}{Upper}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\disc}{disc}
-
 \DeclareMathOperator{\charr}{char}
 \DeclareMathOperator{\Image}{im}
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\aut}{Aut}
+
 \let\emph\relax
 \DeclareTextFontCommand{\emph}{\bfseries\em}
 

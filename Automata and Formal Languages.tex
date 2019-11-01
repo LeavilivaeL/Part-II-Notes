@@ -593,4 +593,62 @@ A \emph{deterministic finite-state automaton (DFA)} is a structure $D = (Q, \Sig
 The idea is that an input to a DFA $D$ over $\Sigma$ is any word $w \in \Sigma^\ast$. The DFA starts in state $q_0$ and reads the 1\th[st] letter $x_1$ of $w$. It moves to state $\delta(q_0, x_1)$ and reads $x_2$, then moves to state $\delta(\delta(q_0, x_1),x_2)$, etc.
 
 When all of $w$ is read, if the DFA is in an accept state then $w$ is accepted. Otherwise it is rejected.
+\newpage
+\section*{Duck Interlude}
+\begin{center}
+\begin{tikzpicture}[scale=7]
+\duck[body=orange!40!yellow, bill=orange, devil=red, witch=black!50!gray, jacket=black!50!gray, magicwand, long hair=red!90!black]
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=7]
+\duck[tshirt=white!70!yellow, glasses=purple!50!blue]
+\shade[bottom color=red!70!blue, top color=black] \duckpathlonghair;
+\duck[scale=.2, body=orange!60!brown, bill=black, xshift=40pt, yshift=50pt,bunny=orange!50!brown, shorthair=orange!60!pink, horsetail=orange!60!pink]
+\end{tikzpicture}
+\end{center}
+\newpage
+A \emph{transition diagram} for a DFA, $D$ is a directed graph such that the vertices are states in $Q$, and for each $(q,\sigma) \in Q\times \Sigma)$, draw a directed edge from $q$ to $\delta(q, \sigma)$ and label this as $\sigma$. Then add an arrow from nowhere to $q_0$ and label it start. We draw a vertex in a double circle if it is an accept state. For instance, $\Sigma = \{a,\ldots, z, \_\}$, the DFA corresponding to the regex /cat/ is:
+
+\begin{center}
+\begin{tikzpicture}
+\node (0) at (0,0) [initial, state, draw] {$q_0$};
+\node (1) at (2,0) [state, draw] {$q_1$};
+\node (2) at (4,0) [state, draw] {$q_2$};
+\node (3) at (6,0) [state, accepting, draw] {$q_3$};
+\draw (0) edge[->] node[above] {$c$} (1);
+\draw (1) edge[->] node[above] {$a$} (2);
+\draw (2) edge[->] node[above] {$t$} (3);
+\draw (2) edge[->, bend right] node[above] {$\Sigma\setminus\{t\}$} (0);
+\draw (1) edge[->, bend left] node[below] {$\Sigma\setminus\{a\}$} (0);
+\draw (0) edge[->, loop below] node[below] {$\Sigma\setminus\{c\}$} (0);
+\draw (3) edge[->, loop right] node[right] {$\Sigma$} (3);
+\end{tikzpicture}
+\end{center}
+
+A \emph{transition table} for a $DFA$ is a table with symbols in $\Sigma$ against states in $q$ where the $(i,j)\th$ entry is $\delta(q_i, \sigma_j) \in Q$.
+
+\subsection*{Regular Languages}
+We describe a way to ``follow" a word through a $DFA$. The \emph{extended transition function} of a DFA $D$ is $\hat{\delta} : Q \times \Sigma^\ast \to Q$ defined inductively via 
+\begin{itemize}
+\item $\hat{\delta}(q, \epsilon) \coloneqq q$
+\item $\hat{\delta}(q, \sigma_1) \coloneqq \delta(q, \sigma_1)$
+\item $\hat{\delta}(q, \sigma_1\ldots\sigma_k) = \delta(\hat{\delta}(q, \sigma_1\ldots\sigma_{k-1}), \sigma_k)$
+\end{itemize}
+So for any $w \in \Sigma^\star$, $\hat{delta}(q_0, w)$ is just the end state on input $w$.
+
+\begin{lemma}
+For all $q \in Q, \sigma_1, \ldots, \sigma_k \in \Sigma^\ast$ and all $1 \leq l \leq k$, we have $\hat{\delta}(q, \sigma_1\ldots\sigma_k) = \hat{\delta}(\hat{\delta}(q, \sigma_1\ldots\sigma_l), \sigma_{l+1}\ldots\sigma_k)$
+\end{lemma}
+\begin{proof}
+This is clear by the inductive definition of $\hat{\delta}$
+\end{proof}
+
+Let $D = (Q, \Sigma, \delta, q_0, F)$ be a DFA. The \emph{accepted language} $\mathcal(L)(D)$ is the set of all words $w \in \Sigma^\ast$ such that $\hat{\delta}(q_0, w) \in F$, i.e. all accepted words. A language is \emph{regular} if it is the accepted language for some DFA.
+
+\subsection*{Non Determinism and $\epsilon$-transitions}
+We now examine a seemingly more general construction where we can choose which state to move to or move to multiple states simultaneously.
+
+A nondeterministic finite state automata (NFA) is a structure $N=(Q, \Sigma, \delta, q_0, F)$ just as for a DFA except that $\delta:Q \times \Sigma \to \powset(Q)$.
+
+An NFA has input $w = \sigma_1\ldots\sigma_k \in \Sigma^\ast$. We start in state $q_0$, read $\sigma_1$ then move to all states in $\delta(q_0, \sigma) \subseteq Q$. Then for all the states $p \in \delta(q_0, \sigma_1)$ we read $\sigma_2$ and move to $\delta(p, \sigma_2)$ so we are now at $\cup_{p\in\delta(q_0, \sigma_1)} \delta(p, \sigma_2)$. Then continue this process to the end of $w$ and get the end states $E_w \subseteq Q$. If $E_w \cap F \neq 0$ then $w$ is accepted, else $w$ is rejected.
 \end{document}

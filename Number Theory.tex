@@ -629,6 +629,48 @@ Note that BQFs can have the same discriminant and not be equivalent, e.g. $x^2 +
 There exists a BQF $f$ with $\disc f = d$ if and only if $d\equiv 0$ or $1 \mod 4$.
 \end{lemma}
 \begin{proof}
-If $d \equiv 0 \mod 4$ take $f = (1,0,-d/4)$. If $d\equiv 1 \mod 4$ take $f = (
+If $d \equiv 0 \mod 4$ take $f = (1,0,-d/4)$. If $d\equiv 1 \mod 4$ take $f = (1,1 \frac{1-d}{4})$. For the other direction note $0, 1$ are the only squares mod $4$.
 \end{proof}
+
+A real quadratic form given by $f(x_1, \ldots, x_n) = \sum_{i\leq j} a_{ij} x_i x_j$ with $a_{ij} \in \R$ is said to be:
+\begin{itemize}
+\item \emph{Positive definite} if $f(x) > 0$ for $x \in \R^n\setminus\{0\}$
+\item \emph{Negative definite} if $f(x) < 0$ for $x \in \R^n\setminus\{0\}$
+\item \emph{Indefinite} if there are $x, y \in \R^n$ such that $f(x) > 0 > f(y)$.
+\end{itemize}
+We will stick to $n = 2, a_{ij}\in \Z$, but the definitions are just the same.
+\begin{lemma}
+Let $f = (a,b,c)$ be a BQF, and let $d = \disc f = b^2 - 4ac$. Then the following hold:
+\begin{enumerate}
+\item If $d < 0$ and $a > 0$ then $f$ is positive definite.
+\item If $d < 0$ and $a < 0$ then $f$ in negative definite.
+\item If $d > 0$ then $f$ is indefinite.
+\item If $d = 0$ then $f(x,y) = \ell(mx+ky)^2$ for some $\ell, m, k \in \Z$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item 
+\begin{itemize}
+\item[\textit{1.}, \textit{2.}] $4af(x,y) = 4a^2x^2 + 4abxy + 4acy^2 = (2ax+by)^2 - b^2y^2 + 4acy^2 = (2ax+by)^2 - dy^2$, where $d = \disc f$. So if $d < 0$ then $4af(x,y) \geq 0$ for all $x,y \in \R$. If it $=0$ then $x=y=0$, and so if $a>0$ then $f$ is positive definite and if $a<0$ then $f$ is negative definite.
+\item[\textit{3.}] Suppose $d > 0$. As above, $4af(x,y) = (2ax+by)^2-dy^2 = (2ax+by-\sqrt{d}y)(2ax+By+\sqrt{d}y) = 4a^2(x+\frac{b-\sqrt{d}}{2a}y)(x+\frac{b+\sqrt{d}}{2a}y)$. Hence we can get get positive or negative values for $4af$, and hence for $f$.
+\item[\textit{4.}] Write $a = a_1a_2^2$ with $a_1$ a product of distinct primes. Then $ax^2 + bxy+cy^2 = a_1(a_2x + \frac{b}{2a_1a_2}y)^2$ is of the desired form.
+\end{itemize}
+\end{proof}
+Note that there are indefinite forms all of whose coefficients are positive, e.g. $\disc(1,3,1) = 5 > 0$. There are also positive definite forms not all of whose coefficients are positive. So $\disc(1,-1,2) = -7 < 0$. Note that $d < 0$ and $a>0$ implies that $c>0$, so the only coefficient that can be negative is the middle one.
+
+\underline{Example:} Consider $(10,34,29)$. The coefficients here are large and awkward - it would be nice to move to an equivalent BQF with smaller coefficients. If $f(x,y) = ax^2 + bxy + cy^2$, consider what happens with the substitution given by $x' = x+ \lambda y, y' + y$. Then we have $f(x', y') = g(x, y) = ax^2 + (b+2\lambda a) xy + (\lambda^2a + \lambda b +c)y^2.$
+
+Hence $(a,b,c) \thicksim (a, b\pm 2a, a\pm b + c)$ with $\lambda = \pm 1$, and in our case $(10, 34, 29) \thicksim (10, 14, 5) \thicksim (10,-6,1).$
+
+Another nice substitution is $x' = y, y' = -x$. This gives $(a,b,c) \thicksim (c, -b, a)$
+
+So in our example, we get $(10, 34, 29) \thicksim (1, 6, 10) \thicksim (1, 4, 5) \thicksim (1, 2, 2) \thicksim (1, 0, 1)$, which is very nice. 
+
+A positive BQF is said to be \emph{reduced} or \emph{in reduced form} when either $-a < b \leq a < c$ or $0 \leq b \leq a = c$. Note that in either case $|b| \leq a \leq c$.
+
+The form that we ended up with at the end of the previous discussion, $(1,0,1)$ is reduced by the second criterion.
+
+\begin{proposition}
+Every positive definite BQF is equivalent to a reduced form.
+\end{proposition}
 \end{document}

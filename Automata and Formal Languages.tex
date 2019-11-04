@@ -605,6 +605,10 @@ When all of $w$ is read, if the DFA is in an accept state then $w$ is accepted. 
 \shade[bottom color=red!70!blue, top color=black] \duckpathlonghair;
 \duck[scale=.2, body=orange!60!brown, bill=black, xshift=40pt, yshift=50pt,bunny=orange!50!brown, shorthair=orange!60!pink, horsetail=orange!60!pink]
 \end{tikzpicture}
+
+\begin{tikzpicture}[scale=7]
+\duck[jacket=blue, tshirt=white, alien=green, water=green, mohican=blue, bill=cyan, bowtie=red, tie=black, buttons=yellow!60!brown, xshift=-200pt]
+\end{tikzpicture}
 \end{center}
 \newpage
 A \emph{transition diagram} for a DFA, $D$ is a directed graph such that the vertices are states in $Q$, and for each $(q,\sigma) \in Q\times \Sigma)$, draw a directed edge from $q$ to $\delta(q, \sigma)$ and label this as $\sigma$. Then add an arrow from nowhere to $q_0$ and label it start. We draw a vertex in a double circle if it is an accept state. For instance, $\Sigma = \{a,\ldots, z, \_\}$, the DFA corresponding to the regex /cat/ is:

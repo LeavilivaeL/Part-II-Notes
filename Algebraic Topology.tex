@@ -847,7 +847,7 @@ Consider a commutative square of group homomorphisms:
 \begin{center}
 \tikz{
 \node (C) at (0,2) {$C$};
-\node (R) at (0,0) {$R$};
+\node (R) at (0,0) {$B$};
 \node (G) at (2,0) {$\Gamma$};
 \node (A) at (2,2) {$A$};
 \draw[->] (C) -- node[above] {$i$} (A);
@@ -860,7 +860,7 @@ This diagram is called a \emph{pushout} if for every commutative square of group
 \begin{center}
 \tikz{
 \node (C) at (0,2) {$C$};
-\node (R) at (0,0) {$R$};
+\node (R) at (0,0) {$B$};
 \node (G) at (2,0) {$G$};
 \node (A) at (2,2) {$A$};
 \draw[->] (C) -- node[above] {$i$} (A);
@@ -873,7 +873,7 @@ there is a unique map $\phi: \Gamma \to G$ making the diagram:
 \begin{center}
 \tikz{
 \node (C) at (0,2) {$C$};
-\node (R) at (0,0) {$R$};
+\node (R) at (0,0) {$B$};
 \node (G) at (2,0) {$\Gamma$};
 \node (A) at (2,2) {$A$};
 \node (G') at (4,-2) {$G$};
@@ -889,4 +889,95 @@ there is a unique map $\phi: \Gamma \to G$ making the diagram:
 commute, i.e. $g = \phi \circ \ell, f = \phi \circ k$. If a pushout exists, we write $\Gamma = A \coprod_C B$, and it unique up to unique isomorphism.
 
 If $C = \{1\}$ then $A \coprod_C B$ is written as $A \ast B$ and is called the \emph{free product} of $A$ and $B$. If $i,j$ are injective we write $A \coprod_C B = A \ast_C B$, the \emph{free product with amalgamation}.
+
+\begin{lemma}
+For $i:C\to A$, $j:C \to \{1\}=B$, then $A \coprod_C B = A/\angle{\angle{i(C)}}$
+\end{lemma}
+\begin{proof}
+Take $q$ to be the quotient map. Since $f \circ i = g \circ j$, then necessarily $f(i(C)) = \{1\}$, and so $i(C) \subseteq \ker f$, Thus $\angle{\angle{i(C)}} \subseteq \ker f$ since $\ker f$ is normal. Thus we get a unique factorisation of f as $q: A \to A/\angle{\angle{i(C)}}$ composed with a map $A/\angle{\angle{i(C)}} \to C$, and so $A/\angle{\angle{i(C)}}$ satisfies the universal property.
+\end{proof}
+\begin{lemma}
+Let $A = \angle{S_1|R_1}, B = \angle{S_2|R_2}$, and $T$ is a generating set for $C$. Let $\tilde{i}:T \to F(S_1)$ be a lift of $i:T\to A$, and $\tilde{j} :T\to F(S_2)$ be a lift of $j:T \to B$. Then:
+\begin{center}
+$\Gamma = \angle{S_1 \coprod S_2 | R_1 \cup R_2 \cup \{\tilde{i}^{-1}\tilde{j}(t) : t \in T\}}$
+\end{center}
+is a presentation for $A \coprod_C B$.
+\end{lemma}
+\begin{proof}\item
+\begin{center}
+\tikz{
+\node (G) at (0,2) {$\Gamma$};
+\node (A) at (0,0) {$A$};
+\node (C) at (2,0) {$C$};
+\node (B) at (2,2) {$B$};
+\node (G') at (-2,4) {$G$};
+\node (F2) at (4,2) {$F(S_2)$};
+\node (F1) at (0,-2) {$F(S_1)$};
+\node (T) at (4,-2) {$T$};
+\draw[->] (C) -- node[above] {$i$} (A);
+\draw[->] (C) -- node[left] {$j$} (B);
+\draw[->] (B) -- node[below] {$\ell$} (G);
+\draw[->] (A) -- node[right] {$k$} (G);
+\draw[dashed, ->] (G) -- node[above right] {$\exists !$} (G');
+\draw[->] (T) -- node[right] {$\tilde{j}$} (F2);
+\draw[->] (T) -- node[below] {$\tilde{i}$} (F1);
+\draw[<->] (T) -- (C);
+\draw[->] (A) edge[bend left] node[left] {$f$} (G');
+\draw[->] (F1) edge[bend left]  node[left] {$\tilde{f}$} (G');
+\draw[->] (B) edge[bend right] node[above] {$g$} (G');
+\draw[->] (F2) edge[bend right] node[above] {$\tilde{g}$} (G');
+\draw[->] (F2) -- (B);
+\draw[->] (F1) -- (A);
+}
+\end{center}
+This diagram is commutative. Note that $\tilde{f}(R_1) = \{1\} = \tilde{g}(R_1)$, and $\tilde{f}\circ \tilde{i} (t) = \tilde{g}\circ\tilde{j}(t)$ for $t \in T$ using the big outer square.
+
+We have a map $S_1 \coprod S_2 \to G$ via $s_1 \in S_1 \mapsto \tilde{f}(s_1); s_2 \in S_2 \mapsto \tilde{g}(s_2)$. So it is sufficient to check that all relations for $\Gamma$ map to $1$ in $G$. $R_1, R_2$ map to $1$ since $\tilde{f}(R_1) = \{1\} = \tilde{g}(R_2)$. Hence if we call the map $\Gamma \to G$ $\phi$ say, then $\phi(\tilde{i}(t)^{-1}\tilde{j}(1)) = \tilde{f}(\tilde{i}(t))^{-1} \tilde{g}(\tilde{j}(t)) = 1$.
+
+Hence by the universal property of presentations, we get a unique map $\Gamma \to G$.
+\end{proof}
+
+\subsection*{Seifert - vn Kampen theorem for Wedges}
+Let $X,Y$ be spaces with $x_0 \in X, y_0 \in Y$ basepoints. Then the \emph{wedge} of $X$ and $Y$ is $(X \coprod Y)/\thicksim$, where $\thicksim$ is the smallest equivalence relation such that $x_0 \thicksim y_0$. We write this as $X \vee Y$, and call the equivalence class $\{x_0, y_0\}$ the wedge point.
+
+\begin{theorem}
+Suppose $X = Y_1 \vee Y_2$ with $x_0$ the wedge point, and $y_i$ the basepoint in $Y_i$.
+
+Then $\pi_1(X,x_0) = \pi_1(Y_1, y_1) \ast \pi_1(Y_2, y_2)$ 
+\end{theorem}
+\begin{proof}[Sketch proof (non-examinable):]
+We need to demonstrate the universal property. Suppose we have $f_i:pi_1(Y_i, y_i) \to G$. WE have inclusions $i_j : Y_j \injection X$ with $i_j(y_j) = x_0$. This induces $i_{j\ast}:\pi_1(Y_j, y_j) \to \pi_1(X, x_0)$. Let $\gamma$ be a l\"o\"op in $X$ based at $x_0$. We can write $\gamma$ as a concatenation $\alpha_1 \beta_1 \alpha_2 \beta_2 \ldots$ with the $\alpha_i$ loops in $Y_1$, and $\beta_i$ loops in $Y_2$.
+
+Then we have no choice but to define $h:\pi_1(X,x_0) \to G$ by $h(\gamma) = f(\alpha_1)g(\beta_1)f(\alpha_2)g(\beta_2)\ldots$.
+
+The technically difficult part is to show that this is well defined on homotopy classes.
+\end{proof}
+
+\underline{Examples:}
+\begin{enumerate}
+\item $\pi_1(S_1 \vee S_1) = \Z \ast \Z = F(\{a, a'\}) = F_2$
+\item $\pi_1(\vee_{[n]} S_1) = F([n])$, the free group on $n$ symbols.
+\end{enumerate}
+
+\begin{theorem}[Generalised Seifert - van Kampen Theorem]
+Suppose $Y_1, Y_2 \subseteq X$ are open subsets with $X = Y_1 \vee Y_2$ and $ Z = Y_1 \cap Y_2$ nonempty, with $Y_1, Y_2, Z$ all path connected. Let $x_0 \in Z, i_k :Z\injection Y_k, j_k:Y_k \to X$ be the inclusion maps. Then:
+\begin{center}
+\tikz{
+\node (x) at (0,2) {$\pi_1(X, x_0)$};
+\node (y2) at (3,2) {$\pi_1(Y_2, x_0)$};
+\node (y1) at (0,0) {$\pi_1(Y_1, x_0)$};
+\node (z) at (3,0) {$\pi_1(Z, x_0)$};
+\draw[->] (y2) -- node[above] {$j_{2\ast}$} (x);
+\draw[->] (y1) -- node[left] {$j_{1\ast}$} (x);
+\draw[->] (z) -- node[below] {$i_{1\ast}$} (y1);
+\draw[->] (z) -- node[right] {$i_{2\ast}$} (y2);
+}
+\end{center}
+is a pushout diagram
+\end{theorem}
+\begin{proof}[Proof omitted.]
+\end{proof}
+\underline{Example:} Let $S^n \subseteq \R^{n+1}$ be the unit sphere, and $x_{\pm} = (\pm 1, 0, 0, \ldots, 0) \in S^n$. Then let $U_{\pm} = S^n \setminus \{x_{\mp}\}$, and $V = U_{+} \cap U_{-} = S^n \setminus \{x_{\pm}\}$. Then $S^n = U_+ \cup U_-$. We know already that $U_+, U_-$ are homeomorphic to $\R^n$ via stereographic projection, and $V \cong (-1, 1) \times S^{n-1}$.
+
+Then we have a map $(x_0, x_n) \mapsto (x_0, (x_1,\ldots, x_n)/|(x_1, \ldots, x_n)|)$. Then everything is the trivial group in the pushout diagram since $\R^n$ is contractible, and so $\pi_1(S^n) = \one$.
 \end{document}

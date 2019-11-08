@@ -673,4 +673,52 @@ The form that we ended up with at the end of the previous discussion, $(1,0,1)$ 
 \begin{proposition}
 Every positive definite BQF is equivalent to a reduced form.
 \end{proposition}
+\begin{proof}
+Consider the operations:
+\begin{align*}
+T_{\pm}:(a,b,c)&\mapsto (a, b\pm 2a, a\pm b +c)\\
+S:(a,b,c)&\mapsto (c, -b, a)
+\end{align*}
+If $a>c$, we use $S$. Otherwise, if $a \leq c$ and $c \leq |b|$, then use $T_{\pm}$ to reduce $|b|$. At each stage, observe that $|a|+|b|$ decreases by at least $1$, so this algorithm will terminate. As such, eventually we must have that $a \leq c$ and $|b| \leq a$. Then, if $a <c$ then $b = -a$ if $a$ is not reduced. Hence $(a,b,c) = (a,-a,c) \thicksim (a,a,c)$, reduced. If $a =c$, then $-a \leq b < 0$, and so $(a,b,a) \thicksim (a,-b,a)$, reduced.
+\end{proof}
+
+\begin{lemma}
+Let $f = (a,b,c)$ be a reduced PDBQF (positive definite binary quadratic form) with discriminant $d$. Then $|b| \leq a \leq \sqrt{\frac{|d|}{3}}$, and $b \equiv d \mod 2$.
+\end{lemma}
+\begin{proof}
+$b\equiv d \mod 2$ is trivial, as $4 \equiv 0 \mod 2$. So $f$ reduced implies that $|b| \leq a \leq c \implies d = b^2-4ac \leq -3ac \leq -3a^2$, and hence $a \leq \sqrt{\frac{|d|}{3}}$.
+\end{proof}
+For instance, if $f$ is a PDBQF with discriminant $-4$, then $f \thicksim (1,0,1)$. This seemingly simply lemma will prove to be immensely useful.
+
+\begin{proof}[Proof of 4.1, continued.]
+We need to show that, if $p \equiv 1 \mod 4$, then we can write $p = x^2 + y^2$ for some $x,y \in \Z$.
+
+Observe that $\legendre{-1}{p} = 1$, and hence there are $m,k \in \Z$ with $m^2 = -1 + pk$. Now if we let $f = (p, 2m, k)$, then $f(1,0) = p$ so $f$ represents $p$, and $\disc f = -4$, so $f \thicksim (1,0,1)$, and hence $x^2+ y^2$ also represents $p$.
+\end{proof}
+We say that a BQF \emph{properly represents} $n \in \Z$ if $\exists x,y \in \Z \st \gcd(x,y) = 1$ and $n= f(x,y)$. Observe that if there is a unimodular substitution $(x,y)\leftrightarrow (X,Y)$, then $d|(x,y) \iff d|(X,Y)$, and hence equivalent BQFs properly represent the same integers.
+
+\begin{lemma}
+The least properly represented positive integers by a PDBQF are $a, c, a-|b|+c$.
+\end{lemma}
+\begin{proof}
+If $f(x,y) =n$ properly, then $(x,y) = 1 \implies x = \pm 1$ and $f(\pm 1, 0) = a$, and similarly $f(0,\pm 1) = c$.
+
+Suppose then that $|x| \geq |y| > 0$. Then $f(x,y) = ax^2 + bxy +cy^2 \geq a - |b|+c \geq c$. We have a similar result if $|y| \geq |x| > 0$.
+
+But then for a suitable choice of $\epsilon \in \{\pm 1\}$, we see $f(1,\epsilon) = a - |b|+c$.
+\end{proof}
+Note that values in the above are repeated if represented by more than one way not counting the trivial $f(x,y) = f(-x,-y)$.
+
+\begin{theorem}
+Every PDBQF is equivalent to a unique reduced form. (i.e. e ach reduced form represents a distinct equivalence class).
+\end{theorem}
+\begin{proof}
+We already have existence, so it is sufficient to prove that no two reduced forms are equivalent, or that if two reduced forms are equivalent they must be the same, so suppose $f,g$ are both reduced, and $(a,b,c) = f \thicksim g = (a',b',c')$.
+
+Note that the least value properly represented by $f, g$ is $a, a'$ say. Hence $a = a'$ and similarly $c = c'$. Now by considering discriminants we have $b = \pm b'$. If $b = 0$, we are immediately done, so suppose $0<b = -b'$. Note that we must have the $-a<b<a<c$, by considering the reduced conditions for both BQFs.
+
+So we have $a<c<a - |b|+c$, and there are no repeats. Since $g(x,y) = f(X,Y)$ for some unimodular substitution represented by $A = \begin{pmatrix}
+\alpha & \beta \\ \gamma & \delta
+\end{pmatrix} \in SL_2(\Z)$, we manually have $\alpha, \delta = \pm 1; \beta, \gamma = 0$, and so $A = \pm I$. Observe that we cannot have the $-$ case, and so $g = f$ as required.
+\end{proof}
 \end{document}

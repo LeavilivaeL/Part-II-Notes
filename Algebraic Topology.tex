@@ -980,4 +980,98 @@ is a pushout diagram
 \underline{Example:} Let $S^n \subseteq \R^{n+1}$ be the unit sphere, and $x_{\pm} = (\pm 1, 0, 0, \ldots, 0) \in S^n$. Then let $U_{\pm} = S^n \setminus \{x_{\mp}\}$, and $V = U_{+} \cap U_{-} = S^n \setminus \{x_{\pm}\}$. Then $S^n = U_+ \cup U_-$. We know already that $U_+, U_-$ are homeomorphic to $\R^n$ via stereographic projection, and $V \cong (-1, 1) \times S^{n-1}$.
 
 Then we have a map $(x_0, x_n) \mapsto (x_0, (x_1,\ldots, x_n)/|(x_1, \ldots, x_n)|)$. Then everything is the trivial group in the pushout diagram since $\R^n$ is contractible, and so $\pi_1(S^n) = \one$.
+
+We call a subset $Y \subseteq X$ a \emph{neighbourhood retract} if $\exists V \subseteq X$ open with $Y \subseteq V$ and $Y$ a deformation retract of $V$.
+
+\begin{theorem}[Siefert-van Kampen for Closed Sets]
+Suppose that $Y_1, Y_2 \subseteq X$ are closed subsets with $X = Y_1 \cup Y_2, Z = Y_1 \cap Y_2$. If $Y_1, Y_2, Z$ are path connected and $Z$ is a neighbourhood retract in both $Y_1, Y_2$, then 
+\begin{center}
+\tikz{
+\node (x) at (0,2) {$\pi_1(X, x_0)$};
+\node (y2) at (3,2) {$\pi_1(Y_2, x_0)$};
+\node (y1) at (0,0) {$\pi_1(Y_1, x_0)$};
+\node (z) at (3,0) {$\pi_1(Z, x_0)$};
+\draw[->] (y2) -- (x);
+\draw[->] (y1) -- (x);
+\draw[->] (z) -- (y1);
+\draw[->] (z) -- (y2);
+}
+\end{center}
+is a pushout diagram
+\end{theorem}
+\subsection*{Attaching Cells}
+Let $X$ be a space and $\alpha : S^{n-1} \to X$ be a map. Define $X \cup_\alpha D^n$ to be the space $(X \coprod D^n) / \thicksim$, where $\thicksim$ is the smallest equivalence relation containing $\alpha(x) \thicksim x$ for all $x \in S^{n-1} = \partial D^n$. We ask the question: ``How does attaching an $n$-cell affect $\pi_1$?"
+
+\begin{lemma}
+If $n \geq 3$, then $i: X \injection X \cup_\alpha D^n$ induces an isomorphism $i_{\ast}:\pi_1(X) \to \pi_1(X \cup_{\alpha} D^n)$
+\end{lemma}
+\begin{proof}
+The \emph{mapping cylinder} of $\alpha$ is the space $M_{\alpha} \coloneqq (X \coprod (S^{n-1} \times I))/\thicksim$, where $(\theta, 0) \in S^{n-1} \times \{0\} \subseteq S^{n-1}\times I$ is equivalent to $\alpha(\theta)$ for all $\theta \in S^{n-1}$.
+
+We now identify the other end of the cylinder, $S^{n-1}\times \{1\}$ with $S^{n-1}$. Then we can see that $S^{n-1}$ is a neighbourhood retract in both $M_\alpha$ and $D^n$, and hence $X\cup_\alpha D^n \cong M_{\alpha} \cup_{\id:S^{n-1} \to S^{n-1}\times \{1\}} D^n$.
+
+So we can take $Y_1 = M_{\alpha}, Y_2 = D^n, Z = S^{n-1} \times \{1\}$. Then $S \vee K$ gives a pushout:
+\begin{center}
+\tikz{
+\node (x) at (0,2) {$\pi_1(X\cup_{\alpha} D^n)$};
+\node (y2) at (3,2) {$\pi_1(M_{\alpha})$};
+\node (y1) at (0,0) {$\pi_1(D^n)$};
+\node (z) at (3,0) {$\pi_1(S^{n-1})$};
+\draw[->] (y2) -- (x);
+\draw[->] (y1) -- (x);
+\draw[->] (z) -- (y1);
+\draw[->] (z) -- (y2);
+}
+\end{center}
+Note that $\one = \pi_1(D^n) = \pi_1(S^{n-1})$. Hence $\pi_1(X\cup_{\alpha}D^n) \cong \pi_1(M_{\alpha}) \cong \pi_1(X)$, as $X$ is a deformation retract of $M_{\alpha}$.
+\end{proof}
+
+\begin{lemma}
+Let $\alpha:S^1 \to X$ be a map with $x_0 = \alpha(1)$. Then $\pi_1(X\cup_{\alpha}D^2, x_0) \cong \pi_1(X,x_0)/\dbangle{\alpha}$, and the inclusion map $i:X \injection X\cup_{\alpha} D^2$ induces the quotient map $\pi_1(X) \to \pi_1(X)/\dbangle{\alpha}$
+\end{lemma}
+
+\begin{proof}
+As before, we have the pushout
+\begin{center}
+\tikz{
+\node (x) at (0,2) {$\pi_1(X\cup_{\alpha} D^n)$};
+\node (y2) at (3,2) {$\pi_1(M_{\alpha})$};
+\node (y1) at (0,0) {$\pi_1(D^n)$};
+\node (z) at (3,0) {$\pi_1(S^{n-1})$};
+\draw[->] (y2) -- (x);
+\draw[->] (y1) -- (x);
+\draw[->] (z) -- (y1);
+\draw[->] (z) -- (y2);
+}
+\end{center}
+Once more, $\pi_1(D^n) = \one$, but now $\pi_1(S^{n-1}) = \Z$. We can compute the map from $\pi_1(S^1) \to \pi_1(M_{\alpha})$ as $1 \mapsto [\alpha]$, and so $\pi_1(X\cup_{\alpha} D^2) \cong \pi_1(X)/\dbangle{\alpha}$ as required, and $\pi_1(X) \to \pi_1(X\cup_{\alpha} D^2)$ is the quotient map.
+\end{proof}
+This theorem gives us a nice way to build up topological spaces to have desired fundamental groups:
+\begin{theorem}
+For any finitely presented group $G$ there is a compact space with $\pi_1(X, x_0) = G$.
+\end{theorem}
+\begin{proof}
+Let $G = \angle{A|B}$, and let $Y = \vee_A S^1$. Then $\pi_1(Y) = F(A)$. For any $r \in R$ let $\gamma_r : S^1 \to Y$ represent $r$. Then repeatedly attach $D^2$ to $Y$ using all the elements of $R$. 
+
+So then let $X = ((Y \cup_{\gamma_{r_1}} D^2) \cup_{\gamma_{r_2}} D^2 ) \ldots$.
+
+Then $\pi_1(X) = F(A)/\dbangle{r_1, \ldots, r_n} = G$.
+\end{proof}
+
+\subsection*{Classification of Spaces}
+An \emph{n-dimensional manifold} is a Hausdorff space $M$ such that every point $x \in M$ has an open neighbourhood homeomorphic to $\R^n$. A two dimensional manifold is called a surface. For instance, a figure 8 is not a manifold, whilst $S^1$ is a manifold.
+
+\underline{Examples:}
+\begin{enumerate}
+\item Let $\alpha:S^1 \to \ast$. Then $\ast \cup_{\alpha} D^2 \cong S^2$.
+\item Let $g \in \Z, g>0$. Set $\Gamma_{2g} = \vee_{i=1}^{2g} S_i^1$ with $S_i^1$ being distinct circles. Now let $\alpha_i: I \to S_i^1; \beta_i : I \to S_{i+g}^1$ be loops generating $\pi_1(S^1)$.
+
+Then let the loop $\rho_g = \alpha_1 \beta_1 \bar{\alpha_1} \bar{\beta_1} \ldots \alpha_g \beta_g \bar{\alpha_g} \bar{\beta_g}:S^2 \to \Gamma_{2g}$.
+
+Let $\Sigma_g = \Gamma_{2g} \cup_{\rho_g} D^2$. We claim then that $\Sigma_{2g}$ is a compact surface.
+\begin{proof}
+Compactness is immediate. Now if $x \in D^2 \setminus S^1$, then $D^2 \setminus S^1$ is an open neighbourhood of $x$ in $\Sigma_{2g}$ homeomorphic to an open subset of $\R^2$. If $x$ is on $S_i^1$ for some $i$, but is not the edge point,
+\end{proof}
+\end{enumerate}
+
 \end{document}

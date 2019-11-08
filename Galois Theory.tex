@@ -719,4 +719,128 @@ Let $L/K$ be a field extension and $f \in K[x], \sigma:L \to L$ be a $K$-homomor
 \begin{proof}
 1 and 2 are clear, and 3 follows from these 2.
 \end{proof}
+
+
+
+
+\begin{lemma}
+Moreover, $L/K$ is separable.
+\end{lemma}
+\begin{proof}
+Let $\alpha \in L$. We must show that the minimal polynomial of $\alpha$ over $K$ has distinct roots in a splitting field. Let $G\alpha = \{\sigma\alpha : \sigma \in G\} = \{\alpha_1, \ldots, \alpha_r\}$ be the orbit of $\alpha$, so that $\alpha_i$ are distinct, and let $g(x) = \Pi_{i=1}^r (x-\alpha_i).$ By definition, $g$ has distinct roots, and $g(\alpha) = 0$, and if $\sigma \in G$ then $\sigma$ permutes $\{\alpha_1, \ldots, \alpha_r\} = G\alpha$, and so $\sigma g(x) = g(x)$, and hence $g(x) \in K[x]$. Hence, if $f \in K[x]$ is the minimal polynomial of $\alpha$ then $f|g$, and as $g$ has distinct roots, so does $f$.
+\end{proof}
+\begin{lemma}
+Let $\gamma \in L$. Then the minimal polynomial of $\gamma$ is $g(x) = \Pi_{\alpha \in G\gamma} (x-\alpha)$. In particular $\deg_K \gamma = \# G\gamma$.
+\end{lemma}
+\begin{proof}
+We have already shown that $g(x) = K[x], g(\gamma) = 0$ and the minimal polynomial divides $g$. It remains to show that $g(x)$ is irreducible. But if not, $g = g_1 \cdot g_2$, and in $L[x]$ we have $g_1(x) = \Pi_{\alpha \in A} (x-\alpha), g_2(x) = \Pi_{\alpha\in B} (x-\alpha)$, and $A \cup B = G\gamma, A \cap B = \emptyset$. But $g_i \in K[x]$ and so each of $A, B$ are $G$-stable, which is not possible if both are nonempty.
+\end{proof}
+\underline{Example:} Let $L = \Q(\im, \sqrt{2}), G = \Z/2 \times \Z/2 = \aut (L/\Q), K = \Q$. This is as we have $\sigma_1: \im \mapsto -\im; \sigma_2: \sqrt{2} \mapsto -\sqrt{2}$. Then if $\gamma= \im$, we have $G \im = \{\pm \im\} \implies$ minimal polynomial for $\im$ is $(x+\im)(x-\im) = x^2+1$ irreducible. If $\gamma = \im + \sqrt{2} + 1$, then the minimal polynomial for $\gamma$ is $(x-1-\im-\sqrt{2})(x-1+\im-\sqrt{2})(x-1-\im+\sqrt{2})(x-1+\im+\sqrt{2}) \in \Q[x]$. This is computationally very easy to find, as long as we know the automorphism group.
+\begin{lemma}
+$[L:K] <\infty, K = L^G$
+\end{lemma}
+\begin{proof}
+Choose $\alpha \in L$ such that $[K(\alpha):K]$ is maximal. This is possible by lemma one, which says that $[K(\alpha):K] \leq \#G$. Now let $\beta \in L$. We show that $\beta \in K(\alpha)$, i.e. $K(\alpha) = L$. But $[K(\alpha,\beta):K(\alpha)] \leq [K(\beta):K] \leq \#G <\infty$. Hence $[K(\alpha,\beta):K] = [K(\alpha,\beta):K(\beta)][K(\beta):K] <\infty$.
+
+Moreover, $K \subseteq K(\alpha,\beta) \subseteq L$, so $K(\alpha, \beta)/K$ is separable, since $L/K$ is separable. We then apply the theorem of the primitive element to see that $K(\alpha, \beta) = K(\gamma)$ for some $\gamma$, and hence $[K(\gamma):K] = [K(\alpha):K]$ by maximality of $[K(\alpha):K]$, and so $[K(\gamma):K(\alpha)] = 1$, i.e. $\beta \in K(\alpha)$ as required.
+\end{proof}
+\begin{theorem}[Artin]
+Let $L$ be a field, $G \leq \aut(L)$ be a finite group. Then:
+\begin{enumerate}
+\item $[L:L^G] = \#G$
+\item $G = \aut(L/L^G)$
+\end{enumerate}
+\end{theorem}
+\begin{proof}\item
+\begin{enumerate}
+\item By the previous lemma, $L = K(\gamma)$ for some $\gamma$, and $\deg_K \gamma = \# G\gamma$. We claim that $\#G\gamma = \#G$. Equivalently, $\stab_G(\gamma) = \{1\}$. To see this, observe that $K(\gamma)$ is a vector space over $K$ with basis $1, \gamma, \gamma^2, \ldots$. Hence if $\sigma \in G$ acts trivially on $\gamma$, then $\sigma \gamma = \gamma$, and so $\sigma$ acts trivially on all of $L$, i.e. $\sigma\ell = \ell \forall \ell \in L$. But $G \leq \aut(L)$ acts faithfully on $L$ by definition, and so such a $\sigma$ is the identity. 
+
+Alternatively, simply observe that $[L:K]\leq \#G$ by the previous lemma, but $\#G \leq [L:K]$ by linear independence of field automorphisms, so we have the result by trichotomy.
+
+\item $G \leq \aut(L/K)$, and so $K = L^G \supseteq L^{\aut(L/K)} \supseteq K$. Hence $L^{\aut(L/K)} = K$, and so $G = \aut(L/K)$. 
+\end{enumerate}
+\end{proof}
+
+Note that this theorem is very useful for computing examples:\\
+\underline{Example:} $L = \C(y), G = \angle{\sigma, \tau}, \sigma y = \im/y, \tau y = -y$. Then what is $K = L^G$. Firstly, $G$ is $\Z_2 \times \Z_2$ as $\sigma^2 y = y, \tau^2 y = y, \sigma \tau y = -\tau\sigma y$, and $Gy = \{y,-y, \im/y, -\im/y\}$, and hence the minimal polynomial of $y$ over $K$ is $(x-y)(x+y)(x-\im/y)(x+\im/y) = (x^2-y^2)(x^2+y^{-2}) = x^4 + x^2 (y^{-2}-y^2) + 1 \in K[x]$. So we must have that $y^2 - y^{-2} \in K$. We know that $\deg_K(y) = 4$ and even that $\deg_{\C(\omega)}(y) = 4$, so we heave that $K = \C(\omega)$ where $\omega = y^2+y^{-2}$.
+
+\underline{Example:} $L = \F_{q^n}, K = \F_q$. Then we claim $\aut(\F_{q^n}/\F_q) = \Z_n$.
+
+\begin{proof}
+Let $\phi(x) = x^9$ for all $x \in \F_{q^n}$. Then if $x \in \F_q$, as $x^9 = x$ we have $\phi(x) = x$, and so $\phi \in \aut(\F_{q^n}/\F_q)$ defines a map $\Z \to \aut(\F_{q^n}/\F_q), i \mapsto \phi^i$. But then $\phi^n(x) = x^{q^n} = x$ for all $x \in \F_{q^n}$, and there is some $x \in \F_{q^n}$ with $\phi^i(x) \neq x$ if $x < n$ as $(\F_{q^n})^{\phi^i} = \F_{q^i}$, and hence $\Z_n = \angle{\phi} \injection \aut(\F_{q^n}/\F_q)$. But then $\#\aut(\F_{q^n}/\F_q) = [\F_{q^n} : \F_q] = n$ by Artin's theorem, and hence we have equality.
+\end{proof}
+
+\begin{proposition}
+Let $L/K$ be a finite extension. Then $\#\aut(L/K) | [L:K]$, with equality if and only if $L/K$ is Galois.
+\end{proposition}
+\begin{proof}
+Set $M = L^{\aut(L/K)}$, so that we have a tower $K \leq M \leq L$. Artin's theorem gives us that $[L:M] = \#\aut(L/K)$, and so by the tower law $[L:K] = \#\aut(L/K)[M:K]$.
+\end{proof}
+\begin{theorem}
+$L/K$ is Galois if and only if $L$ is the splitting the field of a separably polynomial over $K$. More precisely, the following are equivalent:
+\begin{enumerate}
+\item $L/K$ is Galois
+\item $G \leq \aut(L)$ is a finite subgroup and $K = L^G$
+\item $L$ is the splitting field of a separable polynomial in $K[x]$
+\item $L/K$ is separable and the minimal polynomial over $K$ of each $\alpha \in L$ splits into linear factors in $L[x]$
+\end{enumerate}
+\end{theorem}
+\begin{proof}\item
+\begin{itemize}
+\item[\imp{1}{2}] Trivial
+\item[\imp{2}{1}] Follows immediately from Artin
+\item[\imp{2}{4}] The linear factors have roots $\{\sigma\alpha | \sigma \in G\}$
+\item[\imp{4}{3}] If $L=K(\alpha_1, \ldots, \alpha_n)$, let $f_i$ be the minimal polynomial of each $\alpha_i$ which is separable over $L$, and so the lowest common multiple of $f_1, \ldots, f_n$ is a separable polynomial with $L$ as its splitting fields.
+\item[\imp{3}{1}] If $L$ is the splitting field of a polynomial $f \in K[x]$. Then the key lemma tells us that the number of $K$-homomorphisms $L \to L$ is less than or equal to $[L:K]$, and as $f$ is separable we have equality. But this then says that $\#\aut(L/K)=[L:K]$, and so our previous proposition says $L/K$ is Galois.
+\end{itemize}
+\end{proof}
+\begin{corollary}
+Any finite separable extension $L/K$ is centered in a Galois extension $K \subseteq L \subseteq N$ with $N/K$ Galois.
+\end{corollary}
+\begin{proof}
+Let $L = K(\alpha_1, \ldots, \alpha_n)$ and set $N$ to be the splitting field of the lowest common multiple of all the minimal polynomials of the $\alpha_i$. This is separable by definition, and $N/K$ is Galois by the previous theorem, and no proper subfield containing $K$ is Galois.
+
+Moreover, if $K \subseteq L \subseteq N'$ with $N'/K$ Galois but no proper subfield containing $K$ is Galois, then there exists an $L$-automorphism $N \to N'$.
+\end{proof}
+\begin{corollary}
+If $K \subseteq M \subseteq L$ and $L/K$ is Galois, then $L/M$ is Galois.
+\end{corollary}
+\begin{proof}
+Property \textit{4.} from \textbf{6.7} holds for $L/K$ and so it holds for $L/M$.
+\end{proof}
+\begin{theorem}[Fundamental Theorem of Galois Theory]
+If $L/K$ is a Galois extension and $G = \aut(L/K)$, then there is bijection:
+\begin{center}
+((subgroups of $G$)) $\to$ ((fields $M$ with $K \subseteq M \subseteq L$))\\
+$H \mapsto L^H$
+\end{center}
+with inverse given by $\aut(L/M)\mapsfrom M$. In particular, there are only finitely many intermediate fields.
+\end{theorem}
+\underline{Examples:}
+\begin{enumerate}
+\item If $G = \Z_p$ then the tower law implies there are no non-trivial subfields, and there are also clearly no non-trivial subgroups.
+\item If $L = \F_{q^n}, K = \F_q$, then $G = \aut(L/K) = \Z_n$. $L/K$ is Galois from last lecture, and so we know that the only subfields of $L$ are $\F_{q^m}$ for $m|n$.
+\item $L = \Q(\im, \sqrt{2}) \supseteq K = \Q$. We've already seen that the only subgroups of $G = \Z_2 \times \Z_2$ are $\angle{\sigma, \tau}, \angle{\sigma}, \angle{\tau}, \one$, and so the theorem tells us that the only proper subfields are $\Q(\im\sqrt{2}), \Q(\im), \Q(\sqrt{2})$.
+\end{enumerate}
+
+\begin{proof}
+We check the composition of these two maps in both directions is the identity:
+\begin{itemize}
+\item $H \mapsto L^H \mapsto \aut(L/L^H) = H$ by Artin's theorem
+\item $M \mapsto \aut(L/M) \mapsto L^{\aut(L/M)}$. But the corollary showed $L/M$ is Galois, so Artin gives $L^{\aut(L/M)} = M$.
+\end{itemize}
+\end{proof}
+\begin{theorem}[Properties of the Galois correspondence]\item
+\begin{enumerate}
+\item It is order reversing: if $H \subseteq H'$, then $L^{H'} \subseteq L^H$. If $M\subseteq M'$, then $\aut(L/M') \leq \aut(L/M)$
+
+\item A subgroup $H \leq G$ is normal if and only if $K \subseteq L^H$ is a Galois extension. That is, $K \subseteq M$ is Galois if an only if $\aut(L/M) \trianglelefteq \aut(L/K)$, and in that case $\aut(M/K) = G/H$. Note that this is a group if and only if $H$ is normal.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Suppose $N \trianglelefteq G$ is normal. If $n \in N, \sigma \in G, \ell \in L^N$, then $n\sigma(\ell) = \sigma \sigma^{-1} n \sigma(\ell) = \sigma n' \ell = \sigma \ell$, and so $\sigma(\ell) = \ell$, i.e. $\sigma(L^N) \subseteq L^N$, and so we have a map $G/N \to \aut(L^N/K)$. But the set of all $\sigma$ such that $\sigma/L^N = 1$ is the automorphism group $\aut(L/L^n) = N$ by Artin's theorem, and so we have an injection $G/N \injection \aut(L^N/K)$, and so $\#\aut(L^N/K) \geq \#G/N$.
+
+But $K \subseteq L^N \subseteq L$, and $\#\aut(L^N/K) \leq \#G/N$, and hence we have equality, so $[L^N:K]$ is Galois.
+\end{proof}
 \end{document}
+

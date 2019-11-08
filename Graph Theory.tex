@@ -870,4 +870,124 @@ Let $\chi(F) = r+1$ so that $r\geq 1$. Since $T_r(n)$ is $r$-partite it does not
 Now let $\epsilon>0$. If $|G| = n$ and $e(G) \geq (1-\frac{1}{r}+\epsilon)\binom{n}{2}$ then by E-S for large enough $n$ we have $G \supset K_{r+1}(|F|) \supset F$. And so the limit must also be $\leq 1-\frac{1}{r}+\epsilon$, and this holds for all $\epsilon > 0$.
 \end{proof}
 Note that if $F$ is bipartite then this says only $ex(n,F) = o(n^2)$ whereas for otehr $F$ it gives $\ex(n,F)$ asymptotically). The natural bipartite analogue of Tur\'an is to consider $F=K_{t,t}$. Even more natural now is to consider $z(n,t) = \max\{e(G):G n\times n $ bipartite $ G \not\supset K_{t,t}\}$ where $n\times n$ bipartite means $G$ has two vertex classes $X,Y$ of order $n$ and all edges of $G$ lie between $X$ and $Y$.
+
+The problem of finding $z(n,t)$ is known as Zarankiewicz's problem. The exact value of $z(n,t)$ is not known for all $n$ for any choice $t$. In fact, the asymptotic value is unknown except for $t = 2,3$, and the order of magnitude is unknown for $t \geq 4$. The following argument gives the best known upper bound.
+
+\begin{theorem}
+\begin{align*}
+z(n,t) \leq (t-1)^{1/t}(n-t+1)n^{1-1/t} + (t-1)n = O(n^{2-1/t})
+\end{align*}
+\end{theorem}
+\begin{proof}
+Let $z = z(n,t)$ and let $G$ be a bipartite graph with no $K_{t,t}$, $e(G) = z$, where $G$ has a bipartition $X,Y$ such that $|X|=|Y|=n$.
+
+Let the degrees of the vertices in $X$ be $d_1, \ldots, d_n$ where $\sum_{i=1}^n d_i = z = nd$, where $d$ is the average degree. Note that $d_i \geq t-1$ for all $i$, otherwise adding an edge at vertex $i$ doesn't create a $K_{t,t}$. We estimate in two ways the number of $t$-fans, i.e. sets of $t$ edges incident to the same vertex of $X$. A vertex in $X$ of degree $d_i$ is in $\binom{d_i}{t}$ $t$-fans, so there are $\sum_{i=1}^{d_i} \binom{d_i}{t}$ $t$-fans.
+
+On the other had each $t$-subset of $Y$ has at most $t-1$ $t$-fans connected to it, otherwise we would have a $K_{t,t}$ so the number of $t$-fans is at most $(t-1)\binom{n}{t}$.
+
+Hence $\sum_{i=1}^n \binom{d_i}{t} = (t-1)\binom{n}{t}$.
+
+Since the polynomial $\binom{x}{t}$ is convex for $x \geq t-1$ we have $n\binom{d}{t} \leq \sum{i=1}^{n} \binom{d_i}{t} \leq (t-1)\binom{n}{t}$ and hence $\frac{(d-k+1)^t}{n-t+1} \leq \frac{t-1}{n}$, and so we are done.
+\end{proof}
+\begin{theorem}
+$z(n,2) \leq \frac{1}{2}n(1+\sqrt{4n-3})$, and equality holds for infinitely many $n$.
+\end{theorem}
+\begin{proof}
+In the proof above we have $n\binom{d}{2} \leq \binom{n}{2}$, and so $d(d-1) \leq n(n-1)$, and hence $d \leq \frac{1}{2}(1+ \sqrt{4n-3})$.
+
+The argument shows that equality holds iff $d =\frac{1}{2}(1+\sqrt{4n-3})$ is an integer, and there exists a $d$-regular graph where every two vertices in $Y$ have exactly one common neighbour, and the same applies with $X, Y$ reversed.
+
+The existence of such a graph is equivalent to the existence of a projective plane of order $n = p^2 + p + 1, p \in \N$. This is a set of $n$ points and $n$ subsets of the called lines, each point lying in exactly $p+1$ lines, each line containing exactly $p+1$ points, and every two points lying in exactly one common line, and every two lines intersecting in exactly one point.
+
+To get the graph, let $X$ be the points and $Y$ be the lines, and let $xy$ be an edge if $x \in y$. These are known to exist when $p$ is a prime or a prime power.
+\end{proof}
+
+A \emph{Sidon set} is a set $S \subseteq [n]$ whose pairwise sums are distinct, i.e. $a+b = c+d \implies a = c, b = d$ or $a=d, b=c$.
+
+\begin{corollary}
+If $S \subseteq \Z/n\Z$ is Sidon then $|S| \leq \ceil{n^{1/2}}$.
+\end{corollary}
+\begin{proof}
+Consider the bipartite graph where $X,Y = [n]$ and $xy  \in E(G)$ if $y = x+s$ for $s \in S$. Hence $e(G) = n|S|$.
+
+If $G$ has a $K_{2,2}$, then there exist $a,b,c,d \in S$ with $X_1 + a = x_2+c$, $x_2+b = x_1+d$ for some $x_1, x_2 \in X$.
+
+Then $(x_1+ x_2) + a+b = (x_1+x_2) + c + d$, contradicting that $S$ Sidon. Hence $e(G) \leq \frac{1}{2}n (1+\sqrt{4n-3})$
+\end{proof}
+
+\section{Eigenvalues}
+We can also associate matrices with graphs. Sometimes this yields useful structural information. Sometimes it reveals hidden constraints that we wouldn't otherwise notice.
+
+Let $G$ be a graph with vertex set $[n]$. We define the \emph{adjacency matrix} of $G$ to be $A = (a_{ij})$, where $a_{ij} = \begin{cases} 1 & ij \in F \\ 0 & \ow\end{cases}$. An adjacency matrix $A$ is real symmetric, and hence diagonalisable with real eigenvalues $\lambda_1, \ldots, \lambda_n$, which are in principle computable.
+
+Observe that $(A^2)_{ij} = \sum_k a_{ik} a_{kj}$, the number of walks of length $2$ from $i$ to $j$.
+
+There is an orthonormal basis of eigenvectors $e_1, \ldots, e_n$. If $x$ is a unit vector $x = \xi_1 e_1 + \ldots + \xi_n e_n$, where $\sum_i \xi_i^2 = 1$. Writing $\lambda_{\min}, \lambda_{\max}$ for the smallest and largest eigenvalues respectively, we have that $\lambda_{\min} = \min_{||x||=1}x^T Ax, \lambda_{\max} = \max_{||x||=1}x^T Ax$.
+
+\begin{theorem}
+Let $G$ be a graph with vertex set $[n]$. Then:
+\begin{enumerate}
+\item $\delta(G) \leq \lambda_{\max} \leq \Delta(G)$
+\item $|\lambda_i| \leq \Delta(G)$ for all $i$
+\item If $G$ is connected, then $\Delta(G)$ is an eigenvalue iff $G$ is $\Delta$-regular, and it has multiplicity one.
+\item If $G$ is connected, then $-\Delta(G)$ is an eigenvalue iff $G$ is $\Delta$-regular and bipartite.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+If $y = (a_1, a_2, \ldots, a_n)$ then $(Ay)_i = \sum_{j \in \Gamma(i)} a_j$, and $y^T A y = 2 \sum_{ij \in E(G)} a_i a_j$. If $x = (1,1,\ldots,1)/\sqrt{n}$, then $x^T Ax = 2e(G)/n \geq \delta(G)$, and so we have the first part of \textit{1.}
+
+Now pick $y$ with $Ay = \lambda_i y$. Let $m \in [n]$ be such that $|a_m| = \max_{j \in [n]} |a_j|$. We may assume $a_m = 1$. Then $\lambda_i = \sum_{j \in \Gamma(m)} a_j$, and so $|\lambda_i| \leq \sum_{j \in \Gamma(m)} |a_j| \leq d(m) \leq \Delta(G)$, proving \textit{2} and the second part of \textit{1}.
+
+If $\lambda_i = \Delta$, then equality holds, so $d(m) = \Delta(G)$ and $a_j = 1$ for all $j \in \Gamma(i)$. We can then say apply the same argument to $j \in \Gamma(m)$, showing that $d(j) = \Delta(G)$ and $a_\ell =1$ for all $\ell \in \Gamma(j)$, and so on throughout the whole graph since $G$ is connected, and so we have \textit{3}.
+
+If $\lambda_i = -\Delta$, then $d(m) = \Delta(G)$ and $a_j = -1$ for all $j \in \Gamma(m)$. Also, if $j \in \Gamma(m)$ then $d(j) = \Delta(G)$, and $a_\ell = 1$ for all $\ell \in \Gamma(j)$. Thus every vertex has degree $\Delta$, and all $a_{\cdot}$ are $\pm 1$, and edges join $u$ to $v$ if $a_u a_v = -1$.
+\end{proof}
+
+Let $\vec{G}$ be an orientation of $G$, constructed by assigning a direction to each edge of $G$. The \emph{incidence matrix} of $\vec{G}$ is the $n \times e(G)$ matrix $B$ with $B = (b_{ve}) = \begin{cases} 1 & e = uv \\ -1 & e = vu \\ 0 & \ow\end{cases}$.
+
+The \emph{combinatorial Laplacian} is $L = BB^T$. Note that $L = D-A$ where $D = \diag (d(1),d(2), \ldots, d(n))$ is the diagonal matrix of degrees. Note that $L$ doesn't depend on the orientation.
+
+$L$ is real symmetric with eigenvalues $\mu_1 \leq \mu_2 \leq \ldots \leq \mu_n$. Since $L - BB^T$ is positive semi-definite, and so $\mu_i \geq 0$. Indeed, $x^T Lx = (B^T x)^T(B^T x) = \sum_{ij \in E(G)} (x_i-x_j)^2$. In particular, if $x = (1, \ldots, 1)$ then $Lx = 0$ and so $\mu_1 =0$.
+
+If $G$ is $\Delta$-regular then $L = \Delta I - A$, so the eigenvalues of $L$ are $\Delta$-(eigenvalues of $A$). If $G$ not regular, the eigenvalues of $L$ and $A$ are unrelated.
+
+$L$ gives structural information about $G$. In particular, $\mu_2$ shows how $G$ ``expands".
+
+\begin{theorem}
+Let $G$ be a graph and let $U \subset V = V(G)$. Then there are at least $\mu_2 \frac{|U||V-U|}{|V|}$ edges from $U$ to $V-U$.
+\end{theorem}
+\begin{proof}
+Define $x = (x_1, \ldots, x_n)$ by $x_i = n-k$ if $i \in U$ and $x_i = -k$ if $i \notin U$ where $k = |U|$. Then $x^T L x = \sum_{ij \in E(G)} (x_i- x_j)^2 = |F|n^2$ where $F$ is the set of all edges from $U$ to $V-U$.
+
+Take an orthonormal basis $f_1, \ldots, f_n$ with $Lf_i = \mu_i f_i$ so that $f_1 = (1,\ldots, 1)/\sqrt{n}$. Then $\angle{x, f_1} = 0$, so $x = \sum_{i\geq 2} \xi_i f_i$. So $x^T L x = \sum_{i \geq 2} \mu_i \xi_i^2 \geq \mu_2 \sum \xi_i^2 = \mu_2 ||x||^2 = \mu_2 nk(n-k)$. Dividing by $n^2$ we are done.
+\end{proof}
+A graph of diameter $2$ (i.e. the maximum distance between two vertices) and maximum degree $d$ has $\leq d^2+1$ vertices. It attains $d^2 +1$ only if $G$ is $d$-regular and has girth $S$, and in this case we call $G$ a \emph{Moore graph}. For $d=2,3$ we can do this with $C_5$ and the Petersen graph. However, for $d=4$ it cannot be done.
+
+A \emph{strongly regular graph} with parameters $(d,a,b)$ is $d$-regular, every pair of adjacent vertices has $a$ common neighbours, and every pair of non-adjacent vertices has $b$ common neighbours. We exclude the case $b=0$ which implies $G$ is a disjoint union of $K_{d+1}s$, and so $a = d-1$. Hence $b>0$ and $G$ is connected.
+
+Observe that a Moore graph is strongly regular with parameters $(d,0,1)$. Thus $n = 1+d+\frac{d(d-1-a)}{b}$. Let $J$ be the all $1$ matrix, $A$ the adjacency matric of $G$, and $B-J-I-A$ be the adjacency matrix of the complement $\bar{G}$ of $G$. Then $A^2 = dA + aA + bB$, and $BA = 0I + (d-1-a)A + (d-b)B$.
+
+So $(A^2 - dI - aA)A = b(d-1-a)A + (d-b)(A^2 - dI - aA)$.\\
+So $A^3 - (d-b+a)A^2 - (d(b-a) + d-b)A + d(d-b)I = 0$
+\begin{theorem}
+Let $G$ be strongly regular with parameters $(d,a,b)$, $b>0$. Then:
+\begin{align*}
+\frac{1}{2}\left[ n-1 + \frac{(n-1)(b-a)-2d}{\sqrt{(a-b)^2 + 4(d-b)}}\right] \in \Z
+\end{align*}
+\end{theorem}
+\begin{proof}
+We know $A$ satisfies the above cubic, and hence has $\leq 3$ eigenvalues. Now $G$ is $d$-regular and connected, and so by \textbf{4.1} $d$ is an eigenvalue with multiplicity $1$. Let $\lambda, \mu$ be the other two eigenvalues, with multiplicities $r, s$. Then $r+s=n-1$. The eigenvalues are roots of the cubic polynomial $(t-d)(t^2-(a-b)t-(d-b)) = 0$.
+
+Hence $\lambda, \mu = \frac{1}{2}(a-b)\pm \sqrt{(a-b)^2+4(d-b)}$. Also, $r+s = n-1$ and $\trace A = 0 + d + r\lambda + s\mu$. Hence $-d = r\lambda + s\mu = r(\lambda-\mu) + (r+s)\mu = r\sqrt{(a-b)^2 +4(d-b)} + (n-1)\mu$. So $r = \frac{d+(n-1)\mu}{\sqrt{\cdot}} \in \Z$.
+\end{proof}
+
+For Moore graphs, $n=d^2 + 1, a=0, b=1$, and so either $d=2$ or $4d-3=\ell^2$ is a perfect square.
+\begin{theorem}
+There exists a Moore graph only if $d = 2,3,7,57$.
+\end{theorem}
+\begin{proof}
+If $d\neq 2$ then $4d-3 = \ell^2$ and $r = \frac{d}{2}(d+\frac{d-2}{\ell})$, and so $d^2\ell-2r\ell + d(d-2) = 0$. This gives $16d^2\ell - 32 r\ell + (\ell^2+3)(\ell^2-5) = 0$. So $\ell | 15$, and so $\ell =1, 3, 5, $ or $15$, and so $d = 1, 2, 3, 7,$ or $57$.
+
+$d=1$ makes no sense. For $d=2, 3$ we have seen $C_5$ and the Petersen graph work. For $d=7$, we have the Hoffman-Singleton graph with $50$ vertices. The case $d=57$ is not known, but if it exists it has no automorphism.
+\end{proof}
 \end{document}

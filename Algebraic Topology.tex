@@ -1068,10 +1068,134 @@ An \emph{n-dimensional manifold} is a Hausdorff space $M$ such that every point 
 
 Then let the loop $\rho_g = \alpha_1 \beta_1 \bar{\alpha_1} \bar{\beta_1} \ldots \alpha_g \beta_g \bar{\alpha_g} \bar{\beta_g}:S^2 \to \Gamma_{2g}$.
 
-Let $\Sigma_g = \Gamma_{2g} \cup_{\rho_g} D^2$. We claim then that $\Sigma_{2g}$ is a compact surface.
+Let $\Sigma_g = \Gamma_{2g} \cup_{\rho_g} D^2$. We claim then that $\Sigma_{g}$ is a compact surface.
 \begin{proof}
-Compactness is immediate. Now if $x \in D^2 \setminus S^1$, then $D^2 \setminus S^1$ is an open neighbourhood of $x$ in $\Sigma_{2g}$ homeomorphic to an open subset of $\R^2$. If $x$ is on $S_i^1$ for some $i$, but is not the edge point,
+Compactness is immediate. Now if $x \in D^2 \setminus S^1$, then $D^2 \setminus S^1$ is an open neighbourhood of $x$ in $\Sigma_{2g}$ homeomorphic to an open subset of $\R^2$. If $x$ is on $S_i^1$ for some $i$, but is not the edge point we have an open neighbourhood.
 \end{proof}
+Note that $\pi_1(\sigma_g) = \angle{\alpha_1, \beta_i | \alpha_1\beta_1\alpha_1^{-1}\beta_1^{-1}\ldots \alpha_g\beta_g\alpha_g^{-1}\beta_g^{-1}}$. We call $\sigma_g$ the \emph{orientable surface of genus g}.
+\end{enumerate}
+\underline{Example:}
+Take $\Gamma_{g+1} = \vee_{i=0}^g S_i^1$, and let $\alpha_i:S^1 \to S_i^1$ be the identity. Take $\sigma_g = \alpha_0\alpha_0\alpha_1\alpha_1\ldots\alpha_g\alpha_g$
+
+Define $S_g = \Gamma_{g+1}\cup_{\sigma_g}D^2$. Then $S_0$ is $\R\P^2$, $S_1$ is the Klein bottle. We call $S_g$ the \emph{unorientable surface of genus g}. Then $\pi_1(S_G) = \angle{\alpha_0\ldots\alpha_g | \alpha_0^2\alpha_1^2\ldots\alpha_g^2}$
+
+This leads us to a big theorem:
+\begin{theorem}
+Every compact surface is homeomorphic to either $\Sigma_g$ or $S_g$ for some $g$.
+\end{theorem}
+\begin{proof}
+Omitted.
+\end{proof}
+Are any of these surfaces homeomorphic?
+\begin{lemma}
+Let $g \in \N$. Then $\pi(\Sigma_g)$ surjects onto $\Z^{2g}$ but not onto $\Z^{2g}\oplus (\Z/2\Z)$.
+
+$\pi_1(\Sigma_g)$ surjects onto $\Z^g \oplus(\Z/2\Z)$ but not onto $\Z^{g+1}$
+\end{lemma}
+\begin{proof}
+Let $\{\bar{a_i}, \bar{b_i} : 1\leq i \leq g\}$ be a basis for $\Z^{2g}$. Consider the map:
+\begin{align*}
+f:\pi_1(\Sigma_g) &\to \Z^{2g}\\
+\alpha_i &\mapsto \bar{a_i}\\
+\beta_i &\mapsto \bar{b_i}
+\end{align*}
+Then $\Pi_{i=1}^g \alpha_i\beta_i\alpha_i^{-1}\beta_i^{-1} \mapsto \sum_{i=1}^g a_i + b_i - a_i - b_i = 0$, and so $f$ is surjective since $f(\alpha_i), f(\beta_i)$ generate $\Z^{2g}$. 
+
+Now suppose that $g: \pi_1(\Sigma_g) \to \Z^{2g}\oplus \Z/2\Z$ is surjective. Compose this map with the map $\Z^{2g} \oplus (\Z/2\Z) \surjection (\Z/2\Z)^{2g+1}$ reducing mod $2$, to get $\bar{g}:\pi_1(\Sigma_g) \surjection (\Z/2\Z)^{2g+1}$. Hence $\bar{g}(\alpha_i), \bar{g}(\beta_i)$ form a generating set of $(\Z/2\Z)^{2g+1}$, but there are not enough of them \contr.
+
+Let $\bar{a}_1, \ldots, \bar{a}_g$ be generators for the $\Z^g$ part of $\Z^g \oplus \Z/2\Z$, and let $\bar{c}_0$ be the generator of the $\Z/2\Z$ part.
+
+Define:
+\begin{align*}
+\pi_1(S_g) &\to \Z^g\oplus \Z/2\Z\\
+\alpha_i &\mapsto \bar{a}_i\;\;i\geq 1\\
+\alpha_0 &\mapsto \bar{c}_0 - \sum_{i=1}^g \bar{a}_i
+\end{align*}
+This is a surjection onto $\Z^g \oplus \Z/2\Z$, and $\Pi \alpha_i^2 = 2\bar{c}_0-\sum_{i=1}^g 2\bar{a}_i + \sum_{i=1}^g 2\bar{a}_i = 0$
+
+If $f:\pi_1(S_g) \to \Z^{g+1}$ is surjective, then $f(\alpha_0), \ldots, f(\alpha_g)$ generates $\Z^{g+1}$. But $2\sum_{i=0}^g f(\alpha_i) = 0$ \contr.
+\end{proof}
+
+\section{Homology Theory}
+We want to find algebraic invariants that capture higher dimensional information that the very 1-dimensional scope of looking at homotopy classes of loops. We could think about homotopy classes of $n$-spheres embedded onto a surface, but it turns out this is very hard. Instead, we will define a \emph{homology} theory for simplicial complex, which are obtained by gluing together simplices.
+
+A finite set $V = \{v_0, \ldots, v_n\} \subseteq \R^n$ is in \emph{general position} if the smallest affine subspace of $\R^m$ containing $V$ is $n$-dimensional. E.g. 3 points in a triangle are in general position, since you need $\R^2$ to contain them, but if they lie in a line they are not since they can be contained by $\R^1$.
+
+Equivalently:
+\begin{enumerate}
+\item $\{v_1-v_0, \ldots, v_n-v_0\}$ are linearly independent.
+\item For any $s_1, \ldots, s_n \in \R$, $\sum_{i=1}^n s_i(v_i-v_0) = 0$ implies $s_i = 0$ for all $i$.
+\item For any $t_0, \ldots, t_n \in \R$ with $\sum t_i = 0$, if $\sum_{i=0}^n t_iv_i = 0$ then $t_i = 0$.
 \end{enumerate}
 
+The \emph{span} or \emph{convex hull} of $\{v_0, \ldots, v_n\} \subseteq \R^m$ is given by
+\begin{align*}
+\angle{V} = \left\{\sum_{i=1}^n t_iv_i : \sum_{i=0}^n t_i = 1, t_i > 0 \right\}
+\end{align*}
+In other words, this is the smallest convex subset of $\R^m$ containing $V$. For instance, if $V$ is $4$ non-coplanar points, then $\angle{V}$ is a tetrahedron.
+
+If $V$ is a set in general position and $U \subseteq V$, we call $\angle{U}\subseteq \angle{V}$ a \emph{face} of $\angle{V}$, and we write $\angle{U}\leq \angle{V}$. If $U \neq V$ we call $\angle{U}$ a \emph{proper face} of $\angle{V}$.
+
+A \emph{simplicial complex} in $\R^m$ is a finite set of simplices in $\R^m$, $K$, such that:
+\begin{enumerate}
+\item If $\sigma \in K$ and $\tau \leq \sigma$ then $\tau \in K$.
+\item If $\sigma, \tau \in K$ then $\sigma \cap \tau$ is a face of both $\sigma$ and $\tau$ (allowing empty faces).
+\end{enumerate}
+We write $\dim K$ for the dimension of the largest dimensional simplex in $K$. We write $K_{(d)}$ for the set of all simplices in $K$ of dimension $\leq d$, called the $d$ skeleton of $K$.
+
+\underline{Examples:}
+\begin{enumerate}
+\item If $\sigma$ is a simplex, take $K$ to be the set of faces of $\sigma$. For instance if $K$ is a triangle, then it has $7$ faces.
+\item The set of proper faces of a simplex is also a simplicial complex. Note that if $\sigma$ is of dimension $n$, then this is the $(n-1)$-skeleton. This is also called the \emph{boundary} of $\sigma$, written as $\partial \sigma$. The set of points of $\sigma$ not contained in a simplex if $\partial \sigma$ is called the interior of $\sigma$, and is written as $\mathring{\sigma}$. If $\sigma$ is a $0$-simplex, then $\partial \sigma = \emptyset$, $\mathring{\sigma} = \sigma$.
+\end{enumerate}
+
+The \emph{realisation} of $K$, a simplicial complex, is denoted by $|K| \coloneqq \cup_{\sigma\in K} \sigma \subseteq \R^m$, a topological space.
+
+If $X$ is a topological space, a \emph{triangulation of X} is a simplicial complex $K$ with a homeomorphism $X \to |K|$.
+
+\underline{Examples:}
+\begin{enumerate}
+\item Let $\sigma$ be a $n$-simplex, and $K$ the associated simplicial complex. Then $|K| = \sigma$ is homeomorphic to $D^n$ for $n=\dim \sigma$. A space has many possible triangulations.
+\item $\partial \sigma$ is a simplicial complex with $|\delta \sigma| \cong S^{n-1}$ if $\dim \sigma = n$.
+\end{enumerate}
+Let $K,L$ be simplicial complexes. A \emph{simplicial map} is a map $f: K \to L$ such that:
+\begin{enumerate}
+\item Each $0$-simplex $v \in K$ has $f(\sigma)\in L$ a $0$-simplex.
+\item $f(\angle{v_0, \ldots, v_n}) = \angle{f(v_0), \ldots, f(v_n)}$, possibly removing repeats.
+\end{enumerate}
+and the realisation of $f$ is the continuous map $|f|:|K|\to |L|$ given, on a simplex $\sigma = \angle{v_0, \ldots, v_n}$, by $|f|(\Sigma t_i v_i) = \Sigma t_i f(v_i)$ where $\Sigma t_i = 1$. It is easy to check that $|f|$ is continuous. We often write $f_{\sigma}$ for $|f||_{\sigma}$.
+
+\underline{Example:} Let $K = \partial\sigma$ for $\sigma$ a 2-simplex. How many $f:K \to K$ are there? There are $3^3 = 27$ such maps, but a lot more interesting maps $S^1 \to S^1$.
+
+\section{Barycentric Subdivisions}
+Let $V = \{v_0, \ldots, v_n\}$ be in general position, and let $\sigma = \angle{V}$. Then:
+\begin{align*}
+\hat{\sigma} = \frac{1}{n+1}\sum_{i=0}^n v_i
+\end{align*}
+is the \emph{barycenter} of $\sigma$.
+
+Let $K$ be a simplicial complex. The \emph{barycentric subdivision} $K'$ of $K$ is the complex such that:
+\begin{enumerate}
+\item The vertices in $K'$ are the barycenters of elements in $K$.
+\item The vertices $\hat{\sigma_1}, \ldots, \hat{\sigma_n}$ span a simplex in $K'$ if and only if $\sigma_1 \lneq \sigma_2 \lneq \ldots \lneq \sigma_n$ up to ordering of $\sigma_1, \ldots, \sigma_n$.
+\end{enumerate}
+
+\begin{lemma}
+Let $K$ be a simplicial complex. Then $K'$ is a simplicial complex and $|K'| = |K| \subseteq \R^m$.
+\end{lemma}
+\begin{proof}
+The simplices of $K'$ really are simplices, i.e. if $\sigma_1 \lneq \ldots \lneq \sigma_n$ with $\sigma_i \in K$ for all $i$, then $\hat{\sigma_1}, \ldots, \hat{\sigma_n}$ are in general position:
+
+Suppose that $\sum t_i = 0$ and $\sum t_i \hat{\sigma_i} = 0$. Let $j$ be the largest $i$ such that $t_i \neq 0$ Then $\sigma_j = -\sum^{j-1} \frac{t_i}{t_j}\hat{\sigma_i}$, and so $\hat{\sigma_j}$ is contained in a proper face of $\sigma_j$.
+
+But $\hat{\sigma_j}$ is in the interior of $\sigma_j$ \contr.
+
+$K'$ is a simplicial complex: induction on $\dim K$. We have a base case $\dim K = 0$ which is trivial since $K' = K$.
+
+Certainly, $K'$ satisfies the first condition to be a simplicial complex: if $\angle{\hat{\sigma_{i1}}, \ldots \hat{\sigma_{ij}}}\subseteq \angle{\hat{\sigma_1}, \ldots, \hat{\sigma_n}}$, then $\sigma_{i1} \lneq \ldots \lneq \sigma_{ij}$, and so $\angle{\hat{\sigma_{i1}}, \ldots \hat{\sigma_{ij}}} \in K'$.
+
+Now consider two simplices $\angle{\hat{\sigma_1}, \ldots, \hat{\sigma_n}}, \angle{\hat{\tau_1}, \ldots, \hat{\tau_m}}$ in $K'$. If these intersect the intersection must lie in the common face $\sigma_n \cap \tau_m$, so it is enough to intersect both simplices with $\sigma_n \cap \tau_m$ and work on that common face. We can then reduce to the case where $\sigma_n, \tau_m$ are contained in a common face $\delta \in K$.
+
+If either of the simplices does not contain $\hat{\delta}$ then the intersection must be contained in $\partial \delta$. If they both comtain $\hat{\delta}$, then the intersection must be $\Span(\hat{\delta}\cup (\sigma'\cap \delta) \cap (\tau' \cap \partial \delta))$ in either case.
+\end{proof}
 \end{document}

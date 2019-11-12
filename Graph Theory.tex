@@ -990,4 +990,42 @@ If $d\neq 2$ then $4d-3 = \ell^2$ and $r = \frac{d}{2}(d+\frac{d-2}{\ell})$, and
 
 $d=1$ makes no sense. For $d=2, 3$ we have seen $C_5$ and the Petersen graph work. For $d=7$, we have the Hoffman-Singleton graph with $50$ vertices. The case $d=57$ is not known, but if it exists it has no automorphism.
 \end{proof}
+\hrule
+The function $p_G(x), x\in \N$ is the number of ways to colour the graph $G$ with palette $[x]$. For instance $p_{K_r}(x)=x(x-1)(x-2)\ldots(x-r+1)$, or $p_{\bar{K_r}}(x) = x^r$. For $T$ a tree, $p_T(x) = x(x-1)^{|T|-1}$. Given a graph $G$ and an edge $e$, the graph $G/e$ is $G$ \emph{contracted by} $e$ is obtained as follows: if $e = uv$, let $G/e$ be the graph obtained from $G-\{u,v\}$ by adding a new vertex $w$ such that $\Gamma(w) = \Gamma(u) \cup \Gamma(v)$.o
+\begin{center}
+%triangle with two edges coming off each of the two base vertices, and then contraction along base edge
+\end{center}
+\begin{theorem}
+\begin{align*}
+p_G(x) = p_{G-e}(x) - p_{G/e}(x)
+\end{align*}
+\end{theorem}
+\begin{proof}
+Let $e = uv$. The colourings of $G-e$ which are not also colourings of $G$ are those where $c(u) = c(v)$, which are precisely the colourings of $G/e$.
+\end{proof}
+it follows by induction that $p_G(x)$ is a polynomial in $x$ (though this is easy to establish directly - exercise), and is called the \emph{chromatic polynomial}. Some properties can be established directly, e.g. $p_G(x) = \Pi_{c}p_c(X)$ where $c$ runs over the components of $G$, but usually we use this previous theorem.
+
+\begin{corollary}
+$p_G(x) = x^n-a_{n-1}x^{n-1} + \ldots + (-1)^n a_0$, where $n=|G|, a_j \geq 0, a_{n-1}=e(G)$, and $\min\{j:a_j>0\} = k$, where $k$ is the number of components.
+\end{corollary}
+The chromatic polynomial was introduced in an attempt to prove the four colour theorem, but it didn't work.
+
+A \emph{k-edge-colouring} of a graph $G$ is a colouring $c:E(G)\to [k]$ so that $c(e)\neq c(f)$ if $e,f$ are incident. Note that an edge-colouring of $G$ is precisely a vertex colouring of the line graph $L(G)$. However, edge colourings have special properties which are worth mentioning.
+
+The \emph{chromatic index} $\chi'(G)$ is the minimum $k$ such that $G$ is $k$-edge-colourable. We see immediately that $\chi'(G) \geq \Delta(G)$. \textbf{5.1} shows that $\chi'(G) \leq 1+\Delta(L(G)) \leq 2\Delta(G)-1$, with equality only if $G = K_2$ or $G=K_3$ (Brooks) for connected $G$.
+
+In fact, something much stronger is true.
+\begin{theorem}[Vizing]
+For all graphs $G$, then $\Delta(G) \leq \chi'(G) \leq \Delta(G)+1$.
+\end{theorem}
+It is $NP$-complete to decide which value is taken.
+\begin{proof}
+The lower bound is immediate. For the upper bound, colour as many edges of $G$ as possible using a palette of $\Delta(G)+1$ colours. If there's an uncoloured edge, we shall obtain a new colouring which recolours the already coloured edges and colours the uncoloured edge, which will contradict the original choice of colouring.
+
+Let $xy_0$ be the uncoloured edge. Observe that at each vertex there is at least one unused colour. Construct a maximal sequence of distinct edges $xy_0, xy_1, \ldots, xy_k$ and colours $c_0,\ldots,c_k$ such that $c_i$ is unused at $y_i$ and $xy_{i+1}$ has colour $c_i$. This will stop for one of two reasons:
+\begin{itemize}
+\item There is no edge at $x$ coloured $c_k$. In this case colour $xy_i$ with $c_i$, $0\leq i\leq k$.
+\item The colour $c_k$ equals $c_j$ for some $j < k$. Colour $xy_i$ with $c_i$ for $0\leq i\leq j$ and make $xy_j$ uncoloured.
+\end{itemize}
+\end{proof}
 \end{document}

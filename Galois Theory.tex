@@ -842,5 +842,42 @@ Suppose $N \trianglelefteq G$ is normal. If $n \in N, \sigma \in G, \ell \in L^N
 
 But $K \subseteq L^N \subseteq L$, and $\#\aut(L^N/K) \leq \#G/N$, and hence we have equality, so $[L^N:K]$ is Galois.
 \end{proof}
+\hrule
+\underline{Example:} $x^3 - 3x + 1$. $D = -4\cdot (-3)^3 - 27\cdot 1^2 = 81 = 3^4$, and so the Galois group $\Gal(f) = A_3$, as $3^4$ is a square in $\Q$.
+
+Note that if $f(x)$ is a cubic over $\Q$ with only one real root then its splitting field's Galois group is $S_3$, since then we can adjoin a real root and then two complex roots.
+
+Compare the cubic and quadratic equation. $f(x) = x^2 + bx + c \in K[x]$, which factors somewhere as $(x-\alpha_1)(x-\alpha_2)$ with $\alpha_1+\alpha_2 = b, \alpha_1\alpha_2 = c$. Now setting $D = (\alpha_1-\alpha_2)^2 = b^2-4c$. But $b^2-4c$ is not a square if an only if $\alpha_1, \alpha_2 \notin K \iff \Gal(f) = S_2$, otherwise the roots of $f$ are in $K$ and $\Gal(f) = \one = A_2$.
+
+\begin{proposition}
+$f(x) \in K[x]$ irreducible with $L/K$ a splitting field with $\charr K \neq 2$. Let $f(x) = (x-\alpha_1)\ldots(x-\alpha_n)$ in $L[x]$. Set $D = \Pi_{i<j} (\alpha_i - \alpha_j)^2$. Then $D \in K$ and:
+\begin{enumerate}
+\item $D \neq 0 \iff f$ separable
+\item $D$ is a square in $K \iff \Gal(f) \subseteq A_n$
+\item $D$ is a polynomial in the coefficients of $f$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\textit{1.} is clear. As for \textit{2.}, let $\delta = \Pi_{i<j}(\alpha_i -\alpha_j), \delta^2 = D, G = \Gal(f) \subseteq S_n, \delta \neq 0 \iff f$ separable. If $\sigma \in G, \sigma \delta = \begin{cases} \delta & \sigma \in A_n \\ -\delta & \sigma \notin A_n \end{cases}$. So $G \subseteq A_n \iff \forall \sigma \in G, \sigma \delta = \delta \iff \delta \in L^G = K \iff D = \delta^2 \in K$ is a square in $K$.
+
+Part \textit{3.} requires proof, and is why this is useful, but we will prove a more general version of this later on.
+\end{proof}
+\section{Symmetric Polynomials}
+Let $R$ be a ring, and $R[z_1, \ldots, z_n]$ be a polynomial ring in $n$ indeterminates. $S_n$ acts on $R[z_1, \ldots, z_n]$ by permuting the $z_i$, i.e. for $w \in S_n, z_i \mapsto z_{wi}$ where $(123)z_1 = z_2$ e.g.
+
+Then $R[z_1, \ldots, z_n]^{S_n} = \{f \in R[z_1, \ldots, z_n] : wf = f \forall w \in S_n\}$, the symmetric polynomials. 
+
+For instance, $e_1 = z_1 + z_2 + \ldots + z_n$ is a symmetric polynomial. Or we could have $e_2 = \sum_{i<j} z_i z_j$, or $e_3 = \sum_{i<j<k} z_i z_j z_k$, all the way up to $e_n = z_1\ldots z_n$. These are called the elementary symmetric functions.
+
+\begin{theorem}[Fundamental Theorem of Symmetric Polynomials]
+Every symmetric polynomial can be written uniquely as a polynomial in $e_1, \ldots, e_n$. More precisely, the map of rings $R[w_1, \ldots, w_n] \to R[z_1, \ldots, z_n]^{S_n}; w_i \mapsto e_i$ is an isomorphism.
+\end{theorem}
+For instance, $sum z_i^2 = e_1^2 - 2e_2$.
+
+We use this: $K$ is a field, $f \in K[x]$, $L$ a splitting field for $f$ and $f(x) = (x-\alpha_1)\ldots(x-\alpha_n)$. If $f(x) = x^n - a_1x^{n-1} +a_2x^{n-2} - \ldots \pm a_n$, then $a_1 = e_1(\alpha_1, \ldots, \alpha_n), a_2 = e_2(\alpha_1, \ldots, \alpha_n)$ all the way up to $a_n = e_n(\alpha_1, \ldots, \alpha_n)$, and so any polynomial in $\{a_1, \ldots, a_n\}$ is a symmetric function of $\alpha_1, \ldots, \alpha_n$, and the theorem says that the converse is also true, that any symmetric function of $\alpha_1, \ldots, \alpha_n$ can be written as a polynomial in the coefficients of $f$.
+
+For example, if $\Delta(f) = \Pi_{i<j} (\alpha_i-\alpha_j)^2$ is the discriminant of $f$, then the theorem says there is some polynomial in $e_1, \ldots, e_n$, $\Delta(e_1, \ldots, e_n)$ equal to $\Pi_{i<j} (z_i - z_j)^2$, sending $e_1 \mapsto -a_1$.
+
+We claim $\Delta(x^2+px+q) = -4p^3 - 27q^2$, and so $\Delta(f) = \Pi_{1\leq i<j\leq 3} (z_i-z_j)^2$ is a homogeneous polynomial of degree $6$. But note that $e_1 \mapsto 0$, and so it must be a linear combination of $e_2^3$ and $e_3^2$. On the other hand, $\Delta$ vanishes if $f$ has repeated roots, so consider $f(x) = (x-\alpha)^2(x+2\alpha)$. Then $-27c+4d = 0$. Finally calculate $\Delta(x^3-x) = 4$ by explicit computation, so $d = -27, c = -4.$
 \end{document}
 

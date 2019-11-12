@@ -721,4 +721,92 @@ So we have $a<c<a - |b|+c$, and there are no repeats. Since $g(x,y) = f(X,Y)$ fo
 \alpha & \beta \\ \gamma & \delta
 \end{pmatrix} \in SL_2(\Z)$, we manually have $\alpha, \delta = \pm 1; \beta, \gamma = 0$, and so $A = \pm I$. Observe that we cannot have the $-$ case, and so $g = f$ as required.
 \end{proof}
+
+Let $d < 0, d \equiv 0$ or $1 \mod 4$, we define the \emph{class number} $h(d)$ as the number of reduced BQFs of discriminant $d$. For instance, we have seen that $h(-4) = 1$. Consider $d=-24$: the forms $(1,0,6)$ and $(2,0,3)$ have discriminant $-24$ and are reduced. One can show that there re no others, and so $h(-24) = 2$. 
+
+One might ask how $h(d)$ behaves as a function. We know that:
+\begin{enumerate}
+\item $h(d) \to \infty$ as $d \to \infty$
+\item $h(d) \approx \sqrt{d}$, i.e. $\frac{1}{N}\sum_{3\leq -d \leq N} h(d) \thicksim \frac{\pi}{18}N^{1/2}$ as $N \to \infty$.
+\item $h(d) - 1 \implies d \in \{-3,-4,-7,-8,-11,-19,-43,-67,-163,-12,-16,-27,-28\}$
+\item Given $h \geq 1$, there is an explicit upper bound the set of all $\{d:h(d) = h\}$. So in principle we can compute all $d$ with a given class number $h$.
+\end{enumerate}
+\begin{lemma}
+Let $n \in \N$, and $f$ a BQF. then $n$ is properly represented by $f$ if and only if $f \thicksim g = (a,b,c)$ with $a = n$
+\end{lemma}
+\begin{proof}
+If $f \thicksim g = (n,b,c)$, then $g(1,0) = n$
+
+Conversely, if $f(\alpha,\beta) = n$ for some $\alpha, \beta \in \Z, (\alpha,\beta) = 1$, then there exists some $\delta, \gamma \in \Z \st \alpha\delta-\beta\gamma = 1$. Hence $f$ is equivalent to $g(x,y) = f(\alpha x +\gamma y, \beta x+\delta y)$. But the first coefficient of $g$ is $g(1,0) = f(\alpha,\beta) = n$.
+\end{proof}
+
+\begin{theorem}
+Let $n \in \N$ and $d < 0$ with $d \equiv 0$ or $1 \mod 4$. Then $n$ is properly represented by \textit{some} BQF of discriminant $d$ if and only if $x^2 \equiv d \mod 4n$ has a solution.
+\end{theorem}
+\begin{proof}
+If $n = f(x,y)$ with $x,y \in \Z, (x,y) = 1, \disc f = d$ then the previous lemma gives $f \thicksim g=(n,b,c)$. Then $b^2-4nc = d$, and so $b^2 \equiv d \mod 4n$.
+
+Conversely, if $\exists b \in \Z \st b^2 \equiv d \mod 4n$, then $\exists c \in \Z \st b^2 = d+4nc \implies d = b^2-4nc$, so $(n,b,c)$ is as required. 
+\end{proof}
+\underline{Example:} Which integers are properly represented by $x^2+xy+2y^2$? Note that $\disc f = -7 < 0$. If $(a,b,c)$ is a reduced for discriminant $-7$, then $|b| \leq a \leq 1$ and $b$ odd, hence $a = |b| = 1$, and $c = \frac{b^2-d}{4} = 2$. Hence $(a,b,c) = (1,1,2)$ as $(1,-1,2)$ is not reduced. So $f$ properly represents $n$ if and only if $x^2 \equiv -7 \mod 4n$ has solutions.
+
+Suppose $n$ is prime, i.e. $n=p \notin \{2,7\}$. Then by $x^2 \equiv -7 \mod 4p$ if and only if $x^2 \equiv -7 \mod 4$ and $x^2 \equiv -7 \mod p$. Then this system holds if and only if $\legendre{-7}{p} = 1$. Now $\legendre{-7}{p} = \legendre{p}{7}$, i.e. $p \equiv 1, 2, 4 \mod 7$. Note that $f(0,1) = 2$ and $f(1,-2) = 7$.
+
+Suppose $n$ is composite, i.e. $n = \Pi p^{\alpha_p}$ for $p$ distinct primes, $\alpha_p \geq 0$. Then $x^2 \equiv -7 \mod 4n$ is soluble if and only if $x^2 \equiv -7 \mod 2^{2+\alpha_2}$ and $x^2 \equiv -7 \mod p^{\alpha_p}$ for odd $p$ is soluble.
+
+\begin{lemma}[Hensel, only a special case]
+Let $a \in \Z$.
+\begin{enumerate}
+\item If $a \equiv 1 \mod 8$ then $x^2 \equiv a \mod 2^k$ for all $k \geq 1$ is soluble.
+\item If $p > 2$ is prime and $\legendre{a}{p} = 1$ then $x^2 \equiv a \mod p^k$ is soluble for all $k \geq 1$.
+\end{enumerate}
+\end{lemma}
+
+Note then that $-7 \equiv 1 \mod 8$, so the first equation is soluble. If $p$ is odd, then $p \equiv 1, 2, 4\mod 7$ then $\legendre{-7}{p} = 1$, and so $x^2 \equiv -7 \mod p^k$ is soluble for all $k\geq 1$. If $p = 7$, then $x^2 \equiv -7 \mod 7^k$ is soluble when $k \leq 1$ but not when $k \geq 2$.
+
+In conclusion, $f = (1,1,2)$ properly represents $n$ if and only if $n = 7^{\alpha_7} \Pi_{p \equiv 1,2,4 \mod 7} p^{\alpha_p}$ where $\alpha_p \geq 0$, and $\alpha_7 \in \{0,1\}$.
+
+The numbers represented by $f$ not necessarily properly are then of the form $k^2 n$ with $k\geq 1$ and $n$ as above. In other words, $n = x^2 + xy + 2y^2$ for some $x,y \in \Z$ if and only if every prime $p \equiv 3,5,6 \mod 7$ dividing $n$ divides it to an even power.
+
+\begin{proof}[Proof of Hensel.]
+\begin{itemize}
+\item[\textit{1.}] By induction on $k$. The case $k \leq 3$ is clear - taking $x = 1$ will do. So suppose there exists some $x$ such that $x^2 \equiv a \mod 2^k$, i.e. $x^2 = a + 2^k m$ for some $m \in \Z, k \geq 3$. Note that:
+\begin{align*}
+(x+2^{k-1})^2 = x^2 + 2^k x + 2^{2k-2} \equiv a + 2^k(x+m)  \mod 2^{k+1}
+\end{align*}
+If $m$ is even then $x^2 \equiv a \mod 2^{k+1}$\\
+If $m$ is odd then since $x$ is odd, $(x+2^{k-1})^2 \equiv a \mod 2^{k+1}$.
+
+\item[\textit{2.}] Since $\legendre{a}{p}=1$, $x^2 \equiv a \mod p$ is soluble, so we have a base case. Assume that there is some $x$ such that $x^2 \equiv a \mod p^k$ for some $k \geq 1$. Then for $t \in \Z$, we have:
+\begin{align*}
+(x+tp^k)^2 &= x^2 + 2txp^k + t^2 p^{2k}\\
+&= a + (2tx + m)p^k + t^2p^{2k}\\
+&\equiv a + (2tx+m)p^k \mod p^{k+1}
+\end{align*}
+Since $(x,p) = 1$, there is some $t$ such that $2xt+m \equiv 0 \mod p$, and for this $t$ we have $(x+p^k t)^2 \equiv a \mod p^{k+1}$.
+\end{itemize}
+\end{proof}
+\underline{Remarks:}
+\begin{enumerate}
+\item If $h(d) = 1$ we have completely solved the problem of which integers are represented by a given form of discriminant $d \leq 0$. If $h(d) > 1$, we can determine which integers are represented by some form of discriminant $d$, but in general we cannot do better. For some $d$ we can distinguish using additional congruence conditions, but there is no congruence condition to tell if e.g. $p = x^2 + 23y^2$.
+\item An integer $d \equiv 0$ or $1 \mod 4$ is said to be a \emph{fundamental discriminant} if it is not of the form $k^2 d'$ for some $k>1, d' \equiv 0$ or $1 \mod 4$. For a fundamental discriminant, Gauss defined a law of composition which makes the set of BQFs of divisor $d$ into an abelian group. The group is known as the \emph{ideal class group} of the field $\Q(\sqrt{d})$. More will come later on this in Number Fields.
+\item If $f$ is definite, then there are only a finite number of representations of $n$ by $f$. e.g. $n = x^2 + y^2 \implies |x|, |y| \leq \sqrt{n}$. If $f$ is indefinite, there can be infinitely many representations.
+\end{enumerate}
+What about quadratic forms in more than two variables?
+\begin{theorem}[Lagrange, 1770]
+Every possible integer can be written as the sum of four squares
+\end{theorem}
+\begin{theorem}[Legendre, 1797]
+A positive integer $n$ can be written as the sum of three squares if and only if $n \nequiv 4^a \mod (8b+7)$ for some $a,b \geq 0$.
+\end{theorem}
+
+In 1770 Waring posed the following problem: For every $k$, let $g(k)$ be the least integer integer such that every positive integer can be written as a sum $k$-th powers. Hilbert showed in 1909 that $g(k)$ exists for all $k$. Lagrange showed $g(2) = 4$, and it is known that $g(3) = 9, g(4) = 19$. The asymptotic behaviour remains an open question.
+
+\section{The Distribution of Primes}
+We now turn to questions about how primes occur. How many are there? How quickly to they appear? How densely do they come? How regular is the sequence of primes?
+
+\begin{theorem}[Prime Number Theorem]
+Let $\pi(x)$ be the number of primes less than or equal to $x$. Then $\pi(x) \thicksim \frac{x}{\log x}$ as $x \to \infty$.
+\end{theorem}
+This is sometimes stated in terms of the logarithmic integral $Li(x) = \int_2^x \frac{dt}{\log t}$:  $\pi(x) \thicksim Li(x)$.
 \end{document}

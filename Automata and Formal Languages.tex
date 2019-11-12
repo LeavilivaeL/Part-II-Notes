@@ -638,7 +638,7 @@ We describe a way to ``follow" a word through a $DFA$. The \emph{extended transi
 \item $\hat{\delta}(q, \sigma_1) \coloneqq \delta(q, \sigma_1)$
 \item $\hat{\delta}(q, \sigma_1\ldots\sigma_k) = \delta(\hat{\delta}(q, \sigma_1\ldots\sigma_{k-1}), \sigma_k)$
 \end{itemize}
-So for any $w \in \Sigma^\star$, $\hat{delta}(q_0, w)$ is just the end state on input $w$.
+So for any $w \in \Sigma^\star$, $\hat{\delta}(q_0, w)$ is just the end state on input $w$.
 
 \begin{lemma}
 For all $q \in Q, \sigma_1, \ldots, \sigma_k \in \Sigma^\ast$ and all $1 \leq l \leq k$, we have $\hat{\delta}(q, \sigma_1\ldots\sigma_k) = \hat{\delta}(\hat{\delta}(q, \sigma_1\ldots\sigma_l), \sigma_{l+1}\ldots\sigma_k)$
@@ -647,7 +647,7 @@ For all $q \in Q, \sigma_1, \ldots, \sigma_k \in \Sigma^\ast$ and all $1 \leq l 
 This is clear by the inductive definition of $\hat{\delta}$
 \end{proof}
 
-Let $D = (Q, \Sigma, \delta, q_0, F)$ be a DFA. The \emph{accepted language} $\mathcal(L)(D)$ is the set of all words $w \in \Sigma^\ast$ such that $\hat{\delta}(q_0, w) \in F$, i.e. all accepted words. A language is \emph{regular} if it is the accepted language for some DFA.
+Let $D = (Q, \Sigma, \delta, q_0, F)$ be a DFA. The \emph{accepted language} $\mathcal{L}(D)$ is the set of all words $w \in \Sigma^\ast$ such that $\hat{\delta}(q_0, w) \in F$, i.e. all accepted words. A language is \emph{regular} if it is the accepted language for some DFA.
 
 \subsection*{Non Determinism and $\epsilon$-transitions}
 We now examine a seemingly more general construction where we can choose which state to move to or move to multiple states simultaneously.
@@ -655,4 +655,56 @@ We now examine a seemingly more general construction where we can choose which s
 A nondeterministic finite state automata (NFA) is a structure $N=(Q, \Sigma, \delta, q_0, F)$ just as for a DFA except that $\delta:Q \times \Sigma \to \powset(Q)$.
 
 An NFA has input $w = \sigma_1\ldots\sigma_k \in \Sigma^\ast$. We start in state $q_0$, read $\sigma_1$ then move to all states in $\delta(q_0, \sigma) \subseteq Q$. Then for all the states $p \in \delta(q_0, \sigma_1)$ we read $\sigma_2$ and move to $\delta(p, \sigma_2)$ so we are now at $\cup_{p\in\delta(q_0, \sigma_1)} \delta(p, \sigma_2)$. Then continue this process to the end of $w$ and get the end states $E_w \subseteq Q$. If $E_w \cap F \neq 0$ then $w$ is accepted, else $w$ is rejected.
+\hrule
+
+
+
+
+
+
+
+For an $\epsilon$-NFA we can also define its extended transition function $\hat{\delta}(q,w)$ to be the set of all states we can get to by reading $w$ starting at state $q$, reading as many $\epsilon$s as we want to.
+
+Now observe that any DFA is a NFA (just only ever move to one state), and any NFA is an $\epsilon$-NFA (let $\delta(q,\epsilon) = \emptyset$).
+
+Given an ($\epsilon$-)NFA, (E or) N, its \emph{language} $\mathcal{L}\binom{E}{N}$ is $\{w \in \Sigma^{\ast} : \hat{\delta}(q_0, w) \cap F \neq \emptyset\} \subseteq \Sigma^{\ast}$. Note that this definition is consistent whether or not we have a DFA, NFA, or $\epsilon$-NFA.
+
+\subsection*{Equivalence of DFAs and ($\epsilon$-)NFAs}
+Any regular language is the language of an ($\epsilon$-)NFA. Here we show the converse.
+
+First, suppose that we have an NFA $N$. We produce a DFA $D$ on the same alphabet $\Sigma$ such that $\mathcal{L}(N) = \mathcal{L}(D)$.
+
+For the NFA $N = (Q,\Sigma, \delta, q_0, F)$, the \emph{subset construction} for $N$ produces the DFA $D = (\powset(Q), \Sigma, \Delta, \{q_0\}, \mathfrak{F})$, where $\mathfrak{F} \coloneqq \{S\subseteq Q : S\cap F \neq \emptyset \}$, the subsets of states that contain an accept state, and for $S \subseteq Q, \sigma \in \Sigma$ we have $\Delta(S, \sigma) \coloneqq \cup_{p\in S} \delta(p, \sigma)$. Essentially, we replace what was our states, which we could be in more that one of simultaneously, with sets of states, which we can only be in one of at a time.
+
+\begin{theorem}
+For the NFA $N$ and DFA $D$ obtained by the subset construction, let $\hat{\delta}, \hat{\Delta}$ be their respective extended transition function. Then for all $w \in \Sigma^{\ast}$, we have $\hat{\Delta}(\{q_0\}, w) = \hat{\delta}(q_0, w)$.
+\end{theorem}
+\begin{proof}
+Induction on length $k = |w|$. The base case $(k=0)$ is $w = \epsilon$, and LHS = $\{q_0\}$ = RHS.
+
+Now suppose that $\hat{\Delta}(\{q_0\}, \sigma_1, \ldots, \sigma_{k-1}) = \hat{\delta}(q_0, \sigma_1, \ldots, \sigma_{k-1})$. Then for $w = \sigma_1\ldots \sigma_{k-1}\sigma_k$ we have $\hat{\delta}(q_0,w) = \cup_{p\in \delta(q_0, \sigma_1, \ldots, \sigma_{k-1}} \delta(p,\sigma_k)$, which is by definition the same as $\Delta(\hat{\delta}(q_0, \sigma_1\ldots\sigma_{k-1}),\sigma_k) = \Delta(\hat{\Delta}(\{q_0\},\sigma_1\ldots\sigma_{k-1}),\sigma_k) = \hat{\delta}(\{q_0\}, \sigma_1\ldots\sigma_k)$
+\end{proof}
+
+\begin{corollary}
+A language $\mathcal{L}$ is accepted by some DFA if and only if $\mathcal{L}$ is accepted by some NFA.
+\end{corollary}
+\begin{proof}
+For the forwards direction, just convert the DFA into an NFA by replacing the states by singletons of the states.
+
+For the reverse direction, use the subset construction. Then $w \in \Sigma^{\ast}$ is accepted iff $\hat{\delta}(q_0, w \cap F \neq \emptyset \iff \hat{\Delta}(\{q_0\},w) \in \mathfrak{F}$.
+\end{proof}
+
+Likewise, for an $\epsilon$-NFA, the \emph{subset construction with $\epsilon$-transitions} produces a DFA $D = (\powset(Q), \Sigma, \Delta, \ecl(q_0), \mathfrak{F}), \Delta(S, \sigma) \coloneqq \ecl(\cup_{p\in S} \delta(p, \sigma))$
+
+\begin{theorem}
+For an $\epsilon$-NFA $E$ and a DFA $D$ obtained by the subset construction with $\epsilon$-transitions, we have $\hat{\Delta}(\ecl(q_0),w) = \hat{\delta}(q_0,w)$.
+\end{theorem}
+\begin{proof}
+Identical to the previous proof for NFA $\to$ DFA.
+
+\begin{corollary}
+Any DFA, NFA, $\epsilon$-NFA can be represented by any of the others. The constructions are equivalent.
+\end{corollary}
+\end{proof}
+
 \end{document}

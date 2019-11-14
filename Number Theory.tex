@@ -806,7 +806,117 @@ In 1770 Waring posed the following problem: For every $k$, let $g(k)$ be the lea
 We now turn to questions about how primes occur. How many are there? How quickly to they appear? How densely do they come? How regular is the sequence of primes?
 
 \begin{theorem}[Prime Number Theorem]
-Let $\pi(x)$ be the number of primes less than or equal to $x$. Then $\pi(x) \thicksim \frac{x}{\log x}$ as $x \to \infty$.
+Let $\pi(x)$ be the number of primes less than or equal to $x$. Then $\pi(x) \thicksim \frac{x}{\log x}$ as $x \to \infty$. More precisely, $\pi(x) = \frac{x}{\log x} + O(x \exp(-\sqrt{\log x}))$
 \end{theorem}
 This is sometimes stated in terms of the logarithmic integral $Li(x) = \int_2^x \frac{dt}{\log t}$:  $\pi(x) \thicksim Li(x)$.
+
+\begin{theorem}[Dirichlet's Theorem on Primes in Arithmetic Progression]
+Let $a,q$ be coprime integers. Then there are infinitely many primes $p \equiv a \mod q$.
+\end{theorem}
+\begin{theorem}[Siegel-Walfisz]
+Let $a,q \in \Z, (a,q)=1$, and let $\pi(x;q,a)$ be the number of primes $p \leq x$ such that $p \equiv a \mod q$. 
+
+Then for all real $B>0$ there is a constant $C_B>0$ such that:
+\begin{align*}
+\pi(x;q,a) = \frac{1}{\varphi(q)}\frac{x}{\log x}+O_B(x \exp(-C_B\sqrt{\log x}))
+\end{align*}
+whenever $q \leq (\log x)^B$.
+\end{theorem}
+We will not prove any of these theorems, but will study instead the Riemann zeta function and prove Chebyshev's theorem:
+\begin{theorem}[Chebyshev]
+There is some $c_2>c_1>0$ such that for all $x>1$, we have:
+\begin{align*}
+c_1 \frac{x}{\log x} \leq \pi(x) \leq c_2 \frac{x}{\log x}
+\end{align*}
+\end{theorem}
+This will come later though. For now:
+\begin{lemma}
+Let $x \in \N$. Then $\pi(x) \geq \frac{\log x}{2\log 2}$
+\end{lemma}
+\begin{proof}
+Let $p_1, \ldots, p_r$ be the primes up to $x$, so that $r = \pi(x)$. Every $n \leq x$ can be written in the form $n = k^2 \Pi_{i=1}^r p_i^{\alpha_i}$ with $\alpha_i \in \{0,1\}$ and $1 \leq k \leq \sqrt{x}$.
+
+There are $\leq 2^r$ choices for the $\alpha_i$, and $\leq \sqrt{x}$ choices for $k$, hence $x \leq 2^{\pi(x)} \sqrt{x}$.
+
+Rearranging, we have $\pi(x) \geq \frac{\log(x}{2\log 2}$
+\end{proof}
+Here let $p$ denote primes numbers. Then:
+\begin{theorem}
+\item
+\begin{enumerate}
+\item For $x \geq 5$ we have $\sum_{p\leq x} \frac{1}{p} \geq \log\log x - \frac{1}{2}$. In particular, this sum diverges.
+\item For $x \geq 2$, the product $\Pi_{p\leq x} (1-\frac{1}{p})^{-1} \geq \log x$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+For the second part, observe:
+\begin{align*}
+\Pi_{p\leq x} (1-\frac{1}{p})^{-1} &= \Pi_{p\leq x}(1+\frac{1}{p}+\frac{1}{p^2}+\ldots)\\
+&\geq \sum_{n \leq x} \frac{1}{n}\\
+&\geq \int_1^{x+1} \frac{1}{t} dt\\
+&\geq \log x
+\end{align*}
+
+Then for the first part, we want to estimate the value of $\log\left(\Pi_{p\leq x}(1-\frac{1}{p})^{-1}\right) - \sum_{p\leq x}\frac{1}{p}$, or $\sum_{p\leq x}\left(\log(1-\frac{1}{p})^{-1} - \frac{1}{p}\right)$.
+
+But note that:
+\begin{align*}
+\log(1-\frac{1}{p})^{-1} - \frac{1}{p} &= -\log(1-\frac{1}{p}) - \frac{1}{p}\\
+&= (\frac{1}{p} + \frac{1}{2p^2} + \ldots ) -\frac{1}{p}\\
+&= \frac{1}{2p^2} + \frac{1}{3p^3} + \ldots \\
+&\leq \frac{1}{2p^2} + \frac{1}{2p^3} + \ldots \\
+&= \frac{1}{2p^2}\left(1+\frac{1}{p}+\frac{1}{p^2}+\ldots\right)\\
+&= \frac{1}{2p^2}\frac{1}{1-\frac{1}{p}}\\
+&= \frac{1}{2p(p-1)}
+\end{align*}
+Hence:
+\begin{align*}
+\log(\Pi_{p\leq x} (1-\frac{1}{p})^{-1} - \sum_{p\leq x}\frac{1}{p} &\leq \sum_{p\leq x} \frac{1}{2p(p-1)}\\
+&\leq \sum_{2\leq n\leq x} \frac{1}{2n(n-1)}\\
+&= \frac{1}{2} \sum_{2\leq n\leq x} (\frac{1}{n-1} - \frac{1}{n})\\
+&= \frac{1}{2}(1-\frac{1}{x})\\
+&\leq \frac{1}{2}
+\end{align*}
+And so $\sum_{p\leq x}\frac{1}{p} \geq \log \Pi_{p\leq x} (1-\frac{1}{p})^{-1} - \frac{1}{2} \geq \log\log x - \frac{1}{2}$
+\end{proof}
+
+For a complex number $s$ with $\Re s > 1$, we define the \emph{Riemann zeta function} $\zeta$ as:
+\begin{align*}
+\zeta(s) \coloneqq \sum_{n=1}^\infty \frac{1}{n^s}
+\end{align*}
+Conventionally, we write $s = \sigma + \im t$ for $\sigma, t \in \R$.
+
+\begin{lemma}
+For $s \in \C$ with $\Re s > 1$, the series $\sum_{n=1}^\infty \frac{1}{n^s}$ converges absolutely. In fact, it converges uniformly on $\Re s \geq 1+\delta$ for $\delta > 0$, and is thus analytic on $\Re s > 1$.
+\end{lemma}
+\begin{proof}
+Note $|n^s| = n^{\sigma}$, and so $\zeta(s)$ converges absolutely if and only if $\sum_{n=1}^{\infty} \frac{1}{n^{\sigma}}$ converges, which happens precisely when $\sigma > 1$.
+\end{proof}
+
+\begin{theorem}
+For $s \in \C$ with $\Re s >1$, we have that $\zeta(s) = \Pi_{p prime}\left(1-\frac{1}{p^s}\right)^{-1}$.
+\end{theorem}
+The right hand side is known as the \emph{Euler product} for $\zeta$.
+\begin{proof}[Proof (``Hand-waving")]
+\begin{align*}
+\Pi_{p}\left(1-\frac{1}{p^2}\right)^{-1} &= \Pi_p \left(1+p^{-s} + p^{-2s} + \ldots \right)\\
+&= \sum_{n=1}^{\infty} n^{-s}
+\end{align*}
+since every $n$ occurs exactly once by unique factorisation.
+\end{proof}
+\begin{proof}
+Let $s = \sigma+\im t, \sigma>1$ and consider:
+\begin{align*}
+\zeta(s) - \Pi_{p\leq x} (1-p^{-s})^{-1} &= \sum_{n=1}^{\infty} n^{-s} - \Pi_{p\leq x} (1+p^{-s} + p^{-2s} + \ldots)\\
+&= \sum_{n\in \N_x} n^{-s}
+\end{align*}
+where $\N_x = \{n \in \N : $ at least one prime factor of $n$ is $> x \}$. So:
+\begin{align*}
+|\zeta(s) - \Pi_{p\leq x}(1-p^{-s})^{-1}| &\leq \sum_{n \in \N_x} n^{-\sigma}\\
+&\leq \sum_{n > x} n^{-\sigma}\\
+&\to 0 \text{ as } x \to \infty
+\end{align*}
+since $\zeta(s)$ converges.
+\end{proof}
+
 \end{document}

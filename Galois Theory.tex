@@ -879,5 +879,57 @@ We use this: $K$ is a field, $f \in K[x]$, $L$ a splitting field for $f$ and $f(
 For example, if $\Delta(f) = \Pi_{i<j} (\alpha_i-\alpha_j)^2$ is the discriminant of $f$, then the theorem says there is some polynomial in $e_1, \ldots, e_n$, $\Delta(e_1, \ldots, e_n)$ equal to $\Pi_{i<j} (z_i - z_j)^2$, sending $e_1 \mapsto -a_1$.
 
 We claim $\Delta(x^2+px+q) = -4p^3 - 27q^2$, and so $\Delta(f) = \Pi_{1\leq i<j\leq 3} (z_i-z_j)^2$ is a homogeneous polynomial of degree $6$. But note that $e_1 \mapsto 0$, and so it must be a linear combination of $e_2^3$ and $e_3^2$. On the other hand, $\Delta$ vanishes if $f$ has repeated roots, so consider $f(x) = (x-\alpha)^2(x+2\alpha)$. Then $-27c+4d = 0$. Finally calculate $\Delta(x^3-x) = 4$ by explicit computation, so $d = -27, c = -4.$
+
+\begin{proof}
+We need some notation. Given $\lambda = (\lambda_1, \ldots, \lambda_n) \in \N^n$, we write $z^{\lambda} = z_1^{\lambda_1}\ldots z_n^{\lambda_n}$. It is clear that $\{z^{\lambda} : \lambda \in \N^n\}$ is a basis of $R[z_1, \ldots, z_n]$.
+
+We can then totally order $\N^n$ by lexicographic order. Observe that if $\lambda$ is in decreasing order, i.e. $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_n$, then $\lambda \geq \omega \lambda$ for all $\omega \in S_n$.
+
+Hence every orbit $S_n \tilde{\lambda}$ has a maximal element $\lambda$ which is $\tilde{\lambda}$ reordered so that $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_n$.
+
+From this we can deduce that $\{\sum_{\mu \in S_n \lambda} z^{\mu} : \lambda = (\lambda_1 \geq \ldots \geq \lambda_n) \in \N^n\}$ is a basis of $R[z_1, \ldots, z_n]^{S_n}$, as linear independence comes from the fact that different $\lambda$s have disjoint monomials in $\omega\lambda$, and the span comes from the argument above.
+
+Let $f \in R[z_1, \ldots, z_n]^{S_n}$. Write $f = cz^{\lambda} + \ldots$, where the other terms are $z^{\mu}$ for $\mu < \lambda$.
+
+Then $f = cz_1^{\lambda_1-\lambda_2}(z_1z_2)^{\lambda_2-\lambda_3}\ldots(z_1z_2 \ldots z_n)^{\lambda_n} + \ldots$
+
+We claim now that $e_1^{\lambda_1-\lambda_2}e_2^{\lambda_2-\lambda_3}\ldots e_{n-1}^{\lambda_{n-1}-\lambda_n} e_n^{\lambda_n} = z_1^{\lambda_1-\lambda_n}\ldots (z_1\ldots z_n)^{\lambda_n} + \ldots$, which can be seen by carefully expanding it out.
+
+Hence $f-ce_1^{\lambda_1 - \lambda_2}\ldots e_n^{\lambda_n}$ is a polynomial in terms $z^{\mu}$ with $\mu < \lambda$, as in $R[z_1, \ldots, z_n]^{S_n}$, so by induction we are done for surjectivity.
+\end{proof}
+
+\underline{Example:} $\sum_{i\neq j} z_i^2 z_j^2 = z_1^2 z_2 + \ldots = z_1(z_1z_2) + \ldots.$.
+
+Now $e_1e_2 = \sum_{i, j<k} z_iz_jz_k = \sum_{i=j<k} +\sum_{j<k=i} = \sum_{\i\neq j, k}$.
+
+Hence $e_1e_2 = \sum_{i\neq j} z_i^2 z_j + 3 e_3$.
+\begin{proof}[Proof ctd (injectivity).]
+Suppose $g \in R[w_1, \ldots, w_n]$ is such that $g(e_1, \ldots, e_n) =0$ in $R[z_1, \ldots, z_n]^{S_n}$. We want to show that $g = 0$ by induction on $n$. Note that if $n=1$ there is nothing to show as $R[z_1]^{S_1} = R[z_1]$
+
+Otherwise, $g(e_1, \ldots, e_n) \in R[z_1, \ldots, z_n]$ is a polynomial in $z_, \ldots, z_n$, and we can set $z_n = 0$. When we do this, $e_i|_{z_n = 0} = e_i^0$ is $e_i$ for one less variable if $i<n$ and $0$ if $i = n$.
+
+This says that $g(e_1^0, \ldots, e_{n-1}^0, 0)$ is $0$ in $R[z_1, \ldots, z_{n-1}]^{S_{n-1}}$, and so by the inductive hypothesis, $g(w_1, \ldots, w_{n-1}, 0)$ is 0 in $R[w_1, \ldots, w_{n-}]$.
+
+But this says that $g(w_1, \ldots, w_n) = w_n h(w_1, \ldots, w_n)$ for some polynomial $h \in R[w_1, \ldots, w_n]$, so $e_n h(e_1, \ldots, e_n)$ is $0$ in $R[z_1, \ldots, z_n]^{S_n}$. But then $e_n = z_1 \ldots z_n \neq 0$ and $R[z_1, \ldots, z_n]$ is an integral domain so has no zero divisors, hence $h(e_1, \ldots, e_n) = 0$ in $R[z_1, \ldots, z_n]^{S_n}$. Now assume that $g$ was of minimal degree mapping to 0 - this gives $h$ of smaller degree mapping to 0, a contradiction.
+\end{proof}
+\begin{lemma}
+Let $L = K(z_1, \ldots, z_n)$ be the fraction field of $K[z_1, \ldots, z_n]$. Then we have:
+\begin{align*}
+L^{S_n} \coloneqq (\Frac K[z_1, \ldots, z_n])^{S_n} = \Frac (K[z_1, \ldots, z_n]^{S_n})
+\end{align*}
+\end{lemma}
+\begin{proof}
+$\supseteq$ is clear. For $\subseteq$ let $\gamma \in L^{S_n}, \gamma=  f/g$ for $f, g$ in $K[z_1, \ldots, z_n]$. Let $\mu  = \Pi_{\sigma \in S_n} \sigma g \in K[z_1, \ldots, z_n]^{S_n}$. Then $\gamma \mu = f \Pi_{\sigma \in S_n, \sigma \neq 1} \sigma g \in K[z_1, \ldots, z_n]$ and is an $S_n$-invariant.
+
+Hence $\gamma=  \gamma \frac{\mu}{\mu} \in \Frac(K[z_1, \ldots, z_n]^{S_n})$ as required.
+\end{proof}
+Note that Artin implies that $[L:L^{S_n}] = n!$, and $L/L^{S_n}$ is Galois.
+\begin{corollary}
+Any finite group $G$ is the Galois group of some field extension.
+\end{corollary}
+\begin{proof}
+By Cayley embed $G$ inside $S_n$ for some $n$ (e.g. $G$ acts on itself by left multiplication). Then the Galois correspondence gives that $G = \aut (L/L^G)$ where $L = K(z_1, \ldots, z_n)$.
+\end{proof}
+
 \end{document}
 

@@ -605,9 +605,15 @@ When all of $w$ is read, if the DFA is in an accept state then $w$ is accepted. 
 \shade[bottom color=red!70!blue, top color=black] \duckpathlonghair;
 \duck[scale=.2, body=orange!60!brown, bill=black, xshift=40pt, yshift=50pt,bunny=orange!50!brown, shorthair=orange!60!pink, horsetail=orange!60!pink]
 \end{tikzpicture}
+Wendi
 
 \begin{tikzpicture}[scale=7]
 \duck[jacket=blue, tshirt=white, alien=green, water=green, mohican=blue, bill=cyan, bowtie=red, tie=black, buttons=yellow!60!brown, xshift=-200pt]
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=7]
+\duck[squareglasses=purple!40!blue, laughing, head=pink!20!red!10!white!60!brown!70!white, vampire=white,tshirt=yellow!60!brown!80!orange, stripes={\stripes[color=blue!60!black, width=0.06, rotate=-20]}]
+\shade[bottom color=brown!40!black, top color=red!80!blue!80!black] \duckpathlonghair;
 \end{tikzpicture}
 \end{center}
 \newpage
@@ -706,5 +712,61 @@ Identical to the previous proof for NFA $\to$ DFA.
 Any DFA, NFA, $\epsilon$-NFA can be represented by any of the others. The constructions are equivalent.
 \end{corollary}
 \end{proof}
+\hrule
+\begin{theorem}
+For each DFA $D$ there is a regular expression $R$ such that $\mathcal{L}(D) = \mathcal{L}(R)$.
+\end{theorem}
+\begin{proof}
+Given $D = (Q, \Sigma, \delta, q_0, F)$, label the states wlog by $\{1, 2, \ldots, n\}$ with 1 start state $q_0$. Now, given $1 \leq i,j \leq n$ and $0 \leq k \leq n$ we construct by induction on $k$ for each $i,j$ a regular expression $R^{(k)}_{ij}$ with language exactly the words $w$ that begin at state $i$, end at state $j$, and such that all intermediate states passed through not including the endpoints are at most $k$. (Think of $w$ as a directed path from $i$ to $j$.)
 
+For base case we use $k=0$ we have to go directly from $i$ to $j$, so let $\{a_1, \ldots, a_l\}$ be all symbols labelling an edge from $i$ to $g$. If $i \neq j$ then set $R^{(0)}_{ij} = \begin{cases} a_1 + \ldots + a_l & l>0 \\ \emptyset & \ow \end{cases}$\\
+Otherwise if $i=j$ let $R^{(0)}_{ii} = \begin{cases} a_1 + \ldots + a_l + \epsilon & l>0 \\ \epsilon & \ow \end{cases}$
+
+Suppose now that we have $R^{(t)}_{ij}$ defined for all $t < k$. Given a path $\pi$ from $i$ to $j$ not passing through states $k+1, \ldots, n$ either we have:
+\begin{enumerate}
+\item $\pi$ does not pass through $k$, and so a word read from $\pi$ is in $\mathcal{L}(R_{ij}^{(k-1)})$, and vice versa.
+\item $pi$ does pass through $k$ at least once, so split path as $\sigma$ from $i$ to $k$, then $\pi_1, \ldots, \pi_r$ from $k$ to $k$, then $\omega$ from $k$ to $j$, so that $\pi = \sigma\pi_1 \pi_2 \ldots \pi_r \omega$.
+
+The word read from the subpath $\sigma$ is in $\mathcal{L}(R^{(k-1)}_{ik})$. Each word from $\pi_1, \ldots, \pi_r$ is in $\mathcal{L}(R^{(k-1)}_{kk})$ and each word from $\omega$ is in $\mathcal{L}(R^{(k-1)}_{kj})$. So word read from $pi$ is in the language defined by $R^{(k-1)}_{ik}(R^{(k-1)}_{kk})^\ast R^{(k-1)}_{kj}$.
+\end{enumerate}
+Thus for both cases we have a word read from $\pi$ is in the language defined by the sum of the two regular expressions.
+
+Finally, if $F = \{j_1, \ldots, j_s\}$ then $\mathcal{L}(D) = \mathcal{L}(R_{ij_1}^{(n)} + \ldots + R_{1j_s}^{(n)}))$
+\end{proof}
+\subsection*{Closure Properties}
+\begin{theorem}
+Let $L, M$ be regular languages over $\Sigma_L, \Sigma_M$. Then
+\begin{enumerate}
+\item $L \cup M$ is regular over $\Sigma_L \cup \Sigma_M$.
+\item $LM$ is regular over $\Sigma_L \cup \Sigma_M$.
+\item $L^{\ast}$ is regular over $\Sigma_L$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Take regular expressions $R_L, R_M$ for $L, M$, so $\mathcal{L}(R_L) = L$, and $\mathcal{L}(R_M) = M$. Then for \textit{1} we have $R_L + R_M$ is regular and $\mathcal{R_L + R_M} = \mathcal{L}(R_L)\cup \mathcal{L}(R_M) = L \cup M$. For \textit{2} $R_L R_M$ is regular with language $\mathcal{L}(R_L)\mathcal{L}(R_M) = LM$. For \textit{3} $(R_L)^{\ast}$ is regular and $\mathcal{L}((R_L)^{\ast}) = \mathcal{L}(R_L)^{\ast} = L^{\ast}.$
+\end{proof}
+
+\begin{theorem}
+If $L$ is a regular language over $\Sigma$ then so is $\bar{L} = \Sigma^{\ast} \setminus L$, the \emph{complement} of $L$.
+\end{theorem}
+\begin{proof}
+Given a DFA $D$ with $\mathcal{L}(D) = L$, consider the DFA $\bar{D}$ which is the same as $D$ but with accept states $Q \setminus F$. Then for any $w \in \Sigma^{\ast}$, we have that $w \in \bar{L} \iff w \notin L \iff \hat{\delta}(q_0, w) \notin F \iff \hat{\delta}(q_0, w) \in Q \setminus F \iff w \in \mathcal{L}(\bar{D})$.
+\end{proof}
+\begin{theorem}
+If $L,M$ are regular languages, then so is $L \cap M$.
+\end{theorem}
+\begin{proof}
+$\bar{L}, \bar{M}$ are regular, so $\overline{\bar{L} \cup \bar{M}} = L \cap M$ is.
+\end{proof}
+\subsection*{The Pumping Lemma for Regular Languages}
+How do we show a language is not regular? Suppose a word $w$ is accepted by a DFA $D$ but $|w| > |Q|$ ($w$ has more symbols than $D$ has states). Then $w$ defines a directed path in the transition diagram $\Gamma_D$ which must visit some state at least twice. So we can write $w = xyz$ for subdivisions $x,y,z$ where $y$ is a loop. But then we can go around the loop twice or more...
+
+\begin{theorem}[Pumping Lemma for Regular Languages]
+If $L$ is a regular language then there is some $n \geq 1$ such that for all words $w \in L$ with $|w| \geq n$ we can write $w = xyz$ for subwords $x, y, z$ where
+\begin{enumerate}
+\item $y \neq \epsilon$
+\item $|xy| \leq n$
+\item For all $k \geq 0$ we have $xy^k z \in L$
+\end{enumerate}
+\end{theorem}
 \end{document}

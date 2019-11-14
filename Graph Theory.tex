@@ -1025,7 +1025,37 @@ The lower bound is immediate. For the upper bound, colour as many edges of $G$ a
 Let $xy_0$ be the uncoloured edge. Observe that at each vertex there is at least one unused colour. Construct a maximal sequence of distinct edges $xy_0, xy_1, \ldots, xy_k$ and colours $c_0,\ldots,c_k$ such that $c_i$ is unused at $y_i$ and $xy_{i+1}$ has colour $c_i$. This will stop for one of two reasons:
 \begin{itemize}
 \item There is no edge at $x$ coloured $c_k$. In this case colour $xy_i$ with $c_i$, $0\leq i\leq k$.
-\item The colour $c_k$ equals $c_j$ for some $j < k$. Colour $xy_i$ with $c_i$ for $0\leq i\leq j$ and make $xy_j$ uncoloured.
+\item The colour $c_k$ equals $c_j$ for some $j < k$. Colour $xy_i$ with $c_i$ for $0\leq i\leq j$ and make $xy_j$ uncoloured. Let $c$ be a colour not used at $x$. Let $H$ be the subgraph comprising all edges of colours $c$ and $c_k$. $H$ has maximum degree $\leq 2$, so its components are paths and even circuits. We can interchange the colours in any component of $H$ and get another valid colouring. Notice that $x, y_j, y_k$ all have degree $\leq 1$ in $H$, and so can't all lie in the same component of $H$ - a path has only 2 ends.
+
+If $x, y_j$ are in different components, interchange the colours in the component containing $y_j$. Colour $c$ is now unused at $y_i$ so we can colour $xy_j$ with $c$.
+
+If $x, y_j$ are in the same component, then $y_k$ is in another component. Recolour $xy_i$ $c_i$ for $j\leq i < k$. Then $xy_k$ is uncoloured. The components of $H$ remain the same, except the path $x-y_{j+1}-\ldots-y_j$ becomes $y_{j+1}-\ldots-y_j-x$. So $y_k$ is still in a different component, and so we can interchange colours in it leaving $c$ free at $y_k$ and $x$ unaffected. Then colour $xy_k$ with colour $c$.
 \end{itemize}
 \end{proof}
+\begin{theorem}
+If $G$ is bipartite then the chromatic index $\chi'(G) = \Delta(G)$.
+\end{theorem}
+\begin{proof}
+First, note that $G$ is a subgraph of a bipartite graph $F$ which is $\Delta$-regular. To see this, take two copies $G', G''$ of $G$ and add edges $v'v''$ for every vertex $v$ whose degree in $G$ is $<\Delta$. This graph is bipartite, contains $G$, has max degree $\Delta$, but the minimum degree has been increased. Repeat this as necessary to get $F$. It is enough to show that $\chi'(F) = \Delta$.
+
+Let $F$ have vertex classes $X, Y$. Counting edges between $X$ and $Y$ gives $|X|\Delta = e(X,Y) = |Y|\Delta$, and so $|X|=|Y|$. Now let $A \subseteq X$. Then $|A|\Delta = e(A, \Gamma(A)) \leq |\Gamma(A)|\Delta$, i.e. $|A| \leq |\Gamma(A)|$. By Hall's theorem $F$ has a 1-factor. Colour these red, remove them, and repeat on the $(\Delta-1)$-regular graph that remains.
+\end{proof}
+let $G$ be planar. Then $e(G) \leq 3|G|-6$, so $\delta(G) \leq 5$. If $H$ is a subgraph of $G$, ten $H$ is planar so $\delta(H) \leq 5$, and hence $\chi(G) \leq 6$. We can however do better:
+\begin{theorem}[Heawood 1890]
+If $G$ is planar then $\chi(G) \leq 5$
+\end{theorem}
+\begin{proof}
+If not, let $G$ be a minimal counterexample. Let $v$ be a vertex of minimum degree. If $d(v) \leq 4$, colour $G-v$ with 5 colours. Not every colour is used on a neighbour of $v$, so colour $v$ with the remaining colour.
+
+Thus, $d(v) = 5$. Let the neighbours of $v$ be $u_1, \ldots, u_5$. These are not all adjacent to each other else $K_6 \subseteq G$, so say $u_1u_3 \notin E(G)$, say. Remove $v$ and contract $u_1, u_3$. This new graph is planar, so 5-colour it. Then colour $G$ by: every vertex keeps it colour, $u_1$ and $u_3$ both get the colour that was used on the new vertex. Only $\leq 4$ colours are used on the $u_i$, so give $v$ the other colour.
+\end{proof}
+
+The $4$-colour problem (Guthrie, 1852) is to prove or disprove that $\chi(G) \leq 4$ for all planar $G$. By considering the dual graph, this is equivalent to saying we can colour the faces of any bridgeless connected plane graph (map) with $\leq 4$ colours so that contiguous faces have different colours. 
+
+Observe that it's enough to face colour cubic maps (3-regular)
+
+\begin{theorem}[Tait 1880]
+The 4-colour theorem holds if and only if the chromatic index $\chi'(G) = 3$ for every bridgeless planar cubic map.
+
+\end{theorem}
 \end{document}

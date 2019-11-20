@@ -769,4 +769,95 @@ If $L$ is a regular language then there is some $n \geq 1$ such that for all wor
 \item For all $k \geq 0$ we have $xy^k z \in L$
 \end{enumerate}
 \end{theorem}
+\begin{proof}
+We have $L = \mathcal{L}(D)$ for a DFA $D = (Q, \Sigma, \delta, q_0, F)$, and set $n = |Q|$. Now, take an accepted word $w \in L$ with $w = \sigma_1\ldots\sigma_m$ where $m \geq n$. Let $p_i = \hat{\delta}(q_0, \sigma_1\ldots\sigma_i)$ be the state we're in after reading the first $i$ letters of $w$, for $0 \leq i \leq m$, so that $p_0 =q_0$. 
+
+Then by the pigeonhole principle there is some $r < s$ such that $p_r = p_s$.
+
+But then let $w^{(n)} \coloneqq \sigma_1\ldots\sigma_{r-1}(\sigma_r\ldots\sigma_s)^n\sigma_{s+1}\ldots\sigma_n$. Then $w^{(n)} \in L$ 
+\end{proof}
+
+\underline{Example:}\\
+The language $L = \{0^i 1^i : i \geq 0\}$ is \textit{not} regular. If it were, then we have arbitrarily long words, so one is longer than the double number of states in the DFA, say $w = 0^n1^n$ where the DFA has $n$ states. Then by the pumping lemma $w = xyz$ where $|xy|\leq n$ (so that $y$ is non-empty), with $xz$ is accepted. Note that $z$ is all the ones, and possibly some of the zeroes. So $xz$ has more 1s than 0s, so is not in $L$ \contr.
+
+\subsection*{Equivalence and Minimisation of DFAs}
+Given a DFA $D$ over an alphabet $\Sigma$, there are many other DFAs for the same language. For instance, we can just noodle around doing not much and add weird bits that are inaccessible. We want one with the minimal possible number of states.
+
+An \emph{accessible state} $q \in Q$ of a DFA $D$ is one where there is some word that leads the DFA to that state.
+
+From $D$ we can form a DFA $A$ with no inaccessible states and $\mathcal{L}(A) = \mathcal{D}$: if $n = |Q_D|$, then form $S_i \subseteq Q_D$ via $S_0 = \{q_0\}, S_{i+1} = \cup_{q \in S_i} (\cup_{\sigma \in \Sigma} \delta_D(q, \sigma))$, so $S_i$ is the states reachable from $q_0$ after $i$ states. But any accessible state can be reached after $\leq n-1$ steps, removing closed loops of repeated states. So the stet $S = \cup_{j=1}^{n-1}S_j$, so set $S = \cup_{j=0}^{n-1} S_j$, and $Q_A = S \subseteq Q_D$, $F_A = F_D \cap S$, and $\delta_A$ be the restriction of $\delta_D$ to $Q_A \times \Sigma$. However, this might not be enough. Moreover, what about uniqueness?
+
+For $A, B$ both DFAs over $\Sigma$, we say that $A, B$ are \emph{equivalent}, written $A\equiv B$ if, up to relabelling of non-start states, they are the same DFA. Now for a single DFA $D$, we group together equivalent states.
+
+For a DFA $D$, we call two states $p,q \in Q_D$ \emph{equivalent} or \emph{indistinguishable} if for all $w \in \Sigma^{\ast}$ we have that $\hat{\delta}_D(p,w) \in F \iff \hat{\delta}_D(q,w) \in F$, written $p \thicksim q$, otherwise we say that $p,q$ are \emph{distinguished} by $w$.
+
+\begin{proposition}
+For a DFA $D$ and states $p,q \in Q$, then:
+\begin{enumerate}
+\item $\thicksim$ is an equivalence relation on $Q$
+\item If $p \thicksim q$ then $\forall \sigma \in \Sigma$ we have $\delta(p, \sigma) \thicksim \delta(q, \sigma)$ and $\forall w \in \Sigma^{\ast}$ we have $\hat{\delta}(p,w) \thicksim \hat{\delta}(p,w)$.
+\item If $p \thicksim q$ then $p$ is an accepting state if and only $q$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\item
+\begin{enumerate}
+\item For transitivity, we say $p \thicksim q$ and $q \thicksim r$ and take a word $w \in \Sigma^{\ast}$. Then both $\hat{\delta}(p,w)$, $\hat{\delta}(q,w)$ are (non)accepting, as are both $\hat{\delta}(q,w), \hat{\delta}(r,w)$. So it is true for $\hat{\delta}(p,w)$ and $\hat{\delta}(r,w)$.
+\item Suppose we have that $\sigma \in \Sigma$ with $\delta(p,\sigma) \not\thicksim \delta(q, \sigma)$, and so  without loss of generality we have some $w \in \Sigma^{\ast}$ with $\hat{\delta}(\delta(p,\sigma),w)$ accepted, but $\hat{\delta}(\delta(q, \sigma), w)$ is not. Then $p,q$ are distinguished by word $\sigma w$. Then induction on $|w|$.
+
+\item Use $w = \epsilon$ in the definition.
+\end{enumerate}
+\end{proof}
+Given a DFA $D = (Q, \Sigma, \delta, q_0, F)$, we define the \emph{minimal DFA} $D/\thicksim$ for $D$ as $(Q/\thicksim, \Sigma, \delta', [q_0], F')$ where $\delta'([q],\sigma) = [\delta(q,\sigma)]$, well defined by the previous proposition, and the accept states are given by $F' = \{[p]: p\in F\}$ with $[p] \subseteq F$.
+
+\begin{lemma}
+For a DFA $D$ and $D/\thicksim$ as above, take $q \in Q$ and $w \in \Sigma^{\ast}$. Then $\hat{\delta}'([q],w) = [\hat{\delta}(q,w)]$.
+\end{lemma}
+\begin{proof}
+Induction on $k$ for $w = \sigma_1 \ldots \sigma_k$. Check the base case. So we have $LHS = \delta'(\hat{\delta}'([q], \sigma_1\ldots\sigma_{k-1}), \sigma_k)$. Then the induction step follows immediately from the definitions.
+\end{proof}
+\begin{theorem}
+For a DFA $D$ and its minimal DFA $D/\thicksim$ we have that $\mathcal{L}(D/\thicksim) = \mathcal{L}(D)$.
+\end{theorem}
+\begin{proof}
+For all $w \in \Sigma^{\ast}$, we have $w \in \mathcal{L}(D/\thicksim) \iff \hat{\delta}/([q_0],w) \in F' \iff [\hat{\delta}(q,w)] \in F' \iff \hat{\delta}(q,w) \in F \iff w \in \mathcal{L}(D)$.
+\end{proof}
+\begin{lemma}
+For a DFA $D$ and DFA $D/\thicksim$ no two distinct states of $D/\thicksim$ are equivalent.
+\end{lemma}
+\begin{proof}
+Suppose $p, q \in Q$ have $[p] \thicksim [q]$ in $D/\thicksim$. Then for all words $w$ we have $\hat{\delta}'([p],w), \hat{\delta}'([q],w)$ are both (non)accepting in $D/\thicksim$. So $[\hat{\delta}(p,w)], [\hat{\delta}(q,w)]$ are both (non)accepting in $D/\thicksim$ by the \textbf{2.10}, and so $\hat{\delta}(p,w),\hat{\delta}(q,w)$ are both (non)accepting. So $p \thicksim q$ in $D$, so $[p]=[q]$ in $D/\thicksim$.
+\end{proof}
+\begin{corollary}
+If $D$ is a DFA then $(D/\thicksim)/\thicksim \equiv D/\thicksim$.
+\end{corollary}
+\begin{proof}
+By the previous lemma, we don't remove any states, and so we can relabel $[q]$ in the former to just $q$ and this is well-defined, giving the identical transition function.
+\end{proof}
+Note that this reduction of a DFA does not get rid of inaccessible states, but we will see that $D/\thicksim$ with all inaccessible states removed is indeed minimal for its language.
+\begin{theorem}
+If the DFA $D$ has no inaccessible states and $A$ is a DFA with $\mathcal{L}(A) = \mathcal{L}(D)$, then $A$ has at least as many states as $D/\thicksim$ and if they have the same number of states they are equivalent.
+\end{theorem}
+\begin{proof}
+Take a DFA $B$ with the fewest number of states subject to $\mathcal{L}(B) = \mathcal{L}(D)$. Then $B$ has no inaccessible states and $D/\thicksim$ has none, so for any state $[q]$ of $D/\thicksim$ we have some word $w$ with $\hat{\delta}(q_0, w) = q$, since $D$ has no inaccessible states, and so $\hat{\delta}'([q_0],w) = [q]$.
+
+So we have $D/\thicksim = (Q/\thicksim, \Sigma, \delta', [q_0], F')$ and $B = (S,\Sigma, d, s_0, G)$.
+
+Then form the disjoint union DFA of $D/\thicksim, B$ given by:
+
+$U = ((Q/\thicksim )\coprod S, \Sigma, \Delta, [q_0], F'\coprod G)$. As $\mathcal{L}(D/\thicksim) = \mathcal{L}(D) = \mathcal{L}(B)$, this means that states $[q_0]$ and $s_0$ are equivalent, since $\hat{\Delta}([q_0],w)$ is the same as $\hat{\Delta}(s_0, w)$ - we accept/reject the same words. Hence $s_0 \thicksim [q_0]$.
+
+Then if $p = \hat{\Delta}([q_0],w) \thicksim \hat{\delta}(s_0, w) = \hat{d}(s_0, w) = s \in S$, say. The first equality is valid for all $p$ as we have no inaccessible states, so every $p \in Q/\thicksim$ has some state $s \in S$ with $p \thicksim s$.
+
+Likewise, for every $s \in S$ there is some $p \in Q/\thicksim$ with $s \thicksim p$.
+
+Now, since $p \not\thicksim q$ for $p\neq q$ in $Q/\thicksim$, and since $\thicksim$ is an equivalence relation, we must have $|B| \geq |D/\thicksim|$, with equality precisely when we have a one-to-one equivalence pairing between $Q/\thicksim$ and $S$, i.e. the DFAs are themselves equivalent.
+\end{proof}
+What can we do with algorithms?
+
+We can remove inaccessible states: to find equivalent states, we can use \emph{Hopcroft's table filling algorithm}: given a DFA $D$, we have a table $Q \times Q$ with $(p,q)\th$ entry marked with an $\times$ when we have shown that $p \not\thicksim q$. We only fill in the lower left part, starting will all blanks.
+
+First off, put in $\times$ whenever we have $(p,q)$ with one in $F$ and the other not. Then take any $(p,q)$ which is empty. If we have $\sigma \in \Sigma$ with $\delta(p, \sigma) = r, \delta(q,\sigma)$ and $(r,s)$ marked $\times$ then mark with a $\times$. Halt when this fails for all unmarked pairs. This works by obviously working and I don't really feel like copying down half an hour of proof.
+
+We can also test if two DFAs are the same - minimise both and check if they have the same number of states, and check if they are equivalent, and if yes they have the same language.
 \end{document}

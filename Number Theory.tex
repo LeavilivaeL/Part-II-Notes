@@ -871,10 +871,10 @@ But note that:
 \end{align*}
 Hence:
 \begin{align*}
-\log(\Pi_{p\leq x} (1-\frac{1}{p})^{-1} - \sum_{p\leq x}\frac{1}{p} &\leq \sum_{p\leq x} \frac{1}{2p(p-1)}\\
+\log\left(\Pi_{p\leq x} \left(1-\frac{1}{p}\right)^{-1}\right) - \sum_{p\leq x}\frac{1}{p} &\leq \sum_{p\leq x} \frac{1}{2p(p-1)}\\
 &\leq \sum_{2\leq n\leq x} \frac{1}{2n(n-1)}\\
-&= \frac{1}{2} \sum_{2\leq n\leq x} (\frac{1}{n-1} - \frac{1}{n})\\
-&= \frac{1}{2}(1-\frac{1}{x})\\
+&= \frac{1}{2} \sum_{2\leq n\leq x} \left(\frac{1}{n-1} - \frac{1}{n}\right)\\
+&= \frac{1}{2}\left(1-\frac{1}{x}\right)\\
 &\leq \frac{1}{2}
 \end{align*}
 And so $\sum_{p\leq x}\frac{1}{p} \geq \log \Pi_{p\leq x} (1-\frac{1}{p})^{-1} - \frac{1}{2} \geq \log\log x - \frac{1}{2}$
@@ -918,5 +918,211 @@ where $\N_x = \{n \in \N : $ at least one prime factor of $n$ is $> x \}$. So:
 \end{align*}
 since $\zeta(s)$ converges.
 \end{proof}
+\begin{corollary}
+Fro $s \in \C, \Re s > 1$ we have $\zeta(s) \neq 0$
+\end{corollary}
+\begin{proof}
+Clearly, $\Pi_{p \leq X} (1-p^{-s})^{-1} \neq 0$ for $X \geq 2$. 
+
+Now note that $\zeta(s) \Pi_{p \leq X}(1-p^{-s}) = \Pi_{p > X}(1-p^{-s})^{-1} = 1+ \sum_{n \in \N_X} n^{-s}$.
+
+Hence $|\zeta(s) \Pi_{p\leq X}(1-p^{-s})| \geq 1-\sum_{n>X} n^{-\sigma} \to 1$.
+\end{proof}
+It turns out that $\zeta$ can be extended to the whole of $\C$ using an analytic continuation. First, one extends $\zeta$ to $\Re(s) > 0$ using an integral: we define the \emph{$\Gamma$-function} to be $\Gamma(z) = \int_{0}^{\infty} e^{-t}t^{z-1} dt$ for $\Re(z) > 0$. This can be continued to a meromorphic function on $\C$ with simple poles at $z = 0,-1,-2,\ldots$ and no zeroes. The $\Gamma$ function satisfies that $z\Gamma(z) = \Gamma(z-1)$.
+
+We can then define the \emph{completed $\zeta$-function} to be
+\begin{align*}
+\Xi(s) = \pi^{-s/2} \Gamma(s/2) \zeta(s)
+\end{align*}
+for which we can prove a \emph{functional equation}
+\begin{align*}
+\Xi(s) = \Xi(1-s)
+\end{align*}
+This allows us to extend $\zeta$ to the whole of $\C$. $\zeta$ has just one pole, a simple pole at $s=1$, and it has trivial zeroes at $s=-2,-4,\ldots$. Since $\zeta(s) \neq 0$ for $\Re(s)>1$, and the zeroes of $\zeta$ must lie in the \emph{critical strip} where $0 \leq \Re(s) \leq 1$. To prove the prime number theorem one has to show that $\zeta(s) \neq 0$ for $\Re(s) = 1$.
+
+The \emph{Riemann Hypothesis} asserts that in fact all of the zeroes of $\zeta(s)$ lie on the line $\Re(s) = \frac{1}{2}$, which is backed up by extensive numerical evidence.
+
+Define the \emph{M\"obius function} $\mu: \N \to \{-1,0,+1\}$ by defining:
+\begin{align*}
+\mu(n) &= \begin{cases} (-1)^k & n = p_1p_2\ldots p_k;\; p_i \text{ all distinct}\\
+0 & \ow \end{cases}\\
+\mu(1) &= 1
+\end{align*}
+On the example sheet we will show that $\mu$ is a multiplicative function and will prove the M\"obius inversion formula:
+\begin{align*}
+g(n) = \sum_{d|n} f(d) \implies f(n) = \sum_{e|n} \mu(e)g(n/e)
+\end{align*}
+for functions $, g$ defined on $\N$
+
+\begin{lemma}
+Let $u(n) = \sum_{d|n} \mu(d)$. Then $u(n) = \begin{cases} 1 & n=1 \\ 0 & n > 0 \end{cases}$.
+\end{lemma}
+\begin{proof}
+Assuming $\mu$ is multiplicative, we write $v(n) = \Pi_{i=1}^k u(p_i^{\alpha_i})$ if $n = \Pi_{i=1}^{k} p_i^{\alpha_i}$.
+
+Observe that for $m \geq 0$, we have:
+\begin{align*}
+v(p^m) &= \mu(1) + \mu(p) + \ldots \mu(p^m) \\
+&= \begin{cases} \mu(1) = 1 & m=0\\ \mu(1) + \mu(p) = 0 & m > 0\end{cases}
+\end{align*}
+\end{proof}
+The Riemann Hypothesis is known to be equivalent to the assertion that for all $\epsilon > 0$ there is a constant $c_{\epsilon}$ such that $|\sum_{n \leq x} \mu(n) | \leq c_{\epsilon} x^{1/2 + \epsilon}$.
+
+A \emph{Dirichlet series} is of the form $\sum_{n=1}^{\infty} \frac{a_n}{n^s}$ for some sequence $a_n \in \C$.
+\begin{enumerate}
+\item $\zeta(s)$
+\item $\sum_{n=1}^{\infty} \legendre{n}{p}n^{-s}$, a Dirichlet L-function
+\item Products of Dirichlet series, since assuming absolute convergence:
+\begin{align*}
+\left(\sum_{m=1}^{\infty}\frac{a_m}{m^s}\right)\left(\sum_{n=1}^{\infty}\frac{b_n}{n^2}\right) &= \sum_{m=1, n=1}^{\infty} (a_mb_n)\frac{1}{(mn)^s}\\
+&= \sum_{N=1}^{\infty} c_N \frac{1}{N^s}
+\end{align*}
+where $c_N = \sum_{d|N} a_d b_{N/d}$. Concerning convergence, note that if $|a_n| \leq k n^{\ell}$ for some $k, \ell \in \N$, then $\sum_{n=1}^{\infty} \frac{a_n}{n^2}$ converges absolutely for $\Re(s) > k+1$.
+
+For example. $\zeta(s) \zeta(s-1) = \left(\sum_{m=1}^{\infty} \frac{1}{m^s}\right)\left(\sum_{m=1}^{\infty}\frac{n}{n^s}\right) = \sum_{N=1}^{\infty} \frac{c_N}{N^s}$ where $c_N = \sum_{d|N}\frac{N}{d} = \sum_{d|N} d = \sigma(N)$ for $\Re(s) > 2$.
+\end{enumerate}
+
+Define the \emph{von Mangoldt function} $\Lambda: \N \to \R$ by:
+\begin{align*}
+\Lambda(n) = \begin{cases} \log p & n = p^k, k \geq 1,\.p\text{ prime} \\ 0 & \ow \end{cases}
+\end{align*}
+there are relatively few prime powers, so $\Lambda$ is to be thought of as a weighted indicator function of the primes.
+
+One can show that $\pi(x) = \sum_{1\leq n\leq x} \one_{\text{primes}}(n) \thicksim \frac{x}{\log x}$, which is equivalent to seeing that $\Psi(x) \coloneqq \sum_{1\leq n\leq x} \Lambda(n)  \thicksim x$.
+
+\begin{proposition}
+Let $s \in \C, \Re(s) >1$. Then:
+\begin{align*}
+\frac{\zeta'(s)}{\zeta(s)} &= -\sum_{n=1}^{\infty} \frac{\Lambda(n)}{n^s}
+\end{align*}
+\end{proposition}
+\begin{proof}
+For $\Re(s) > 1$, we have that $\zeta(s) = \Pi_p (1-p^{-s})^{-1}$, and so $\log\zeta(s) = -\sum_{p} \log(1-p^{-s})$. Now note that $\frac{d}{ds}p^{-s} = \frac{d}{ds}e^{-s\log p} = -\log(p) p^{-s}$.
+
+Therefore, differentiating both sides, we have:
+\begin{align*}
+\frac{\zeta'(s)}{\zeta(s)} &= -\sum_p \frac{(\log p) p^{-s}}{1-p^{-s}} \\
+&= -\sum_p (\log p) \sum_{j=1}^{\infty} p^{-js} \\
+&= -\sum_{n=1}^{\infty} \frac{\Lambda(n)}{n^s}
+\end{align*}
+\end{proof}
+
+Then integrating $\frac{\zeta'(s)}{\zeta(s)}\frac{x^s}{s}$ around a contour, one can show that:
+\begin{align*}
+\Psi(x) = \frac{1}{2\pi\im}\int_{c-\im \infty}^{c+\im\infty} \left(-\frac{\zeta'(s)}{\zeta(s)}\frac{x^s}{s}\right) ds
+\end{align*}
+Then, shifting the contour to the left, this is equal to:
+\begin{align*}
+= x - \sum_{p:\zeta(p) = 0} \frac{x^p}{p}-\frac{\zeta'(0)}{\zeta(0)} - \frac{1}{2}\log\left(1-\frac{1}{x^2}\right)
+\end{align*}
+
+\begin{theorem}
+Let $X>1$ and let $P = \Pi_{p\leq \sqrt{X}}p$. Then $\pi(X)-\pi(\sqrt{X})+1 = \sum_{d|P}\mu(d)\floor{\frac{X}{d}}$
+\end{theorem}
+\begin{proof}
+By the sieve of Eratosthenes, if we delete from $\{2,3,\ldots, X\}$ all multiples of primes $\leq \sqrt{X}$, we are left with $\{p : \sqrt{X} < p \leq X\}$. \\
+Hence we have that $\{1\leq n\leq X:(n,P) = 1\} = \{1\}\cup\{p:\sqrt{X}<p\leq X\}$.\\
+So $\pi(X)-\pi(\sqrt{X}) + 1 = \#\{1\leq n\leq X: (n,P) = 1\}$.
+Also, by lemma \textbf{5.10}, $\sum_{d|n} \mu(d) = \begin{cases} 1 & n=1 \\ 0 & n>1\end{cases}$. Hence:
+\begin{align*}
+\#\{1\leq n \leq X: (n,P) = 1\} &= \sum_{1\leq n\leq X} \sum_{d|(n,P)} \mu(d) \\
+&= \sum_{d|P} \sum_{1\leq n\leq X, n \equiv 0 \mod d} \mu(d)\\
+&= \sum_{d|P} \mu(d) \sum)_{1\leq n \leq X, n\equiv 0 \mod d} 1\\
+&= \sum_{d|P} \mu(d) \floor{\frac{X}{d}}
+\end{align*}
+\end{proof}
+The next two results use divisibility propertied of binomial coefficients
+\begin{theorem}[Tchebychev]
+$\exists c_2 > c_1 > 0 \st \forall x \geq 2:$
+\begin{align*}
+c_1 \frac{x}{\log x} \leq \pi(x) \leq c_2 \frac{x}{\log x}
+\end{align*}
+Where we can take $c_1 = \frac{\log 2}{2} \approx 0.346\ldots$, and $c_2 = 6\log 2 \approx 4.158\ldots$ for $x \geq 4$.
+\end{theorem}
+\begin{proof}[Proof of upper bound.]
+We shall sandwich $n \in \N$ between two powers of $2$.
+
+We first prove by induction on $k$ that $\pi(2^k) \leq 3\cdot\frac{2^k}{k} (\dagger)$ for $k \geq 1$.
+
+Observe that, for even $x \geq 4$, $\pi(x) \leq \frac{x}{2}$, so $\pi(2^k) \leq 2^{k-1} \leq 3\cdot \frac{2^k}{k}$ whenever $k \leq 6$.
+
+Let $n \in \N, N = \binom{2n}{n} < 2^{2n}$. Then $N \geq \Pi_{n<p\leq 2n}p$ since every prime in this product divides the numerator once and doesn't divide the denominator, and so $\geq n^{\pi(2n)-\pi(n)}$
+
+So $\pi(2n)-\pi(n) \leq \frac{\log(2^{2n})}{\log n} = 2\log 2\frac{n}{\log n}$. Assuming the inductive hypothesis $(\dagger)$ for $k$
+\begin{align*}
+\pi(2^{k+1}) &\leq \pi(2^k) + 2\log 2 \frac{2^k}{\log 2^k}\\
+&= \pi(2^k) + \frac{2^{k+1}}{k}\\
+&\leq 3 \cdot \frac{2^k}{k} + \frac{2^{k+1}}{k}\\
+&= 5 \cdot \frac{2^k}{k} = 5\cdot \frac{2^{k+1}}{2k}\\
+&\leq 3\cdot \frac{2^{k+1}}{k+1}
+\end{align*}
+for $k \geq 5$. Hence $(\dagger)$ holds for all $k\geq 1$. Moreover, $\frac{d}{dx}\left(\frac{x}{\log x}\right) = \frac{\log x - 1}{(\log x)^2} > 0$, so $\frac{x}{\log x}$ is monotonic increasing for $x \geq e$. So if $4 \leq 2^k < x \leq 2^{k+1}$, then $\pi(x) \leq \pi(2^{k+1}) \leq 6\cdot \frac{2^k}{k+1} < 6 \log 2 \frac{2^k}{\log(2^k)} < 6\log 2 \frac{x}{\log x}$.
+\end{proof}
+Let $n \geq 1$, $p$ a prime. Define the \emph{p-adic valuation of n} as $v_p(n)$, the exponent of $p$ in the factorisation of $n$.
+
+Clearly $n = p^{v_p(n)}n_0$ with $(n_0,p) = 1$, and $v_p(nm) = v_p(n) + v_p(m)$. Question 6 on sheet 3 will show that $v_p(n!) = \sum_{i=1}^{\infty} \floor{\frac{n}{p_i}}$
+\begin{lemma}
+Let $n \in \N, N = \binom{2n}{n}$. Then:
+\begin{enumerate}
+\item If $\frac{2n}{3} < p \leq 2n$, then $(N,p) = 1$
+\item If $p^k | N$ for some $k \geq 1$ then $p^k \leq 2n$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item If $p \in (\frac{2n}{3}, n]$, then $p \leq n < 2p \leq 2n < 3p$. Hence both the denominator and numerator of $N = \binom{2n}{n}$ are divisible by exactly one copy of $p$
+\end{enumerate}
+\end{proof}
+\begin{proof}[Proof of lower bound]
+Let $n \in \N, N = \binom{2n}{n} = \prod_{p\leq 2n}p^{v_p(N)}$. By the previous lemma, we have $p^{v_p(N)} \leq 2n$, and so $v_p(N) \leq \frac{\log 2n}{\log p}$.
+
+It then follows from this that:
+\begin{align*}
+\log N &= \sum_{p\leq 2n} v_p(N) \log p\\
+&\leq \sum_{p\leq 2n} \frac{\log 2n}{\log p}\log p\\
+&= \pi(2n) \log 2n
+\end{align*}
+So we need a lower bound on $N$. Note that $2^{2n} = (1+1)^{2n} = \sum_{j=0}^{2n} \binom{2n}{j} = 2 + \sum_{j=1}^{2n-1} \binom{2n}{j} \leq 2 + (2n-1)N \leq 2nN$
+
+So we have $\pi(2n) \geq \frac{\log N}{\log 2n} \geq \frac{\log(2^{2n}) - \log 2n}{\log 2n} = \log 2 \frac{2n}{\log 2n} - 1$
+
+So if $2n < x \leq 2n+2$, we have $\pi(x)\geq \pi(2n) \geq \log 2\frac{x-2}{\log x} - 1 \geq \frac{\log 2}{2}\frac{x}{\log x}$
+\end{proof}
+
+\begin{theorem}[Bertrand's Postulate]
+For all $n > 1$ there is a prime $p \in [n, 2n)$.
+\end{theorem}
+For this, we need a lemma: for $x \geq 1$, let $P(x) = \prod_{p\leq x} p$. Then $P(x) \leq 4^x$ for all $x \geq 1$.
+\begin{proof}
+By induction on $n$, noting that $P(x) = P(\floor{x})$. Firstly, note that $P(2) \leq 4^2, P(3) \leq 4^3$.
+
+For $n\geq 1$, $P(2n+1) = P(2n+1) = \prod_{p\leq n+1} p \cdot \prod_{n+1\leq p\leq 2n+1} p = P(n+1) \cdot \prod_{n+1 \leq p\leq 2n+1} p$.
+
+Now clearly $\prod_{n+2\leq p\leq 2n+1}p$ divides $\binom{2n+1}{n}$ since each prime $p \in [n+2, 2n+1]$ divides $\binom{2n+1}{n}$. 
+
+Moreover, $2\binom{2n+1}{n} = \binom{2n+1}{n} + \binom{2n+1}{n+1} < \sum_{j=0}^{2n+1} \binom{2n+1}{j} = 2^{2n+1}$, so $\binom{2n+1}{n}\leq 4^n$.
+
+It then follows that $P(2n+2)=P(2n+1)\leq P(n+1)\cdot 4^n \leq 4^{n+1}\cdot 4^n = 4^{2n+1}$.
+\end{proof}
+\begin{proof}[Proof of Bertrand's Postulate]
+Suppose $\nexists p \in [n,2n)$. Let $N = \binom{2n}{n}$. Then if $p|N$, we have $p \leq \frac{2n}{3}$ by \textbf{5.14}, and also $p^{v_p(N)} \leq 2n$ for all $p$.
+
+Write $N = N_1 \cdot N_2$ with $N_1 = \prod_{v_p(N) = 1} p$, $N_2 = \prod_{v_p(N) \geq 2} p$.
+
+Then $N_1 \leq \prod_{p\leq 2n/3} p = P(2n/3) \leq 4^{2n/3}$\\
+And $N_2 = \prod_{v_p(N)\geq 2} p^{v_p(N)} \leq \prod_{p\leq \sqrt{2n}} 2n \leq (2n)^{\sqrt{2n}}$
+
+Hence $\frac{2^{2n}}{2n} \leq N \leq 4^{2n/3} \cdot(2n)^{\sqrt{2n}}$, and so
+\begin{align*}
+2^{2n/3} \leq (2n)^{1+\sqrt{2n}} \implies \frac{\log 2}{3} (2n) \leq (1+\sqrt{2n})\log(2n)
+\end{align*}
+which is obviously false for large values of $n$, e.g. $n = 2^9$.
+
+For smaller values of $n$, consider the list of primes $p=2,5,11,23,47,89,179,359,719$, where each $p_i$ is the largest prime $\leq 2(p_{i-1}+1)$.
+\end{proof}
+
+\section{Continued Fractions}
+We want to find good rational approximations for irrational numbers, where $|\pi - \frac{p}{q}|$ small relative to $q$, e.g. $335/113$
 
 \end{document}

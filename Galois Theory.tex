@@ -999,22 +999,198 @@ $\angle{\sigma^3} = \Z/2$, so $\sigma^3\eta = \eta$, so the orbit of $\eta$ unde
 So $(x-\eta)(x-\eta_2)(x-\eta_3)$ is a polynomial in $\Q[x]$ irreducible, which expands out to $x^3+x^2-2x-1$. We also know there is a subfield $M'\subseteq \Q(\xi_7)$ with $[\Q(\xi_7):M'] = 3$. We can field it by examining the orbit of $\sigma^2$ on $\xi_7$, since $\angle{\sigma^2} = \Z/3$. If we put $\epsilon = \xi + \xi^2 + \xi^4$, then $\epsilon \in \Q(\xi_7)^{\Z_3} = M'$, so $\Q(\epsilon)$ is a quadratic extension of $\Q$, and $G.\epsilon = \{\epsilon, \epsilon'\}$ where $\epsilon' = \xi^{-1} + \xi^{-2} + \xi^{-4}$.
 
 So the polynomial of this extension is $(x-\epsilon)(x-\epsilon') = x^2+x+2 \implies \Q(\epsilon) = \Q(\sqrt{-7})$, since the discriminant of this polynomial is $\Delta = 1-4\cdot 2 = -7$.
+\begin{proposition}
+Let $p$ be prime $>2$. Then the unique quadratic extension of $\Q$ contained in $\Q(\xi_p)$ is $\Q(\sqrt{\pm p})$ where the sign is $(-1)^{(p-1)/2}$.
+\end{proposition}
+\begin{proof}[Proof 1 (sketch).]
+Pick a generator $\sigma$ of $\aut(\Q(\xi_p)/\Q) = G \cong \Z_{p-1} = \angle{\sigma}$. Then take $\alpha = \xi + \sigma^2 \xi + \sigma^4 \xi + \ldots + \sigma^{p-1} \xi$. Then $G\alpha = \{\alpha, \sigma\alpha\}$, and $\alpha+\sigma\alpha = -1$.
+
+Then compute $\alpha\sigma\alpha$, and so the minimal polynomial $x^2 + x + \alpha\sigma\alpha$ of $\alpha$, and hence the discriminant, and conclude.
+\end{proof}
+\begin{proof}[Proof 2.]
+Let $f$ be an irreducible polynomial over $K$, and $L$ a splitting field for $f$, with $f(x) = (x-\alpha_1)\ldots(x-\alpha_n)$.
+
+Then $f'(x) = \sim_{i=1}^{n}  (x-\alpha_1)\ldots(x-\alpha_{i-1})(x-alpha_{i+1})\ldots(x-\alpha_n)$\\
+Hence $f'(\alpha_i) = (\alpha_i-\alpha_1)\ldots(\alpha_i-\alpha_{i-1})(\alpha_i-\alpha_{i+1})\ldots(\alpha_i-\alpha_n)$\\
+So $f'(a\alpha_1)\ldots f'(\alpha_n) = \prod_{i \neq j} (\alpha_i-\alpha_j) = (-1)^{p(p-1)/2} \prod_{i<j} (\alpha_i-\alpha_j)^2 = \Delta(f)$
+\end{proof}
+\begin{corollary}
+Take $f(x) = x^p-1$, so that $f'(x) = px^{p-1}$. Then $\Delta(f) = (-1)^{p(p-1)/2} p^p \xi^{(1+2+\ldots +p-1)(p-1)} = \pm 1 p^p = (-1)^{(p-1)/2} p^p$
+\end{corollary}
+$\Q(\sqrt{\Delta})$ is always a quadratic extension of $\Q$ contained in $\Q(\xi_p)$, and there is a unique root, so we're done.
+\begin{corollary}
+$\aut(\Q_p(\xi_p)/\Q) \not\subseteq A_n$.
+\end{corollary}
+\item $p=17$. $(\Z/17)^{\times} \cong \Z/16$. Then we have a chain of subgroups $\one < \Z/2 < \Z/4 < \Z/8 < \Z/16$, and so the fundamental theorem of Galois theory gives intermediate subfields $\Q(\xi_{17}) \supset K_3 \supset K_2 \supset K_1 \supset \Q$, where $[K_i: K_{i-1}] = 2$, and so each $K_i$ can be obtained from $K_{i-1}$ by adding a single square root, hence $\Q(\xi_17)$ is constructible by ruler and compass.
+
+But $K_3 = \Q(\eta) = \Q(2\cos \frac{2\pi}{17})$, and so $\cos \frac{2\pi}{17}$ is constructible, and hence the regular 17-gon is constructible.
+\begin{theorem}[Gauss]
+A regular $n$-gon is constructible iff it is of the form:
+\begin{center}
+$n = 2^k p_1\ldots p_r$ where $p_i$ are distinct primes of the form $2^{2^\ell} + 1$.
+\end{center}
+These primes are known as Fermat primes, and the only known ones are 3, 5, 17, 257, 65537.
+\end{theorem}
+\begin{proof}
+$[\Q(\xi_n):\Q(\cos\frac{2\pi}{n})] = 2$, and so $\cos \frac{2\pi}{n}$ is constructible iff $\xi_n$ is constructible iff $\Q(\xi_n)$ is a constructible field.
+\begin{itemize}
+\item[\underline{$\implies$:}] If $[\Q(\xi_n):\Q]$ is a constructible field, then $[\Q(\xi_n):\Q] = \#(\Z/n\Z)^{\times}$ is a power of 2. Note that $\#(\Z/n\Z)^{\times} = \prod_i p_i^{\alpha_i-1}(p_i-1)$ from Number Theory.
+
+So $n = 2^k p_1\ldots p_r$ with $p_i$ distinct primes, since the $\alpha_i \leq 1$. Moreover, these $p_i$ must be one more than a power of $2$, so $p_i = 2^m + 1$. But this implies that $m$ must also be a power of $2$ - check this.
+
+\item[\underline{$\impliedby$:}] If $n$ is of this form, it suffices to find a chain of subgroups $0 \subset A_1 \subset A_2 \subset \ldots \subset A_r = (\Z/n\Z)^{\times}$, with $A_l/A_{l-1} \cong \Z/2\Z$, as then we have a sequence of quadratic extensions. But any abelian group of order $2^n$ has such a chain of groups, by considering the structure theorem for finite abelian groups.
+\end{itemize}
+\end{proof}
 \end{enumerate}
 \end{enumerate}
+\hrule
+Kummer: $L/K$ Galois, $\aut(L/K) = \Z/n$ with a primitive n\th root of 1 in $K$, then $L = K(\sqrt[n]{\theta})$
 
+Suppose $f \in K[x]$ is irreducible, and $\delta = (\alpha_1-\alpha_2)(\alpha_2-\alpha_3)(\alpha_1-\alpha_3) \in K$, so $L$ is the splitting field of $f(x) = (x-\alpha_1)(x-\alpha_2)(x-\alpha_3)$. Let $\sqrt{-3} \in K$, so that $\xi_3 \in K$.
 
+Then $\aut(L/K) \leq S_3$, and $[L:K] = 3$, hence $\aut(L/K) = \Z/3$ since it is a transitive subgroup. Then Kummer theory implies that $L = K(\cbrt{\theta})$ for some $\theta \in K$. Hence any element of $L$, in particular the roots of $f$, can be written as a linear combination of $1, \cbrt{\theta}, (\cbrt{\theta})^2$, and $\theta$ can be written as a linear combination of $K$. In the case where $K = \Q(\sqrt{-3})$, we see that all cubics over $\Q$ are soluble using radicals.
 
+In general, a cubic $f(x) = x^3 + px + q \in K[x]$ is solvable by radicals for arbitrary $K$ with characteristic not in $\{2,3\}$.
 
+\begin{proof}
+Let $K' = K(\sqrt{-3}, \sqrt{\Delta})$, and $L'$ a splitting field of $f$ over $K'$.
 
+Now if $f'$ is not irreducible it factorises as a quadratic and a linear term, so is solvable by radicals. Otherwise, $f$ is irreducible over $K'[x]$, and $[L':K'] = 3$, so there exists $\theta \in K'$ with $L' = K'(\cbrt{\theta})$, and such a $\theta$ is of the form $c_1 + c_2\sqrt{-3} +c_3\sqrt{\Delta} + c_4\sqrt{-3\Delta}$, and we're done.
+\end{proof}
 
+Worked example: Let $\Gal(L/K) = \angle{\sigma}$ so $\sigma \alpha_3 = \alpha_2$ etc, where $\alpha_i$ are the roots of $f(x) = x^3+px+q$.
 
+Set $beta = p_\xi(\alpha_1) = \alpha_1 + \xi \alpha_2 + \xi^2 \alpha_3, \gamma = p_{\xi^2}(\alpha_1) = \alpha_1 + \xi^2 \alpha_2 + \xi \alpha_3$.
 
+Then $1, \beta, \gamma$ form a basis of $L$ as a $K$-vector space, and $\beta^3$ is an element $\theta \in K$ that Kummer theory constructs.
 
+So $\alpha_1 = \frac{1}{3}(\beta+\gamma), \alpha_2 = \frac{1}{3}(\xi^2\beta + \xi\gamma), \alpha_3 = \frac{1}{3}(\xi\beta + \xi^2\gamma)$. If we find $\beta^3, \gamma^3$ in terms of the coefficients of $f$, this determines $\alpha_1, \alpha_2, \alpha_3$.
 
+Then we claim:
+\begin{enumerate}
+\item $\beta \gamma = -3p$
+\item $\beta^3, \gamma^3$ are roots of $x^2+27qx-27p^3$
+\end{enumerate}
+so that $\theta = \frac{1}{2}(-27q+3\sqrt{-3\Delta})$, giving $\beta = \cbrt{\theta}, \gamma = -3p/\beta$, and this gives the roots.
 
+\begin{proof}[Proof of claim.]
+Explicit computation:
+\begin{enumerate}
+\item $\beta\gamma = (\alpha_1 + \xi \alpha_2+ \xi^2\alpha_3)(\alpha_1+\xi^2\alpha_2+\xi\alpha_3) = \alpha_1^2 + \alpha_2^2 + \alpha_3^2 + (\xi+\xi^2)\sum_{i<j}\alpha_i\alpha_j = (\alpha_1+\alpha_2+\alpha_3)^2 - 3\sum_{i<j} \alpha_i\alpha_j = -3p$
 
+\item So $\beta^3\gamma^3 = -27p^3$, but $\beta^3+\gamma^3 = \beta^3+\gamma^3 + (\alpha_1+\alpha_2+\alpha_3)^3 = \ldots = 3(\alpha_1^3+\alpha_2^3+\alpha_3^3) + 18\alpha_1\alpha_2\alpha_3 = -27q$ using facts about sums etc of roots. So $(x-\beta^3)(x-\gamma^3) = \frac{1}{2}(-27q \pm 3\sqrt{-3\Delta})$.
+\end{enumerate}
+\end{proof}
 
+$L\supseteq K$ is an \emph{extension by radicals} if there is a chain $K = L_0 \subset L_1 \subset \ldots \subset L_r = L$ and $L_i$ is obtained from $L_{i-1}$ by adjoining a root of $x^{n_i} - \theta_i \in L_{i-1}[x]$. $L \supseteq K$ is \emph{contained in an extension by radicals} if there exists an extension $L' \supseteq L \supseteq K$ with $L'\supseteq K$ an extension by radicals.
 
+$f \in K[x]$ is \emph{solvable by radicals} if the splitting field $L \supseteq K$ is contained in an extension by radicals. For example, any quadratic or cubic is solvable by radicals.
+
+\begin{lemma}
+If $L \supseteq K$ Galois, $G = \aut(L/K)$ abelian, and $K$ contains a primitive $|G|\th$ root of unity, then $L \supseteq K$ is an extension by radicals.
+\end{lemma}
+\begin{proof}
+$G \cong \Z/n_1 \times \ldots \times \Z/n_r$ by the CFGAG. We induct on $r$ with $N = \Z/n_1$, so $N \triangleleft G$. Then $L^N/K$ is Galois with $G/N \cong \Z/n_2 \times \ldots \Z/n_r$. By induction $L^N/K$ is an extension by radicals. But $L/L^N$ is a cyclic extension, so $K$ and hence $L^N$ contains all the $n_r\th$ roots of unity, and hence a primitive $n_r\th$ root of unity. Then Kummer theory tells us $L = L^N(\sqrt[d]{\theta})$ for some $\theta \in L^N, d \geq 0$.
+\end{proof}
+
+\begin{corollary}
+If $K$ is arbitrary and $L \supseteq K$ is Galois with $G = \aut(L/K)$ abelian and $\charr K \nmid |G|$, then $L/K$ is contained in an extension by radicals.
+\end{corollary}
+\begin{proof}
+Put $\ell = |G|$. Then we have the extensions $K \subseteq K(\xi_l) \subseteq L(\xi_l) \supseteq L \supseteq K$. Then we claim that $\aut(L(\xi_l)/K(\xi_l)) \injection \aut(L/K)$ is a subgroup.
+
+Proof: if $L$ is the splitting field of some polynomial $f$ that is separable, and $\sigma \in \aut(L(\xi)/K(\xi))$ then $\sigma$ fixes $f$, and so permutes its roots, so $\sigma(L)\subseteq L$, and there is a homomorphism $\aut(L(\xi)/K(\xi)) \to \aut(L/K)$. But $L(\xi)/K(\xi)$ is the splitting field of the same polynomial so this homomorphism is injective.
+
+Hence $L \subseteq L(\xi_l)$ and $L(\xi_l) \supseteq K(\xi_l) \supseteq K$ is an extension by radicals.
+\end{proof}
+Observe that we never used the fact that $G$ was abelian in above, just that $G$ has a normal subgroup $N$ with $N$ cyclic and $G/N$ in this class. We've already seen an example of $G$ in this bigger class $K \subseteq K(\xi_n) \subseteq L$ where $L$ is the splitting field of $x^n-\theta$. So what we really want is a \emph{short exact sequence} $0 \to \Z_d \to G \to A \to 0$, where $A \leq (\Z/n\Z)^{\times}$ for some $n$.
+
+We say $G$ is \emph{solvable} if there is some chain $1 = G_0 \leq G_1 \leq G_1 \leq \ldots \leq G_4 = G$, such that:
+\begin{enumerate}
+\item $G_i \triangleleft G_{i+1}$
+\item $G_{i+1}/G_{i}$ is abelian
+\end{enumerate}
+
+\begin{lemma}
+$G$ is solvable and finite $\iff$ we have above, but with $G_{i+1}/G_{i}$ is cyclic.
+\end{lemma}
+\begin{proof}
+One direction is obvious, since cyclic groups are abelian. For the other direction, suppose $G_{i+1}/G_i$ is abelian. Then it is $\Z_{a_i} \times \ldots \times \Z_{a_m}$. But for this we have a chain $1 \leq \Z_{a_1} \leq \Z_{a_1}\times \Z_{a_2} \leq \ldots \Z_{a1} \times \ldots \Z_{a_n}$ with quotients at each stage of $\Z_{a_i}$, so we can refine the old chain to get a new chain where all quotients are cyclic.
+\end{proof}
+
+\begin{proposition}
+\item
+\begin{enumerate}
+\item If $G$ solvable, then $H \leq G \implies H$ is solvable.
+\item If $G$ is a group with $N \triangleleft G$, then $G$ is solvable $\iff$ $N$ and $G/N$ are solvable
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Assume $G$ is solvable, so that $1 \leq G_1 \leq \ldots \leq G_r \leq G$ with abelian subquotients. Then we have a chain $1 \leq G_1 \cap H \leq \ldots \leq G \cap H = H$.
+
+We have to show that $H_i = G_i \cap H$ is normal in $H_{i+1}$ and that $H_{i+1}/H_{i}$ is abelian
+
+But if $h \in G_{i+1} \cap H, h G_i h^{-1} \subseteq G_{i}$, as $G_i \triangleleft G_{i+1}$, so $h(G_i \cap H)h^{-1} \subseteq G_i \cap H$ as $H$ is a subgroup, and hence $H_i \triangleleft H_{i+1}$. Now check that $H_{i+1}/H_{i} \to G_{i+1}/G_i; hH_i \mapsto hG_i$ is an injective group homomorphism
+
+\item Exercise.
+\end{enumerate}
+\end{proof}
+\begin{corollary}
+$S_n$ is not solvable for $n \geq 5$
+\end{corollary}
+\begin{proof}
+$A_n \triangleleft S_n$ is simple, so the only chain we can make is $1 \triangleleft A_n$, but $A_n/1 = A_n$ is not abelian, and so $S_n$ is not solvable.
+\end{proof}
+\begin{theorem}[Galois]
+Let $f \in K[x], \charr K = 0$ or $\charr K > \deg f$. Let $L$ be the splitting field of $f/K$. Then $f$ is solvable by radicals if and only if $G = \aut(L/K)$ is a solvable group.
+\end{theorem}
+\begin{proof}
+$\impliedby$ we've already seen - it's the same as the proof for abelian groups. We'll do $\implies$ next lecture, but for now let's play with $\impliedby$.
+\end{proof}
+\subsection*{Quartics}
+$f \in K[x]$, $f(x) = (x-\alpha_1)(x-\alpha_2)(x-\alpha_3)(x-\alpha_4)$. Suppose $f$ is irreducible over $K[x]$, with $\charr K > 3$, so $f$ is separable with splitting field $L$, and $G = \aut(L/K)$.
+
+WLOG $\sum \alpha_i = 0$, so $f(x) = x^4 + px^2+ qx+r$. We want to find the roots. If $G$ is solvable, we know how to do this.
+
+The possible Galois groups are transitive subgroups of $S_4$, which are $S_4, A_4, D_4 = \Z_4 \rtimes \Z_2 = \angle{(1234),(12)(34)}, \Z_4 = \angle{(1234)}, V \cong \Z_2 \times \Z_2 = \angle{(12)(34), (13)(24)}$. There are $3$ more subgroups isomorphic to $\Z_4$ and another $3$ to $D_4$, but they are all conjugate. There are more isomorphic to $V$ but they are not transitive.
+
+Let $\Delta$ be the discriminant of $f$ = $\prod_{i<j} (\alpha_i-\alpha_j)^2$ with $\delta = \sqrt{\Delta}$. Then $\delta \in K \iff G \subseteq A_4$, so $G = V$ or $A_4$. If $\delta \notin K, G = \Z_4, D_4, S_4$.
+
+Note that we have $1 \leq V \leq A_4 \leq S_4$, with subquotients $\Z_2 \times \Z_2, \Z_3, \Z_2$, so $S_4$ is solvable, and so $G \leq S_4$ is solvable. 
+
+This corresponds with fields $L \supseteq M = L^{G \cap  V} \supset L^{G \cap A_4} = K(\delta) \supseteq K$, which are extensions of degrees: 2 or 4; 3 or 1; 1 or 2.
+
+We have 5 cases:
+\begin{tabular}{c|c|c}
+$G\cap V$ & $G \cap A_4$ & $G$ \\
+$V$&$V$&$V$\\
+$V$&$A_4$&$A_4$\\
+$V$&$V$&$D_4$\\
+$\Z_2$&$\Z_2$&$\Z_4$\\
+$V$&$A_4$&$S_4$
+\end{tabular}
+
+We need to study this intermediate field $M = L^{G \cap V}$, and decide if it is $K(\delta)$ or $K(\delta)(\cbrt{\theta})$ for some $\theta$ in $K(\delta)$.
+
+We can express $M$ in terms of partially symmetrised functions of $\alpha_1, \ldots, \alpha_4$.
+
+Given $\gamma \in L, \sum_{g \in G \cap V} g\gamma \in L^{V \cap G} = M$. For instance, if $G = S_4, \gamma= \alpha_1$, we get $\alpha_1+\alpha_2+\alpha_3+\alpha_4 = 0 \in M$.
+
+We first change basis so $\beta = \alpha_1+\alpha+2, \gamma = \alpha_1+\alpha_3, \epsilon = \alpha_1+ \alpha_4 = -(\alpha_2+\alpha_3)$.
+
+$\beta^2 = -(\alpha_1+\alpha_2)(\alpha_3+\alpha_4)$\\
+$\gamma^2 = -(\alpha_1+\alpha_3)(\alpha_2+\alpha_4)$\\
+$\epsilon^2 = -(\alpha_1+\alpha_4)(\alpha_2+\alpha_3)$
+
+It is clear that $V\beta^2 = \beta^2, V\gamma^2=\gamma^2, V \epsilon^2 = \epsilon^2$, and if $G = S_4$, it is clear that $S_4 \beta^2 = \{\beta^2, \gamma^2, \epsilon^2\}$, and for any $G \leq S_4, G \{\beta^2, \gamma^2, \delta^2\} = \{\beta^2, \gamma^2, \epsilon^2\}$.
+
+We claim that $L^{G \cap V} = K(\beta^2, \gamma^2, \epsilon^2)$. $\supseteq$ is clear, and for equality, by Artin we have $\aut(L/K(\alpha^2, \beta^2, \gamma^2)) = G \cap V$, and this is immediate if $\beta^2, \gamma^2, \epsilon^2$ are distinct, but $\beta^2 = \gamma^2 \implies \beta =\pm \gamma \implies \alpha_2=\alpha_3$ or $\alpha_1=\alpha_4$, but $f$ is separable \contr.
+
+So we must find $\beta^2, \gamma^2, \epsilon^2$ in terms of the coefficients of $f$. Set $g(x) = (x-\beta^2)(x-\gamma^2)(x-\epsilon^2) \in K[x]$ as $G$ permutes the roots of the \emph{resolvent cubic}.
+
+Hence the coefficients are symmetric functions in $\alpha_1, \ldots, \alpha_4$, and so if we expand out we know that this is a polynomial in terms of the coefficients of $f$.
+
+Claim: $g(x) = x^3 + 2px^2 + (p^2-4r)x - q^2$ - expand it out. 
 \end{document}
-
-

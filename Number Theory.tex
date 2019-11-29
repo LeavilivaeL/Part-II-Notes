@@ -1123,6 +1123,161 @@ For smaller values of $n$, consider the list of primes $p=2,5,11,23,47,89,179,35
 \end{proof}
 
 \section{Continued Fractions}
-We want to find good rational approximations for irrational numbers, where $|\pi - \frac{p}{q}|$ small relative to $q$, e.g. $335/113$
+We want to find good rational approximations for irrational numbers, where $|\pi - \frac{p}{q}|$ small relative to $q$, e.g. $335/113$. We define a possibly finite sequence of integers $a_0, a_1, a_2, \ldots$ with $a_n \geq 1$ for $n \geq 1$ as follows:
+\begin{enumerate}
+\item Let $a_0 = \floor{\theta}$. If $\theta = a_0$, \textsc{Halt}. Otherwise, let $\theta_1 = 1/{\theta - a_0} > 1$.
+\item Let $a_1 = \floor{\theta_1} \geq 1$. Stop if $\theta_1 = _1$. Otherwise let $\theta_2 = \frac{1}{\theta_1 - a_1} > 1$, and repeat.
+\end{enumerate}
+If this algorithm stops at step $n$, then we write $\theta = [a_0;a_1,a_2,\ldots, a_n]$, otherwise, we write $\theta = [a_0;a_1,a_2,\ldots,a_{n-1},\theta_n]$.
+
+We call this the \emph{continued fraction expansion} of $\theta$. The $a_i$ are known as the \emph{partial quotients} and the $\theta_i$ are the \emph{complete quotients} for $\theta$.
+
+For instance, $\theta = \frac{59}{13} = 4 + \frac{7}{13} = 4 + \frac{1}{1+\frac{6}{7}} = 4  + \frac{1}{1+\frac{1}{1+\frac{1}{6}}}$
+
+\begin{proposition}
+The CFE of $\theta \in \R$ terminates iff $\theta \in \Q$.
+\end{proposition}
+\begin{proof}
+Only if is clear.
+
+Suppose $\theta = \frac{b_0}{c_0} \in \Q$. Then each $\theta_i$ is also in $\Q$, say $\theta_i = \frac{b_i}{c_i}$ in lowest terms. Then $\theta_i = a_i + \frac{1}{\theta_{i+1}}$, so $b_{i+1} = c_i < b_i$, and so the $b_i$ strictly decrease but are positive, so it terminates.
+\end{proof}
+Note that if $\frac{b_i}{c_i} = a_i + \frac{c_{i+1}}{b_{i+1}}$ then $b_i = a_ib_{i+1} + b_{i+2}$, so all we're really doing is Euclid's algorithm on $(b_0, c_0)$.
+
+Let $a_0, a_1, \ldots$ be integers with $a_n \geq 1$. We define the \emph{convergents} of the continued fraction expansion $[a_0;a_1,a_2,\ldots]$ as pairs of integers $(p_n, q_n)$ for $n\geq 0$ as follows:\\
+$p_0 = a_0, p_1 = a_0a_1 +1, p_n = a_np_{n-1} + p_{n-2}$\\
+$q_0 = 1, q_1 = a_1, q_n = a_nq_{n-1} + q_{n-1}$
+
+Note that $1 \leq q_1 < q_2 < \ldots$ is an increasing sequence of positive integers tending to $\infty$. We can also write this in matrix form, and sometimes let $p_{-1} = 1, q_{-1} = 0$, giving:
+\begin{align*}
+\begin{pmatrix}
+p_n & p_{n-1} \\ q_n & q_{n-1}
+\end{pmatrix} = \begin{pmatrix}
+a_0 & 1 \\ 1 & 0
+\end{pmatrix}\begin{pmatrix}
+a_1 & 1 \\ 1  0
+\end{pmatrix}\cdots\begin{pmatrix}
+a_n & 1 \\ 1 & 0
+\end{pmatrix}
+\end{align*}
+\begin{proposition}
+\item
+\begin{enumerate}
+\item $(p_n, q_n) = 1$, and in fact $p_nq_{n-1} - p_{n-1}q_n = (-1)^{n-1}$
+\item $[a_0;a_1, a_2, \ldots, a_n] = \frac{p_n}{q_n}$
+\item If $\alpha = [a_0;a_1,\ldots,a_{n-1}\beta]$ for some real $\beta > 0$, then $\alpha$ lies strictly between $\frac{p_n}{q_n}$ and $\frac{p_{n-1}}{q_{n-1}}$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Take the determinant of the matrix and this appears
+\item By induction on $n$ - base case is immediate. For induction step, just do manual manipulation.
+\item By induction on $n$ - base case is immediate. Let $n >0$ and set $\gamma = a_n + \frac{1}{\beta}$. By the induction hypothesis:
+\begin{align*}
+\alpha = [a_0;a_1,\ldots, a_{n-1},\gamma] &= \frac{p_{n-}\gamma + p_{n-1}}{q_{n-1}\gamma + q_{n-2}}\\
+&= \frac{p_{n-1}(a_n\beta + 1) + \beta p_{n-2}}{q_{n-1}(a_n \beta + 1) + \beta q_{n-2}}\\
+&= \frac{(a_np_{n-1} + p_{n-2})\beta + p_{n-1}}{(a_nq_{n-1} + q_{n-2})\beta + q_{n-1}}\\
+&= \frac{p_n \beta + p_{n-1}}{q_n \beta + q_{n-1}}
+\end{align*}
+Finally, if $\frac{x}{y} < \frac{x'}{y'}$ with $y,y'>0$ then $\frac{x}{y} < \frac{x+x'}{y+y'} < \frac{x'}{y'}$, and so we are done. 
+\end{enumerate}
+\end{proof}
+\begin{theorem}
+Let $\theta \in \R$ be irrational with $[a_0;a_1,a_2,\ldots]$. Then $\forall n \geq 0, |\theta - \frac{p_n}{q_n}| < \frac{1}{q_n q_{n-1}}$. In particular $\frac{p_n}{q_n} \to 0$ as $n \to \infty$.
+\end{theorem}
+\begin{proof}
+$|\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}| = |\frac{p_nq_{n+1} - p_{n+1}q_n}{q_nq_{n+1}}| = |\frac{(-1)^n}{q_nq_{n+1}}| = \frac{1}{q_nq_{n+1}}$
+
+Then write $\theta  = [a_0;a_1, a_2, \ldots, a_{n+1}, \theta_{n+2}]$, and we see that $\theta$ lies between $\frac{p_n}{q_n}$ and $\frac{p_{n+1}}{q_{n+1}}$.
+
+Hence $|\theta - \frac{p_n}{q_n}| < \frac{1}{q_nq_{n+1}}$. Then observing that $q_n \to \infty$ gives the last part of the statement.
+\end{proof}
+As a result of this theorem, we can think of $\theta = [a_0;a_1,\ldots] = \lim_{n\to \infty} [a_0;a_1,\ldots,a_n]$.
+
+If we fix a denominator $q \geq 1$ and try to minimise $|\theta - \frac{p}{q}|$, the best we can expect in general is $\frac{1}{2q}$, where $p$ is the closest integer to $\theta q$.
+
+\begin{theorem}
+Let $\theta \in \R$, and suppose that $(p_n, q_n)$ are convergents for the CFE of $\theta$.
+
+Suppose $q \in \N$ with $1 \leq q < q_{n+1}$ for some $n \in \N$. Then for all $p \in \Z, |q \theta - p| \geq |q_n \theta - p_n|$. 
+
+Moreover, if $q \in \N, p\in \Z$ are are such that $|\theta - \frac{p}{q}| < |\theta-\frac{p_n}{q_n}|$, then $q > q_n$.
+\end{theorem}
+
+\begin{proof}
+For the ``moreover" part, suppose that $q \leq q_n$. Then the first part of the theorem implies that $|\theta - \frac{p}{q}| \geq \frac{1}{q}|q_n\theta - p_n| = \frac{q_n}{q}|\theta-\frac{p_n}{q_n}| \geq | \theta - \frac{p_n}{q_n}| \contr.$
+
+Now let $q \in \N, p \in \Z$ with $1\leq q < q_{n+1}$ for some $n \in \N$. Consider the system of equations $p_nu + p_{n+1}v = p; q_n u + q_{n+1} v = q$.
+
+Then we have that $\det \begin{pmatrix} p_n & p_{n+1} \\ q_n & q_{n+1} \end{pmatrix} = (-1)^n$, so this system has a unique solution $(u,v)$ with $u,v \in \Z$ not both 0.
+
+Thus $q \theta -p = q_n u + q_{n+1} v)\theta - (p_n u + p_{n+1}v) = (q_n \theta - p_nu) + (q_{n+1}\theta - p_{n+1})v$.
+
+If $v = 0$, then $|q\theta - p| = |q_n \theta - p_n||u| \geq |q_n\theta - p_n|$.
+
+We may assume $v \neq 0$. By the second equation, $u \neq 0$ and has the opposite sign to $v$.
+
+Also, $\theta - \frac{p_n}{q_n}$ and $\theta -\frac{p_{n+1}}{q_{n+1}}$ have opposite signs, and it follows that $(q_n \theta - p_n)u$ and $(q_{n+1}\theta-p_{n+1})v$ have the same sign.
+
+So $|q\theta-p| = |(q_n\theta-p_n)u| + |(q_{n+1}\theta-p_{n+1})v| \geq |(q_n\theta-p_n)u| \geq |q_n\theta - p_n|$.
+\end{proof}
+
+\begin{theorem}
+Let $\theta \in \R\setminus \Q$, and suppose that $(p_n, q_n)$ are the convergents for the CFE of $\theta$. Then:
+\begin{enumerate}
+\item At least one of any pair of consecutive convergents satisfies $|\theta-\frac{p}{q}| < \frac{1}{2q^2}$.
+\item If $\frac{p}{q} \in \Q$ is such that $|\theta-\frac{p}{q}| < \frac{1}{2q^2}$, then $p/q = p_n/q_n$ for some $n$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Suppose that for some $n \in \N$, $|\theta-\frac{p_n}{q_n}| \geq \frac{1}{2q_n^2}$ and $|\theta - \frac{p_{n+1}}{q_{n+1}}|\geq \frac{1}{2q_{n+1}^2}$.
+
+Then $\frac{1}{2}\left(\frac{1}{q_n^2} + \frac{1}{q_{n+1}^2}\right) \leq |\theta-\frac{p_n}{q_n}| + |\theta - \frac{p_{n+1}}{q_{n+1}}| = |\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}| = \frac{1}{q_nq_{n+1}}$, contradicting AMGM \contr.
+
+\item Suppose $\frac{p}{q} \in \Q$ with $|\theta-\frac{p}{q}| < \frac{1}{2q^2}$. Then there is some $n \geq 0$ such that $q_n \leq q < q_{n+1}$. We claim that $\frac{p}{q} = \frac{p_n}{q_n}$, because if not, then $\frac{1}{qq_n} \leq |\frac{p}{q} - \frac{p_n}{q_n}| \leq |\theta - \frac{p}{q}| + |\theta-\frac{p_n}{q_n}| = \frac{1}{q}|\theta q - p| + \frac{1}{q_n}|\theta q_n-p_n|$, and so $q < q_n$ \contr.
+\end{enumerate}
+\end{proof}
+
+A CFE of the form $[a_0;a_1,\ldots,a_n,\ldots,a_{n+k},a_n,\ldots,a_{n+k},a_n,\ldots]$ is called \emph{eventually periodic}, and is abbreviated as $[a_0;a_1,\ldots,\overline{a_n,\ldots,a_{n+k}}]$. It is called \emph{purely periodic} if $n=0$, and the \emph{period} is the least positive integer $k+1$ such that this happens.
+
+\begin{theorem}[Lagrange]
+The CFE of $\theta \in \R\setminus \Q$ is eventually periodic if and only if $\theta$ is a quadratic irrational.
+\end{theorem}
+\begin{proof}
+Suppose $\phi = [\overline{a_0;a_1,\ldots,a_n}]$ is purely periodic. Then $\phi = [a_0,a_1,\ldots,a_n,\phi] = \frac{p_n \phi + p_{n-1}}{q_n \phi + q_{n-1}}$. So $\phi^2 + (q_{n-1}-p_n)\phi-p_{n-1} = 0$, and so $\phi$ is a quadratic irrational.
+
+We then observe quadratic irrationals are closed under division, multiplication, addition, and so if $\phi$ is eventually periodic, the periodic part is quadratic irrational and so $\phi$ is also.
+
+Conversely, if $a\theta^2+b\theta+c=0$. Then let $f = (a,b,c)$ be a BQF which we can write as $f(x,y) = a(x-\theta y)(x-\theta'y)$, where $\theta'$ is the conjugate root of this quadratic.
+
+Then let $f_n(x,y) = f(p_nx+p_{n-1}y, q_nx+q_{n-1}y) = (a_n,b_n,c_n)$. We shall see that the complete quotients $\theta_n$ of $\theta$ arise a solutions to $f_{n-1}(x,1)=0$, and that there are only finitely many forms $f_n$.
+
+First observe that $\disc(f_n) = \disc(f) = D$. Also $\theta = \frac{p_n\theta_{n+1}+p_{n-1}}{q_n\theta_{n+1}+q_{n-1}}$, so $f_n(\theta_{n+1},1) = (q_n\theta_{n+1}+q_{n-1})^2f(\theta,1) = 0$. Now observe that $|f(p_n,q_n)| \leq 2a|\theta-\theta'|$, so it follows that $f_n(1,0) = f(p_n,q_n) = a_n$, and $f_{n+1}(0,1) = f(p_n,q_n) = c_{n+1}$ are both bounded above. So there are finitely many distinct $f_n$, and so $f_{n+k} = f_n$. Hence the set of complete quotients is finite, and so the CFE is eventually periodic.
+\end{proof}
+\begin{theorem}[Galois]
+$\theta$ has a purely periodic CFE if and only if $\theta > 1$ and $\theta' \in (-1,0)$.
+\end{theorem}
+\begin{corollary}
+If $\d \in \N$ is not a square, then $\sqrt{d} = [a_0;\overline{a_1,\ldots,a_m}]$.
+\end{corollary}
+\begin{proof}
+$\theta_1 = \frac{1}{\sqrt{d}-a_0} > 1$, with its conjugate root $\theta_1' = \frac{1}{-\sqrt{d}-a_0} \in (-1,0)$.
+\end{proof}
+In fact it is the case that $\sqrt{d} = [a_0;\overline{a_1,a_2,\ldots,a_2,a_1,2a_0}]$.
+\begin{theorem}[Pell's Equation]
+If $d \in \N$ is not a square then $x^2 - dy^2 = 1$ has a solution in integers $x, y \neq 0$.
+\end{theorem}
+\begin{proof}
+Let $\theta = \sqrt{d} = [a_0;a_1,\ldots, a_n, \theta_{n+1}]$ with $\theta_1=\theta_{n+1}$.
+
+So $\sqrt{d} = \frac{p_n\theta_{n+1}+p_{n-1}}{q_n\theta_{n+1}+q_{n-1}} = \frac{p_n+p_{n-1}(\sqrt{d}-a_0)}{q_n+q_{n-1}(\sqrt{d}-a_0)}$ and so $q_{n-1}d + (q_n-q_{n-1}a_0)\sqrt{d} = p_n - a_0p_{n-1}+p_{n-1}\sqrt{d}$.
+
+Comparing coefficients, we have $p_{n-1}^2 - dq_{n-1}^2 = q_np_{n-1}-p_nq_{n-1} = (-1)^n$.
+
+And so if $n$ is even then $(x,y)=(p_{n-1},q_{n-1})$ is a solution to Pell's equation. If $n$ is odd, then $(p_{2n-1},q_{2n-1})$ is a solution.
+\end{proof}
 
 \end{document}

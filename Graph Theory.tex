@@ -918,7 +918,7 @@ Then $(x_1+ x_2) + a+b = (x_1+x_2) + c + d$, contradicting that $S$ Sidon. Hence
 \section{Eigenvalues}
 We can also associate matrices with graphs. Sometimes this yields useful structural information. Sometimes it reveals hidden constraints that we wouldn't otherwise notice.
 
-Let $G$ be a graph with vertex set $[n]$. We define the \emph{adjacency matrix} of $G$ to be $A = (a_{ij})$, where $a_{ij} = \begin{cases} 1 & ij \in F \\ 0 & \ow\end{cases}$. An adjacency matrix $A$ is real symmetric, and hence diagonalisable with real eigenvalues $\lambda_1, \ldots, \lambda_n$, which are in principle computable.
+Let $G$ be a graph with vertex set $[n]$. We define the \emph{adjacency matrix} of $G$ to be $A = (a_{ij})$, where $a_{ij} = \begin{cases} 1 & ij \in G \\ 0 & \ow\end{cases}$. An adjacency matrix $A$ is real symmetric, and hence diagonalisable with real eigenvalues $\lambda_1, \ldots, \lambda_n$, which are in principle computable.
 
 Observe that $(A^2)_{ij} = \sum_k a_{ik} a_{kj}$, the number of walks of length $2$ from $i$ to $j$.
 
@@ -1121,4 +1121,129 @@ It is enough to establish the inequality,
 
 Let $a = R(s,t-1), b = R(s-1,t)$. We need to show that if $K_{a+b}$ is red/blue coloured we get a red $K_s$ or a blue $K_t$. Each vertex has degree $a+b-1$. Pick $v$. It has red degree $\geq a$ or blue degree $\geq b$ - by symmetry we assume the latter. So $v$ is joined by blue to $K_{R(s,t-1)}$. This $K_{R(s,t-1)}$ either has a red $K_s$ so we're done, or a blue $K_{t-1}$, which with $v$ gives a blue $K_t$. 
 \end{proof}
+Remarks:
+\begin{enumerate}
+\item The recurrence gives $R(s,t) \leq \binom{s+t-2}{s-1}\leq 2^{s+t-2}$
+\item Equality doesn't always hold in the recurrence: it would require $K_{a+b-1}$ to have a spanning subgraph regular of degree $a-1$ which is impossible if $a,b$ are even. 
+\item $R(3) = 6, R(4) = 18$ are the only values known
+\end{enumerate}
+We can even make this problem harder - suppose we use $k \geq 2$ colours. Given $s_1, \ldots, s_k$, does there exist $R_k(s_1,\ldots, s_k)$, the smallest $n$ so that if we colour edges of $K_n$ with palette $[k]$ we get a $K_{s_i}$ of colour $i$ for some $i \in [k]$? We know already $R_2(s_1,s_2) = R(s_1,s_2)$ exists.
+
+\begin{theorem}
+Let $k\geq 2$. Then $R_k(s_1, \ldots, s_k)$ exists.
+\end{theorem}
+\begin{proof}
+By induction on $k$ - true for $k=1,2$. We use a colour blindness argument.
+
+Let $n = R_{k-1}(R_(s_1,s_2),s_3,\ldots, s_k)$ which exists by induction. Colour $K_n$ with $k$ colours, and then go colour blind and don't distinguish colours 1 and 2. Then either we have a $K_{s_i}$ in colour $i$ for some $i \geq 3$, or we have a $K_{R_2(s_1,s_2)}$ in colour 1 \& 2. In this case, we have a $K_{s_i}$ in colour $i$ for $i$ in $\{1,2\}$.
+\end{proof}
+
+This shows that $R_k(s_1,\ldots,s_k) \leq R_{k-1}(R_2(s_1,s_2),s_3,\ldots,s_k)$. Alternatively, go blind on colours $1-4$ and get $R_k(s_1,\ldots,s_k) \leq R_{k-3}(R_4(s_1,\ldots, s_4),s_5,\ldots, s_k)$.
+
+Alternatively, mimic the proof of \textbf{5.1} to get $R_k(s_1,\ldots, s_k) \leq R_k(s_1-1,s_2,\ldots,s_k) + \ldots + R_k(s_1,s_2,\ldots, s_k-1) + k-2$.
+
+Recall that an edge of a graph is just a 2-subset of $V(G)^{(2)}$. An \emph{r-uniform hypergraph} is a pair $H = (V,E)$ where $E \subset V^{(r)}$, so that a graph is just a 2-uniform hypergraph. Then we say $K_n^{(r)}$ is the complete r-uniform hypergraph of order $n$, $([n],[n]^{(r)})$.
+
+Define $R^{(r)}(s,t)$ to be the smallest $n$ such that if we colour $K_n^{(r)}$ red or blue, we get a red $K_s^{(r)}$ or a blue $K_t^{(r)}$.
+
+Then $R^{(2)}(s,t) = R(s,t)$, and $R^{(1)}(s,t) = s+t-1$.
+
+\begin{theorem}[Ramsey, Erd\"os-Szekeres]
+$R^{(r)}(s,t)$ exists.
+\end{theorem}
+\begin{proof}
+By induction on $r: r=1$ is done by the pigeonhole principle. Let $a = R^{(r)}(s-1,t), b = R^{(r)}(s,t-1)$, and $n=1+R^{(r-1)}(a,b)$. Colour $K_n^{(r)}$ red/blue. Pick a vertex $v$. Colour $K_{n-1}^{(r-1)}$ with vertex set $V(K_n^{(r)}) - \{v\}$ by giving $(r-1)$-set $Z$ the colour $Z\cup\{v\}$ had in the colouring of $K_n^{(r)})$. By the definition of $n-1$ we get a red $K_a^{(r-1)}$ or blue $K_b^{(r-1)}$, wlog the latter.
+
+This means that in $K_n^{(r)}$ we have $b$ vertices such that $v$ together with any $r-1$ of these $b$ has colour blue. By definition of $b$ either these $b$ vertices contain a red $K_s^{(r)}$ as desired, or they contain blue $K_{t-1}^{(r)}$ which together with $v$ gives $K_t^{(r)}$.
+\end{proof}
+Colour blindness shows that more than 2 colours works in the natural way.
+
+What if we have infinitely many vertices? If we colour $\N^{(2)}$ red/blue, does there exist an infinite set $M \subset \N$ with $M^{(2)}$ monochromatic?
+
+\begin{theorem}[Infinite Ramsey]
+Let $\N^{(r)}$ be coloured with $k$ colours. Then there is a monochromatic $M{(r)}$ for some infinite $M \subseteq \N$.
+\end{theorem}
+
+\section{Probabilistic Methods}
+We know $R(s) < 4^s$, but we don't know an exponential lower bound construction.
+\begin{theorem}[Erd\"os 1947]
+$R(s) > \sqrt{2}^{s-1}$ for $s \geq 2$.
+\end{theorem}
+\begin{proof}
+Colour the edges of $K_n$ red or blue independently with probability 1/2. Let $X$ be the number of monochromatic $K_s$. There are $\binom{n}{s}$ subsets of $s$ vertices, each of which is monochromatic with probability $2\cdot\left(\frac{1}{2}\right)^{s/2}$. So the expected value of $X$ is $\mathbb{E}(X) = \binom{n}{2}\cdot 2 \cdot \left(\frac{1}{2}\right)^{s/2} < \frac{2}{s!}\frac{n^s}{2^{\binom{s}{2}}} \leq \left[\frac{n}{\sqrt{2}^{s-1}}\right]^s$. Thus if $n \leq \sqrt{2}^{s-1}$ then $\mathbb{E}(X) <1$. Hence there is some colouring of $K_n$ with $X=0$, and so $R(s) > n$.
+\end{proof}
+Note that here we use that if $X \geq 0$ is an integer, with $\mathbb{E}(X)<1$ then $X=0$ sometimes.
+
+\subsection*{Elementary Probability}
+Given $\Omega$ a finite probability space, e.g. the set of all colourings of something we define:
+\begin{itemize}
+\item An \emph{event} is a subset $A \subseteq \Omega$.
+\item A \emph{random variable} is a function $X: \Omega \to \R$.
+\item The \emph{expected value} of $X$ is $\E(X) = \sum_{\omega in \Omega} \P(\omega)X(\omega)$. Note that expectation is linear: $\E(X+Y) = \E(X) + \E(Y)$.
+\item The \emph{indicator function} $\one_A$ of the event $A$ is $\one_A(\omega) = \begin{cases} 1 & \omega \in A \\ 0 & \omega \notin A \end{cases}$. Then $\E(\one_A) = \P(A)$.
+\end{itemize}
+Often a variable that counts something can be expressed as a sum of indicators. For example $X(\omega)$ is the number of monochromatic $K_s$. For each $\alpha \in [n]^{(s)}$ let $\one_{\alpha}$ be the indicator of the event ``$K_n[\alpha]$ is monochromatic." Then $X = \sum_{\alpha} \one_{\alpha}$, and so $\E(X) = \E(\sum_{\alpha} \one_\alpha) = \sum_\alpha \E(\one_\alpha) = \sum_\alpha \P(\one_\alpha = 1) = \binom{n}{s}2^{1-\binom{s}{2}}$.
+
+\begin{theorem}
+The graph $G$ has an independent set of size at least $\sum_{v \in V(G)} \frac{1}{d(v)+1}\geq \frac{|G|}{d+1}$
+\end{theorem}
+Note that the inequality comes from AM \leq GM \leq HM, and this is theorem is really just Tur\'an's theorem, but viewed from the complement.
+\begin{proof}
+Take a random ordering of the vertices and run the greedy algorithm to colour $G$. Let $X$ be the number of vertices that get colour $1$. For each vertex $v \in V(G)$ let $\one_v$ be the indicator of ``$v$ gets colour $1$". So $X = \sum_{v \in V(G)} \one_v$. Now $\P(\one_v = 1) \geq \P(v $ comes before all its neighbours in the ordering$) = \frac{1}{d(v)+1}$.
+
+So $\E(X) \geq \sum_{v \in V} \frac{1}{d(v)+1}$, so there's an ordering where $X \geq \sum_{v} \frac{1}{d(v)+1}$. 
+\end{proof}
+The space $\mathcal{G}(n,p)$ comprises all $2^{\binom{n}{2}}$ graphs on vertex set $[n]$ with edges chosen independently with probability $p$. A natural model of bipartite graphs has two vertex sets of size $n$, with each of the $n^2$ possible edges occurring with probability $p$ independently of each other.
+
+Recall Zarankiewicz's problem - we proved $z(n,t) = O(n^{2-1/t})$ for $t$ fixed and $n$ large. To prove a lower bound, we could look at random bipartite and hope the expected number of $K_{t,t}$ is $<1$. $\E(K_{t,t}) = \binom{n}{t}^2 p^{t^2} < 1$ if $p \approx n^{-2/t}$, with about $n^2 p = n^{2-2/t}$ edges.
+
+\begin{theorem}
+$z(n,t) \geq \frac{1}{2}n^{2-2/(t+1)}$
+\end{theorem}
+\begin{proof}
+Take a random bipartite $n \times n$ graph with edge probability $p$. Suppose it has $J$ edges and $K$ copies of $K_{t,t}$. By removing an edge from each $K_{t,t}$ we get a $K_{t,t}$-free graph with $J-K$ edges.
+
+Now $\E(J) = pn^2$ and $\E(K) = \binom{n}{t}^2 p^{t^2} < \frac{1}{2}n^{2t}p^{t^2}$. So $\E(J-K) > pn^2 - \frac{1}{2}n^{2t}p^{t^2}$. Take $p = n^{-2/(t+1)}$, we have $\E(J-K) > \frac{1}{2}n^{2-2/(t+1)}$, and so there is a graph with $J_K > \frac{1}{2}n^{2-2/t+1}$.
+\end{proof}
+This theorem gives us graphs of order $n$ with no complete subgraph larger than $2 \log_2 n$ and no independent set larger than $2 \log_2 n$, and so the chromatic number $\geq n/(2\log_2 n)$. WE can do better.
+
+Observe that $I_{\{|X|>t\}} < \frac{|X|}{t}$ for any $t > 0$, and by taking expectations, $P(|X|>t) < \frac{\E(|X|)}{t}$, which is Markov's inequality.
+
+\begin{theorem}[Erdo\"os 1959]
+Let $k$ and $g$ be integers. Then there exists a graph of chromatic number $\geq k$ and girth $\geq g$.
+\end{theorem}
+\begin{proof}
+Let $G$ be a random element of $\mathcal{G}(n,p)$ where $p = n^{-1+1/g}$, and $n$ is large.
+
+Now let $X_{\ell}$ be the number of circuits of length $\ell$ and let $X = x_3+x_4+\ldots X_{g-1}$. Then:
+\begin{align*}
+\E(X) = \sum_{\ell=3}^{g-1} \E(X_{\ell}) < \sum_{\ell} n^{\ell}p^{\ell} = \sum_{\ell}n^{\ell/g} < gn^{(g-1)/g} < n/4
+\end{align*}
+Let $A$ be the event $\{X>n/2\}$, so $\P(A) < 1/2$ by Markov.
+
+Let $Y$ be the number of independent sets of size $t = \ceil{n/2k}$. Then $\E(Y) = \binom{n}{t}(1-p)^{\binom{t}{2}} < n^t e^{-p\binom{t}{2}} = [ne^{p/2}]^t e^{-pt^2/2} < \exp\left((\log n + 1/2)(n/2k + 1) - n^{1+1/g}/(8k^2)\right) < 1/2$ if $n$ is large.
+
+So if $B$ is the event $\{Y \geq 1\}$ then $\P(B) < 1/2$ by Markov, and so $\P(A \cup B) \leq \P(A) + \P(B) < 1$, and so there is a graph $G$ where neither $A$ nor $B$ happen. Remove a vertex from each circuit of length $<g$ to get a graph $G'$ with no short circuit and $|G'|\geq n/2$. Then $G'$ has no independent set of size $t$, so $\chi(G') \geq \frac{|G'|}{t-1} > k$.
+\end{proof}
+Let $A$ be an event in $\mathcal{G}(n,p)$ where $p$ might be a function of $n$. We say $A$ happens \emph{with high probability} if $\P(A) \to 1$ as $n \to \infty$.
+
+Suppose $X$ counts something. We can never say $X\geq 1$ with high probability because $\E(X)$ large. Recall $\Var X = \E(X-\E(X))^2$.
+
+Then $\P(|X-\E(X)|>t) = \P((X-\E(X))^2 > t^2) < \frac{\Var X}{t^2}$ by Markov, which is Chebyshev's inequality.
+
+Note that $\P(X=0) < \frac{\Var X}{t^2}$ for $t< \E(X)$, so $\P(X=0) \leq \Var(X)/(\E(X))^2$.
+
+Suppose that $X = \sum_{\alpha}I_{\alpha}$ is a sum of indicators.
+
+Then $\E(X) = \sum_{\alpha} \E(I_{\alpha}) = \sum_{\alpha}\P(\alpha)$. Then $(\E(X))^2 = \sum_{\alpha,\beta} \P(\alpha)\P(\beta)$.
+
+Now $X^2 = \sum_{\alpha, \beta} I_{\alpha}I_{\beta} = \sum_{\alpha, \beta} I_{\alpha \& \beta}$.
+
+So $\E(X^2) = \sum_{\alpha,\beta} \P(\alpha)\P(\beta|\alpha)$.
+
+Hence $\Var X = \sum_{\alpha} \P(\alpha)\left[ \sum_{\beta} \P(\beta | \alpha) - \P(\beta)\right]$.
+
+
+
+
 \end{document}

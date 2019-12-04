@@ -1164,7 +1164,7 @@ This corresponds with fields $L \supseteq M = L^{G \cap  V} \supset L^{G \cap A_
 
 We have 5 cases:
 \begin{tabular}{c|c|c}
-$G\cap V$ & $G \cap A_4$ & $G$ \\
+$G\cap V$ & $G \cap A_4$ & $G$ \\\hline
 $V$&$V$&$V$\\
 $V$&$A_4$&$A_4$\\
 $V$&$V$&$D_4$\\
@@ -1193,4 +1193,28 @@ So we must find $\beta^2, \gamma^2, \epsilon^2$ in terms of the coefficients of 
 Hence the coefficients are symmetric functions in $\alpha_1, \ldots, \alpha_4$, and so if we expand out we know that this is a polynomial in terms of the coefficients of $f$.
 
 Claim: $g(x) = x^3 + 2px^2 + (p^2-4r)x - q^2$ - expand it out. 
+\hrule
+
+\subsection*{Reduction mod p}
+Let $f \in \Z[x]$, and $p$ be prime . Write $\bar{f}(x) = \sum \overline{a_i} x^i \in \F_p[x]$. We can study $f$ by studying $\bar{f}$ for different $p$. For example, if $\bar{f}$ is irreducible for some $p$ then $f$ is irreducible over $\Z$.
+
+For instance, consider $f(x) = x^4+5x^2-2x-3$. Mod 2 we have this is $(x^2+x+1)^2$, and mod 3 we have it is $x(x^3-x+1)$. But this implies that $f$ is irreducible over $\Z$, since if it factors in $\Z[x]$, then that factorisation would be a valid factorisation in $\F_p$. So some combination of the factors mod $p$ would have the same degree independent of $p$, since factorisations mod $p$ are a refinement of the factorisation mod $\Z[x]$.
+
+\begin{theorem}[Dedekind]
+For $f \in \Z[x]$ monic and $p$ prime, suppose $\bar{f}$ factors into distinct irreducible factors. Then $\Gal(f/\Q) \geq \Gal(\bar{f}/\F_p)$.
+\end{theorem}
+As we know how to compute $\Gal(\bar{f}/q)$ we get the corollary:
+\begin{corollary}
+$\bar{f} = h_1\ldots h_r \in \F[x]$, with $h_i$ irreducible of degree $d_i$, and $h_i \neq h_j$, then $\Gal(f/\Q)$ contains a cycle of type $(d_1, \ldots, d_r)$.
+\end{corollary}
+\begin{proof}
+Exercise
+\end{proof}
+For instance, with $f$ as above, $\Gal(\bar{f}/\Q) = S_4$ or $A_4$.
+\subsection*{Function fields}
+$K = \C(x) = \text{Frac}\C[]x$, so that $\C(x) = \C\setminus P \to \C$, where $P$ is a finite set of poles.
+
+Then let $L = K(\sqrt{x^3-x}) = \C(x)[y]/y^2-x^3+x$ is a quadratic extension, so $L/K$ is Galois with automorphism group $C_2$ with $\sigma:y \to -y; x\to x$.
+
+But $L = \text{Frac}R$ where $R = \C[x,y]/y^2-x^3+x$, so that $R$ is polynomial functions on the zero set $E = \{(x,y)\in \C : y^2=x^3-x\}$. In this language, $L$ is the set of polynomial functions from $E \setminus P' \to \C$, where $P'$ is a finite set of points. Moreover, inclusion $\C(x) \injection L$ comes from the inclusion $C[x] \injection R$, and this corresponds to a map going the other way. For each $x \in \C\setminus\{0,1,-1\}, x^3-x$ has two square roots, so there are two choices of $y$, and hence $\#p^{-1}(x) = 2$, so $p:E\to \C$ is a 2:1 map away from $\{0,1,-1\}$. Then the Galois group $G = \angle{\sigma}$ acts on $E$, and $E/G = \C$.
 \end{document}

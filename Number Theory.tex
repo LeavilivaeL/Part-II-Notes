@@ -1279,5 +1279,67 @@ Comparing coefficients, we have $p_{n-1}^2 - dq_{n-1}^2 = q_np_{n-1}-p_nq_{n-1} 
 
 And so if $n$ is even then $(x,y)=(p_{n-1},q_{n-1})$ is a solution to Pell's equation. If $n$ is odd, then $(p_{2n-1},q_{2n-1})$ is a solution.
 \end{proof}
+Indeed, one can prove that any solution to Pell's equation must be a convergent of $\sqrt{d}$.
 
+\underline{Examples:}
+\begin{enumerate}
+\item Solve $x^2-6y^2 = 1$. We first compute $\sqrt{6} = [2; \overline{2,4}]$. Then $p_1/q_1 = 5/2$, giving $5^2-6\cdot 2^2 = 1$.
+\item Solve $x^2-17y^2 = -1$. We have $\sqrt{17} = [4;\overline{8}]$. Then $p_0/q_0 = 4/1$, and $4^2-17\cdot 1^2 = -1$.
+\end{enumerate}
+
+\section{Primality Testing and Prime factorisation}
+Given a large integer $N$ we want to determine efficiently if $N$ is prime, and if $N$ is not prime find a prime factor.
+
+It turns out that we can do the former, but as far as we know we cannot do the latter. We will usually assume $N$ is odd. Fermat's little theorem can tell us if $N$ is not prime. Recall that, if $(a,p)=1$, then $a^{p-1} \equiv 1 \mod p$. 
+
+\begin{enumerate}
+\item $N = 15$. $2^{14} = (2^4)^3\cdot 2^2 = 16^3\cdot 4 \equiv 4 \mod 15$, so $15$ is not prime.
+
+\item $N=10$. $3^90 \equiv 1 \mod 91$, but $91=7\cdot 13$ is composite. Using base $2$, we have $2^90 \equiv 64 \mod 91$, and we conclude that one base alone is not sufficient. 
+\end{enumerate}
+
+Let $b \in \N$. An odd composite integer $N >1$ with $(b,N) > 1$ is a \emph{(Fermat) pseudoprime to base b} is $b^{N-1} \equiv 1 \mod N$. Note that this definition only depends on $b \mod N$, so it is sufficient to consider bases $1 \leq b < N$. For instance, 91 is a Fermat pseudoprime to base $3$.
+
+\begin{proposition}
+Let $N > 1$. If $N$ is not a pseudoprime to some base $b_0$, then for at least half of $\{1 \leq b < N : (b,N) = 1\}$, it is not a pseudoprime to base $b$.
+\end{proposition}
+\begin{proof}
+Note that the set of bases to which $N$ is a pseudoprimes is closed under multiplication: $b_1^N \equiv 1 \equiv b_2^N \mod N \implies (b_1b_2)^N \equiv 1 \mod N$.
+
+It follows that $B = \{1 \leq b < N: (b,N) = 1, N$ is pseudoprime to base $b\}$ is a subgroup of $(\Z/N\Z)^{\times}$. But $b_0 \notin B$, so $B$ is a proper subgroup of index $\geq 2$.
+\end{proof}
+
+If $N$ is not pseudoprime to any base, we can determine this in practice by checking a relatively small number of bases. But it turns out that there are composite $N$ which is pseudoprime to ever base.
+
+An odd composite integer $N > 1$ is a \emph{Carmichael number} if it is pseudoprime to every base. It has been shown that there are infinitely many Carmichael numbers.
+
+Recall that, if $(a,p)=1$, then $a^{(p-1)/2} \equiv \legendre{a}{p} \mod p$.
+
+Let $b \in \N$. An odd composite integer $N >1$ is said to be an \emph{Euler pseudoprime to base b} if $b^{(N-1)/2} \equiv \legendre{b}{N} \mod N$. Squaring both sides shows immediately that every Euler pseudoprime to base $b$ is a Fermat pseudoprime to base $b$.
+
+\begin{proposition}
+If $N<1$ is not an Euler pseudoprime to some base $b_0$ then it is not an Euler pseudoprime to at least half the bases $\{1\leq b<N : (b,N) = 1\}$.
+\end{proposition}
+\begin{proof}
+Same as for Fermat.
+\end{proof}
+\begin{theorem}
+If $N<1$, odd, composite, then there is some base such that $N$ is not an Euler pseudoprime to base $b$.
+\end{theorem}
+\begin{proof}
+Suppose first that $N$ is square free. Let $N = p\cdot m$ with some prime $p, m \geq 3, p\nmid m$.
+
+Pick $u \in \Z \st \legendre{u}{p}=-1$. Then by the CRT, $\exists b \in \Z \st b >1, b \equiv u \mod p, b \equiv 1 \mod m$.
+
+Then $\legendre{b}{N} = \legendre{b}{p}\legendre{b}{m} = \legendre{u}{p}\legendre{1}{m} = -1$.
+
+But since $ b \equiv 1 \mod m, b^{(N-1)/2} \equiv 1 \nequiv -1 \mod m$. So $b^{(N-1)/2} \nequiv -1 \mod N$.
+\end{proof}
+
+This gives us the following probabilistic test:\\
+\textbf{\underline{Solvay-Strassen Primality Test}}
+
+Given odd $N > 1$, pick $1 \leq b <N$ at random. Check if $(b,N) = 1$ - if this fails then $N$ is composite. Then compute $b^{(N-1)/2}$ by repeated squaring, and $\legendre{b}{N}$ by repeated squaring, and $\legendre{b}{N}$ by reciprocity law. Then check if $b^{(N-1)/2} \equiv \legendre{b}{N} \mod N$. If not, then $N$ is composite. Otherwise, $N$ is composite with probability $\leq 1/2$.
+
+If $N$ passes $k$ iterations of this test, then $N$ is composite with probability $1/2^k$.
 \end{document}

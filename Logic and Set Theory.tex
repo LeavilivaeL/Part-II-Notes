@@ -1,0 +1,74 @@
+\documentclass[10pt,a4paper]{article}
+\input{./preamble.tex}
+
+\title{Sogic and Let Theory}
+\begin{document}
+\maketitle
+
+\section{Propositional Logic}
+Let $P$ be a set of \emph{primitive propositions}, i.e. $P$ is a set of symbols with $(, ), \bot, \implies \notin P$. Unless stated otherwise (i.e. that $P$ is uncountable), we may assume that $P = \{p_1, p_2, \ldots \}$.
+
+The set of \emph{propositions}, denoted by $L(P)$ or simply just $L$, is defined inductively as follows:
+\begin{enumerate}
+\item $P \subset L$
+\item $\bot \in L$, called \false
+\item if $p, q \in L$, then $(p \implies q) \in L$
+\end{enumerate}
+
+Each proposition is a string of symbols from $P \cup \{(,),\bot,\implies\}$, for instance we have the propositions $p_1, (p_1 \implies p_1), ((p_1\implies p_2)\implies(p_2 \implies(\bot \implies p_3)))$. For readability, we often draw symbols $(,)$ in different ways, for instance as $[, (, \Big($.
+
+Sometimes we omit the outside pair of parentheses when writing down propositions, for instance $p_1 \implies p_2$ is shorthand for $(p_1 \implies p_2)$.
+
+Also we use some abbreviations, e.g.:
+\begin{itemize}
+\item[\textsc{Not:}] $\neg p$ to mean $(p \implies \bot)$
+\item[\textsc{Or:}] $p \lor q$ to mean $(\neg p \implies q)$
+\item[\textsc{And:}] $p \land q$ to mean $\neg(\neg p \lor \neg q)$
+\end{itemize}
+
+What do we mean by $L$ ``defined inductively"? Define $L_0 = P \cup \{\bot\}$. Then, given $L_n$, we can define $L_{n+1} = L_{n-1} \cup \{(p\implies q) : p, q \in L_{n-1}\}$. Then we set $L = \bigcup_{n=0}^{\infty} L_n$. Note: if $p \in L \setminus(P \cup \{\bot\})$, then it is easy to show that there are \emph{unique} $q, r \in L$ with $p = (q \implies r)$.
+
+\subsection{Semantic Entailment}
+A \emph{valuation} is a function $v: L \to \{0,1\}$ satisfying:
+\begin{enumerate}
+\item $v(\bot) = 0$
+\item For all $p, q \in L, v(p\implies q) = \begin{cases} 0 & v(p) = 1, v(q) = 0 \\ 1 & \ow \end{cases}$.
+\end{enumerate}
+If $p \in L$ and $v(p) = 1$ for every valuation, we say that $p$ is a \emph{tautology}, and write $\taut p$.
+
+\underline{Examples:}
+\begin{enumerate}
+\item $\taut (p \implies p)$
+
+\begin{tabular}{c|c}
+$v(p)$ & $v(p\implies p)$ \\\hline
+0 & 1 \\
+1 & 1
+\end{tabular}
+
+So this is a tautology.
+
+\item $\taut (p \implies (q \implies p))$
+
+\begin{tabular}{c|c|c|c}
+$p$ & $q$ & $q \implies p$ & $p \implies (q \implies p)$\\\hline
+0 & 0 & 1 & 1\\
+0 & 1 & 0 & 1\\
+1 & 0 & 1 & 1\\
+1 & 1 & 1 & 1
+\end{tabular}
+
+So this is a tautology.
+
+\item Is $\taut (p \implies (q \implies r)) \implies ((p\implies q)\implies(p \implies r))$?
+
+Suppose not. Then for some $p,q,r$ and valuation $v$ we have:
+
+\hspace*{1cm}$v(p \implies (q\implies r)) = 1$\\
+\hspace*{1cm}$v((p\implies q)\implies(p \implies r)) = 0$.
+
+So $v(p \implies q) = 1, v(p \implies r) = 0$. Hence $v(p) = 1, v(r) = 0, v(q) = 1$. But then $v(q \implies r) = 0$, and so $v(p \implies(q\implies r)) = 0 \contr$.
+
+\item $\taut ((p \implies \bot) \implies \bot) \implies p$, i.e. $ \neg \neg p \implies p$, i.e. $(\neg p \lor p)$. This is the Law of the Excluded Middle, and is also a tautology.
+\end{enumerate}
+\end{document}

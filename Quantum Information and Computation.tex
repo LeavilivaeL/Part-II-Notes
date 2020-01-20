@@ -1,0 +1,49 @@
+\documentclass[10pt,a4paper]{article}
+\input{./preamble.tex}
+
+\title{Ew Applied Maths}
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\subsection*{What is information?}
+We get information when we acquire knowledge. In classical information, the fundamental unit of information is a bit - a \underline{B}oolean un\underline{it}, which takes values of either $0$ or $1$. If we have a question with $2^n$ possible different, answers, then we can label each answer with a string of $n$ bits.
+
+\subsection*{What is computation?}
+Computation can be defined as the processing of information - updating a bit string using a prescribed sequence of steps, which we might call a program. Each of these steps can be the actions of a Boolean gate, such as \textsc{Not}, \textsc{And}, \textsc{Or}.
+
+\subsection*{What is a bit physically?}
+Physically a bit is given by any 2 \textit{different} physical states of a system that can be reliably distinguished by some physical measurement. For instance, I can write 0 or 1 in this document, which is stored as data on GitHub or your hard drive, and you can conduct the physical measurement of loading this document and reading the following number: 1. This concept is summed up in the saying ``There is no information without representation". We see that any computation is then the manipulation of a physical system, and so computers must obey the laws of physics. Modern computers obey classical physics (at least for now - please email me / hololens call me if this is not the case for you), but as Feynmann once said: ``Nature isn't classical dammit".
+
+On the atomic and subatomic (and even now molecular) scales, particles are governed by Quantum Mechanics. This has some novel features over classical mechanics, such as the ideas of quantum superposition, entanglement, and quantum measurement. Throughout this course, we will be exploiting these features. They will make things more complicated, but at the same time will give us some advantages in information storage, communication, computation, as well as security/cryptography.
+
+Most of the work for this course was done during the 1980's and 1990's, although the Russian mathematician Alexander Holevo was already working on the ideas of quantum information in the 1970's.
+
+\subsection*{In what ways is QIC better than its classical counterpart?}
+A quantum computer cannot compute any computational task which isn't already computable \textit{in principle} by a classical computer. However, some things will require many times the age of the universe to compute even on the fastest of classical supercomputers.
+
+\subsection{Computational Complexity Theory}
+We want to have some idea of the ``difficulty" of a computational task. We measure this by the amount required of the two computational resources of time and space. For instance, consider the problem of factoring a number with $n$ digits. Then the input size for the computation is $n$, and we can look at how the time/space grow as functions of $n$.
+
+If the time grows polynomially in $n$, we call this a poly-time algorithm. These are computable in practice. If it grows faster than any polynomial, we call it an exponential-time algorithm, which are, whilst theoretically computable, uncomputable in practice for large inputs. 
+
+Currently, there is no known poly-time factoring algorithm for a classical computer, but in 1994 Peter Shor came up with a poly-time quantum algorithm for integer factorisation.
+
+\subsection{Communication \& Security Issues}
+If we use quantum particles as information carriers, we end up with communication possibilities which were the stuff of science fiction previously, such as quantum teleportation, or implement mathematically provably secure communication. 
+
+\subsection{Technological Issue}
+Moore's law states that, since 1965, devices will miniaturise by a factor of 4 every 3.5 years. Eventually (and this is already happening), we will get close to quantum scales. For instance, modern CPUs are built by manufacturing machines with a resolution of around 10nm, or 100 atoms across. At these scales, quantum mechanics will start to cause problems for classical computation, so why not embrace this new feature? In reality, the technological barrier to actually using quantum bits (qubits) is huge, and the most advanced current quantum computers have about 53 qubits. Moreover, Google has claimed \emph{quantum supremacy} in demonstrating a task, known as the ``random sampling algorithm", which their quantum computer can complete faster than a classical computer.
+
+\subsection{Quantum Mechanics}
+We have 4 key postulates of quantum mechanics:
+\begin{itemize}
+\item[(QM1)] Describes the quantum state of a physical system, $S$
+\item[(QM2)] Describes the joint state of two composite systems, $S_1S_2$
+\item[(QM3)] Describes how quantum states evolve throughout time. Here we will be interested in discrete time steps.
+\item[(QM4)] Describes how quantum states respond to measurement.
+\end{itemize}
+The idea behind the mathematics of quantum mechanics, which we'll get to properly in the next section, is that we want to associate to every quantum-mechanical system $S$ a \emph{complex inner product vector space} $\mathcal{V}$, or \emph{Hilbert space}. We will be using \emph{Dirac's bra-ket notation}.
+
+A \emph{ket} is a vector $\ket{\psi} \in \mathcal{V}$. For quantum computation, we will use $\mathcal{V} = \C^2$. Then we will represent the \emph{qubit} $\ket{0} = \begin{pmatrix} 1 \\ 0\end{pmatrix}$, and $\ket{1} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$. Then for $\alpha, \beta \in \C$, we can represent a valid quantum state by $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$. If $|\alpha|^2 + |\beta|^2 = 1$, then this is a \emph{qubit}, and when we measure it we get 0 with probability $|\alpha|^2$ and 1 with probability $|\beta|^2$.
+\end{document}

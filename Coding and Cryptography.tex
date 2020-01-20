@@ -1,0 +1,131 @@
+\documentclass[10pt,a4paper]{article}
+\input{./preamble.tex}
+
+\title{Coding \& Cryptography}
+\begin{document}
+\maketitle
+
+\setcounter{section}{-1}
+\section{Communication Channels}
+This course will be about modelling communication. In general, we have the following idea:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\node (s) at (0,0) {\textsc{Source}};
+\node (e) at (4,0) {\textsc{Encoder}};
+\node (d) at (8,0) {\textsc{Decoder}};
+\node (r) at (12,0) {\textsc{Receiver}};
+\draw (s) edge[->] (e) (d) edge[->] (r);
+\draw[->, decorate, line join=round, decoration={zigzag, segment length=4, amplitude=0.9, post=lineto, post length=2pt}] (e) -- node[above] {\textsc{Channel}} node[below] {Errors, Noise} (d) ;
+\end{tikzpicture}
+\end{figure}
+\vspace{-1em}
+For example, the channel might be an optical or electrical telegraph, modems, audio CDs, satellite relays. The encoding and decoding might be something like \textsc{Ascii}, so that each character in the email ``Call at 2pm" would be encoded into 8 bits using $a = 1100101, \ldots$, giving an 84 bit message to be transmitted via the internet, and decoded by the receiver's email client. Our general aim here will be, given some source and channel (modelled probabilistically), to design an encoder and decoder to send messages economically and reliably.
+
+\underline{Examples}
+\begin{itemize}
+\item (Noiseless coding) Morse Code. In this code, more common letters are assigned shorter codes, so that we have $A = \cdot - \ast, E = \cdot \ast, Q = - - \cdot - \ast, Z = - - \cdot \cdot \ast$. This is adapted to the \textit{source}, in the sense that we chose the codes based off the expected distribution of letters that we will have to transmit.
+
+\item (Noisy coding) \textsc{Isbn}. In the \textsc{Isbn} encoding, every book is given a 10 digit number $a_1a_2\ldots a_{10}$, with $\sum_{i=1}^{10} (11-i)a_i \equiv 0 \mod 11$. This is adapted to the \textit{channel}, in the sense that the likely errors to occur will be 1 incorrect digit, or accidentally transposing two digits, which this code is resistant to (will return an error rather than an erroneous result).
+\end{itemize}
+
+A \emph{communication channel} accepts symbols from some alphabet $\mathcal{A} = \{a_1, a_2, \ldots, a_r\}$ (e.g. $\{0,1\}, \{a,b,\ldots,z\}$), and outputs symbols from an alphabet $\mathcal{B} = \{b_1, \ldots, b_s\}$. The channel is modelled by the probabilities:
+\begin{center}$\P(y_1,y_2,\ldots,y_n$ received$| x_1,x_2,\ldots,x_n$ sent$) = \prod_{i=1}^{n} \P(y_i$ received$| x_i$ sent$)$\end{center}
+
+A \emph{discrete memoryless channel (DMC)} is a channel with $p_{ij} = \P(b_j$ received$|a_i$ sent$)$ the same for each channel usage and independent of any past or future channel usages.
+
+The \emph{channel matrix} is $P = (p_{ij})$, an $r \times s$ stochastic matrix.
+
+\underline{Examples:} The \emph{binary symmetric channel (BSC)} with error probability $p \in [0,1]$ has $\mathcal{A} = \mathcal{B} = \{0,1\}$. The channel matrix is $\begin{pmatrix} 1-p & p \\ p & 1-p \end{pmatrix}$. A symbol is transmitted correctly with probability $1-p$.
+
+The \emph{binary erasure channel} has input alphabet $\{0,1\}$, and output alphabet $\{0, 1, \ast\}$, where we miss a bit is probability $p$, giving channel matrix $\begin{pmatrix} 1-p & 0 & p \\ 0 & 1-p & 0\end{pmatrix}$. We can model $n$ uses of a channel by the \emph{n\th extension} with input alphabet $\mathcal{A}^n$, and output alphabet $\mathcal{B}^n$.
+
+A \emph{code} $c$ of \emph{length} $n$ is a function $c: M \to \mathcal{A}^n$ where $M$ is the set of all possible messages. Implicitly, we also have a decoding rule $\mathcal{B}^n \to M$.\\
+The \emph{size} of $c$ is $m = |M|$. \\
+The \emph{information rate} is $\rho(c) = \frac{1}{n}\log_2(m)$. \\
+The \emph{error rate} is $\hat{e}(c) = \max_{x\in M} \{\P($error$|x$ sent$)\}$.
+
+A channel can transmit reliably at a rate $R$ if there exists a sequence of codes $(c_n: n\geq 1)$ with $c_n$ a code of length $n$, $\lim_{n\to \infty}(\rho(c_n)) =R, \lim_{n\to\infty}(\hat{e}(c_n)) = 0$. The capacity of a channel is the supremum of all reliable transmission rates.
+
+\begin{theorem}
+A $BSC$ with error probability $p < \frac12$ has a non-zero capacity (i.e. good codes exist).
+\end{theorem}
+\begin{proof}
+See \textbf{9.3}
+\end{proof}
+
+\section{Noiseless Coding}
+\subsection{Prefix-free Codes}
+For an alphabet $\mathcal{A}, |\mathcal{A}|<\infty$, let $\mathcal{A}^{\ast} = \bigcup_{n\geq 0} \mathcal{A}^n$, the set of all finite strings from $\mathcal{A}$. The \emph{concatenation} of strings $x = x_1\ldots x_r$ and $y = y_1\ldots y_s$ is $xy = x_1\ldots x_ry_1\ldots y_s$.
+
+Let $\mathcal{A}, \mathcal{B}$, be alphabets. A \emph{code} is a function $c:\mathcal{A} \to \mathcal{B}^{\ast}$. The strings $c(a)$ for $a \in \mathcal{A}$ are called \emph{codewords} (cws). If $x, y \in \mathcal{B}^{\ast}$ then $x$ is a \emph{prefix} of $y$ if $y=xz$ for some $z \in \mathcal{B}^{\ast}$.
+
+For example, we have the Greek fire code, found in the writings of Polybius around 280 BC. $\mathcal{A} = \{\alpha, \beta, \ldots, \omega\}, \mathcal{B} = \{1,2,3,4,5\}$, with code $\alpha \mapsto 11, \beta \mapsto 12, \ldots, \psi \mapsto 53, \omega \mapsto, 54$, where $xy$ means ``$x$ torches held up, and another $y$ torches nearby".
+
+The English language is even a code: we can let $\mathcal{A}$ be words in a given dictionary, and $\mathcal{B} = \{a,b,\ldots,z,\text{\textvisiblespace}\}$, where the coding function is to spell the word and follow it with a space.
+
+We send a message $x_1\ldots x_n \in \mathcal{A}^{\ast}$ as $c(x_1)\ldots c(x_n) \in \mathcal{B}^{\ast}$. So $c$ extends to a function $c^{\ast}:\mathcal{A}^{\ast} \to \mathcal{B}^{\ast}$.
+
+$c$ is \emph{decipherable}/\emph{decidable} if $c^{\ast}$ is injective, so that each string in $\mathcal{B}^{\ast}$ could have come from at most one message. Note that it isn't sufficient to just have $c$ injective, although clearly this is necessary:
+
+$\mathcal{A} = \{1,2,3,4\}, \mathcal{B} = \{0,1\}, c:1\mapsto 0, 2\mapsto 1, 3\mapsto 00, 4\mapsto 01$. Then $c^{\ast}(114) = 0001 = c^{\ast}(312)$.
+
+If $|\mathcal{A}|=m, |\mathcal{B}|=a$, then we say $c$ is an \emph{a-ary code of size m}. 2-ary = \emph{binary}, 3-ary=\emph{ternary}.
+
+We aim to construct decipherable codes with short word lengths. Assuming $c$ is injective, the following are always decipherable:
+\begin{itemize}
+\item Block codes, where every codeword has the same length (e.g. Greek fire, \textsc{Ascii})
+\item Comma codes, where we have an ``end of word" character (e.g. English language)
+\item Prefix-free codes, where no codeword is a prefix of any other distinct words.
+\end{itemize}
+Note that both of the first two are special cases of prefix-free codes. Prefix-free codes are often called \emph{instantaneous} or \emph{self-punctuating} codes. Note that not all decipherable codes are prefix-free: $0\mapsto 01, 1 \mapsto 011$ is decipherable but not prefix free.
+
+\begin{theorem}[Kraft's Inequality]
+Let $|\mathcal{A}| = m, |\mathcal{B}| = a$. A prefix-free code $c:\mathcal{A} \to \mathcal{B}^{\ast}$ with word lengths $\ell_1, \ldots, \ell_m$ exists if and only if:
+\begin{align*}
+\sum_{i=1}^{m} a^{-\ell_i} &\leq 1 \tag{\ast}
+\end{align*}
+\end{theorem}
+\begin{proof}
+Rewrite (\ast) as $\sum_{\ell=1}^s n_{\ell}a^{-\ell} \leq 1 (\star)$, where $n_{\ell}$ is the number of codewords of length $\ell$ and $s = \max_{1 \leq i \leq m} \ell_i$.
+
+\begin{itemize}
+\item[$\implies$] If $c:\mathcal{A} \to \mathcal{B}^{\ast}$ is prefix-free, then $n_1 a^{s-1} + n_2 a^{s-2} + \ldots n_s \leq a^s$, since the \textsc{Lhs} is the number of strings of length $s$ in $\mathcal{B}$ with some codeword of $c$ as a prefix, and \textsc{Rhs} is the number of strings of length $s$. Dividing by $a^{s}$ gives $(\star)$.
+
+\item[$\impliedby$] Given $n_1, \ldots, n_s$ satisfying $(\star)$, we need to construct a prefix-free code $c$ with $n_\ell$ codewords of length $\ell$ for all $\ell \leq s$. We use induction on $s$. The case $s=1$ is clear: we have $(\star)$ gives $n_1 \leq a$, so we can choose a code.
+
+By the induction hypothesis there is a prefix-free code $\hat{c}$ with $n_{\ell}$ codewords of length $\ell$ for all $\ell \leq s-1$. Then $(\star)$ gives:
+\begin{align*}
+n_1 a^{s-1} + n_2 a^{s-2} + \ldots + n_{s-1}a + n_s &\leq a^s
+\end{align*}
+where the first $s-1$ terms on \textsc{Lhs} sum to the number of strings of length $s$ with some codeword of $\hat{c}$ as a prefix, and the \textsc{Rhs} is the number of strings of length $s$. Hence we can add at least $n_s$ new codewords of length $s$ to $\hat{c}$ and maintain the prefix-free property, giving our code.
+\end{itemize}
+\end{proof}
+
+\begin{theorem}[McMillan]
+Any decipherable code satisfies Kraft's inequality
+\end{theorem}
+\begin{proof}[Karush]
+Let $c:\mathcal{A} \to \mathcal{B}^{\ast}$ be a decipherable code with codewords of lengths $\ell_1, \ldots, \ell_m$. Let $s = \max_{1 \leq i\leq m} \ell_i$. Then for $R \in \N:$
+\begin{align*}
+\left(\sum_{i=1}^{m} a^{-\ell_i}\right)^R = \sum_{l=1}^{Rs} b_{\ell}a^{-\ell}
+\end{align*}
+where $b_{\ell} = |\{x \in \mathcal{A}^R : c^{\ast}(x)$ has length $\ell\}| \leq |\mathcal{B}^{\ell}| = a^{\ell}$, using the fact that $c^{\ast}$ is injective. Then:
+\begin{align*}
+\left(\sum_{i=1}^m a^{-\ell_i}\right)^R &\leq \sum_{l=1}^R a^\ell a^{-\ell} = Rs\\
+\sum_{i=1}^m a^{-\ell_i} &\leq (Rs)^{\frac1R} \to 1 \text{ as } R \to \infty
+\end{align*}
+\end{proof}
+
+\begin{corollary}
+A decipherable code with prescribed word lengths exists iff a prefix-free code with same word lengths exists.
+\end{corollary}
+\begin{proof}
+\item
+\begin{itemize}
+\item[$\implies$] Use \textbf{1.2} to generate a prefix-free code by \textbf{1.1}
+\item[$\impliedby$] Prefix-free codes are decipherable.
+\end{itemize}
+\end{proof}
+\end{document}

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  20 JAN 2020 09:58
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  20 JAN 2020 10:57
  system commands enabled.
 **"Logic and Set Theory.tex"
 ("./Logic and Set Theory.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.973 seconds
+luaotfload | main : initialization completed in 1.003 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -844,36 +844,40 @@ LaTeX Warning: No \author given.
 [1
 
 {C:/Users/Harry/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-("./Logic and Set Theory.aux"))
+[3] [4] ("./Logic and Set Theory.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 20252 strings out of 494305
+ 20253 strings out of 494305
  100000,552014 words of node,token memory allocated
  482 words of node memory still in use:
    5 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 7 attribute, 52 glue_spec,
  7 attribute_list, 2 write nodes
-   avail lists: 1:3,2:406,3:119,4:23,5:144,6:22,7:1826,8:36,9:146,10:5,11:75
- 23645 multiletter control sequences out of 65536+200000
- 73 fonts using 4922103 bytes
- 57i,10n,78p,1092b,218s stack positions out of 5000i,500n,10000p,200000b,50000s
-<<C:\Users\Harry\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/stmaryrd/dpi600
-\stmary10.pk>><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmromancaps1
-0-regular.otf><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bo
-lditalic.otf><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-reg
-ular.otf><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman12-bold.ot
-f><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c
-:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman17-regular.otf><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pf
-b>
-Output written on Logic and Set Theory.pdf (2 pages, 102489 bytes).
+   avail lists: 1:3,2:581,3:162,4:41,5:256,6:24,7:2533,8:47,9:217,10:9,11:75
+ 23646 multiletter control sequences out of 65536+200000
+ 74 fonts using 5053799 bytes
+ 57i,10n,78p,1092b,332s stack positions out of 5000i,500n,10000p,200000b,50000s
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/p
+rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><<C:\Users\H
+arry\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/stmaryrd/dpi600\stmary10.pk
+>><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.ot
+f><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf
+><c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:
+/program files/miktex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/progra
+m files/miktex 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c:/program fi
+les/miktex 2.9/fonts/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/symbols/msam10.pfb>
+Output written on Logic and Set Theory.pdf (4 pages, 149573 bytes).
 
-PDF statistics: 91 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

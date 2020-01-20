@@ -71,4 +71,80 @@ So $v(p \implies q) = 1, v(p \implies r) = 0$. Hence $v(p) = 1, v(r) = 0, v(q) =
 
 \item $\taut ((p \implies \bot) \implies \bot) \implies p$, i.e. $ \neg \neg p \implies p$, i.e. $(\neg p \lor p)$. This is the Law of the Excluded Middle, and is also a tautology.
 \end{enumerate}
+Note that a valuation is entirely determined by its values on the primitive propositions.
+\begin{proposition}
+\item
+\begin{enumerate}
+\item Let $v, w: L \to \{0,1\}$ be valuations with $v|_P = w|_P$. Then $v=w$.
+\item Let $f:P \to \{0,1\}$. Then there is a valuation $v:L \to \{0,1\}$ with $v|_P = f$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}\item
+\begin{enumerate}
+\item We prove this by induction on $n$, so that $v|_{L_n} = w|_{L_n}$. For the base case of $n=0$, $v|_P = w|_P$, and $v(\bot) = 0 = w(\bot)$. Then for the induction step, $v|_{L_{n-1}} = w|_{L_{n-1}}$. Let $p \in L_n \setminus L_{n-1}$. Then $p = (q \implies r)$ for some $q, r \in L_{n-1}$. We know that $v(q) = w(q), v(r) = w(r)$, and so $v(p) = w(p)$.
+
+\item We define $v$ successively on $L_0, L_1, L_2, \ldots$
+\begin{itemize}
+\item[$L_0$:] Let $v|_P = f$ and let $v(\bot) = 0$
+\item[$L_n$:] If $p \in L_n \setminus L_{n-1}$, then $p = (q \implies r)$, and so set $v(p)$ to be 0 if $v(q) = 1, v(r) = 0$, and $1$ otherwise. Since propositions are built up in a unique way, this is indeed a valuation.
+\end{itemize}
+\end{enumerate}
+\end{proof}
+
+Let $S \subset L$. We say that $v$ is a \emph{model} of $S$ if $v$ is a valuation with $v(x) = 1$ for all $x \in S$. If $S = \{p\}$, we say that $v$ is a model of $p$. If every model of $S \subset L$ is a model of $p \in L$, we say that $S$ \emph{semantically entails} $p$, and write $S \taut p$. Note that $\emptyset \taut p$ is exactly the same as $\taut p$.
+
+For example, $\{p, p\implies q\} \taut q$.
+
+\subsection{Syntactic Entailment (Provability)}
+Our proof system will have axioms as follows for all $p, q, r \in L$:
+\begin{enumerate}
+\item[A1] $p \implies (q \implies p)$
+\item[A2] $(p \implies (q \implies r)) \implies ((p \implies q) \implies (p \implies r))$
+\item[A3] $((p \implies \bot) \implies \bot)\implies p$
+\end{enumerate}
+Our proof system also has a \emph{deduction rule} known as \emph{modus ponens} (MP): for all $p, q \in L$, from $p$ and $(p \implies q)$ we can deduce $q$.
+
+Note that each axiom is a tautology. For MP, see the last example of \textbf{\textsection 1.1}
+
+Let $S \subset L$ and $p \in L$. A \emph{proof} of $p$ from $S$ is a sequence $t_1, t_2, \ldots, t_n \in L$ of finite length with $t_n = p$ such that, for each $i$, either $t_i$ is an axiom, or $t_i \in S$ (a \emph{hypothesis}), or there exist $j, k < i$ with $t_k = (t_j \implies t_i)$.
+
+If there exists a proof of $p$ from $S$, we say that $S$ \emph{syntactically entails} $p$, or $S$ \emph{proves} $p$, and we write $S \vdash p$. If $S = \emptyset$, we say $p$ is a \emph{theorem} and write $\vdash p$.
+
+\underline{Example: $\vdash (p \implies p)$}\\
+Use A2, with $r=p$, to get $(p \implies (q\implies p)) \implies ((p \implies q) \implies (p \implies p))$. Now the first bracket is a theorem by A1, and if we take $q = (p \implies p)$ in the second, we can use modus ponens twice with A1 to deduce the final bracket, that $(p \implies p)$. We will write this formally:
+
+\begin{lemma}
+For all $p \in L, \vdash (p \implies p)$
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item $(p \implies ((p \implies p) \implies p)) \implies ((p \implies (p\implies p))\implies (p \implies p))$ \hfill (A2)
+\item $p \implies ((p \implies p)\implies p)$ \hfill (A1)
+\item $(p \implies (p \implies p)) \implies (p \implies p)$ \hfill (MP on 1, 2)
+\item $p \implies (p \implies p)$ \hfill (A1)
+\item $p \implies p$ \hfill (MP on 3, 4)
+\end{enumerate}
+\end{proof}
+\begin{proposition}[The Deduction Theorem]
+Let $S \subset L$ and $p, q \in L$. Then $S \vdash (p \implies q)$ if and only if $S \cup \{p\} \vdash q$.
+\end{proposition}
+\begin{proof}
+Suppose $t_1, \ldots, t_n$ is a proof of $p \implies q$ from $S$. Then $t_1, \ldots, t_n, p, q$ is a proof of $q$ from $S \cup \{p\}$. Suppose that $t_1, \ldots, t_n$ instead is a proof of $q$ from $S \cup \{p\}$. We show by induction on $i$ that $S \vdash (p \implies t_i)$ for each $i$, and then we will be done since $t_n = q$.
+\begin{enumerate}
+\item If $t_i \in S$:
+\begin{itemize}
+\item $t_i \implies (p \implies t_i)$ \hfill (A1)
+\item $t_i$ \hfill (hypothesis)
+\item $(p \implies t_i)$ \hfill (MP)
+\end{itemize}
+\item If $t_i = p$, use Lemma \textbf{1.2}
+\item If $t_j = (t_j \implies t_i)$ for some $j, k < i$, then write down proofs of $(p \implies t_j), (p \implies t_k)$ from $S$. Then append:
+\begin{itemize}
+\item $(p \implies (t_j \implies t_i)) \implies ((p \implies t_j) \implies (p \implies t_i))$ \hfill (A2)
+\item $(p \implies t_j) \implies (p \implies t_i)$ \hfill (MP)
+\item $p \implies t_i$ \hfill (MP)
+\end{itemize}
+\end{enumerate}
+\end{proof}
 \end{document}

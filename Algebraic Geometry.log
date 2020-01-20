@@ -1,7 +1,7 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  20 JAN 2020 12:41
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  20 JAN 2020 12:55
  system commands enabled.
-**"Quantum Information and Computation.tex"
-("./Quantum Information and Computation.tex"
+**"Algebraic Geometry.tex"
+("./Algebraic Geometry.tex"
 LaTeX2e <2018-12-01>
 Lua module: luaotfload-main 2019-07-04 2.98 luaotfload entry point
 Lua module: luaotfload-init 2019-07-04 2.98 luaotfload submodule / initializatio
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.174 seconds
+luaotfload | main : initialization completed in 1.035 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -728,8 +728,8 @@ Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
 )
 \c@theorem=\count135
 )
-("./Quantum Information and Computation.aux")
-\openout1 = Quantum Information and Computation.aux
+("./Algebraic Geometry.aux")
+\openout1 = Algebraic Geometry.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
@@ -844,58 +844,35 @@ LaTeX Warning: No \author given.
 [1
 
 {C:/Users/Harry/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-[3]
-Overfull \hbox (2.54747pt too wide) in paragraph at lines 87--88
-[]\TU/lmr/m/n/10 If $\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10  []\OMS/cmsy/m/n/10 i \
-OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 []\OMS/cmsy/m/n/10 ij\OML/
-cmm/m/it/10 []\OMS/cmsy/m/n/10 i\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 j\OML/cmm/
-m/it/10  []\OMS/cmsy/m/n/10 i \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 j\OML/cmm/m/it
-/10 []\OMS/cmsy/m/n/10 ij\OML/cmm/m/it/10 []\OMS/cmsy/m/n/10 i$ \TU/lmr/m/n/1
-0 are prod-uct vec-tors in $\OMS/cmsy/m/n/10 V 
- W$\TU/lmr/m/n/10 . Then $\OMS/cmsy/m/n/10 h\OML/cmm/m/it/10  []\OMS/cmsy/m/n/1
-0 j\OML/cmm/m/it/10  []\OMS/cmsy/m/n/10 i \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 h\
-OML/cmm/m/it/10 []\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 []\OMS/cmsy/m/n/10 ih\OM
-L/cmm/m/it/10 []\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 []\OMS/cmsy/m/n/10 i$\TU/l
-mr/m/n/10 .
- []
-
-LaTeX Font Info:    Try loading font information for U+euf on input line 97.
-("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/ueuf.fd"
-File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [4]
-("./Quantum Information and Computation.aux"))
+("./Algebraic Geometry.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 20270 strings out of 494305
+ 20271 strings out of 494305
  100000,552014 words of node,token memory allocated
  495 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:3,2:592,3:118,4:25,5:224,6:20,7:3713,8:35,9:320,10:15,11:286
- 23656 multiletter control sequences out of 65536+200000
- 78 fonts using 5146087 bytes
- 57i,20n,78p,1107b,254s stack positions out of 5000i,500n,10000p,200000b,50000s
-<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><
-c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/pr
-ogram files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/pr
-ogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:/progra
-m files/miktex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/program files
-/miktex 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c:/program files/mik
-tex 2.9/fonts/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-r10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/euler/eufm7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Quantum Information and Computation.pdf (4 pages, 142466 bytes
-).
+   avail lists: 1:3,2:377,3:130,4:28,5:175,6:19,7:2235,8:40,9:189,10:7,11:75
+ 23664 multiletter control sequences out of 65536+200000
+ 70 fonts using 4528071 bytes
+ 57i,9n,78p,1090b,279s stack positions out of 5000i,500n,10000p,200000b,50000s
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/p
+rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/program 
+files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/program f
+iles/miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files
+/miktex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/program files/miktex
+ 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9
+/fonts/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Algebraic Geometry.pdf (2 pages, 114462 bytes).
 
-PDF statistics: 111 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 93 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

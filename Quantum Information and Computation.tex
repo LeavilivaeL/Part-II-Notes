@@ -4,6 +4,7 @@
 \title{Ew Applied Maths}
 \begin{document}
 \maketitle
+\setcounter{section}{-1}
 
 \section{Introduction}
 \subsection*{What is information?}
@@ -45,5 +46,54 @@ We have 4 key postulates of quantum mechanics:
 \end{itemize}
 The idea behind the mathematics of quantum mechanics, which we'll get to properly in the next section, is that we want to associate to every quantum-mechanical system $S$ a \emph{complex inner product vector space} $\mathcal{V}$, or \emph{Hilbert space}. We will be using \emph{Dirac's bra-ket notation}.
 
-A \emph{ket} is a vector $\ket{\psi} \in \mathcal{V}$. For quantum computation, we will use $\mathcal{V} = \C^2$. Then we will represent the \emph{qubit} $\ket{0} = \begin{pmatrix} 1 \\ 0\end{pmatrix}$, and $\ket{1} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$. Then for $\alpha, \beta \in \C$, we can represent a valid quantum state by $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$. If $|\alpha|^2 + |\beta|^2 = 1$, then this is a \emph{qubit}, and when we measure it we get 0 with probability $|\alpha|^2$ and 1 with probability $|\beta|^2$.
+\section{Mathematical Preliminaries \& Bra-Ket Notation}
+We will be working in an $n$-dimensional complex inner product spaces $\mathcal{V}$. We will denote a column vector by a \emph{ket}, denoted $\ket{\psi}$. It's conjugate transpose is called a \emph{bra}, and written $\bra{\psi}$. For instance, if $\ket{\psi} = \begin{pmatrix} a \\ b \end{pmatrix}$, then $\bra{\psi} = (\bar{a}, \bar{b})$. We then denote the \emph{inner product} $(\ket{\phi}, \ket{\psi}) = \braket{\phi}{\psi} = (\bar{a}, \bar{b})\begin{pmatrix} c \\ d\end{pmatrix} = \bar{a}c+\bar{b}d \in \C$.
+
+Recall the axioms for an inner product:
+\begin{itemize}
+\item[IP1] Positive definite. $\R \ni \braket{\psi}{\psi} \geq 0$, and $=0$ if and only if $\ket{\psi} = \mathbf{0}$.
+\item[IP2] Linearity in second argument. $\braket{\phi}{\lambda\psi} = \lambda \braket{\phi}{\psi}$
+\item[IP3] Antilinearity in first argument. $\braket{\lambda\phi}{\psi} = \bar{\lambda}\braket{\phi}{\psi}$
+\item[IP4] Skew-symmetry. $\overline{\braket{\phi}{\psi}} = \braket{\psi}{\phi}$
+\item[IP5] Norm. We define $||\psi|| = \sqrt{\braket{\psi}{\psi}}$
+\end{itemize}
+
+For this course we will take as a convention that $\mathcal{V} = \C^n$, with basis $\ket{0} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \ket{1} = \begin{pmatrix}
+0 \\ 1 \end{pmatrix}$, and so on for higher dimensions.
+
+We also have an \emph{outer product}, which is simply the other way round, so that we have $\ket{\psi}\bra{\phi}$ is an $n\times n$ matrix.
+
+Note that this basis is a \emph{complete orthonormal basis} for $\C^n$, i.e. we have $\braket{i}{j} = \delta_{ij}$.
+
+By complete, we mean that $\sum_{i=1}^n \ket{i}\bra{j} = I_{n \times n}$. As an exercise, check that $\mathcal{V} = \C^2$ with basis $\ket{0}, \ket{1}$ is complete.
+
+We will also be using the orthonormal basis $\{\ket{+}, \ket{-}\}$, with $\ket{\pm} = \frac{\ket{0}\pm\ket{1}}{\sqrt{2}}$.
+
+Suppose we have spaces $\mathcal{V}, \mathcal{W}$, of dimensions $n, m$, with bases $\{\ket{e_i}\}_{i=1}^m; \{\ket{f_i}\}_{i=1}^n$. Then we define the \emph{tensor product space} $\mathcal{V} \otimes \mathcal{W}$ to be the $mn$ dimensional vector space with orthonormal basis $\{\ket{e_i}\otimes\ket{f_j}\}_{i,j}$, where we have:
+\begin{align*}
+\ket{v}\otimes\ket{w} = \begin{pmatrix} a \\ b \end{pmatrix} \otimes \begin{pmatrix} c \\ d \end{pmatrix} = \colvec{a \colvec{c \\ d}\\b \colvec{c\\d}} = \colvec{ac \\ ad\\ bc \\ bd} \in \C^2\otimes \C^2.
+\end{align*}
+
+If a vector $\ket{\psi} \in \mathcal{V}\otimes\mathcal{W}$ can be written as $\ket{v}\otimes \ket{w}$, we call it a \emph{product state}. There are some vectors which cannot be expressed in this way. These are called \emph{entangled vectors}. Note that we will often omit the $\otimes$, and just write $\ket{\psi} = \ket{v}\ket{w}$.
+
+We can also take $k$-fold \emph{tensor powers} of $\mathcal{V}$:
+\begin{align*}
+\mathcal{V}^{\otimes k} \coloneq \mathcal{V}\otimes \mathcal{V}\otimes\ldots \otimes \mathcal{V}
+\end{align*}
+$\mathcal{V}^{\otimes k}$ is an $n^k$ dimensional vector space. It has a basis $\{\ket{i_1}\ket{i_2}\ldots\ket{i_k} = \ket{i_1i_2\ldots i_k}\}$, where the $\ket{i_j}$ are basis vectors of $\mathcal{V}$. In the case where $\mathcal{V} = \C^2$, we can think of these as bitstrings.
+
+For an example of an entangled vector, consider $\ket{\Phi} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) \in \C^2 \otimes \C^2$. Assume there is $\ket{v} = a\ket{0} + b\ket{1}; \ket{w} = c\ket{0} + d\ket{1}$. Then $\ket{v}\otimes\ket{w} = ac\ket{00}+ad\ket{01}+bc\ket{10}+bd\ket{11}$. But there is no choice of $a, b$ that makes this equal to $\ket{\Phi}$.
+
+If $\ket{\psi_1} = \ket{\alpha_1}\ket{\beta_1}, \ket{\psi_2} = \ket{\alpha_2}\ket{\beta_2}$ are product vectors in $\mathcal{V}\otimes\mathcal{W}$. Then $\braket{\psi_1}{\psi_2} = \braket{\alpha_1}{\alpha_2}\braket{\beta_1}{\beta_2}$. In the case where one of the vectors is not a product vector, we have to write it as a sum of the basis vectors $\ket{e_i}\ket{f_j}$ of $\mathcal{V}\otimes\mathcal{W}$, and then expand that product out.
+
+For example, if $\ket{A} = \sum_{i=1}^m \sum_{j=1}^n a_{ij}\ket{e_i}\ket{f_j}$, and $\ket{B} = \sum\sum b_{ij} \ket{e_i}\ket{f_j}$, then:
+\begin{align*}
+\braket{A}{B} &= \sum_{i,i'}\sum_{j,j'} a_{ij}^*b_{i'j'} \braket{e_i}{e_i'}\braket{f_j}{f_j'}\\
+&= \sum_{i,j} a_{ij}^* b_{ij}
+\end{align*} 
+
+\section{Postulates of Quantum Mechanics}
+\begin{enumerate}
+\item[QM1] To any isolated/closed quantum system, one can associate a Hilbert space $\mathcal{V}$, called the \emph{state space}. The physical states are given by \emph{unit vectors} in $\mathcal{V}$. (More precisely, they are given by \emph{rays}: suppose we have $\ket{\psi}\in \mathcal{V}, \ket{\phi} = e^{\im\theta}\ket{\psi}$ for $\theta \in \R$, where we call $e^{\im\theta}$ a \emph{global phase factor}. We will see that there is no measurement that is able to distinguish $\ket{\phi}, \ket{\psi}$, so to all intents and purposes they are identical - they refer to the same state. Hence we only distinguish state vectors up to the equivalence relation of differing by a global phase factor, and call the equivalence classes the rays)
+\end{enumerate}
 \end{document}

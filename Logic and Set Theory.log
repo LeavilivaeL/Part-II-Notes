@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  20 JAN 2020 10:57
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  22 JAN 2020 10:55
  system commands enabled.
 **"Logic and Set Theory.tex"
 ("./Logic and Set Theory.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.003 seconds
+luaotfload | main : initialization completed in 1.063 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -726,9 +726,108 @@ Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
 ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/centernot.sty"
 Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
 )
-\c@theorem=\count135
+("C:/Program Files/MiKTeX 2.9/tex/latex/pgfplots/pgfplots.sty"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplots.revision.tex")
+Package: pgfplots 2018/03/28 v1.16 Data Visualization (1.16)
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplots.code.tex"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplotscore.code.tex"
+Package pgfplots info on input line 124: Initializing with LUA version Lua 5.3
+\pgfplots@luabackend@table=\catcodetable5
+\t@pgfplots@toka=\toks43
+\t@pgfplots@tokb=\toks44
+\t@pgfplots@tokc=\toks45
+\pgfplots@tmpa=\dimen196
+\c@pgfplots@coordindex=\count135
+\c@pgfplots@scanlineindex=\count136
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/sys/pgfplotssysgeneric.code.
+tex"))
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/libs/pgfplotslibrary.code.te
+x")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpg
+fsupp_loader.code.tex"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryfpu.code.tex"
 )
-("./Logic and Set Theory.aux")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/luamath/pgflibraryluama
+th.code.tex")
+Package pgfplots info on input line 275: luamath library shipped with pgf 3.1.4b
+ is up-to-date
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/util/pgfplotsutil.code.tex"
+Package pgfplots info on input line 82: Found new luatex: initializing lua comma
+nds instead of write18 (shell-escape)
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/liststructure/pgfplotslistst
+ructure.code.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/liststructure/pgfplotslistst
+ructureext.code.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/liststructure/pgfplotsarray.
+code.tex"
+\c@pgfplotsarray@tmp=\count137
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/liststructure/pgfplotsmatrix
+.code.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/numtable/pgfplotstableshared
+.code.tex"
+\c@pgfplotstable@counta=\count138
+\t@pgfplotstable@a=\toks46
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/liststructure/pgfplotsdeque.
+code.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/util/pgfplotsbinary.code.tex
+"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/util/pgfplotsbinary.data.cod
+e.tex"))
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/util/pgfplotsutil.verb.code.
+tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/libs/pgflibrarypgfplots.surf
+shading.code.tex"
+\c@pgfplotslibrarysurf@no=\count139
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfs
+hading.pgfsys-luatex.def")))
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/util/pgfplotscolormap.code.t
+ex"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/util/pgfplotscolor.code.tex"
+))
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplotsstackedplots.code.te
+x")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplotsplothandlers.code.te
+x"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplotsmeshplothandler.code
+.tex"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplotsmeshplotimage.code.t
+ex")))
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplots.scaling.code.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplotscoordprocessing.code
+.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplots.errorbars.code.tex"
+) ("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplots.markers.code.tex"
+) ("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplotsticks.code.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgfplots/pgfplots.paths.code.tex")
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+librarydecorations.pathreplacing.code.tex"
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/decorations/pgflibraryd
+ecorations.pathreplacing.code.tex"))
+\pgfplots@numplots=\count140
+\pgfplots@xmin@reg=\dimen197
+\pgfplots@xmax@reg=\dimen198
+\pgfplots@ymin@reg=\dimen199
+\pgfplots@ymax@reg=\dimen256
+\pgfplots@zmin@reg=\dimen257
+\pgfplots@zmax@reg=\dimen258
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+libraryplotmarks.code.tex"
+File: tikzlibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryplotmarks.cod
+e.tex"
+File: pgflibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+)))
+\c@theorem=\count141
+) ("./Logic and Set Theory.aux")
 \openout1 = Logic and Set Theory.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -783,17 +882,17 @@ LaTeX Font Info:    ... okay on input line 5.
 ABD: EveryShipout initializing macros
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count136
-\scratchdimen=\dimen196
+\scratchcounter=\count142
+\scratchdimen=\dimen259
 \scratchbox=\box63
-\nofMPsegments=\count137
-\nofMParguments=\count138
-\everyMPshowfont=\toks43
-\MPscratchCnt=\count139
-\MPscratchDim=\dimen197
-\MPnumerator=\count140
-\makeMPintoPDFobject=\count141
-\everyMPtoPDFconversion=\toks44
+\nofMPsegments=\count143
+\nofMParguments=\count144
+\everyMPshowfont=\toks47
+\MPscratchCnt=\count145
+\MPscratchDim=\dimen260
+\MPnumerator=\count146
+\makeMPintoPDFobject=\count147
+\everyMPtoPDFconversion=\toks48
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -809,7 +908,7 @@ Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks45
+\pdftexcmds@toks=\toks49
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
 8.
@@ -820,8 +919,14 @@ Package grfext Info: Graphics extension search list:
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 6.
 
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable ti
+ck labels; missing features). Consider writing \pgfplotsset{compat=1.16} into yo
+ur preamble.
+ on input line 5.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 6.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -844,18 +949,18 @@ LaTeX Warning: No \author given.
 [1
 
 {C:/Users/Harry/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-[3] [4] ("./Logic and Set Theory.aux"))
+[3] [4] [5] ("./Logic and Set Theory.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 20253 strings out of 494305
- 100000,552014 words of node,token memory allocated
+ 29984 strings out of 494305
+ 100000,1144653 words of node,token memory allocated
  482 words of node memory still in use:
    5 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 7 attribute, 52 glue_spec,
  7 attribute_list, 2 write nodes
-   avail lists: 1:3,2:581,3:162,4:41,5:256,6:24,7:2533,8:47,9:217,10:9,11:75
- 23646 multiletter control sequences out of 65536+200000
+   avail lists: 1:2,2:581,3:164,4:42,5:259,6:24,7:2774,8:47,9:217,10:9,11:93
+ 33164 multiletter control sequences out of 65536+200000
  74 fonts using 5053799 bytes
- 57i,10n,78p,1092b,332s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,10n,96p,1092b,334s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/p
 rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><<C:\Users\H
 arry\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/stmaryrd/dpi600\stmary10.pk
@@ -874,10 +979,11 @@ fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Prog
 ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/symbols/msam10.pfb>
-Output written on Logic and Set Theory.pdf (4 pages, 149573 bytes).
+pe1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/symbols/msbm10.pfb>
+Output written on Logic and Set Theory.pdf (5 pages, 167504 bytes).
 
-PDF statistics: 123 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 130 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -78,7 +78,7 @@ If a vector $\ket{\psi} \in \mathcal{V}\otimes\mathcal{W}$ can be written as $\k
 
 We can also take $k$-fold \emph{tensor powers} of $\mathcal{V}$:
 \begin{align*}
-\mathcal{V}^{\otimes k} \coloneq \mathcal{V}\otimes \mathcal{V}\otimes\ldots \otimes \mathcal{V}
+\mathcal{V}^{\otimes k} \coloneqq \mathcal{V}\otimes \mathcal{V}\otimes\ldots \otimes \mathcal{V}
 \end{align*}
 $\mathcal{V}^{\otimes k}$ is an $n^k$ dimensional vector space. It has a basis $\{\ket{i_1}\ket{i_2}\ldots\ket{i_k} = \ket{i_1i_2\ldots i_k}\}$, where the $\ket{i_j}$ are basis vectors of $\mathcal{V}$. In the case where $\mathcal{V} = \C^2$, we can think of these as bitstrings.
 
@@ -94,6 +94,34 @@ For example, if $\ket{A} = \sum_{i=1}^m \sum_{j=1}^n a_{ij}\ket{e_i}\ket{f_j}$, 
 
 \section{Postulates of Quantum Mechanics}
 \begin{enumerate}
-\item[QM1] To any isolated/closed quantum system, one can associate a Hilbert space $\mathcal{V}$, called the \emph{state space}. The physical states are given by \emph{unit vectors} in $\mathcal{V}$. (More precisely, they are given by \emph{rays}: suppose we have $\ket{\psi}\in \mathcal{V}, \ket{\phi} = e^{\im\theta}\ket{\psi}$ for $\theta \in \R$, where we call $e^{\im\theta}$ a \emph{global phase factor}. We will see that there is no measurement that is able to distinguish $\ket{\phi}, \ket{\psi}$, so to all intents and purposes they are identical - they refer to the same state. Hence we only distinguish state vectors up to the equivalence relation of differing by a global phase factor, and call the equivalence classes the rays)
+\item[QM1] To any isolated/closed quantum system, one can associate a Hilbert space $\mathcal{V}$, called the \emph{state space}. The physical states are given by \emph{unit vectors} in $\mathcal{V}$. (More precisely, they are given by \emph{rays}: suppose we have $\ket{\psi}\in \mathcal{V}, \ket{\phi} = e^{\im\theta}\ket{\psi}$ for $\theta \in \R$, where we call $e^{\im\theta}$ a \emph{global phase factor}. We will see that there is no measurement that is able to distinguish $\ket{\phi}, \ket{\psi}$, so to all intents and purposes they are identical - they refer to the same state. Hence we only distinguish state vectors up to the equivalence relation of differing by a global phase factor, and call the equivalence classes the rays). We will be focusing on the specific case where $\mathcal{V} = \C^2$, with the states $a\ket{0} + b\ket{1}$ for $a,b \in \C$, called \emph{qubits}.
+
+\item[QM2] Given a composite of two systems $S_1, S_2$ with vector spaces $\mathcal{V}_1, \mathcal{V}_2$, the state space of the composite system $S_1S_2$ is given by $\mathcal{V}_1\otimes \mathcal{V}_2$. Again, focusing on the qubit case, if we have $n$ cubits then the composite space of $S_1S_2\ldots S_n$ is $\mathcal{V} = (\C^2)^{\otimes n}$, with basis given by the bitstrings discussed above. Note that the number of coefficients required to define a member of $\mathcal{V}$ grows as $2^n$, the number of basis vectors, but the number of coefficients required to define a product state grows only linearly, as such a state can be written as $(a_1\ket{0}+b_1\ket{1})\otimes\ldots\otimes(a_n\ket{0}+b_n\ket{1})$.
 \end{enumerate}
+
+\subsection{Observables}
+An \emph{observable} $A$ is a linear hermitian (or self-adjoint) operator that acts on the state space $\mathcal{V}$ of $S$. Recall that linearity means that $A(a\ket{v} + b\ket{w}) = aA\ket{v} + bA\ket{w}$, and in this case we can represent $A$ by some matrix with respect to a basis of $\mathcal{V}$. We have for each $A$ a \textit{unique} linear operator $A^{\dag}$, the \emph{adjoint} of $A$, with the property that $\braket{v}{Au} = \braket{A^{\dag}v}{u}$. From 1B linear algebra, we know $A^{\dag}$ has matrix given by the conjugate transpose of the matrix representing $A$ (when taken with the same basis of course). Hence to say that $A$ is \emph{self-adjoint} is to say that $A = A^{\dag}$.
+
+An \emph{eigenvector} of $A$ is $\ket{phi}$ with the property that $A\ket{phi} = \lambda\ket{\phi}$ for $\lambda$ in the base field of $\mathcal{V}$. We call $\lambda$ an \emph{eigenvalue} of $A$. Some important examples of these linear maps will be the Pauli operators, given by:
+\begin{align*}
+I = \sigma_0 &= \begin{pmatrix}
+1 & 0\\ 0 & 1
+\end{pmatrix}\\
+\sigma_x & = \begin{pmatrix}
+0 & 1 \\ 1 & 0
+\end{pmatrix}\\
+\sigma_y &= \begin{pmatrix}
+0 & -\im \\ \im & 0
+\end{pmatrix}\\
+\sigma_z &= \begin{pmatrix}
+1 & 0 \\ 0 & -1
+\end{pmatrix}
+\end{align*}
+Note that $\sigma_{i}^2 = I$, and $\sigma_x \sigma_y = \im \sigma_z$.
+
+Moreover, $\sigma_x\ket{0} = \ket{1}, \sigma_x\ket{1} = \ket{0}$. We call $\sigma_x$ a \emph{bit flip} - it flips the value of a bit. The eigenvectors of $\sigma_x$ are $\ket{+}, \ket{-}$.
+
+\hspace*{-1em}$\sigma_z\ket{0} = \ket{0}, \sigma_z\ket{1} = -\ket{1}$, so we call $\sigma_z$ a \emph{phase flip}. 
+
+\hspace*{-1em}$\sigma_y\ket{0} = \im\ket{1}, \sigma_y\ket{1}=-\im\ket{0}$, and we call $\sigma_y$ a \emph{combined flip}.
 \end{document}

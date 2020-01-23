@@ -37,7 +37,7 @@ $\{\alpha \in F : \alpha$ algebraic$\}$ is a subfield of $F$.
 It is enough to prove that it is closed under $+, \times$ and inverse. For $+$ and $\times$ see \textbf{1.6} below for a stronger statement. If $0 \neq \alpha$ is algebraic, then $\sum^n b_j \alpha^j = 0 \implies \sum^n b_{n-j}(\alpha^{-1})^j = 0$, and so $\alpha^{-1}$ is algebraic.
 \end{proof}
 
-$\alpha \in F$ is an \emph{algebraic integer} if there exists a monic polynomial $f \in \Z[x]$ with $f(\alpha) = 0$.
+$\alpha \in F$ is an \emph{algebraic integer} if there is a monic polynomial $f \in \Z[x]$ with $f(\alpha) = 0$.
 \stepcounter{theorem}
 
 \begin{lemma}
@@ -80,10 +80,196 @@ Now to introduce the main characters of this course:
 
 An \emph{algebraic number field} (or just \emph{number field}) is a field $K \supset \Q$ which is a finite extension, i.e. $[K:\Q] < \infty$. The \emph{ring of integers of K}, written $\o_K$, is the set of algebraic integers in $K$. By \textbf{1.6} it is a ring. It is useful to have the converse:
 
+\begin{proposition}
+Let $\alpha \in F$ be algebraic. Then for some $0 \neq b \in \Z, b\alpha$ is an algebraic integer.
+\end{proposition}
+\begin{proof}
+Exercise.
+\end{proof}
+
 \begin{theorem}[Primitive Element]
 If $K$ is a number field, then $K = \Q(\alpha)$ for some $\alpha \in K$.
 \end{theorem}
 \begin{proof}
 Done in Galois theory.
 \end{proof}
+
+\section{Quadratic Fields}
+$K$ is a \emph{quadratic field} if $[K:\Q] = 2$. In this case, let $\alpha \in K \setminus \Q$. The minimal polynomial $m_{\alpha}$ is a quadratic, and so solving we get $\alpha = x+\sqrt{y}\footnote{By $\sqrt{y}$ we just mean some $\beta \in K$ with $\beta^2 = y$}$ for $x,y \in \Q, y \neq 0$. Since $y$ is not a rational square, we can write $y$ uniquely as $z^2 d$ for $z \in \Q\setminus\{0\}$, $d\neq 0,1$ a square-free integer. So $K = \Q(\sqrt{d}) = \Q[x]/(x^2-d)$. If $d' \neq d$ also square-free, then $\Q(\sqrt{d}) \ncong \Q(\sqrt{d'})$.
+
+Now we want to compute $\o_K$. Let $\alpha = u + v\sqrt{d} \in K$ for $u, v \in \Q$. If $v = 0, \alpha \in \o_K \iff \alpha \in \Z$. Otherwise, $\alpha \notin \Q$, and $m_{\alpha} = x^2 - 2ux + (u^2-dv^2)$. So $\alpha \in \o_{K} \iff 2u \in \Z$ and $u^2-dv^2 \in \Z$.
+
+If $u \in \Z$, then $dv^2 \in \Z$, and since $d$ is square-free, we must have $v \in \Z$. Otherwise, $u = \frac{2a+1}{2}, a \in \Z$, and we must have $4dv^2 - (2a+1)^2 \in 4\Z$, which holds if and only if $v = \frac{k}{2}, k \in \Z$ and $dk^2 \equiv 1 \mod 4$. If $d \equiv 1 \mod 4$, this holds if and only if $k$ is odd, and if $d$ is not $1\mod 4$, then this congruence cannot hold.
+
+In conclusion,
+\begin{theorem}
+If $d \in \Z\setminus\{0,1\}$ is square-free, and $K = \Q(\sqrt{d})$, then:
+\begin{enumerate}
+\item If $d \nequiv 1 \mod 4$, then $\o_K = \{u + v\sqrt{d} : u, v \in \Z\} = \Z[\sqrt{d}]$.
+\item If $d \equiv 1 \mod 4$, then $\o_K = \{u + v\sqrt{d}: u, v \in \frac12\Z, u-v\in \Z\} = \Z[\frac{1+\sqrt{d}}{2}]$
+\end{enumerate}
+\end{theorem}
+
+\underline{Examples:} If $d = -3$, then $\o_{\Q(\sqrt{-3})} = \Z[\frac{1+\sqrt{-3}}{2}] = \Z[\xi_3]$.
+
+Note that, for a general number field $K$, we needn't have $\o_K = \Z[\alpha]$ for $\alpha \in K$, and in fact for $\deg K > 2$ this method is unlikely to be practical for computing $\o_K$.
+
+\section{Embeddings}
+Let $K$ be a number field with $[K:\Q] = n$.
+
+\begin{theorem}
+There are precisely $n$ homomorphisms $\sigma_i:K \injection \C$. These are called the \emph{complex embeddings} of $K$. More generally, if $\Q\subset F\subset K$ are number fields, then each of the $[F:\Q]$ complex embeddings of $F$ extend to exactly $[K:F]$ complex embeddings of $K$.
+\end{theorem}
+\begin{proof}[Proof. (Galois Theory)]
+Assume $K = \Q(\theta) = \Q[x]/(m_\theta)$ by the theorem of the primitive element. Then to give $\sigma: K \injection \C$ is the same as to give $\phi:\Q[x]\to \C$ with $\phi(m_{\theta}) = 0$. If $z = \phi(x)$, then $\phi(m_\theta) = m_\theta(z)$, giving a bijection $\{\sigma:K \injection \C\} \leftrightarrow \{$roots of $m_{\theta} \in \C\}$, coming from $\sigma \mapsto \sigma(\theta)$. The second part is the same as the first, but replacing $\Q$ by $F$ since $\theta$ has degree $[K:F]$ over $F$.
+\end{proof}
+
+\underline{Remarks:}
+\begin{enumerate}
+\item If $K \subset \C$ we can choose $\sigma$ to be the inclusion.
+\item For some $r \in \{0, \ldots, n\}$, exactly $r$ of the $\sigma_{i}$ will be \emph{real}, i.e. $\sigma_{i}(K) \subseteq \R$. The remaining embeddings will then come in complex conjugate pairs $\sigma_i, \overline{\sigma_i}$. So $n = r+2s$, where $r$ is the number of real embeddings, and $s$ is the number of complex conjugate pairs of embeddings.
+\end{enumerate}\newpage
+
+\hspace*{-1em}\underline{Examples:} 
+\begin{itemize}
+\item[$\Q(\sqrt{d})$.] We have two cases:
+\begin{itemize}
+\item[$d>0$.] There are $2$ real embeddings: $\sigma_1:\sqrt{d} \mapsto +\sqrt{d} \in \R$, and $\sigma_2:\sqrt{d} \mapsto -\sqrt{d} \in \R$. So $(r,s) = (2, 0)$.
+\item[$d<0$.] There is now one pair of complex embeddings, given by $\sigma_1:\sqrt{d} \to \im \sqrt{|d|}; \sigma_2:\sqrt{d}\to -\im\sqrt{|d|}$. So $(r,s) = (0,1)$.
+\end{itemize}
+\item[$\Q(\cbrt{2})$.] We have 1 real embedding $\cbrt{2} \mapsto \cbrt{2} \in \R$, and the two complex embeddings $\cbrt{2} \mapsto \omega^{\pm 1}\cbrt{2} \in \C$, so $(r, s) = (1,1)$.
+\end{itemize}
+
+\begin{proposition}
+If $\alpha \in K$, then the complex numbers $\sigma_i(\alpha)$ are the complex roots of $m_\alpha$, each taken $n/\deg(\alpha)$ times.
+\end{proposition}
+\begin{proof}
+Apply the 2\th[nd] part of \textbf{3.1} with $F = \Q(\alpha)$.
+\end{proof}
+
+\section{Norm and Trace}
+Given $K$ a number field, $\alpha \in K$, define a map $u_{\alpha}: K \to K$ by $u_{\alpha}(x) = \alpha x$. $K$ is a $\Q$-vector space, and $u_{\alpha}$ is a $\Q$-linear map.  Define:
+\begin{itemize}
+\item $f_{\alpha}$ to be the \emph{characteristic polynomial} of $u_{\alpha}$, so $f_{\alpha} = \det(x-u_{\alpha}) \in \Q[x]$, monic
+\item $\Nn_{K/\Q}(\alpha) = \det(u_{\alpha}) \in \Q$, the \emph{norm} of $\alpha$
+\item $\Tr_{K/\Q}(\alpha) = \tr(u_{\alpha}) \in \Q$, the \emph{trace} of $\alpha$ 
+\end{itemize}
+More explicitly, let $\beta_1, \ldots, \beta_n$ be a $\Q$-basis for $K$. Then $\alpha\beta_i = \sum_{j=1}^n A_{ji}\beta_j$ for some $A \in M_{n,n}(\Q)$. Then $f_{\alpha} = \det(x\cdot I_n - A), \Nn_{K/\Q}(\alpha) = \det(A), \Tr_{K/\Q} = \tr(A)$. As an exercise, work these out for $\Q(\sqrt{d})$.
+
+\begin{proposition}
+\begin{align*}
+\Nn_{K/\Q}(\alpha\beta) &= \Nn_{K/\Q}(\alpha)\Nn_{K/\Q}(\beta)\\
+\Tr_{K/\Q}(\alpha+\beta) &= \Tr_{K/\Q}(\alpha) + \Tr_{K/\Q}(\beta)
+\end{align*}
+\end{proposition}
+\begin{proof}
+From the definition, $u_{\alpha\beta} = u_{\alpha}u_{\beta}$, and $u_{\alpha+\beta} = u_{\alpha} + u_{\beta}$, so the result follows from linear algebra.
+\end{proof}
+
+\begin{theorem}
+\item
+\begin{enumerate}
+\item The minimal polynomial of $u_{\alpha}$ is $m_{\alpha}$, and $f_{\alpha} \prod_{i=1}^n(x-\sigma_i(\alpha)) = m_{\alpha}^{n/d}$, where $\deg(\alpha) = d$.
+
+\item $\Nn_{K/\Q}(\alpha) = \prod_{i=1}^n \sigma_i(\alpha), \Tr_{K/\Q}(\alpha) = \sum_{i=1}^n \sigma_i(\alpha)$.
+\end{enumerate}
+We call the $\sigma_i(\alpha)$ the \emph{conjugates} of $\alpha$.
+\end{theorem}
+\begin{proof}
+Note that \textit{1.}$\implies$\textit{2.}, because $\det u_{\alpha} = (-1)^n f_{\alpha}(0)$, the product of the eigenvalues, and $\tr u_{\alpha} = -($coeff. of $ x^{n-1}$ in $f_\alpha)$.
+
+For \textit{1.}, we first do the case $\deg \alpha = n$, i.e. $K = \Q(\alpha)$. Then $f_\alpha, m_\alpha \in \Q[x]$ are monic of degree $n$, and if $\beta \in K$ then $f_{\alpha}(\alpha)\beta = f_{\alpha}(u_{\alpha})\beta = 0$ by Cayley-Hamilton. So $f_\alpha(\alpha) = 0 \implies m_\alpha = f_\alpha$.
+
+In general, if $[K:\Q(\alpha)] = \frac{n}{d}$, then $K \cong \Q(\alpha)^{\oplus(n/d)}$, and then $f_\alpha = ($char. poly. of $u_\alpha$ on $\Q(\alpha))^{n/d} = m_\alpha^{n/d} = \prod_{i=1}^n (x-\sigma_i(\alpha))$.
+\end{proof}
+\begin{corollary}
+\item
+\begin{enumerate}
+\item Let $\alpha \in K$. Then $\alpha = 0 \iff \Nn_{K/\Q}(\alpha) = 0$.
+\item Let $\alpha \in \o_K$. Then $f_{\alpha} \in \Z[x]$, and $\Nn_{K/\Q}(\alpha), \Tr_{K/\Q}(\alpha) \in \Z$. Moreover, $\Nn_{K/\Q}(\alpha) \in \{\pm 1\}$ if and only if $\alpha \in \o_k^{\ast}$ is a \emph{unit}, i.e. $\alpha^{-1} \in \o_k$.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+\item
+\begin{enumerate}
+\item $\alpha = 0 \iff \sigma_i(\alpha) = 0$ for all $i$.
+\item $m_\alpha \in \Z[x]$, so $f_\alpha \in \Z[x]$, and hence $\Nn_{K/\Q}(\alpha), \Tr_{K/\Q}(\alpha) \in \Z$, since they are coefficients of $f_{\alpha}$ up to a choice of sign. 
+
+If $\alpha$ is a unit, then $\Nn_{K/\Q}(\alpha)\Nn_{K/\Q}(\alpha^{-1}) = \Nn_{K/\Q}(\alpha\alpha^{-1}) = \Nn_{K/\Q}(1) = 1$, and so $\Nn_{K/\Q}(\alpha)$ is a unit and an integer, so in $\{\pm 1\}$.
+
+If $\Nn_{K/\Q}(\alpha) \in \{\pm 1\}, f_\alpha = x^n + \sum_{i=1}^{n-1} b_i x^i \pm 1$, so $f_\alpha(\alpha) = 0 \implies \alpha\cdot\left(\alpha^{n-1}+\sum_{i=1}^{n-1}b_i\alpha^{i-1}\right) = \mp 1$, so $\alpha^{-1} \in \o_K$ and we have an explicit representation of $\alpha^{-1}$.
+\end{enumerate}
+\end{proof}
+
+Note that we can also define, if $\Q \subset F \subset K$ the relative trace $\Tr_{K/F}(\alpha), \Nn_{K/F}(\alpha)$ as the trace/determinant of $u_{\alpha}$ viewed as an $F$-linear map from $K \simeq F^{[K:F]}$ to itself, and we have that:
+\begin{align*}
+\Tr_{K/\Q} = \Tr_{F/\Q}\cdot\Tr_{K/F}\;\;\;\;\;\;\;\;\; \Nn_{K/\Q} = \Nn_{F/\Q}\cdot\Nn_{K/F}
+\end{align*}
+
+\section{Some Modules from GRM}
+\begin{proposition}
+$G$ is a finitely generated abelian group written additively with no torsion, i.e. no elements of finite order, and a finite set of generators $x_1, \ldots, x_n$. Let $H \subset G$ be the subgroup generated by $y_1, \ldots, y_n \in G$, where $y_i = \sum_{j=1}^n A_{ji}x_j$ for some $A \in Mat_{n,n}(\Z)$ Then if $\det(A) \neq 0$, $H$ has finite index in $G$, with $(G:H) = |\det A|$.
+\end{proposition}
+\begin{proof}
+Using Smith normal form, $A = PDQ$ for $P,Q,D$ integer $n\times n$ matrices where $\det P, \det Q \in \{\pm 1\}$ and $D = diag(d_1, \ldots, d_n)$ for $d_i \geq 0$, $d_i | d_{i+1}$. Then $G/H \cong \Z/d_1\Z \times \ldots \times \Z/d_n\Z$, where $\Z/0\Z = \Z$.
+
+Hence if $|\det A| = \prod_i d_i \neq 0$, then $G/H$ contains no $\Z$ terms and has dimension $\prod_i d_i = |\det A|$.
+\end{proof}
+
+Let $V$ be a $\Q$-vector space, and $\dim(V) = n < \infty$. Let $H \subset V$ be a subgroup, viewed as a sub-$\Z$-module. Then define:
+\begin{align*}
+\rank(H) = \dim(\spann(H)) \in \{0, 1, \ldots, n\}
+\end{align*}
+\begin{proposition}
+If $H$ is finitely generated as an abelian group then $H = \bigoplus_{i=1}^r \Z v_i$ where $r = \rank(H)$ and $x_1, \ldots, x_r \in V$ are linearly independent.
+\end{proposition}
+\begin{proof}
+$H$ has no torsion as $V$ is a $\Q$-vector space, so by classification $H$ is an abelian group freely generated by some $x_1, \ldots, x_r$. If $a_i \in \Q$ and $\sum a_i x_i = 0$ in $V$, then clearing denominators we have $\sum b_i x_i = 0$ with $b_i \in \Z$. So we must have $b_i = 0$ for all $i$, so $a_i = 0$ and the $x_i$ are linearly independent, and $r = \rank(H)$ by the definition of rank.
+\end{proof}
+
+\section{Discriminants and Integral Bases}
+Let $\alpha_1, \ldots, \alpha_n \in K$. Define the \emph{discriminant}
+\begin{align*}
+\Disc(\alpha_1) = \Disc(\alpha_1, \ldots, \alpha_n) = \det(\Tr_{K/\Q}(\alpha_i\alpha_j))i,j) \in \Q
+\end{align*}
+\begin{theorem}
+\item
+\begin{enumerate}
+\item $\Disc(\alpha_1, \ldots, \alpha_n) = \det(\sigma_i(\alpha_j))^2$.
+\item $\Disc(\alpha_i) \neq 0  \iff \alpha_1, \ldots, \alpha_n$ is a $\Q$-basis for $K$.
+\item If $\beta_i = \sum_{j=1}^n A_{ji}\alpha_j$ for $A \in Mat_{n,n}(\Q)$, then $\Disc(\beta_i) = (\det A)^2\Disc(\alpha_i)$
+\item Suppose $(\alpha_i)$ is a $\Q$-basis. Then $\Disc(\alpha_i)$ depends only on the subgroup $\Z\alpha_1+\ldots+\Z\alpha_n \in K$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Let $\Delta = (\sigma_i(\alpha_j))_{ij} \in Mat_{n,n}(\C)$. Then $(\Delta^t\Delta)_{ij} = \sum_{k=1}^n \sigma_k(\alpha_i)\sigma_k(\alpha_j) = \sum_{k=1}^n \sigma_k(\alpha_i\alpha_j) = \Tr_{K/\Q}(\alpha_i\alpha_j)$
+
+So $(\det \Delta)^2 = \det(\Delta^t\Delta) = \det\Tr_{K/\Q}(\alpha_i\alpha_j)$.
+
+\item If $\alpha_1, \ldots, \alpha_n$ is not a $\Q$-bases, then there are some $b_1, \ldots, b_n \in \Q$, not all $0$, with $\sum b_j\alpha_j = 0$. Then for all $i$, $0 = \sigma_i\left(\sum_{j=1}^n b_j\alpha_j\right) = \sum_{j=1}^n b_j\sigma_i(\alpha_j)$, and so $\det \Delta = 0$, hence $\disc(\alpha_i) = 0$.
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

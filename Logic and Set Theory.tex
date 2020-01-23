@@ -147,4 +147,57 @@ Suppose $t_1, \ldots, t_n$ is a proof of $p \implies q$ from $S$. Then $t_1, \ld
 \end{itemize}
 \end{enumerate}
 \end{proof}
+
+\subsection{The Completeness Theorem and Applications}
+The key result of this section will be that $\taut$ and $\vdash$ coincide. There will be two directions to prove:
+\begin{enumerate}
+\item \emph{Soundness:} If $S \vdash p$ then $S \taut p$.
+\item \emph{Adequacy:} If $S \taut p$ then $S \vdash p$.
+\end{enumerate}
+\begin{proposition}[Soundness Theorem]
+Let $S \subset L$ and $p \in L$ with $S \vdash p$. Then $S \taut p$.
+\end{proposition}
+\begin{proof}
+Let $t_1, \ldots, t_n$ be a proof of $p$ from $S$. Let $v$ be a model of $S$. We show by induction on $i$ that $v(t_i) = 1$ for $1 \leq i \leq n$.
+
+If $t_i \in S$ then $v(t_i) = 1$. If $t_i$ is an axiom then $\taut t_i$ so $v(t_i) = 1$. Otherwise, $t_k = (t_j \implies t_i)$ for some $j, k < i$. By the induction hypothesis, $v(t_j) = v(t_j \implies t_i) = 1$, so $v(t_i) = 1$.
+\end{proof}
+
+For adequacy, first consider the special case $p = \bot$, i.e. ``If $S \taut \bot$ them $S \vdash \bot$". We will prove the contrapositive: ``If $S \nvdash \bot$ then $S \ntaut \bot$". If $S \nvdash \bot$ we say that $S$ is \emph{consistent}. $`S \taut \bot$" means ``if $v$ is a model of $S$ then $v(\bot)=1$". But $v(\bot) = 0$ for every valuation $v$, so this says ``$S$ has no model." Hence ``$S \ntaut \bot$" says ``$S$ has a model".
+
+\begin{theorem}[Model Existence Lemma]
+Let $S \subset L$ be consistent. Then $S$ has a model.
+\end{theorem}
+\begin{proof}[Proof in the case P is countable]
+$L$ is countable, as each $p \in L$ is a finite string of symbols from $P \cup \{(,),\bot,\implies\}$.
+
+We write $L = \{x_1, x_2, \ldots\}$. We shall recursively construct sets $S_n \subset L$ with $S=S_0 \subset S_1 \subset\ldots$ and $S_n$ consistent.
+
+The base case is trivial, as $S_0 = S$ is consistent by hypothesis. Then for $n>0$, we have $S_{n-1}$ consistent. If $S_{n-1} \cup \{\neg x_n\}$ is consistent, let $S_n = S_n\cup \{\neg x_n\}$. Otherwise, $S_{n-1} \cup \{\neg x_n\} \vdash \bot$, and by the deduction theorem, $S_{n-1} \vdash (\neg x_n \implies \bot)$, i.e. that $S_{n-1} \vdash \neg \neg x_n$. But $S_{n-1} \vdash (\neg\neg x_n \implies x_n)$ by (A3), and so $S_{n-1} \vdash x_n$ by (MP). But $S_{n-1}$ is consistent, so let $S_n = S_{n-1} \cup \{x_n\}$.
+
+Then let $\bar{S} = \bigcup_{n=1}^{\infty} S_n$. Firstly, $S_n$ is consistent - suppose $t_1, \ldots, t_n$ is a proof of $\bot$ from $\bar{S}$. Then there is some collection $i_1, \ldots, i_m \in \N$ such that the hypotheses used in the proof come from $S_{i_1}, \ldots, S_{i_m}$. Let $I = \max\{i_1, \ldots, i_m\}$. Then every hypothesis comes from $S_I$, and so $t_1, \ldots, t_n$ is a proof of $\bot$ from $S_I$. \contr
+
+Also, for every $p \in L$ we have $p \in \bar{S}$ or $\neg p \in \bar{S}$. Moreover, $\bar{S}$ is \emph{deductively closed} (d.c): if $\bar{S} \vdash p$ then $p \in \bar{S}$. Indeed, suppose that $\bar{S} \vdash p$ but $p \notin \bar{S}$. Then $\neg p \in \bar{S}$. Now $\bar{S} \vdash p$ and $\bar{S} \vdash \neg p$, i.e. $\bar{S} \vdash (p \implies \bot)$. So by (MP), $\bar{S} \vdash \bot$ \contr. 
+
+Now let $v: L \to \{0,1\}$ be the indicator function of $\bar{S}$. We must check that $v$ is a valuation. As $\bar{S}$ is consistent, it is certainly true that $\bot \notin \bar{S}$, and so $v(\bot) = 0$. 
+
+Let $p, q \in L$. We want to think about $(p \implies q)$:
+\begin{itemize}
+\item[Case 1.] Suppose $v(q) = 1$. Then $q \in \bar{S}$, so $\bar{S} \vdash (p \implies q)$, but $\bar{S}$ is deductively closed, and so $(p \implies q) \in \bar{S}$, and $v(p \implies q) = 1$.
+
+\item[Case 2.] Suppose $v(p) = 0$. Again, we must show that $v(p \implies q) = 1$, i.e. that $\bar{S} \vdash (p \implies q)$. By the Deduction Theorem, this is equivalent to $S\cup \{p\} \vdash q$, and $p \notin S$, so $\neg p \in S$ and it will be enough to show that $\{p, \neg p\} \vdash q$. We have:
+\begin{enumerate}
+\item $(p \implies \bot)$ \hfill (hyp)
+\item $p$ \hfill (hyp)
+\item $\bot$ \hfill (MP on 1,2)
+\item $((q \implies \bot)\implies \bot) \implies q$ \hfill (A3)
+\item $\bot \implies ((q\implies \bot)\implies \bot)$ \hfill (A1)
+\item $(q \implies \bot) \implies \bot$ \hfill (MP on 3,5)
+\item $q$ \hfill (MP on 4,6)
+\end{enumerate}
+\item[Case 3.] $v(p) = 1, v(q) = 0$. We want to show that $v(p \implies q) = 0$. Suppose instead that $v(p \implies q) = 1$, so that $(p \implies q) \in \bar{S}, p \in \bar{S}$. But then by (MP) $\bar{S} \vdash q$, so $q \in \bar{S}$, so $v(q) = 1$. \contr
+\end{itemize}
+We have now shown that $v$ is a valuation. Moreover, $S \subset \bar{S}$ so $v(p) =1$ for all $p \in S$. Hence $v$ is a model of $S$.
+\end{proof}
+
 \end{document}

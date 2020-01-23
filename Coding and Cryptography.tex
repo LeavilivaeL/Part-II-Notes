@@ -128,4 +128,91 @@ A decipherable code with prescribed word lengths exists iff a prefix-free code w
 \item[$\impliedby$] Prefix-free codes are decipherable.
 \end{itemize}
 \end{proof}
+
+\section{Shannon's Noiseless Coding Theorem}
+Entropy is a measure of `randomness' or `uncertainty'. Suppose we have a random variable $X$ that takes values $x_1, \ldots, x_n$ with probabilities $p_1, \ldots, p_n$. Then the \emph{entropy} (roughly speaking) is the expected number of fair coin tosses needed to simulate $X$.
+
+\hspace*{-1em}\underline{Examples:}
+\begin{itemize}
+\item $p_1 = p_2 = p_3 = p_4 = \frac14$. We can identify $\{x_1, x_2, x_3, x_4\}$ with $\{HH, HT, TH, TT\}$, and so the entropy of this random variable is $2$.
+
+\item $(p_1, p_2, p_3, p_4)=(\frac12,\frac14,\frac18,\frac18)$. Here, the entropy is $1\cdot\frac12+2\cdot\frac14+3\cdot\frac18+3\cdot\frac18 = \frac74$. We might say then, since the entropy is greater, that the first example is ``more random" than the second.
+\end{itemize}
+
+More concretely, the \emph{Shannon (or information) entropy} of $X$ is $H(X) = -\sum_{i=1}^n p_i \log_2 p_i$. Note that $H(X) \geq 0$ with equality if and only if $\P(X=x_i) = 1$. This is measured in \emph{bits}. We take the convention that $0\log 0 =0$.
+
+\hspace*{-1em}\underline{Example}: Consider a biased coin, where $\P(X=H) = p, \P(X=T) = 1-p$. Then $H(X) = -p\log p-(1-p)\log(1-p) = p\log(\frac{1-p}{p} - \log(1-p)$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[xmin=0, xmax=1 ,ymax=1.5, samples=50, xlabel = {$p$}, ylabel={$H(X)$}]
+\addplot[blue, ultra thick, samples=200] (x, {x*log2((1-x)/x) - log2(1-x)});
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{proposition}[Gibb's Inequality]
+Let $(p_1, \ldots, p_n)$ and $(q_1, \ldots, q_n)$ be probability distributions. Then:
+\begin{align*}
+-\sum_{i=1}^n p_i \log p_i \leq -\sum_{i=1}^n p_i \log q_i
+\end{align*}
+with equality if and only if $p_i = q_i$ for all $i$.
+\end{proposition}
+
+\begin{proof}
+Since $\log x = \frac{\ln x}{\ln 2}$, we may replace $\log$ by $\ln$ in the proof. Put $I = \{1 \leq r\leq n: p_i \neq 0\}$. Now $\ln x \leq x-1$ with equality if and only if $x=1$. So we have $\ln \frac{q_i}{p_i} \leq \frac{q_i}{p_i} - 1$, and hence:
+\begin{align*}
+\sum_{i \in I} p_i \ln \frac{q_i}{p_i} &\leq \sum_{i\in I}q_i - \sum_{i \in I}p_i\\
+&= \sum_{i \in I} q_i - 1 \leq 0\\
+\therefore - \sum_{i \in I}p_i \ln p_i &\leq - \sum_{i \in I} p_i \ln q_i\\
+\therefore -\sum_{i=1}^n p_i \log p_i &\leq -\sum_{i=1}^n p_i \log q_i
+\end{align*}
+If equality holds, then $\sum_{i\in I} p_i =1$ and $\frac{p_i}{q_i} = 1$ for all $i \in I$, so $p_i = q_i$
+\end{proof}
+
+\begin{corollary}
+$H(p_1, \ldots, p_n) \leq \log n$ with equality if and only if $p_1 = \ldots = p_n = \frac1n$.
+\end{corollary}
+\begin{proof}
+Take $q_1 = \ldots = q_n = \frac1n$ in \textbf{2.1}.
+\end{proof}
+
+Let $\mathcal{A} = \{\mu_1, \ldots, \mu_m\}$, and $|\mathcal{B}| = a$, where $m, a\geq 2$. The random variable $X$ takes values $\mu_1, \ldots, \mu_m$ with probabilities $p_1, \ldots, p_m$. We say a code $c:\mathcal{A} \to \mathcal{B}^{\ast}$ is \emph{optimal} if it is a decipherable code with smallest possible expected word length, $\E S = \sum_i p_i \ell_i$.
+
+\begin{theorem}[Shannon's Noiseless Coding Theorem]
+The expected word length $\E S$ of an optimal code satisfies:
+\begin{align*}
+\frac{H(X)}{\log a} \leq \E S < \frac{H(X)}{\log a}+1
+\end{align*}
+\end{theorem}
+\begin{proof}
+For the lower bound, take $c: \mathcal{A} \to \mathcal{B}^{\ast}$ decipherable with word lengths $\ell_1, \ldots, \ell_m$. Then set $q_i = \frac{a^{-\ell_i}}{D}$ where $D = \sum_{i=1}^m a^{-\ell_i}$. Now we have that $\sum_{i=1}^m q_i = 1$. By Gibbs,
+\begin{align*}
+H(X) &\leq -\sum_{i=1}^m p_i \log q_i\\
+&= -\sum p_i\left(-\ell_i \log a - \log D\right)\\
+&= \left(\sum_{i=1}^m p_i \ell_i\right) \log a + \log D
+\end{align*}
+By McMillan, $D \leq 1$, so $\log D \leq 0$, and so $H(X) \leq \left(\sum_{i=1}^m p_i \ell_i\right) \log a = \E S \cdot \log a$, and we have equality if and only if $p_i = a^{-\ell_i}$ for some integers $\ell_1, \ldots \ell_m$.
+
+For the upper bound, take $\ell_i = \ceil{-\log_a p_i}$. Then $-\log_a p_i \leq \ell_i \implies p_i \geq a^{-\ell_i}$.
+
+Now $\sum_{i=1}^m a^{-\ell_i} \leq \sum_{i=1}^m p_i = 1$. By Kraft, there is some prefix-free code $c$ with word lengths $\ell_1, \ldots, \ell_m$, and the expected word length of $c$ is $\E S = \sum p_i \ell_i < \sum p_i (-\log_a p_i + 1) = \frac{H(X)}{\log a} + 1$.
+\end{proof}
+
+\hspace*{-1em}\underline{Example:} \emph{Shannon-Fano coding}\\
+We mimic the above proof: given probabilities $p_1, \ldots, p_n$, set $\ell_i = \ceil{-\log_a p_i}$. Construct the prefix-free code with word lengths $\ell_1, \ldots, \ell_m$ by choosing in order of increasing length, ensuring that previous codewords are not prefixes. For example, if $a = 2, m = 5$ we have:\\
+\begin{figure}[H]
+\centering
+\begin{tabular}{c|c|c|c}
+$i$ & $p_i$ & $\ceil{-\log_2 p_i}$ & Codewords \\\hline
+1 & 0.4 & 2 & 00 \\
+2 & 0.2 & 3 & 010\\
+3 & 0.2 & 3 & 011\\
+4 & 0.1 & 4 & 1000\\
+5 & 0.1 & 4 & 1001
+\end{tabular}
+\end{figure}
+$\E S = \sum p_i \ell_i = 2.8$, entropy $= 2.12$
+
 \end{document}

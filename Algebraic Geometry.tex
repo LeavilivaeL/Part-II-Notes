@@ -10,7 +10,10 @@
 \section{Introduction}
 What is algebraic geometry? Broadly speaking, it is the study of the geometry of solutions to systems of polynomial equations. For example, in $\R^2$, if we have the set $X$ of solutions to $\{(x,y)\in \R^2 : x^2+y^2 = 1\}$, then we know that this set forms a circle, and we know lots of geometric facts about circles. If we take a more complicated function, such as $y^2 = x^3-x$, we get something that looks like:
 \begin{tikzpicture}% fill this in
-
+\begin{axis}
+\addplot[blue, ultra thick, samples=200] ({(x^3-x)^(0.5)}, x);
+\addplot[blue, ultra thick, samples=200] ({-(x^3-x)^(0.5)}, x);
+\end{axis}
 \end{tikzpicture}
 
 If we instead think about complex solutions, we get something of the form of a torus minus a single point, with another rich geometric structure.
@@ -67,7 +70,73 @@ So $p \in Z(\angle{S})$, and so $Z(S)\subseteq Z(\angle{S})$.
 \hspace*{-1em}The other inclusion follows from the fact that $S \subseteq \angle{S}$, we must have $Z(\angle{S}) \subseteq Z(S)$.
 \end{proof}
 
-Let $X \subseteq \mathbb{A}^n$ be a subset. Define $I(X) \coloneqq \{f \in A : f(p) = 0 \;\forall p \in X\}$, the \emph{ideal of X}. Note that $I(X)$ is indeed an ideal, since if $f, g \in I(X)$ then $f+g \in I(X)$, and if $f \in I(X), g \in A$, then $f\cdot g \in I(X)$.
+Let $X \subseteq \mathbb{A}^n$ be a subset. Define $I(X) \coloneqq \{f \in A : f(p) = 0 \;\forall p \in X\}$, the \emph{ideal of X}. Note that $I(X)$ is indeed an ideal, since if $f, g \in I(X)$ then $f+g \in I(X)$, and if $f \in I(X), g \in A$, then $f\cdot g \in I(X)$. Note that if $S_1\subseteq S_2 \subseteq A_1$, then $Z(S_2) \subseteq Z(S_1)$, and if $X_1 \subseteq X_2$, then $I(X_2) \subseteq I(X_1)$.
 
-Note that if $S_1\subseteq S_2 \subseteq A_1$, then $Z(S_2) \subseteq Z(S_1)$, and if $X_1 \subseteq X_2$, then $I(X_2) \subseteq I(X_1)$.
+The \emph{radical} of an ideal $I \subset A$ is the set $\sqrt{I} \coloneqq \{x \in A: \exists n\in\N \st x^n \in I\}$. This is defined in general for any commutative ring $A$, not just polynomial rings.
+
+\begin{lemma}
+$\sqrt{I}$ is an ideal.
+\end{lemma}
+\begin{proof}
+If $f, g \in \sqrt{I}$, there is $n, m$ such that $f^n, g^m \in I$. Then $(f+g)^{m+n} = \sum_{i=0}^{m+n} \binom{m+n}{i}f^i g^{m+n-i}$. Now for each term in this sum, either we have $i \geq n$ or $m+m-i\geq m$, and so one of these terms is in $I$. Hence by the closure rules for ideals, $(f+g)^{m+n} \in I$, so $f+g \in \sqrt{I}$. Given $f \in \sqrt{I}, g \in A$, we have $(fg)^n = f^n g^n$, and $f^n \in I \implies f^ng^n \in I$, so $fg \in \sqrt{I}$.
+\end{proof}
+
+\begin{proposition}
+\item
+\begin{enumerate}
+\item If $X \subseteq \mathbb{A}^n$ is algebraic, then $Z(I(X)) = X$.
+\item If $I \subseteq A$ is an ideal, then $I(Z(I)) \supseteq \sqrt{I}$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Since $X$ is algebraic $X = Z(I)$ for some $I \subseteq A$. Certainly $I \subseteq I(X)$, and so $Z(I(X)) \subseteq Z(I) = X$. But $X \subseteq Z(I(X))$ trivially, and so $X = Z(I(X))$.
+
+\item If $f \in \sqrt{I}$, then $f^n \in I$ for some $n$, and so $f^n$ vanishes on $Z(I)$, thus $f$ vanishes on $Z(I)$. Hence $f \in I(Z(I))$.
+\end{enumerate}
+\end{proof}
+\begin{theorem}[Hilbert Nullstellensatz]
+Let $K$ be algebraically closed. Then $I(Z(I)) = \sqrt{I}$.
+\end{theorem}
+\begin{proof}
+Deferred until later.
+\end{proof}
+
+\hspace*{-1em}\underline{Example:} If $K = \R$, $I = \angle{x^2+y^2+1} \subseteq \R[x,y]$, then $Z(I) = \emptyset$, so $I(Z(I)) = \R[x,y] \neq \sqrt{I}$.
+
+\hspace*{-1em}We define an \emph{affine (algebraic) variety} to be an algebraic subset of $\mathbb{A}^n$. Very often we can decompose affine varieties into smaller subsets. For instance, $Z(\angle{xy}) = + = - \cup | = Z(\angle{x}) \cup Z(\angle{y})$. If $Y \subseteq X$ is a non-empty closed subset, then we say $Y$ is \emph{irreducible} if whenever $Y = Y_1 \cup Y_2$ with $Y_1, Y_2$ closed, then either $Y_1 = Y$ or $Y_2 = Y$.  In the Euclidean topology on $\C^n$, the irreducible subsets are single points, but under the Zariski topology they are much more interesting. We will now turn to the question of identifying when an algebraic set is irreducible.
+
+\begin{proposition}
+If $X_1, X_2 \subseteq \mathbb{A}^n$, then $I(X_1 \cup X_2) = I(X_1) \cap I(X_2)$.
+\end{proposition}
+\begin{proof}
+Since $X_1, X_2 \subseteq X_1 \cup X_2, I(X_1 \cup X_2) \subseteq I(X_1), I(X_2)$. Hence $I(X_1 \cup X_2) \subseteq I(X_1) \cap I(X_2)$.
+
+Conversely, if $f \in I(X_1) \cap I(X_2)$, then $f$ vanishes on both $X_1$ and $X_2$, and so on all of the union. So $I(X_1) \cap I(X_2) \subseteq I(X_1 \cup X_2)$.
+\end{proof}
+
+Recall that an ideal $P \subseteq A$ of a commutative ring is said to be \emph{prime} if it is not the whole ring, and whenever $fg \in P$, either $f \in P$ or $g \in P$.
+
+\begin{lemma}
+Let $P \subseteq A$ be prime, and $I_1, \ldots, I_n \subseteq A$ be ideals. Suppose that $P \supseteq \bigcap_i I_i$. Then there is some $i$ such that $P \supseteq I_i$, and if equality holds in either then it holds in both.
+\end{lemma}
+\begin{proof}
+Suppose $P \nsupseteq I_i$ for any $i$, so for all $i$ there is some $x_i \in I_i \setminus P$. Then $x = \prod_i x_i \in I_i$ for all $i$, so $x \in \bigcap_i I_i$ and hence $x \in P$. But then some $x_i \in P$ because $P$ is prime. \contr
+
+If we have equality, then $P \subseteq I_i$ for all $i$, and by above there is some $i$ for which $P \supseteq I_i$, so $P = I_i$.
+\end{proof}
+
+\begin{proposition}
+Let $K$ be algebraically closed. Then an algebraic set $X \subseteq \mathbb{A}^n$ is irreducible if and only if $I(X)$ is prime.
+\end{proposition}
+\begin{proof}
+\item
+\begin{itemize}
+\item[$\implies$] If $f\cdot g \in I(X)$, then $X \subseteq Z(f\cdot g) = Z(f) \cup Z(g)$. So $X = (X \cap Z(f)) \cup (X \cap Z(g))$. Irreducibility implies that \textsc{wlog} $X = X\cap Z(f)$, i.e. $X \subseteq Z(f)$ as $Z(f), Z(g), X$ are closed. Then $f \in I(X)$, and so $I(X)$ is prime.
+
+\item[$\impliedby$] If $P$ is prime with $Z(P) = X_1 \cup X_2$, $X_1, X_2$ closed. Then $I(X_1) \cap I(X_2) = I(X_1\cup X_2) = I(Z(P)) = \sqrt{P}$ by the Nullstellensatz. But if $f^n \in P$, then $f \in P$, and so $\sqrt{P} = P$. Hence $I(X_1)\cap I(X_2) = P$, and $P = I(X_1)$ or $I(X_2)$, so $Z(P) = X_1$ or $X_2$.
+\end{itemize}
+\end{proof}
+So if $K$ is algebraically closed, then we have a one-to-one correspondence between algebraic subsets and radical ideals, and between irreducible algebraic subsets and prime ideals.
 \end{document}

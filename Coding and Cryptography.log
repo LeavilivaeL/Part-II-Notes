@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  22 JAN 2020 09:57
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  27 JAN 2020 09:56
  system commands enabled.
 **"Coding and Cryptography.tex"
 ("./Coding and Cryptography.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.875 seconds
+luaotfload | main : initialization completed in 0.823 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -825,9 +825,18 @@ File: tikzlibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryplotmarks.cod
 e.tex"
 File: pgflibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-)))
+))) ("C:/Program Files/MiKTeX 2.9/tex/generic/mathdots/mathdots.sty"
+Package: mathdots 2014/06/11 v0.9 Improve and add various macros for dots in mat
+h.
+\MDo@unit=\dimen259
+\MDo@dotsbox=\box63
+\MDoprekern=\muskip11
+\MDopostkern=\muskip12
+\MDodotkern=\muskip13
+)
 \c@theorem=\count141
-) ("./Coding and Cryptography.aux")
+)
+("./Coding and Cryptography.aux")
 \openout1 = Coding and Cryptography.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -883,13 +892,13 @@ ABD: EveryShipout initializing macros
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count142
-\scratchdimen=\dimen259
-\scratchbox=\box63
+\scratchdimen=\dimen260
+\scratchbox=\box64
 \nofMPsegments=\count143
 \nofMParguments=\count144
 \everyMPshowfont=\toks47
 \MPscratchCnt=\count145
-\MPscratchDim=\dimen260
+\MPscratchDim=\dimen261
 \MPnumerator=\count146
 \makeMPintoPDFobject=\count147
 \everyMPtoPDFconversion=\toks48
@@ -1322,40 +1331,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 203--215
 
  []
 
-[6] ("./Coding and Cryptography.aux"))
+
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 230--258
+[]$[]$ $[]$ 
+ []
+
+[6] [7]
+Overfull \hbox (21.09576pt too wide) in paragraph at lines 335--336
+[]\TU/lmr/m/n/10 By Hy-poth-e-sis, $\U/msb/m/n/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/
+it/10 c[]\OT1/cmr/m/n/10 )$ \TU/lmr/m/n/10 is in-de-pen-dent of $\OML/cmm/m/it/
+10 c \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 C$\TU/lmr/m/n/10 , and so for fixed $\
+OML/cmm/m/it/10 x$\TU/lmr/m/n/10 , max-imis-ing $\U/msb/m/n/10 P\OT1/cmr/m/n/10
+ (\OML/cmm/m/it/10 c[]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )$
+ []
+
+[8] [9] ("./Coding and Cryptography.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 30529 strings out of 494305
+ 30655 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 495 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
+ 510 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 55 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:2,2:1152,3:334,4:28,5:275,6:18,7:3036,8:50,9:486,10:6,11:183
- 33709 multiletter control sequences out of 65536+200000
+   avail lists: 1:2,2:1266,3:334,4:29,5:281,6:18,7:3037,8:54,9:486,10:6,11:183
+ 33828 multiletter control sequences out of 65536+200000
  75 fonts using 5185495 bytes
- 64i,11n,100p,1095b,1998s stack positions out of 5000i,500n,10000p,200000b,50000s
-<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/pro
-gram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/prog
-ram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program f
-iles/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/program f
-iles/miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files
-/miktex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/program files/miktex
- 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9
-/fonts/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/symbols/msbm10.pfb>
-Output written on Coding and Cryptography.pdf (6 pages, 190935 bytes).
+ 64i,15n,100p,1095b,1998s stack positions out of 5000i,500n,10000p,200000b,50000s
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman7-regular.otf><c:/p
+rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/program 
+files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/program f
+iles/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program files/
+miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/program files/
+miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files/mikt
+ex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/program files/miktex 2.9/
+fonts/opentype/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9/font
+s/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/sym
+bols/msbm10.pfb>
+Output written on Coding and Cryptography.pdf (9 pages, 222829 bytes).
 
-PDF statistics: 128 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 144 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

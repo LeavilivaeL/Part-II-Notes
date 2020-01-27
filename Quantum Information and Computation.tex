@@ -124,4 +124,62 @@ Moreover, $\sigma_x\ket{0} = \ket{1}, \sigma_x\ket{1} = \ket{0}$. We call $\sigm
 \hspace*{-1em}$\sigma_z\ket{0} = \ket{0}, \sigma_z\ket{1} = -\ket{1}$, so we call $\sigma_z$ a \emph{phase flip}. 
 
 \hspace*{-1em}$\sigma_y\ket{0} = \im\ket{1}, \sigma_y\ket{1}=-\im\ket{0}$, and we call $\sigma_y$ a \emph{combined flip}.
+\begin{figure}[H]
+\centering
+\begin{tabular}{c|cc}
+& $\ket{0}$ & $\ket{1}$\\\hline
+$\sigma_x$ & $\ket{1}$ & $\ket{0}$\\
+$\sigma_y$ & $\im\ket{1}$ & $-\im\ket{0}$\\
+$\sigma_z$ & $\ket{0}$ & $-\ket{1}$
+\end{tabular}
+\end{figure}
+\subsection{Dirac Notation For Linear Operators/Maps}
+A simple example of a linear operation on $\mathcal{V}$: let $M$ be the matrix given by $\ket{v}\bra{w}$ for $\ket{v},\ket{w} \in \C^2$. Then $M\ket{x} = \ket{v}\bra{w}\ket{v} = \braket{w}{x}\ket{v}$, so this is a rank 1 linear operation with image $\spann \ket{v}$. The kernel of $M$, $\ker M = \{\ket{a} : \ket{a} \bot \ket{\omega}\}$, since if $\ket{a}$ is perpendicular to $\ket{w}$ then $\braket{w}{a} = 0$.
+
+In general, we can represent any linear operation $A:\C^2 \to \C^2$ by a $2\times 2$ matrix $\begin{pmatrix} a & b \\ c& d\end{pmatrix} = a \ket{0}\bra{0} + b\ket{0}\bra{1} + c \ket{1}\bra{0} + d \ket{1}\bra{1}$. In general, if $A : \mathcal{V} \to \mathcal{V}$ where $\dim \mathcal{V} = n$, we can write $A = \sum_{i,j}^n a_{ij}\ket{e_i}\bra{e_j}$, and so we have $A\ket{\psi} = \sum_{i,j,k} a_{ij}\psi_k \ket{e_i}\braket{e_j}{e_k} = \sum_{i,j} a_{ij}\psi_j\ket{e_i}$.
+
+We define the \emph{trace} of a linear map to be the sum along the leading diagonal of a matrix representing the linear map, i.e. $\tr A = \sum_{i} \bra{e_i}A\ket{e_i}$. Note that $\braket{w}{v} = \tr \ket{v}\bra{w}$.
+
+A very useful class of operators is the \emph{projection operators}, which are \emph{idempotent} (i.e. $\pi^2 = \pi$) hermitian operators. For example, $\Pi_v = \ket{v}\bra{v}$, a rank 1 projection operator, satisfies $\Pi_v^2 = \Pi_v, \Pi_v^{\dag} = \Pi_v$. This projection map returns only the component of the vector along the vector onto which it is a projection. We can generalise this to higher dimensional subspaces: if $\mathcal{E} \subseteq \mathcal{V}$, where $\mathcal{E} = \spann \{e_1, \ldots, e_d\}$, then we can define the projection onto $\mathcal{E} = \sum_{i=1}^d \Pi_{e_i}$.
+
+\subsection{Tensor Products of Linear Operations}
+If $a,B$ act on $\C^2$, then given $\ket{i}\ket{j} \in \C^2 \otimes \C^2$, we can define the tensor product of the linear operations $(A \otimes B)\ket{i}\ket{j}$ to be the $4 \times 4$ linear map $(A\otimes B)_{ij} = A_{\ceil{i/2}\ceil{j/2}}B_{i\%2, j\%2}$, i.e. $a_{ij}B$ for each $i,j$.
+
+\begin{itemize}
+\item[QM3] We can describe the time evolution of a \emph{closed} quantum system - we can think about how the states evolve by writing them as say $\ket{\psi(t_1)}, \ket{\psi(t_2)}$ for some time points $t_2 > t_1$. The third postulate says that this evolution is given by a \emph{unitary operator}, i.e. a linear map $U$ for which $UU^{\dag} = I = U^{\dag}U$, so that $\ket{\psi(t_2)} = U(t_1,t_2)\ket{\psi(t_2)}$.
+\end{itemize}
+\begin{proposition}
+Let $U:\mathcal{V}\to \mathcal{V}$ be a linear operator. The following are equivalent:
+\begin{enumerate}
+\item $U$ is unitary
+\item $U$ maps complete orthonormal bases to complete orthonormal bases
+\item $U$ preserves inner products, so $\braket{Uv}{Uw} = \braket{v}{w}$
+\item The columns of $U$ form an orthonormal basis of $\mathcal{V}$
+\item The rows of $U$ form an orthonormal basis of $\mathcal{V}$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Done in lectures but was a mess. Check this for yourself. (If you can be bothered).
+\end{proof}
+
+In Quantum Mechanics, one measures an \emph{observable}, say $A$. An important representation of $A$ is as \emph{spectral projection}: we can write $A = \sum_{n} a_n P_n$, where $a_n$ are the (real) eigenvalues of $A$, and $P_n$ are the spectral projection operators. In the case that $a_n$ is a \emph{non-degenerate} eigenvalue (i.e. has only one $\ket{\phi_n}$ with $A\ket{\phi_n} = a_n\ket{\phi_n}$), then $P_n = \ket{\phi_n}\bra{\phi_n}$. If $a_n$ is degenerate, say with  multiplicity $m > 1$, then  $P_n = \sum_{i=1}^m \ket{\phi_n^{(i)}}\bra{\phi_n^{(i)}}$, where the $\ket{phi_n^{(i)}}$ are the eigenvectors with $a_n$ as their eigenvalue.
+
+The outcome of a measurement is one of the eigenvalues, $a_k$. If the \emph{initial state} of the system to be measured is $\ket{\phi} \in \mathcal{V}$, then $\P($outcome is $a_k) = p(a_k)$, where $p(a_k) = \bra{\phi}P_k\ket{\phi}$. If the outcome is $a_k$, then after the measurement, the state collapses to $\frac{P_k\ket{\phi}}{\sqrt{p(a_k)}}$. This is called the \emph{Born Rule.} Note that this measurement is completely specified by the projection operations. 
+
+We can also measure \emph{relative to a basis}: given a basis $\mathcal{B} = \{\ket{e_i}\}_{i=1}^n$, and $\ket{\phi} \in \mathcal{V}$. Then the probability we observe outcome $j \in [n]$ is $\braket{\phi}{e_j}\braket{e_j}{\phi} = |a_j|^2$, and the state collapses to $\frac{a_j \ket{e_j}}{\sqrt{|a_j|^2}} = \ket{e_j}$.
+
+For example, if $\mathcal{V} = \C^2$, and $\mathcal{B} = \{\ket{0},\ket{1}\}$, then we measure $\ket{\phi} = a\ket{0}+b\ket{1}$ relative to $\mathcal{B}$. The outcomes are $0$ or $1$. $\P(0) = \bra{\phi}P_0\ket{\phi} = \braket{\phi}{0}\braket{0}{\phi} = |a|^2$, and if we get $0$ then the state collapses to $\ket{0}$.
+
+\subsection{Incomplete Projective Measurements}
+In the previous case, where we have a complete orthonormal basis, we decomposed the space up into dimension 1 subspaces, i.e. the spans of the eigenvectors, and then used rank 1 projection operators onto these subspaces. We can instead, more generally, decompose $\mathcal{V}$ into mutually orthogonal subspace of dimension $\geq 1$, so that $\mathcal{V} = \bigoplus_{i=1}^d \mathcal{E}_i$, where $\sum_{i=1}^d \dim \mathcal{E}_i = \dim\mathcal{V} = n$. Then if $\Pi_i$ is the projection operator onto $\mathcal{E}_i$, we have $\Pi_j\Pi_k = \delta_{jk}\Pi_j$.
+
+The incomplete measurement of $\ket{\psi} \in \mathcal{V}$ relative to the orthogonal decomposition $\{\mathcal{E}_1, \ldots, \mathcal{E}_d\}$ returns $i$ with probability $p(i) = \bra{\psi}\Pi_i\ket{\psi}$. If the outcome of the measurement is $i$, then the post measurement state is $\frac{\Pi_i \ket{\psi}}{\sqrt{p(i)}}$.
+
+Given an incomplete measurement with decomposition $\{\mathcal{E}_i,\ldots, \mathcal{E}_d\}$ of $\mathcal{V}$, we can choose a basis $\{\ket{e^{(i)}_j}\}_{j=1}^{d_i}$ of each $\mathcal{E}_i$, so that together  they form an orthonormal basis of the whole space $\mathcal{V}$. Then the measurement will return $k$ (corresponding to the subspace $\mathcal{E}_k$) with probability $\sum_{i=1}^{d_k} \left(\bra{\psi} P_i^{(k)} \ket{\psi}\right) = \bra{\psi} \left(\sum_{i=1}^{d_k} P_i^{(k)}\right) \ket{\psi} = \bra{\psi} \Pi_{k} \ket{\psi}$.
+
+For example, if we want to measure the \emph{parity} of a 2-bit string $b_1b_2$ (i.e. $b_1$ \textsc{xor} $b_2$), we might have some state given by $\ket{\psi} = a\ket{00} + b\ket{01} + c\ket{10} + d\ket{11}$. Then the space of 0 parity, $\mathcal{E}_0 = \spann\{\ket{00},\ket{11}\}$, and likewise we have $\mathcal{E}_1 = \spann\{\ket{01},\ket{11}\}$. Then $\P(0) = \bra{\psi}\Pi_0 \ket{\psi} = \bra{\psi}\Big(\ket{00}\bra{00}+\ket{11}\bra{11}\Big)\ket{\psi} = \braket{\psi}{00}\braket{00}{\psi} +  \braket{\psi}{11}\braket{11}{\psi} = |a|^2 + |d|^2$, and the post measurement state is $\frac{a\ket{00} + d\ket{11}}{\sqrt{|a|^2 + |d|^2}}$.
+
+We can also do this on the vector level: $\P(0) = \P(00) + \P(11) = \braket{\psi}{00}\braket{00}{\psi} + \braket{\psi}{11}\braket{11}{\psi} = |a|^2+|d|^2$. It is not a coincidence that we get the same answer, but of course since this isn't a pure course we won't formalise this into a nice little lemma or proposition, and instead we'll just assert it's obvious and move on.
+
+
 \end{document}

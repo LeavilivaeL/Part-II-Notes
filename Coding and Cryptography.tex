@@ -215,4 +215,148 @@ $i$ & $p_i$ & $\ceil{-\log_2 p_i}$ & Codewords \\\hline
 \end{figure}
 $\E S = \sum p_i \ell_i = 2.8$, entropy $= 2.12$
 
+\section{Huffman Coding Algorithm}
+Huffman was a student of Fano, and was thinking about how to construct an optimal code. For simplicity, we will take $a = 2$. Suppose we get messages with orders $p_1 \geq p_2 \geq \ldots \geq p_m$. Huffman gave a recursive definition of codes that we can prove are optimal. If $m=2$, then take codewords $0$ and $1$.
+
+If $m > 2$, we first have a Huffman code for messages $\mu_1, \ldots, \mu_{m-2}, \nu$ with probabilities $p_1, \ldots, p_{m-2}, p_{m-1}+p_m$, then append $0$ and $1$ to give codewords for $\mu_{m-1}$ and $\mu_m$.
+
+\hspace*{-1em}Note:
+\begin{itemize}
+\item Huffman codes are prefix-free.
+\item We have some choices to make if some of the $p_j$ are equal, so Huffman codes are not unique.
+\end{itemize}
+\hspace*{-1em}\underline{Example:} Reconsider the previous example:
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\begin{tikzpicture}
+\node[draw, circle] (a) at (0,10) {$p_i$};
+\node[draw, circle] (b) at (-1,9) {0.6};
+\node[draw, circle] (c) at (1,9) {0.4};
+\node[draw, circle] (d) at (0,8) {0.4};
+\node[draw, circle] (e) at (-2,8) {0.2};
+\node[draw, circle] (f) at (1,7) {0.2};
+\node[draw, circle] (g) at (-1,7) {0.2};
+\node[draw, circle] (h) at (0,6) {0.1};
+\node[draw, circle] (i) at (-2,6) {0.1};
+
+\draw (a) -- node[above left] {0} (b) (a) -- node[above right] {1} (c);
+\draw (b) -- node[above left] {0} (e) (b) -- node[above right] {1} (d);
+\draw (d) -- node[above left] {0} (g) (d) -- node[above right] {1} (f);
+\draw (g) -- node[above left] {0} (i) (g) -- node[above right] {1} (h);
+\end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\begin{tabular}{c|c|c}
+$i$ & $p_i$ & Codewords \\\hline
+1 & 0.4 & 1\\
+2 & 0.2 & 00\\
+3 & 0.2 & 011\\
+4 & 0.1 & 0100\\
+5 & 0.1 & 0101
+\end{tabular}
+\end{subfigure}
+\end{figure}
+This code has expected length $2.2$, which is less than Shannon-Fano gave.
+\begin{theorem}[Huffman, 1952]
+Huffman codes are optimal.
+\end{theorem}
+\begin{proof}
+We show this by induction on $m$. The case of $m=2$ is trivial. For $m > 2$, let $c_m$ be a Huffman code for source $X_m$ which takes values $\mu_1, \ldots, \mu_m$ with probabilities $p_1 \geq \ldots \geq p_m$. Then $c_{m-1}$ is constructed from a Huffman code $c_{m-1}$ for values $\mu_1, \ldots, \mu_{m-1}, \nu$ with probabilities $p_1, \ldots, p_{m-2}, p_{m-1}+p_m$.
+
+Observe that $\E S_m = \E S_{m-1} + p_{m-1} + p_m$ by construction of $c_m$ from $c_{m-1}$.
+
+Now let $c_m'$ be an optimal code for $X_m$. Without loss of generality, we may take $c_m'$ to be prefix-free and the last two codewords of $c_m'$ have maximal length and differ only in the last digit (see \textbf{3.2} below). Say $c_m'(\mu_{m-1}) = y0, c_m'(\mu_m) = y1$ for some $y \in \{0, 1\}^\ast$.
+
+Let $c_{m-1}'$ be the prefix free code for $X_{m-1}$ given by $c_{m-1}'(\mu_i) = c_m'(\mu_i), c_{m-1}'(\nu) = y$.
+
+Then the expected word length is $\E S_m' = \E S_{m-1}' + p_{m-1} + p_m \geq \E S_{m-1} + p_{m-1} + p_m = \E S_m$ by the inductive hypothesis, and so $c_m$ is optimal.
+\end{proof}
+\begin{lemma}
+Suppose messages $\mu_1, \ldots, \mu_m$ are sent with probabilities $p_1,\ldots, p_m$, with an optimal code $c$ with word lengths $\ell_1, \ldots, \ell_m$. Then:
+\begin{enumerate}
+\item If $p_i > p_j$ then $\ell_i \leq \ell_j$.
+\item Among all codewords of maximal length, there are two that differ only in the last digit.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Otherwise, modify $c$ by swapping the $i\th$ and $j\th$ codewords, or deleting the last letter of each codeword of maximal length. The modified code is still prefix-free but has shorter expected word length, contradicting optimality of $c$.
+\end{proof}
+\section{Joint Entropy}
+If $X,Y$ are random variables with value in $\mathcal{A}$ and $\mathcal{B}$. Then $(X,Y)$ is also a random variable with entropy $H(X,Y)$, the \emph{joint entropy} of $X,Y$.
+\begin{align*}
+H(X,Y) = -\sum_{x \in \mathcal{A}} \sum_{y \in \mathcal{B}} \P(X=x, Y=y)\log \P(X=x, Y=y)
+\end{align*}
+We can of course generalise this to any finite number of random variables. We will use Gibb's (\textbf{2.1}) to prove:
+\begin{lemma}
+Let $X,Y$ be random variables taking values in $\mathcal{A}, \mathcal{B}$. Then:\begin{align*}
+H(X,Y) \leq H(X) + H(Y)
+\end{align*}
+with equality if and only if $X$ and $Y$ are independent.
+\end{lemma}
+\begin{proof}
+Let $\mathcal{A} = \{x_1, \ldots, x_m\}, \mathcal{B} = \{y_1, \ldots, y_n\}$. Set $p_{ij} = \P(X=x_i, Y=y_i), p_i = \P(X=x_i), q_i = \P(Y=y_i)$. Then Gibb's inequality with $\{p_{ij}\}$ and $\{p_iq_j\}$ gives:
+\begin{align*}
+-\sum_{i,j} p_{ij}\log p_{ij} \leq -\sum_{i,j} p_{ij}\log(p_iq_j) &= -\sum_i\left(\sum_j p_{ij}\right) \log p_i - \sum_j \left(\sum_i p_{ij}\right) \log q_j\\
+&= -\sum_i p_i \log p_i -\sum_j q_j \log q_j
+\end{align*}
+i.e. $H(X,Y) \leq H(X) + H(Y)$, with equality if and only if $p_{ij} = p_i q_j$ for all $i, j$, i.e. when $X,Y$ are independent.
+\end{proof}
+
+\hspace*{-1em}\underline{Example:} Let $X$ be a random variable that takes $D$ values with probability $\frac1D$. Then $H(X) = \log_2(D)$. Suppose $X_1, \ldots, X_N$ are i.i.d. with the same distribution as $X$. Then $H(X_1, \ldots, X_N) = N \log_2 D$.
+
+\section{Error Correcting Codes}
+\subsection{Noisy Channels and Hamming's Code}
+A \emph{binary [n,m]-code} is a subset $C \subseteq \{0,1\}^n$ of \emph{size} $m = |C|$, \emph{length} $n$. The elements of $C$ are called \emph{codewords}. We use an $[n,m]$-code to send one of $m$ messages through a binary symmetric channel, making $n$ uses of the channel. Clearly $1 \leq m \leq 2^n$, so $0\leq \frac{1}{n}\log m \leq 1$. If $|C| = 1$ then $\rho(C) = 0$, and if $C= \{0,1\}^n$ then $\rho(C) = 1$.
+
+For $x, y \in \{0,1\}^n$, the \emph{Hamming distance} $d(x,y) = |\{i:1\leq i\leq n, x_i \neq y_i \}|$, i.e. the number of positions where $x$ and $y$ differ.
+
+We have three possible decoding rules:
+\begin{enumerate}
+\item The \emph{ideal observer} decoding rule decodes $x \in \{0,1\}^n$ as $c\in C$ maximising $\P(c$ sent$|x$ received$)$.
+\item Then \emph{maximum likelihood} decoding rule decodes $x \in \{0,1\}^n$ as $c\in C$ maximising $\P(x$ received$|c$ sent$)$.
+\item The \emph{minimum distance} decoding rule decodes $x \in \{0,1\}^n$ as $c\in C$ minimising $d(x,c)$.
+\end{enumerate}
+
+\begin{lemma}
+\item
+\begin{enumerate}
+\item If all the messages are equally likely, then 1. and 2. agree.
+\item If $p < \frac{1}{2}$, then 2. and 3. agree.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item By Bayes' Rule:
+\begin{align*}
+\P(c\sent |x \received) = \frac{\P(c \sent)}{\P(x\received)}\P(x\received|c\sent)
+\end{align*}
+\end{enumerate}
+By Hypothesis, $\P(c\sent)$ is independent of $c \in C$, and so for fixed $x$, maximising $\P(c\sent|x\received)$ is the same as maximising $\P(x\received|c\sent)$.
+
+\item Let $r = d(x,c)$. Then $\P(x\received|c\sent) = p^r(1-p)^{n-r} = (1-p)^n\left(\frac{p}{1-p}\right)^r$. Since $p < \frac12$, $\frac{p}{1-p} < 1$, and so maximising $\P(x\received|c\sent)$ is the same as minimising $d(x, c)$.
+\end{proof}
+
+For instance, suppose $000$ is sent with probability $\frac{9}{10}$, and $111$ with probability $\frac{1}{10}$, through a binary symmetric channel with error probability $\frac14$. If we receive $110$, the ideal receiver computes $\P(000\sent|110\received)=\frac34; \P(110\sent|110\received)=\frac14$, and so decodes it as $000$. But the minimum distance (and so maximal likelihood) code is $111$. Henceforth, we will decide to use minimal distance decoding. 
+
+Note that minimal distance decoding can be expensive in terms of time and storage if $|C$ is large, and we also need to specify a convention in the case of a tie (e.g. make a random choice, request the message again).
+
+A code is \emph{d-error detecting} if changing up to $d$ digits in each codeword can never produce another codeword. It is \emph{e-error correcting} if, knowing that $x \in \{0,1\}^n$ differs from some codeword in at most $e$ places, we can deduce uniquely what the codeword is.
+
+\hspace*{-1em}\underline{Examples}
+\begin{enumerate}
+\item A \emph{repetition code} of length $n$ has codewords $00\ldots0, 11\ldots1$. This is an $[n,2]$-code. It is $(n-1)$ error detecting and $\floor{\frac{n-1}{2}}$-error correcting. But the information rate is only $\frac1n$.
+\item A \emph{simple parity check code} or \emph{paper tape code}: identify $\{0,1\}$ with $\F_2$ (i.e. arithmetic modulo 2), and let $C = \{(x_1,\ldots, x_n)\in \{0,1\}^n : \sum x_i = 0\}$. This is an $[n, 2^{n-1}]$-code. It is 1-error detecting, but cannot correct errors. Its information rate is $\frac{n-1}{n}$.
+\item \emph{Hamming's Original Code} is a $2$-error detecting and 1-error correcting binary [7,16]-code:
+\begin{align*}
+C = \left.\begin{cases} & c_1+c_3+c_5+c_7 = 0\\ c \in \F_2^7 : & c_2+c_3+c_6+c_7 = 0\\ &c_4+c_5+c_6+c_7 = 0\end{cases}\right\}
+\end{align*}
+\end{enumerate}
+The bits $c_3,c_5,c_6,c_7$ are arbitrary and $c_1, c_2, c_4$ are forced. The information rate is $\frac47$.
+
+Given $x \in \F_2^7$, we form the \emph{syndrome} $z = (z_1,z_2,z_4) \in \F_2^7$, where $z_1 = x_1+x_3+x_5+x_7,$ $z_2 = x_2+x_3+x_6+x_7,$ $z_4 = x_4+x_5+x_6+x_7$. If $x \in C$ then $z = (0,0,0)$. If $d(x,c) = 1$ for some $c \in C$ then $x_i$ and $c_i$ differ for $i = z_1 + 2z_2 + 4z_4$.
+
+
+
+
 \end{document}

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  22 JAN 2020 19:09
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  27 JAN 2020 11:55
  system commands enabled.
 **"Quantum Information and Computation.tex"
 ("./Quantum Information and Computation.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.728 seconds
+luaotfload | main : initialization completed in 0.827 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -825,9 +825,18 @@ File: tikzlibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryplotmarks.cod
 e.tex"
 File: pgflibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-)))
+))) ("C:/Program Files/MiKTeX 2.9/tex/generic/mathdots/mathdots.sty"
+Package: mathdots 2014/06/11 v0.9 Improve and add various macros for dots in mat
+h.
+\MDo@unit=\dimen259
+\MDo@dotsbox=\box63
+\MDoprekern=\muskip11
+\MDopostkern=\muskip12
+\MDodotkern=\muskip13
+)
 \c@theorem=\count141
-) ("./Quantum Information and Computation.aux")
+)
+("./Quantum Information and Computation.aux")
 \openout1 = Quantum Information and Computation.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -883,13 +892,13 @@ ABD: EveryShipout initializing macros
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count142
-\scratchdimen=\dimen259
-\scratchbox=\box63
+\scratchdimen=\dimen260
+\scratchbox=\box64
 \nofMPsegments=\count143
 \nofMParguments=\count144
 \everyMPshowfont=\toks47
 \MPscratchCnt=\count145
-\MPscratchDim=\dimen260
+\MPscratchDim=\dimen261
 \MPnumerator=\count146
 \makeMPintoPDFobject=\count147
 \everyMPtoPDFconversion=\toks48
@@ -967,41 +976,44 @@ mr/m/n/10 .
 LaTeX Font Info:    Try loading font information for U+euf on input line 97.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/ueuf.fd"
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [4] [5]
+) [4] [5] [6] [7]
 ("./Quantum Information and Computation.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 29999 strings out of 494305
+ 30065 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 495 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 52 glue_spec,
+ 510 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 55 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:2,2:590,3:118,4:25,5:234,6:20,7:3713,8:35,9:319,10:15,11:286
- 33172 multiletter control sequences out of 65536+200000
+   avail lists: 1:2,2:590,3:137,4:25,5:255,6:20,7:3713,8:73,9:319,10:15,11:286
+ 33231 multiletter control sequences out of 65536+200000
  78 fonts using 5146087 bytes
  64i,20n,96p,1107b,254s stack positions out of 5000i,500n,10000p,200000b,50000s
-<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><
-c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/pr
-ogram files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/pr
-ogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:/progra
-m files/miktex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/program files
-/miktex 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c:/program files/mik
-tex 2.9/fonts/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-r10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/euler/eufm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/euler/eufm7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/symbols/msbm10.pfb>
-Output written on Quantum Information and Computation.pdf (5 pages, 152763 bytes
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/pro
+gram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/prog
+ram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program f
+iles/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/program f
+iles/miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files
+/miktex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/program files/miktex
+ 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9
+/fonts/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cmextra/cmex7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
+5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eu
+fm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm7.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Quantum Information and Computation.pdf (7 pages, 207912 bytes
 ).
 
-PDF statistics: 118 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 143 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

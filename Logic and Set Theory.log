@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  22 JAN 2020 10:55
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  27 JAN 2020 10:57
  system commands enabled.
 **"Logic and Set Theory.tex"
 ("./Logic and Set Theory.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.063 seconds
+luaotfload | main : initialization completed in 1.193 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -825,9 +825,18 @@ File: tikzlibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryplotmarks.cod
 e.tex"
 File: pgflibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-)))
+))) ("C:/Program Files/MiKTeX 2.9/tex/generic/mathdots/mathdots.sty"
+Package: mathdots 2014/06/11 v0.9 Improve and add various macros for dots in mat
+h.
+\MDo@unit=\dimen259
+\MDo@dotsbox=\box63
+\MDoprekern=\muskip11
+\MDopostkern=\muskip12
+\MDodotkern=\muskip13
+)
 \c@theorem=\count141
-) ("./Logic and Set Theory.aux")
+)
+("./Logic and Set Theory.aux")
 \openout1 = Logic and Set Theory.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -883,13 +892,13 @@ ABD: EveryShipout initializing macros
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count142
-\scratchdimen=\dimen259
-\scratchbox=\box63
+\scratchdimen=\dimen260
+\scratchbox=\box64
 \nofMPsegments=\count143
 \nofMParguments=\count144
 \everyMPshowfont=\toks47
 \MPscratchCnt=\count145
-\MPscratchDim=\dimen260
+\MPscratchDim=\dimen261
 \MPnumerator=\count146
 \makeMPintoPDFobject=\count147
 \everyMPtoPDFconversion=\toks48
@@ -949,18 +958,18 @@ LaTeX Warning: No \author given.
 [1
 
 {C:/Users/Harry/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-[3] [4] [5] ("./Logic and Set Theory.aux"))
+[3] [4] [5] [6] [7] [8] ("./Logic and Set Theory.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 29984 strings out of 494305
+ 30045 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 482 words of node memory still in use:
-   5 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 7 attribute, 52 glue_spec,
- 7 attribute_list, 2 write nodes
-   avail lists: 1:2,2:581,3:164,4:42,5:259,6:24,7:2774,8:47,9:217,10:9,11:93
- 33164 multiletter control sequences out of 65536+200000
+ 510 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 55 glue_spec,
+ 8 attribute_list, 2 write nodes
+   avail lists: 1:2,2:623,3:166,4:42,5:279,6:24,7:3455,8:86,9:258,10:9,11:140
+ 33218 multiletter control sequences out of 65536+200000
  74 fonts using 5053799 bytes
- 64i,10n,96p,1092b,334s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,16n,96p,1092b,334s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/p
 rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><<C:\Users\H
 arry\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/stmaryrd/dpi600\stmary10.pk
@@ -981,9 +990,9 @@ ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
 9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
 public/amsfonts/symbols/msbm10.pfb>
-Output written on Logic and Set Theory.pdf (5 pages, 167504 bytes).
+Output written on Logic and Set Theory.pdf (8 pages, 196487 bytes).
 
-PDF statistics: 130 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 139 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

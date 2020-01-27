@@ -9,12 +9,19 @@
 
 \section{Introduction}
 What is algebraic geometry? Broadly speaking, it is the study of the geometry of solutions to systems of polynomial equations. For example, in $\R^2$, if we have the set $X$ of solutions to $\{(x,y)\in \R^2 : x^2+y^2 = 1\}$, then we know that this set forms a circle, and we know lots of geometric facts about circles. If we take a more complicated function, such as $y^2 = x^3-x$, we get something that looks like:
-\begin{tikzpicture}% fill this in
-\begin{axis}
-\addplot[blue, ultra thick, samples=200] ({(x^3-x)^(0.5)}, x);
-\addplot[blue, ultra thick, samples=200] ({-(x^3-x)^(0.5)}, x);
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[axis lines=middle]
+\addplot[blue, ultra thick, samples=200, domain=1:3] (x, {(x^3-x)^(0.5)});
+\addplot[blue, ultra thick, samples=200, domain=1:3
+] (x, {-(x^3-x)^(0.5)});
+\addplot[blue, ultra thick, samples=200, domain=-1:0] (x, {(x^3-x)^(0.5)});
+\addplot[blue, ultra thick, samples=200, domain=-1:0] (x, {-(x^3-x)^(0.5)});
 \end{axis}
 \end{tikzpicture}
+\end{figure}
 
 If we instead think about complex solutions, we get something of the form of a torus minus a single point, with another rich geometric structure.
 
@@ -138,5 +145,59 @@ Let $K$ be algebraically closed. Then an algebraic set $X \subseteq \mathbb{A}^n
 \item[$\impliedby$] If $P$ is prime with $Z(P) = X_1 \cup X_2$, $X_1, X_2$ closed. Then $I(X_1) \cap I(X_2) = I(X_1\cup X_2) = I(Z(P)) = \sqrt{P}$ by the Nullstellensatz. But if $f^n \in P$, then $f \in P$, and so $\sqrt{P} = P$. Hence $I(X_1)\cap I(X_2) = P$, and $P = I(X_1)$ or $I(X_2)$, so $Z(P) = X_1$ or $X_2$.
 \end{itemize}
 \end{proof}
-So if $K$ is algebraically closed, then we have a one-to-one correspondence between algebraic subsets and radical ideals, and between irreducible algebraic subsets and prime ideals.
+So if $K$ is algebraically closed, then we have a one-to-one correspondence between algebraic subsets and radical ideals, and between irreducible algebraic subsets and prime ideals. This correspondence suggests that, just as prime ideals are the ``building blocks" of ideals, so too are irreducible varieties the building blocks of algebraic sets.
+
+\begin{proposition}
+Any algebraic set is a finite union of irreducible varieties.
+\end{proposition}
+\begin{proof}
+Let $\mathcal{S}$ be the set of non-empty closed subsets of $\mathbb{A}^n$ which cannot be written as a finite union of irreducible subsets. Suppose $\mathcal{S} \neq \emptyset$. Then we claim $\mathcal{S}$ has a minimal element with respect to inclusion. 
+
+If not, then there is an infinite descending chain of elements of $\mathcal{S}$, say, $X_1 \supsetneq X_2 \supsetneq \ldots$. If $I_j = I(X_j)$, then we get an \textit{ascending} chain of ideals $I_1 \subsetneq I_2 \subsetneq \ldots$. But since $K[x_1, \ldots, x_n]$ is Noetherian (proven in IB GRM), every ascending chain of ideals is eventually stationary. \contr.
+
+Let $Y \in \mathcal{S}$ be a minimal element. Since $Y \in \mathcal{S}$, $Y$ is not irreducible, and so $Y = Y_1 \cup Y_2$, with $Y_1, Y_2 \neq Y$. Since $Y_i \subsetneq Y$ and $Y$ is minimal in $\mathcal{S}, Y_i \notin \mathcal{S}$, and so can be written as a finite union of irreducible closed subsets. But then $Y$ can also be written as a finite union of irreducible closed subsets.
+\end{proof}
+
+If $Y = \bigcup_{i=1}^n Y_i$, with $Y_i$ irreducible varieties, $Y_i \subseteq Y_j$ for $i \neq j$, then $Y_i, \ldots, Y_n$ are the \emph{irreducible components} of $Y$.
+
+\hspace*{-1em}\underline{Example:} $Z(xy) = Z(x)\cup Z(y)$. Note that $Z(x)$ is irreducible because $(x)$ is a prime ideal in $K[x,y]$ - to see this observe $K[x,y]/(x) \cong K[y]$ is an integral domain. So the irreducible component of $Z(xy)$ are $Z(x)$ and $Z(y)$, or the two coordinate axes.
+
+\begin{proposition}
+The irreducible components of $Y$ are unique up to ordering.
+\end{proposition}
+\begin{proof}
+Exercise.
+\end{proof}
+
+\hspace*{-1em}\underline{Example:} $A = K[x_1, \ldots, x_n]$ is a unique factorisation domain (UFD). If $f \in A\setminus\{0\}$, then $f$ is irreducible if and only if $(f)$ is prime. If instead, $f = f_1\ldots f_n$ is a factorisation into irreducible components, then $Z(f) = Z(f_1)\cup\ldots\cup Z(f_n)$ is the irreducible decomposition  of $Z(f)$.
+
+For instance, $Z(y^2-x^3+x)$, the diagram on the first page of these notes, is irreducible.
+
+\section{Regular and Rational Functions}
+In algebraic geometry we are interested in polynomial functions, i.e. $f: \mathbb{A}^n \to K$ for some $f \in A = K[x_1, \ldots, x_n]$. Then, given $X \subseteq \mathbb{A}^n$ closed, we get $f|_X : X \to K$. Note that if there are $f,g \in A$ with $f|_X = g|_X$, then $(f-g)|_X = 0$, and so $f-g \in I(X)$.
+
+Let $X \subseteq \mathbb{A}^n$ be an algebraic set. We define the \emph{coordinate ring} of $X$ to be $A(X) \coloneqq A/I(X)$.
+
+If $X$ is irreducible and $U \subseteq X$ is open, then a \emph{regular function} on $U$ is a function $f:U \to K$ such that, for every $p \in U$, there is an open neighbourhood $p \in V \subseteq U$, and functions $g, h \in A(X)$, with $h(q) \neq 0$ for all $q \in V$ and $f = g/h$ on $V$, i.e. everywhere in $U$ it is \textit{locally} a ratio of two polynomials.
+
+\hspace*{-1em}\underline{Examples:}
+\begin{enumerate}
+\item $f \in A(X)$ induces $f|_U: U \to K$, which is $f/1$ on $U$ and so regular.
+\item If $U \subseteq \mathbb{A}^1$, $U = \mathbb{A}^1 \setminus\{0\}$. Then $g(x)/x^n$ is a regular function on $U$ for any polynomial $g$.
+\end{enumerate}
+
+We write for $U \subseteq X$ open, $\mathcal{O}_X(U) \coloneqq \{f:U \to K: f\text{ a regular function}\}$. Note that $\mathcal{O}_X(U)$ is a ring, i.e. sums, products, and differences of regular functions are regular. $\mathcal{O}_X(U)$ is also a $K$-algebra, so we can multiply by scalars in $K$.
+
+\begin{lemma}
+$\mathcal{O}_X(X) = A(X)$ if $K$ is algebraically closed.
+\end{lemma}
+\begin{proof}
+Deferred until after Hilbert's Nullstellensatz.
+\end{proof}
+
+Recall that, if $A$ is an integral domain, then we define the \emph{field of fractions} of $A$ to be $\Big\{\frac{f}{g} : f \in A, g \in A \setminus\{0\}\Big\}/\thicksim$, with $\frac{f}{g} \thicksim \frac{f'}{g'}$ if $fg' = f'g$. This is, as the name would suggest, a field.
+
+If $X \subseteq \mathbb{A}^n$ is an irreducible variety, then we define the \emph{function field} of $X$ to be the field of fractions of $A(X)$. We denote this $K(X)$. Note that $A(X)$ is an integral domain if and only if $X$ is irreducible. Then $f \in K(X)$ can be written as $f=\frac{g}{h}$ for $g,h \in A(X)$, and this is a regular function on $X \setminus Z(h)$.
+
+
 \end{document}

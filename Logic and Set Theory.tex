@@ -200,4 +200,95 @@ Let $p, q \in L$. We want to think about $(p \implies q)$:
 We have now shown that $v$ is a valuation. Moreover, $S \subset \bar{S}$ so $v(p) =1$ for all $p \in S$. Hence $v$ is a model of $S$.
 \end{proof}
 
+\begin{corollary}[The Adequacy Theorem]
+Let $S \subset L$ and $p \in L$ with $S \taut p$. Then $S \vdash  p$.
+\end{corollary}
+\begin{proof}
+Suppose $v$ is a model of $S \cup \{\neg p\}$. Then $v(p) = 1$ and $v(\neg p) = 1$, so $v(\bot) = 1$ \contr. So $S \cup \{\neg p\}$ has no model, and so by the model existence lemma it is inconsistent. That is, $S \cup \{\neg p\} \vdash \bot$. Then by the deduction theorem, $S \vdash (\neg p \implies \bot)$, i.e. $S \vdash \neg \neg p)$, and hence $S \vdash p$.
+\end{proof}
+\begin{theorem}[The Completeness Theorem]
+Let $S \subset L$ and $p \in L$. Then $S \taut p$ if and only if $S \vdash p$.
+\end{theorem}
+\begin{proof}
+Soundness and adequacy.
+\end{proof}
+Two important applications:
+\begin{corollary}[Compactness Theorem]
+Let $S \subset L$ such that every finite subset of $S$ has a model. Then $S$ has a model.
+\end{corollary}
+\begin{proof}
+Not at all obvious a priori, but obvious if we replace ``has a model" by ``is consistent". If $S$ is not consistent, then $S \vdash \bot$, so, as proofs are finite, $T \vdash \bot$ for some finite $T \subset S$, so $T$ is inconsistent.
+\end{proof}
+\begin{corollary}[The Decidability Theorem]
+Let $S \subset L$ be finite and $p \in L$. Then there is an algorithm to determine in finite time whether or not $S \vdash p$.
+\end{corollary}
+\begin{proof}
+Obvious if we replace $\vdash$ by $\taut$, and then do a truth table.
+\end{proof}
+\subsection{What happens when P is uncountable?}
+This will be just a sketch - it will be a while before we can do this properly in chapter 3. We have only proved the completeness theorem under the assumption that $P$ is countable. However, we only used this when showing that, if $S$ is consistent, then there is a consistent $\bar{S} \supset S$ with $p \in \bar{S}$ or $\neg p \in \bar{S}$ for all $p \in L$.
+
+We needed $P$ to be countable so that $L = \{x_1, x_2, \ldots\}$ is countable and we can consider the $x_is$ in turn, deciding if $x_i \in \bar{S}$ or $\neg x_i \in \bar{S}$.
+
+Can we do without this assumption? Now allow $P$, and hence $L$, to be uncountable. Let $S \subset L$ be consistent and look for $\bar{S} \supset S$ consistent with $p \in \bar{S}$ or $\neg p \in \bar{S}$ for all $p \in L$. We could try $\bar{S} = S$, and if it works then we are done.
+
+Otherwise, there is some $x_0 \in L$ with $x_0 \notin \bar{S}$ and $\neg x_0 \notin \bar{S}$. Exactly as in the countable case, either $\bar{S}\cup\{x_0\}$ or $\bar{S} \cup \{\neg x_0\}$ is consistent. So add $x_0$ or $\neg x_0$ to $\bar{S}$, keeping it consistent. If $\bar{S}$ works now, then we're done, otherwise there is some $x_1 \in L$ with $x_1 \notin \bar{S}$ and $\neg x_1 \notin \bar{S}$, and so on and so forth. If this never terminates, then we keep on going forever.
+
+If after we've done this infinitely many times, if we are done the stop. Otherwise, we have $x_{\omega}$ with $x_{\omega} \notin \bar{S}$ and $\neg x_{\omega} \notin \bar{S}$, so either add $x_{\omega}$ or $\neg x_{\omega}$ to $\bar{S}$. If we're not done there is another $x_{\omega+1}$ and so on.
+
+Either eventually we finish, or we have to go on forever, until we get to $x_{\omega\cdot 2}$, and then keep on going\ldots
+
+If this never terminates, we get loads and loads of $x_is$. What are they being indexed by? It looks to be some sort of extension of $\N$.:
+\begin{align*}
+0,1,2,3,4,\ldots,\omega,\omega+1,\omega+2,\ldots,\omega2,\omega2+1,\ldots,\omega3,\ldots,\omega4,\ldots,\\\omega^2,\omega^2+1,\ldots,\omega^2+\omega,\ldots,\omega^22,\ldots, \omega^3,\ldots,\omega^4,\ldots,\omega^\omega,\ldots,\omega^{\omega^\omega},\ldots,\omega^{\omega^{\omega^{\iddots}}}=\epsilon_0,\ldots
+\end{align*}
+This is only countably many ordinals, but in fact if we keep on going, we can get to uncountably many numbers. We call these indices \emph{ordinals}, and we will define them in chapter 2 in such a way that:
+\begin{itemize}
+\item 0 is an ordinal
+\item For any ordinal $\alpha$ there is a least ordinal larger than it
+\item Given any set of ordinals, there is a least ordinal bigger than all of them
+\end{itemize}
+We will use Hartog's Lemma to show that in fact, eventually we do run out of stuff in $L$ if we use this indexing, which says that, for any set $X$, there are more ordinals than there are elements of $X$.
+
+Note that here we are using the axiom of choice, because this is part of the maths tripos which uses the axiom of choice. Later on we, will think about what might happen if we don't have the axiom of choice, but we won't worry about that for now.
+
+\section{Ordinals}
+\subsection{Functions and Relations}
+A \emph{function} $f:X \to Y$ from a set $X$ to a set $Y$ is a subset $f \subset X\times Y$ such that for all $x \in X$ there is a unique $y \in Y$ with $(x,y) \in f$. We write $f(x) = y$ to mean $(x,y) \in f$. If $Z \subset X$, the \emph{restriction} of $f$ to $Z$ is the function $f|_Z:Z\to Y$ given by $f|_Z = f \cap (Z\times Y)$.
+
+If $f^{-1}(\{y\}) = \{x \in X: f(x) = y\}$ has at most one element for every $y \in Y$, we say $f$ is an \emph{injection} (i.e. no two $x$'s get mapped to the same $y$). If $f^{-1}(\{y\})$ has at least one element for every $y \in Y$, we say $f$ is a \emph{surjection} (i.e. every $y$ gets mapped to by some $x$). If $f$ is both an injection and a surjection, it is called a \emph{bijection}.
+
+A \emph{relation} $R$ on a set $X$ is a subset $R \subset X \times X$. We write $xRy$ to mean $(x,y) \in R$. If $R, S$ are relations on sets $X, Y$ respectively, an \emph{isomorphism} from $(X,R)$ to $(Y,S)$ is a bijection $f:X \to Y$ such that, for all $x, y \in X, xRy \iff f(x)Sf(y)$. If such an isomorphism exists, we say that $(X,R)$ and $(Y,S)$ are \emph{isomorphic}.
+
+Note: this is not the right way to think about functions and relations, but it is convenient sometimes. Keep thinking of a function as ``something that associates a unique element of $Y$ with each element of $X$". Note that this does give us a way to define functions and relations in such a way that they live in the universe of sets.
+
+\subsection{Well-Ordering}
+A \emph{total order} on a set $X$ is a relation $<$ on $X$ satisfying:
+\begin{itemize}
+\item For all $x, y \in X$, precisely one of $x=y, x<y, y<x$ holds. \hfill(trichotomy)
+\item Fro all $x,y,z \in X$, if $x<y$ and $y<z$ then $x<z$. \hfill(transitivity)
+\end{itemize}
+If $<$ is a total order on $X$, we can define a relation $\leq$ on $X$ by $x\leq y$ if $x<y$ or $x=y$. This satisfies:
+\begin{itemize}
+\item For all $x,y \in X, x\leq y$ or $y \leq x$.
+\item For all $x,y \in X$, if $x\leq y$ and $y\leq x$, then $x=y$.
+\item For all $x,y,z \in X$, if $x\leq y, y\leq z$, then $x \leq z$.
+\end{itemize}
+Conversely, given a relation $\leq$ satisfying these conditions, we can define a total order $<$ on $X$ by $x<y$ if $x\leq y$ and $x \neq y$. Some sources will define $\leq$ to be a total order, but here we will use the $<$ version.
+
+A total order of $X$ is a \emph{well-ordering} of $X$ if every non-empty subset $Z \subset X$ has a least element (i.e. an element $y \in Z$ such that for all $x \in Z, y \leq x$.
+
+An \emph{ordinal} is a well-ordered set with isomorphic sets considered to be the same. Given a well-ordered set $X$, the \emph{order-type} of $X$ is the corresponding ordinal.
+
+A total order $<$ is a well-ordering if and only if there is no infinite descending sequence $x_1 > x_2 > \ldots$.
+
+\hspace*{-1em}\underline{Examples:}
+\begin{enumerate}
+\item $X = \{a,b,c,d\}$ with $a<b,c,d; b<c,d; c<d$ well orders $X$.
+\item The usual order on $\N, \Z, \Q, \R$ defines a total order. $\N$ is well ordered by this, $\Z,\Q,\R$ are not, as $-1>-2>-3>\ldots$.
+\item $x<y$ if $|x|-\frac{1+\sgn x}{4} < |y|-\frac{1+\sgn y}{4}$ is however a well ordering on $\Z$, with $0<1<-1<2<-2<\ldots$.
+\item Take $\{\frac1n: n \in\N\setminus\{0\}\}$ with the usual ordering. This is not a well ordering, as $1>\frac12>\frac13>\ldots$.
+\item Take $\{-\frac1n: n \in\N\setminus\{0\}\}$ with the usual ordering. This is a well ordering, as there are only finitely many elements less than any given element. This has the same order type as $\N$ with the usual order.
+\item What about $X = \big\{-\frac1n: n \in \N\setminus\{0\}\big\}\cup\big\{1-\frac1n:n \in \N\setminus\{0\}\big\}$ with the usual order. Even though there are infinitely many elements less than say $\frac23$, we can see that any descending sequence can have only finitely many positive terms, before a negative term, and then only finitely many negative terms. Hence this is in fact a well-ordering, but it is not the same order-type as $\N$. This should remind you of the discussion at the end of section 1, where we went through infinitely many elements, and then did it again.
+\end{enumerate}
 \end{document}

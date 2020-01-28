@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  23 JAN 2020 10:58
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  28 JAN 2020 10:56
  system commands enabled.
 **"Number Fields.tex"
 ("./Number Fields.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.884 seconds
+luaotfload | main : initialization completed in 1.083 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -825,9 +825,27 @@ File: tikzlibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/libraries/pgflibraryplotmarks.cod
 e.tex"
 File: pgflibraryplotmarks.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-)))
-\c@theorem=\count141
-) ("./Number Fields.aux")
+))) ("C:/Program Files/MiKTeX 2.9/tex/generic/mathdots/mathdots.sty"
+Package: mathdots 2014/06/11 v0.9 Improve and add various macros for dots in mat
+h.
+\MDo@unit=\dimen259
+\MDo@dotsbox=\box63
+\MDoprekern=\muskip11
+\MDopostkern=\muskip12
+\MDodotkern=\muskip13
+)
+("C:/Program Files/MiKTeX 2.9/tex/latex/enumitem/enumitem.sty"
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip53
+\enit@outerparindent=\dimen260
+\enit@toks=\toks47
+\enit@inbox=\box64
+\enit@count@id=\count141
+\enitdp@description=\count142
+)
+\c@theorem=\count143
+)
+("./Number Fields.aux")
 \openout1 = Number Fields.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -882,17 +900,17 @@ LaTeX Font Info:    ... okay on input line 5.
 ABD: EveryShipout initializing macros
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count142
-\scratchdimen=\dimen259
-\scratchbox=\box63
-\nofMPsegments=\count143
-\nofMParguments=\count144
-\everyMPshowfont=\toks47
-\MPscratchCnt=\count145
-\MPscratchDim=\dimen260
-\MPnumerator=\count146
-\makeMPintoPDFobject=\count147
-\everyMPtoPDFconversion=\toks48
+\scratchcounter=\count144
+\scratchdimen=\dimen261
+\scratchbox=\box65
+\nofMPsegments=\count145
+\nofMParguments=\count146
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count147
+\MPscratchDim=\dimen262
+\MPnumerator=\count148
+\makeMPintoPDFobject=\count149
+\everyMPtoPDFconversion=\toks49
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -908,7 +926,7 @@ Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks49
+\pdftexcmds@toks=\toks50
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
 8.
@@ -978,7 +996,7 @@ m/n/10 in-te-ger $\OML/cmm/m/it/10 n \OMS/cmsy/m/n/10  \OML/cmm/m/it/10 n$ \TU
  []
 
 [5]
-Overfull \hbox (1.66287pt too wide) in paragraph at lines 247--248
+Overfull \hbox (3.16982pt too wide) in paragraph at lines 247--248
 []\TU/lmr/m/n/10 Let $\OT1/cmr/m/n/10  = (\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 
 (\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 ))[] \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 M
 at[]\OT1/cmr/m/n/10 (\U/msb/m/n/10 C\OT1/cmr/m/n/10 )$\TU/lmr/m/n/10 . Then $\O
@@ -988,18 +1006,19 @@ t/10 []\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10
 10 [][]\OT1/cmr/m/n/10 ) =
  []
 
-[6] ("./Number Fields.aux"))
+[6] [7] [8] ("./Number Fields.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 30005 strings out of 494305
+ 30387 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 506 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 3 glue, 4 kern, 1 glyph, 9 attribute, 52 glue_spec,
- 9 attribute_list, 2 write nodes
-   avail lists: 1:2,2:742,3:169,4:43,5:302,6:26,7:3191,8:49,9:359,10:10,11:129
- 33178 multiletter control sequences out of 65536+200000
- 78 fonts using 5205543 bytes
- 64i,9n,96p,1085b,247s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 532 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 55 glue_spec
+, 10 attribute_list, 2 write nodes
+   avail lists: 1:2,2:803,3:178,4:44,5:303,6:26,7:3190,8:62,9:467,10:10,11:129
+ 33546 multiletter control sequences out of 65536+200000
+ 82 fonts using 5729031 bytes
+ 64i,20n,96p,1085b,332s stack positions out of 5000i,500n,10000p,200000b,50000s
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf>
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/p
 rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman6-regular.otf><c:/progra
 m files/miktex 2.9/fonts/opentype/public/lm/lmroman7-regular.otf><c:/program fil
@@ -1012,21 +1031,23 @@ type/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9/fonts/opentype
 /public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on Number Fields.pdf (6 pages, 226550 bytes).
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/symbols/msam7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/symbols/msbm7.pfb>
+Output written on Number Fields.pdf (8 pages, 263092 bytes).
 
-PDF statistics: 158 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 179 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

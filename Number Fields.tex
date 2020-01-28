@@ -230,7 +230,7 @@ $H$ has no torsion as $V$ is a $\Q$-vector space, so by classification $H$ is an
 \section{Discriminants and Integral Bases}
 Let $\alpha_1, \ldots, \alpha_n \in K$. Define the \emph{discriminant}
 \begin{align*}
-\Disc(\alpha_1) = \Disc(\alpha_1, \ldots, \alpha_n) = \det(\Tr_{K/\Q}(\alpha_i\alpha_j))i,j) \in \Q
+\Disc(\alpha_1) = \Disc(\alpha_1, \ldots, \alpha_n) = \det(\Tr_{K/\Q}(\alpha_i\alpha_j))) \in \Q
 \end{align*}
 \begin{theorem}
 \item
@@ -244,22 +244,78 @@ Let $\alpha_1, \ldots, \alpha_n \in K$. Define the \emph{discriminant}
 \begin{proof}
 \item
 \begin{enumerate}
-\item Let $\Delta = (\sigma_i(\alpha_j))_{ij} \in Mat_{n,n}(\C)$. Then $(\Delta^t\Delta)_{ij} = \sum_{k=1}^n \sigma_k(\alpha_i)\sigma_k(\alpha_j) = \sum_{k=1}^n \sigma_k(\alpha_i\alpha_j) = \Tr_{K/\Q}(\alpha_i\alpha_j)$
+\item Let $\Delta = (\sigma_i(\alpha_j))_{ij} \in Mat_{n,n}(\C)$. Then $(\Delta^\intercal\Delta)_{ij} = \sum_{k=1}^n \sigma_k(\alpha_i)\sigma_k(\alpha_j) = \sum_{k=1}^n \sigma_k(\alpha_i\alpha_j) = \Tr_{K/\Q}(\alpha_i\alpha_j)$
 
-So $(\det \Delta)^2 = \det(\Delta^t\Delta) = \det\Tr_{K/\Q}(\alpha_i\alpha_j)$.
+So $(\det \Delta)^2 = \det(\Delta^\intercal\Delta) = \det\Tr_{K/\Q}(\alpha_i\alpha_j)$.
 
-\item If $\alpha_1, \ldots, \alpha_n$ is not a $\Q$-bases, then there are some $b_1, \ldots, b_n \in \Q$, not all $0$, with $\sum b_j\alpha_j = 0$. Then for all $i$, $0 = \sigma_i\left(\sum_{j=1}^n b_j\alpha_j\right) = \sum_{j=1}^n b_j\sigma_i(\alpha_j)$, and so $\det \Delta = 0$, hence $\disc(\alpha_i) = 0$.
+\item If $\alpha_1, \ldots, \alpha_n$ is not a $\Q$-basis, then there are some $b_1, \ldots, b_n \in \Q$, not all $0$, with $\sum b_j\alpha_j = 0$. Then for all $i$, $0 = \sigma_i\left(\sum_{j=1}^n b_j\alpha_j\right) = \sum_{j=1}^n b_j\sigma_i(\alpha_j)$, so $\det \Delta = 0$, hence $\disc(\alpha_i) = 0$.
+
+For the other direction, suppose $(\alpha_i)$ is a $\Q$-basis for $K$, and let $T = (\Tr_{K/\Q}(\alpha_i\alpha_j))_{ij}$. It is enough to prove that, for $b \in \Q^n\setminus\{0\}, Tb \neq 0$, or equivalently that there is $c \in \Q^n$ such that $c^\intercal Tb \neq 0$. But if $\beta  = \sum_j jb_j\alpha_j, \gamma = \sum_j c_j\alpha_j$, then $c^\intercal T b = \sum_{i,j} c_i \Tr_{K/\Q}(\alpha_i\alpha_j)b_j = \Tr_{K/\Q}(\sum_{i,j}c_ib_j\alpha_i\alpha_j ) = \Tr_{K/\Q}(\beta\gamma)$, so taking $\gamma = \frac1\beta$, we get $\Tr_{K/\Q}(1) = n \neq 0$.
+
+\item $\Delta = (\sigma_i(\alpha_j)), \Delta' = (\sigma_i(\beta_j))$, so $\Delta'_{ij} = \sum_k \sigma_i(A_{kj}\alpha_k) = \sum_{k} A_{kj}\sigma_i(\alpha_k) = (\delta A)_{ij}$. Hence $\det \Delta' = \det \Delta \det A$, and result follows by part 1.
+
+\item If $(\alpha_i), (\beta_i)$, generate the same subgroup, then $\beta_i = \sum A_{ji}\alpha_j$, where $A_{ij} \in \Z, \det A \in \{\pm 1\}$. Then by part 3, $\Disc(\beta_i) = (\det A)^2 \Disc(\alpha_i) = \Disc(\alpha_i)$.
 \end{enumerate}
 \end{proof}
 
 
+If $H \subset K$ is a finitely generated subgroup of rank $n$, and $(\alpha_1, \ldots, \alpha_n)$ is a $\Z$-basis for $H$, then above implies that $\Disc(\alpha_1, \ldots, \alpha_n)$ is a non-zero rational, depending only on $H$, which we call $\Disc(H)$.
 
+\begin{lemma} If $H \subset H' \subset K$ are finitely generated subgroups of rank $n$, then
+\begin{align*}
+\Disc(H) = (H':H)^2\Disc(H')
+\end{align*}
+\end{lemma}
+\begin{proof}
+Pick $\Z$-bases $(\alpha_i), (\alpha_i')$ for $H, H'$. Then $\alpha_i = \sum_j B_{ji} \alpha'_j$, for $B \in Mat_{n,n}(\Z)$. Then by \textbf{6.1}\textit{(3.)}, together with \textbf{5.1}, give that:
+\begin{align*}
+(H':H)^2 = (\det B)^2 = \Disc(H)/\Disc(H')
+\end{align*}
+\end{proof}
 
+\begin{theorem}
+There exist $\omega_1, \ldots, \omega_n \in \o_K$ such that $\o_K = \Z\omega_1\oplus\ldots\oplus\Z\omega_n$ (i.e. that $\o_K$ is finitely generated as a $\Z$-module). We say that $(\omega_i)$ is an \emph{integral basis} for $K$.
+\end{theorem}
+\begin{proof}
+Certainly, there is $\omega_1, \ldots, \omega_n \in \o_K$ which form a $\Q$-basis for $K$ - take any $\Q$-basis of $K$ and multiply by a suitable non-zero integer. Then for such a basis, $\Disc(H) \in \Z\setminus\{0\}$ where $H = \sum_i \Z\omega_i \subset K$.
 
+Choose such a basis with $|\Disc(H)|$ minimal. Then let $\alpha \in \o_K$, and let $H' = \Z\alpha + H \subset K$. Then $H' \subset H$ are finitely generated of rank $n$, and so by \textbf{6.2}, $\Disc(H) = (H':H)^2\Disc(H')$, and by minimality of $\Disc(H), H' = H$, so $\alpha \in H$.
+\end{proof}
 
+The \emph{discriminant of K} $d_K = \Disc(\o_K) = \Disc(\omega_i)$ for any integral basis $(\omega_i)$.
 
+\hspace*{-1em}\underline{Example:} Let $K = \Q(\sqrt{d})$ for $d$ a square free integer not 0 or 1.
+\begin{itemize}
+\item[$d \nequiv 1 \mod 4$:] An integral basis is $\{1, \sqrt{d}\}$ and so we have $\Delta = (\sigma_i(\alpha_k)) = \begin{pmatrix} 1 & \delta \\ 1 & -\delta\end{pmatrix}$, where $\sigma_1(\sqrt{d}) = \delta, \sigma_2(\sqrt{d}) = -\delta, \delta^2 = d$, and so $d_K = (\det \Delta)^2 = 4d$.
 
+\item[$d \equiv 1 \mod 4$:] An integral basis is $\{1, \frac{1+\sqrt{d}}{2}$. Then $d_K = (\det \Delta)^2 = \left|\begin{pmatrix} 1 & (1+\delta)/2 \\ 1 & (1-\delta)/2 \end{pmatrix}\right|^2 = d$.
+\end{itemize}
 
+We will now have a few useful results to help with computation of discriminants:
+\begin{proposition}
+Suppose $K = \Q(\theta)$, and $f = m_{\theta}$ is the minimal polynomial of $\theta$. Then:
+\begin{align*}
+\Disc(1, \theta, \ldots, \theta^{n-1}) = \prod_{i<j} \left(\sigma_i(\theta) - \sigma_j(\theta)\right)^2 = (-1)^{n(n-1)/2}\Nn_{K/\Q}(f'(\theta))
+\end{align*}
+\end{proposition}
+\begin{proof}
+Recall the \emph{Vandermonde determinant:}
+\begin{align*}
+\vdm(x_1, \ldots, x_n) = \left|\begin{pmatrix}
+x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1} \\ \vdots & \vdots & \ddots & \vdots \\ x_1 & x_2 & \cdots & x_n \\ 1 & 1 & \cdots & 1 \end{pmatrix}\right| = \prod_{i<j} (x_i - x_j)
+\end{align*}
+Then $\Disc(1, \ldots, \theta^{n-1}) = \vdm(\sigma_1(\theta), \ldots, \sigma_n(\theta))^2$, giving the first equality. For the second, see example sheet 1 q.7.
+\end{proof}
+
+\begin{proposition}
+Let $\omega_1, \ldots, \omega_n \in \o_K$ with $\Disc(\omega_i)$ squarefree. Then $(\omega_i)$ is an integral basis.\footnote{The converse is false, e.g. for $\Q(\sqrt{d})$ with $d \nequiv 1 \mod 4$ gives $d_K = 4d$, which is not squarefree.}
+\end{proposition}
+\begin{proof}
+Let $H = \sum \Z \omega_j \subset \o_K$. Then \textbf{6.2} implies that $\Disc(\omega_i) = (\o_k:H)^2 \Disc(\o_k)$. Since $\Disc(\omega_i)$ is squarefree, then $(\o_K:H) = 1$ and $\o_K = H$.
+\end{proof}
+
+\section{Ideals I}
+\underline{Example:} $\Q(\sqrt{-5}) = K$, $\o_K = \Z[\sqrt{-5}].$ Then $6=2\cdot 2 = (1+\sqrt{-5})(1-\sqrt{-5})$, and so $\o_K$ is not a UFD. But it turns out that we can restore unique factorisation by replacing elements of $\o_K$ by ideals. 
 
 
 

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  27 JAN 2020 09:56
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  7 FEB 2020 09:56
  system commands enabled.
 **"Coding and Cryptography.tex"
 ("./Coding and Cryptography.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.823 seconds
+luaotfload | main : initialization completed in 1.032 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -78,7 +78,72 @@ Package: inputenc 2018/08/11 v1.3c Input encoding file
 
 Package inputenc Warning: inputenc package ignored with utf8 based engines.
 
-) ("C:/Program Files/MiKTeX 2.9/tex/latex/amsmath/amsmath.sty"
+) ("C:/Program Files/MiKTeX 2.9/tex/latex/xcolor/xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/graphics-cfg/color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: luatex.def on input line 225.
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/graphics-def/luatex.def"
+File: luatex.def 2018/01/08 v1.0l Graphics/color driver for luatex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+("C:/Program Files/MiKTeX 2.9/tex/latex/xcolor-material/xcolor-material.sty"
+Package: xcolor-material 2016/10/11 v0.1 A package for accessing Google Material
+ colors using the xcolor package
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX detected.
+)))))
+("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/graphicx.sty"
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/graphics.sty"
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:/Program Files/MiKTeX 2.9/tex/latex/graphics-cfg/graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: luatex.def on input line 99.
+)
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:/Program Files/MiKTeX 2.9/tex/latex/amsmath/amsmath.sty"
 Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip43
 
@@ -88,12 +153,12 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsmath/amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
-\ex@=\dimen103
+\@emptytoks=\toks17
+\ex@=\dimen105
 ))
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsmath/amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen104
+\pmbraise@=\dimen106
 )
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsmath/amsopn.sty"
 Package: amsopn 2016/03/08 v2.02 operator names
@@ -110,7 +175,7 @@ LaTeX Info: Redefining \dots on input line 485.
 LaTeX Info: Redefining \cdots on input line 606.
 \Mathstrutbox@=\box27
 \strutbox@=\box28
-\big@size=\dimen105
+\big@size=\dimen107
 LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 \macc@depth=\count93
@@ -118,21 +183,21 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 \dotsspace@=\muskip10
 \c@parentequation=\count95
 \dspbrk@lvl=\count96
-\tag@help=\toks17
+\tag@help=\toks18
 \row@=\count97
 \column@=\count98
 \maxfields@=\count99
-\andhelp@=\toks18
-\eqnshift@=\dimen106
-\alignsep@=\dimen107
-\tagshift@=\dimen108
-\tagwidth@=\dimen109
-\totwidth@=\dimen110
-\lineht@=\dimen111
-\@envbody=\toks19
+\andhelp@=\toks19
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks20
 \multlinegap=\skip44
 \multlinetaggap=\skip45
-\mathdisplay@stack=\toks20
+\mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
 )
@@ -148,37 +213,33 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amscls/amsthm.sty"
 Package: amsthm 2017/10/31 v2.20.4
-\thm@style=\toks21
-\thm@bodyfont=\toks22
-\thm@headfont=\toks23
-\thm@notefont=\toks24
-\thm@headpunct=\toks25
+\thm@style=\toks22
+\thm@bodyfont=\toks23
+\thm@headfont=\toks24
+\thm@notefont=\toks25
+\thm@headpunct=\toks26
 \thm@preskip=\skip46
 \thm@postskip=\skip47
 \thm@headsep=\skip48
-\dth@everypar=\toks26
+\dth@everypar=\toks27
 )
 ("C:/Program Files/MiKTeX 2.9/tex/latex/float/float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count100
-\float@exts=\toks27
+\float@exts=\toks28
 \float@box=\box29
-\@float@everytoks=\toks28
+\@float@everytoks=\toks29
 \@floatcapt=\box30
 )
 ("C:/Program Files/MiKTeX 2.9/tex/latex/mathtools/mathtools.sty"
 Package: mathtools 2019/07/31 v1.22 mathematical typesetting tools
 
-("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/keyval.sty"
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks29
-)
 ("C:/Program Files/MiKTeX 2.9/tex/latex/tools/calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count101
 \calc@Bcount=\count102
-\calc@Adimen=\dimen112
-\calc@Bdimen=\dimen113
+\calc@Adimen=\dimen114
+\calc@Bdimen=\dimen115
 \calc@Askip=\skip49
 \calc@Bskip=\skip50
 LaTeX Info: Redefining \setlength on input line 80.
@@ -194,14 +255,14 @@ LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \g_MT_multlinerow_int=\count104
-\l_MT_multwidth_dim=\dimen114
+\l_MT_multwidth_dim=\dimen116
 \origjot=\skip52
-\l_MT_shortvdotswithinadjustabove_dim=\dimen115
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen116
-\l_MT_above_intertext_sep=\dimen117
-\l_MT_below_intertext_sep=\dimen118
-\l_MT_above_shortintertext_sep=\dimen119
-\l_MT_below_shortintertext_sep=\dimen120
+\l_MT_shortvdotswithinadjustabove_dim=\dimen117
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen118
+\l_MT_above_intertext_sep=\dimen119
+\l_MT_below_intertext_sep=\dimen120
+\l_MT_above_shortintertext_sep=\dimen121
+\l_MT_below_shortintertext_sep=\dimen122
 )
 ("C:/Program Files/MiKTeX 2.9/tex/latex/geometry/geometry.sty"
 Package: geometry 2018/04/16 v5.8 Page Geometry
@@ -219,14 +280,14 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@cnth=\count105
 \Gm@cntv=\count106
 \c@Gm@tempcnt=\count107
-\Gm@bindingoffset=\dimen121
-\Gm@wd@mp=\dimen122
-\Gm@odd@mp=\dimen123
-\Gm@even@mp=\dimen124
-\Gm@layoutwidth=\dimen125
-\Gm@layoutheight=\dimen126
-\Gm@layouthoffset=\dimen127
-\Gm@layoutvoffset=\dimen128
+\Gm@bindingoffset=\dimen123
+\Gm@wd@mp=\dimen124
+\Gm@odd@mp=\dimen125
+\Gm@even@mp=\dimen126
+\Gm@layoutwidth=\dimen127
+\Gm@layoutheight=\dimen128
+\Gm@layouthoffset=\dimen129
+\Gm@layoutvoffset=\dimen130
 \Gm@dimlist=\toks30
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/geometry/geometry.cfg"))
@@ -238,8 +299,8 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ("C:/Program Files/MiKTeX 2.9/tex/latex/pgf/utilities/pgfrcs.sty"
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/utilities/pgfutil-common.tex"
 \pgfutil@everybye=\toks31
-\pgfutil@tempdima=\dimen129
-\pgfutil@tempdimb=\dimen130
+\pgfutil@tempdima=\dimen131
+\pgfutil@tempdimb=\dimen132
 
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/utilities/pgfutil-common-lists.te
 x")) ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/utilities/pgfutil-latex.def"
@@ -254,26 +315,6 @@ Package: pgfrcs 2019/08/03 v3.1.4b (3.1.4b)
 Package: pgf 2019/08/03 v3.1.4b (3.1.4b)
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/pgf/basiclayer/pgfcore.sty"
-("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/graphicx.sty"
-Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
-
-("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/graphics.sty"
-Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
-
-("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/trig.sty"
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-)
-("C:/Program Files/MiKTeX 2.9/tex/latex/graphics-cfg/graphics.cfg"
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
-)
-Package graphics Info: Driver file: luatex.def on input line 99.
-
-("C:/Program Files/MiKTeX 2.9/tex/latex/graphics-def/luatex.def"
-File: luatex.def 2018/01/08 v1.0l Graphics/color driver for luatex
-))
-\Gin@req@height=\dimen131
-\Gin@req@width=\dimen132
-)
 ("C:/Program Files/MiKTeX 2.9/tex/latex/pgf/systemlayer/pgfsys.sty"
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/systemlayer/pgfsys.code.tex"
 Package: pgfsys 2019/08/03 v3.1.4b (3.1.4b)
@@ -327,27 +368,9 @@ File: pgfsyssoftpath.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/systemlayer/pgfsysprotocol.code.t
 ex"
 File: pgfsysprotocol.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-)) ("C:/Program Files/MiKTeX 2.9/tex/latex/xcolor/xcolor.sty"
-Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
-
-("C:/Program Files/MiKTeX 2.9/tex/latex/graphics-cfg/color.cfg"
-File: color.cfg 2016/01/02 v1.6 sample color configuration
-)
-Package xcolor Info: Driver file: luatex.def on input line 225.
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
-Package xcolor Info: Model `RGB' extended on input line 1364.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-)
-("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/basiclayer/pgfcore.code.tex"
+)) ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/basiclayer/pgfcore.code.tex"
 Package: pgfcore 2019/08/03 v3.1.4b (3.1.4b)
-
-("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/math/pgfmath.code.tex"
+ ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/math/pgfmath.code.tex"
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/math/pgfmathcalc.code.tex"
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/math/pgfmathutil.code.tex")
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/math/pgfmathparser.code.tex"
@@ -656,10 +679,6 @@ File: pgflibrarypatterns.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
 librarycalc.code.tex"
 File: tikzlibrarycalc.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-)
-("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/ifluatex.sty"
-Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX detected.
 )))
 ("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
 libraryautomata.code.tex"
@@ -668,21 +687,6 @@ File: tikzlibraryautomata.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:/Program Files/MiKTeX 2.9/tex/latex/parskip/parskip.sty"
 Package: parskip 2019-01-16 v2.0c non-zero parskip adjustments
 
-("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/kvoptions.sty"
-Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
-
-("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/ltxcmds.sty"
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)
-("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/kvsetkeys.sty"
-Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
-
-("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/infwarerr.sty"
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/etexcmds.sty"
-Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-)))
 ("C:/Program Files/MiKTeX 2.9/tex/latex/etoolbox/etoolbox.sty"
 Package: etoolbox 2019/09/09 v2.5g e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count130
@@ -834,7 +838,16 @@ h.
 \MDopostkern=\muskip12
 \MDodotkern=\muskip13
 )
-\c@theorem=\count141
+("C:/Program Files/MiKTeX 2.9/tex/latex/enumitem/enumitem.sty"
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip53
+\enit@outerparindent=\dimen260
+\enit@toks=\toks47
+\enit@inbox=\box64
+\enit@count@id=\count141
+\enitdp@description=\count142
+)
+\c@theorem=\count143
 )
 ("./Coding and Cryptography.aux")
 \openout1 = Coding and Cryptography.aux
@@ -854,6 +867,47 @@ LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 
+("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count144
+\scratchdimen=\dimen261
+\scratchbox=\box65
+\nofMPsegments=\count145
+\nofMParguments=\count146
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count147
+\MPscratchDim=\dimen262
+\MPnumerator=\count148
+\makeMPintoPDFobject=\count149
+\everyMPtoPDFconversion=\toks49
+) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/pdftexcmds.sty"
+Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
+
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+\pdftexcmds@toks=\toks50
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
+8.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+("C:/Program Files/MiKTeX 2.9/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+librarypositioning.code.tex"
+File: tikzlibrarypositioning.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+)
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
 *geometry* verbose mode - [ preamble ] result:
@@ -889,43 +943,6 @@ LaTeX Font Info:    ... okay on input line 5.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EveryShipout initializing macros
-("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count142
-\scratchdimen=\dimen260
-\scratchbox=\box64
-\nofMPsegments=\count143
-\nofMParguments=\count144
-\everyMPshowfont=\toks47
-\MPscratchCnt=\count145
-\MPscratchDim=\dimen261
-\MPnumerator=\count146
-\makeMPintoPDFobject=\count147
-\everyMPtoPDFconversion=\toks48
-) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
-Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-
-("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/grfext.sty"
-Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
-
-("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/kvdefinekeys.sty"
-Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-))
-("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/pdftexcmds.sty"
-Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
-
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks49
-)
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
-8.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG
-,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 456.
-)
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
@@ -956,7 +973,7 @@ LaTeX Font Info:    Try loading font information for U+stmry on input line 6.
 LaTeX Warning: No \author given.
 
 
-Overfull \hbox (4.56038pt too wide) in paragraph at lines 30--31
+Overfull \hbox (2.34038pt too wide) in paragraph at lines 30--31
 []\TU/lmr/m/n/10 (Noisy cod-ing) \TU/lmr/m/sc/10 Isbn\TU/lmr/m/n/10 . In the \T
 U/lmr/m/sc/10 Isbn \TU/lmr/m/n/10 en-cod-ing, ev-ery book is given a 10 digit n
 um-ber $\OML/cmm/m/it/10 a[]a[] [] a[]$\TU/lmr/m/n/10 ,
@@ -1345,41 +1362,416 @@ OML/cmm/m/it/10 x$\TU/lmr/m/n/10 , max-imis-ing $\U/msb/m/n/10 P\OT1/cmr/m/n/10
  (\OML/cmm/m/it/10 c[]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )$
  []
 
-[8] [9] ("./Coding and Cryptography.aux"))
+[8] [9] [10] [11] [12] [13]
+Overfull \hbox (18.34013pt too wide) in paragraph at lines 553--554
+\TU/lmr/m/n/10 This con-tent is nonex-am-inable, but is re-quired to prove the 
+ex-am-inable re-sult that $\OML/cmm/m/it/10 H \OT1/cmr/m/n/10 = \OML/cmm/m/it/1
+0 H\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]\OT1/cmr/m/n/10 )$\TU/lmr/m/n/10 . 
+ []
+
+[14] [15] [16] [17]
+NOTE: coordinate (2Y5.0e0],3Y0.0e0]) has been dropped because it is unbounded (i
+n y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.94975e0],3Y0.0e0]) has been dropped because it is unbounde
+d (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.8995001e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.8492502e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.7990002e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.7487503e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.6985004e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.6482504e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.5980005e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.5477505e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.4975006e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.4472507e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.3970007e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.3467508e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.2965009e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.2462509e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.196001e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.145751e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.0955011e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.0452512e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.9950012e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.9447513e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.8945013e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.8442514e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.7940015e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.7437515e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.6935016e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.6432516e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.5930017e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.5427518e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.4925018e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.4422519e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.392002e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.341752e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.291502e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.2412521e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.1910022e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.1407523e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.0905023e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.0402524e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.9900024e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.9397525e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.8895026e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.8392526e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.7890027e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.7387527e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.6885028e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.6382529e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.588003e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.537753e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.487503e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.4372531e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.3870032e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.3367532e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.2865033e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.2362534e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.1860034e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.1357535e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.0855035e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.0352536e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.9850037e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.9347537e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.8845038e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.8342538e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.7840039e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.733754e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.683504e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.6332541e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.5830042e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.5327542e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.4825043e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.4322543e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.3820044e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.3317545e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.2815045e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.2312546e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.1810046e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.1307547e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.0805048e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.0302548e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y9.800049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y9.297549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y8.795049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y8.292549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y7.790049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y7.287549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y6.785049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y6.282549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y5.780049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y5.277549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.775049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y4.272549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.770049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y3.267549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.765049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.262549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.760049e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y1.257549e-1],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y7.55049e-2],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (2Y2.52549e-2],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.0299951e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.080245e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.130495e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.180745e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.2309949e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.2812448e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.3314948e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.3817447e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.4319946e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.4822446e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.5324945e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.5827444e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.6329944e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.6832443e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.7334943e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.7837442e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.8339941e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.8842441e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.934494e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y1.984744e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.0349939e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.0852438e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.1354938e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.1857437e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.2359937e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.2862436e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.3364935e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.3867435e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.4369934e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.4872433e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.5374933e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.5877432e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.6379932e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.6882431e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.738493e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.788743e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.8389929e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.8892429e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.9394928e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y2.9897427e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.0399927e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.0902426e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.1404926e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.1907425e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.2409924e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.2912424e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.3414923e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.3917422e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.4419922e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.4922421e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.542492e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.592742e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.642992e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.6932419e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.7434918e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.7937418e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.8439917e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.8942416e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.9444916e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y3.9947415e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.0449915e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.0952414e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.1454913e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.1957413e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.2459912e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.2962411e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.3464911e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.396741e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.446991e0],3Y0.0e0]) has been dropped because it is unbound
+ed (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.4972409e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.5474908e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.5977408e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.6479907e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.6982407e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.7484906e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.7987405e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.8489905e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.8992404e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.9494904e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+NOTE: coordinate (1Y4.9997403e0],3Y0.0e0]) has been dropped because it is unboun
+ded (in y). (see also unbounded coords=jump). 
+[18] [19] ("./Coding and Cryptography.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 30655 strings out of 494305
+ 31426 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 510 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 55 glue_spec,
- 8 attribute_list, 2 write nodes
-   avail lists: 1:2,2:1266,3:334,4:29,5:281,6:18,7:3037,8:54,9:486,10:6,11:183
- 33828 multiletter control sequences out of 65536+200000
- 75 fonts using 5185495 bytes
- 64i,15n,100p,1095b,1998s stack positions out of 5000i,500n,10000p,200000b,50000s
-<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman7-regular.otf><c:/p
-rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/program 
-files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/program f
-iles/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program files/
-miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/program files/
-miktex 2.9/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files/mikt
-ex 2.9/fonts/opentype/public/lm/lmroman12-bold.otf><c:/program files/miktex 2.9/
-fonts/opentype/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9/font
-s/opentype/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/sym
-bols/msbm10.pfb>
-Output written on Coding and Cryptography.pdf (9 pages, 222829 bytes).
+ 521 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 3 glue, 4 kern, 1 glyph, 9 attribute, 55 glue_spec,
+ 9 attribute_list, 2 write nodes
+   avail lists: 1:3,2:1330,3:348,4:30,5:364,6:19,7:3480,8:74,9:600,10:10,11:183
+ 34578 multiletter control sequences out of 65536+200000
+ 80 fonts using 5842919 bytes
+ 64i,18n,100p,1095b,1996s stack positions out of 5000i,500n,10000p,200000b,50000s
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/p
+rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman6-regular.otf><c:/progra
+m files/miktex 2.9/fonts/opentype/public/lm/lmroman7-regular.otf><c:/program fil
+es/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/program files/mikt
+ex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/program files/mikte
+x 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program files/miktex 2.9
+/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/program files/miktex 2.9
+/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files/miktex 2.9/fon
+ts/opentype/public/lm/lmroman12-bold.otf><c:/program files/miktex 2.9/fonts/open
+type/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9/fonts/opentype
+/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/rsfs/rsfs10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/rsfs/rsfs7.pfb>
+Output written on Coding and Cryptography.pdf (19 pages, 338735 bytes).
 
-PDF statistics: 144 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 214 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

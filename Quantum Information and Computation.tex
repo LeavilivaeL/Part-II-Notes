@@ -181,5 +181,12 @@ For example, if we want to measure the \emph{parity} of a 2-bit string $b_1b_2$ 
 
 We can also do this on the vector level: $\P(0) = \P(00) + \P(11) = \braket{\psi}{00}\braket{00}{\psi} + \braket{\psi}{11}\braket{11}{\psi} = |a|^2+|d|^2$. It is not a coincidence that we get the same answer, but of course since this isn't a pure course we won't formalise this into a nice little lemma or proposition, and instead we'll just assert it's obvious and move on.
 
+\subsection{Extended Born Rule}
+This rule will tell us what to do when we only measure part of a composite system. This is a particular kind of the incomplete measurements discussed above. It will tell us both the probability of outcomes, and the post measurement state. Suppose we have $\ket{\psi} \in \mathcal{V} \otimes \mathcal{W}$, where $\dim\mathcal{V} = m, \dim\mathcal{W} = n$, and orthonormal bases $\{\ket{e_i}\}, \{\ket{f_i}\}$ of each.
+
+Then we can write $\ket{\psi} = \sum_i^m \sum_j^n a_{ij}\ket{e_i}\ket{f_j}$. Our measurement will be only in $\mathcal{V}$, so will have possible outcomes $1, 2, \ldots, m$.
+
+Then $p(k) = \bra{\psi}P_k \otimes I \ket{\psi}$, where $P_k = \ket{e_k}\bra{e_k}$.
+
 
 \end{document}

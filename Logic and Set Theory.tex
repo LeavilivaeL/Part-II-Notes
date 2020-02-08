@@ -139,7 +139,7 @@ Suppose $t_1, \ldots, t_n$ is a proof of $p \implies q$ from $S$. Then $t_1, \ld
 \item $(p \implies t_i)$ \hfill (MP)
 \end{itemize}
 \item If $t_i = p$, use Lemma \textbf{1.2}
-\item If $t_j = (t_j \implies t_i)$ for some $j, k < i$, then write down proofs of $(p \implies t_j), (p \implies t_k)$ from $S$. Then append:
+\item If $t_k = (t_j \implies t_i)$ for some $j, k < i$, then write down proofs of $(p \implies t_j), (p \implies t_k)$ from $S$. Then append:
 \begin{itemize}
 \item $(p \implies (t_j \implies t_i)) \implies ((p \implies t_j) \implies (p \implies t_i))$ \hfill (A2)
 \item $(p \implies t_j) \implies (p \implies t_i)$ \hfill (MP)
@@ -291,4 +291,358 @@ A total order $<$ is a well-ordering if and only if there is no infinite descend
 \item Take $\{-\frac1n: n \in\N\setminus\{0\}\}$ with the usual ordering. This is a well ordering, as there are only finitely many elements less than any given element. This has the same order type as $\N$ with the usual order.
 \item What about $X = \big\{-\frac1n: n \in \N\setminus\{0\}\big\}\cup\big\{1-\frac1n:n \in \N\setminus\{0\}\big\}$ with the usual order. Even though there are infinitely many elements less than say $\frac23$, we can see that any descending sequence can have only finitely many positive terms, before a negative term, and then only finitely many negative terms. Hence this is in fact a well-ordering, but it is not the same order-type as $\N$. This should remind you of the discussion at the end of section 1, where we went through infinitely many elements, and then did it again.
 \end{enumerate}
+
+Let $X$ be a well-ordered set. An \emph{initial segment} of $X$ is a subset $Z \subset X$ such that if $z \in Z$ and $x \in X$ with $x \leq z$ then $x \in Z$. If $Y$ is also a well-ordered set, then we say $Y \leq X$ if $Y$ is isomorphic to some initial segment of $X$. We make some remarks about this notion:
+\begin{enumerate}
+\item If $Z \neq X$ is an initial segment of $X$ then $X \setminus Z \neq 0$ so has some least element $x$. Then $Z = \{y \in X: y<x\} = X_{(<x)}$.
+\item Clearly $X \leq X$.
+\item This also gives a definition of $\alpha \leq \beta$ for ordinals $\alpha, \beta$. (We should really check that this is well-defined: i.e. if $Y \leq X$ and $Y' \cong Y, X' \cong X$, then $Y' \leq X'$. This is obvious though because the definition is given in terms of isomorphism, which is transitive).
+\item Transitivity is clear, as $\alpha \leq\beta, \beta\leq \gamma \implies \alpha \leq \gamma$. What about trichotomy?
+\end{enumerate}
+We will generalize two important concepts from $\N$ - the ideas of \emph{induction} and \emph{recursion}
+\begin{proposition}[Proof by Induction]
+Let $X$ be a well ordered set and let $P(x)$ be a statement about $x \in X$. Suppose for all $x \in X$ that $(\forall y < x, P(y)) \implies P(x)$. Moreover, suppose for $z = \min X$ that $P(z)$. Then $\forall x \in X, P(x)$.
+\end{proposition}
+\begin{proof}
+Suppose not. Then the set $\{x \in X: \neg P(x)\}$ is non-empty, so has a least element $x$, which is strictly greater than $z$. Then $\forall y < x, P(y)$ but $\neg P(x)$. \contr
+\end{proof}
+\begin{proposition}
+Let $X$ be a well-ordered set and $f:X \to Z$ be an isomorphism from $X$ to an initial segment $Z$ of $X$. Then $f$ is the identity function on $X$, and in particular $X \nless X$.
+\end{proposition}
+\begin{proof}
+We prove this by induction on $x$ that $\forall x \in X, f(x)=x$. Indeed, suppose that $x \in X$ and $f(y)=y$ for all $y < x$. As $f$ is injective, $f(x) \geq x$; if $f(x)>x$ then, as $Z$ is an initial segment and $f$ is surjective onto $Z$ we have $f(z) = x$ for some $z > x$, so $f(z) = x < f(x)$, but $x < z$. \contr
+\end{proof}
+
+What about recursion? We want to generalise things like ``define $f: \N \to \N$ recursively by $f(0)=1$ and $f(n) = \sum_{i=0}^{n-1}f(i)$ for $n > 0$".
+
+\begin{proposition}[Definition by Recursion]
+Let $X$ be a well-ordered set, let $Y$ be a set, and let $G:\powset (X\times Y) \to Y$. Then there is a unique function $f:X \to Y \st \forall x \in X, f(x) = G(f|_{X_{(<x)}})$.
+\end{proposition}
+\begin{proof}
+For uniqueness, suppose functions $f, f'$ both have this property. We show by induction that $\forall x \in X, f(x) = f'(x)$. Indeed, suppose $x \in X$ and $f(y) = f'(y)$ for all $y < x$. Then $f(x) = G(f|_{x_{(<x)}}) = G(f'|_{(X_{(<x)}}) = f'(x)$.
+
+For existence, define $h$ is an \emph{attempt} at $f$ to mean $h:Z \to Y$ for some initial segment $Z$ of $X$ with $\forall x \in Z, h(x) = G(h|_{Z_{(<x)}})$. Suppose that $h:Z \to Y$ and $h':Z'\to Y$ are attempts. Then $Z \subset Z'$ or $Z' \subset Z$, \textsc{wlog} take the first. Then $h'|_Z$ is an attempt with domain $Z$, and so by uniqueness $h'|_Z = h$. So attempts agree at any points where they are both defined.
+
+Next we will prove by induction that, $\forall x \in X$, there is some attempt $h_x$ with $x \in \dom (h_x)$. Indeed, let $x \in X$ and suppose that, for all $y <x$, $h_y$ is an attempt with $y \in \dom (h_y)$. Let $h = \bigcup_{y<x} h_y$. Then by what we've' just done, $h$ is a function. Indeed, $h$ is an attempt and $X_{(<x)} \subset \dom(h)$. 
+
+If $x \in \dom(h)$, set $h_x = h$. If $x \notin \dom(h)$ then $\dom(h) = X_{(<x)}$. Then we can set $h_x = h\cup \{(x, G(h|_{X_{(<x)}})\}$. Finally, let $f = \bigcup_{x \in X} h_x$.
+\end{proof}
+
+\begin{proposition}
+Let $X,Y$ be well-ordered sets with $Y \nleq X$, then $X \leq Y$.
+\end{proposition}
+\begin{proof}
+Define $f:X\to Y$ recursively by letting $f(x)$ be the least element of $Y \setminus\{f(w): w \in X, w< x\}$. This set is nonempty as $Y \nleq X$. Then $f$ is an isomorphism from $X$ to an initial segment of $Y$.
+\end{proof}
+\begin{proposition}[Trichotomy]
+Let $\alpha, \beta$ be ordinals. Then $\alpha \leq \beta$ or $\beta \leq \alpha$, and if both hold then $\alpha = \beta$.
+\end{proposition}
+\begin{proof}
+The first part follows immediately from \textbf{2.4}. For the second part, suppose we have isomorphisms $f:\alpha \to B, g:\beta \to A$ where $A,B$ are initial segments of $\alpha, \beta$ respectively. Then $f \circ g$ is an isomorphism from $\beta$ to some initial segment of itself. Then by \textbf{2.2} $f\circ g$ is the identity function on $\beta$. Hence $B = \beta$, and so $\alpha \cong \beta$, so $\alpha = \beta$.
+\end{proof}
+\begin{theorem}
+Let $\alpha$ be an ordinal. Then the ordinals less than $\alpha$ form a set well ordered by $<$.
+\end{theorem}
+\begin{proof}
+The ordinals less than $\alpha$ are precisely the order types of the proper initial segments $\alpha_{(<x)}$ for $x \in \alpha$ of $\alpha$. Then $\bar{\alpha} = \{\alpha_{(<x)} : x \in \alpha\}$ is isomorphic to $\alpha$ via $\alpha \to \bar{\alpha}, x \to \alpha_{(<x)}$. Thus $\bar{\alpha}$ is well-ordered.
+\end{proof}
+Note that we can write $I_{\alpha}$ for the set of ordinals less than $\alpha$. Then $I_\alpha$ has order type $\alpha$.
+\begin{corollary}
+Any non-empty set $X$ of ordinals has a least element.
+\end{corollary}
+\begin{proof}
+$X \neq \emptyset$ so there is some $\alpha \in X$. If $\alpha$ is the least element of $X$ then we're done. Otherwise $X \cap I_{\alpha} \neq \emptyset$. But $I_\alpha$ is well-ordered so $X \cap I_\alpha$ has a least element, which must also be the least element of $X$.
+\end{proof}
+This would lead us to want to say something along the lines of ``the ordinals are well-ordered by <". However:
+\begin{theorem}[Burali-Forti Paradox]
+The ordinals do not form a set.
+\end{theorem}
+\begin{proof}
+Suppose $X$ is the set of ordinals. Then $X$ is well ordered by $<$ so has order type $\alpha$ for some $\alpha \in X$. But $I_\alpha$ also has order type $\alpha$, and this is a proper initial segment of $X$. So $X$ is isomorphic to a proper initial segment of itself, contradicting \textbf{2.2}.\contr
+\end{proof}
+\subsection{Ordinal Arithmetic}
+Let $\alpha, \beta$ be ordinals. We define $\alpha+\beta$ to be the set $\alpha$ followed by $\beta$, and $\alpha\beta$ to be $\alpha$ followed by itself $\beta$ times.
+
+More precisely, $\alpha+\beta$ is the order type of the set $(\{0\}\times \alpha)\cup (\{1\}\times \beta)$ ordered by $(i,x) < (j,y)$ if and only if $i<j$ or ($i=j$ and $x<y$), whilst $\alpha\beta$ is the order type of the set $\alpha \times \beta$ ordered by $(x,y)<(z,y)$ if and only if $y<w$ or ($y=w$ and $x<z$).
+
+As an exercise, check that these two orderings are indeed well-orderings, so that these definitions make sense.
+
+Suppose that, for each $n \in \N$, we identify $n$ with the ordinal well-ordering on an $n$-element set. Then these definitions generalise arithmetic in $\N$. 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\node at (0,0) {$2+3 = $};
+\node[draw, circle, fill, red] at (1,0) {};
+\node[draw, circle, fill, red] at (2,0) {};
+\node[draw, circle, fill, blue] at (3,0) {};
+\node[draw, circle, fill, blue] at (4,0) {};
+\node[draw, circle, fill, blue] at (5,0) {};
+\node at (5.7,0) {$=5$};
+\node at (0,-1) {$2\cdot 3 = $};
+\node[draw, circle, fill, red] at (1,-1) {};
+\node[draw, circle, fill, red] at (2,-1) {};
+\node[draw, circle, fill, blue] at (3,-1) {};
+\node[draw, circle, fill, blue] at (4,-1) {};
+\node[draw, circle, fill, green] at (5,-1) {};
+\node[draw, circle, fill, green] at (6,-1) {};
+\node at (6.7,-1) {$=6$};
+\end{tikzpicture}
+\end{figure}
+
++ is associative immediately from the definitions. However, if $\omega$ is the order type of $\N$, then $1+\omega = \omega$ under the isomorphism ``subtract 1", however $\omega+1$ would have $\omega$ as an initial segment, and so $1+\omega \neq \omega+1$. As an exercise (see sheet 2), think about whether multiplication is associative, commutative, or distributive.
+
+\subsection{Ordinal Arithmetic II - Attack of the Ordinals}
+There is an alternative approach, using ideas of induction and recursion. First, we will need some preliminary ideas.
+
+\begin{proposition}
+\item
+\begin{enumerate}
+\item Let $\alpha$ be an ordinal. Then there is a least ordinal $\beta > \alpha$.
+\item Let $X$ be a set of ordinals. then there is a least ordinal $\gamma$ with $\gamma >\delta$ or all $\delta \in X$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Take $\beta$ to be $\alpha$ with a single additional element added greater than everything in $\alpha$.
+\item Let $Y = \{I_{\delta} : \delta \in X\}$. Then $X$ is the set of order types of elements of $Y$ and the elements of $Y$ are nested sets of ordinals. So take $gamma$ to be the order type of $\bigcup_{\delta \in X} I_{\delta}$.
+\end{enumerate}
+\end{proof}
+
+In \textit{1.}, we write $\beta = \alpha^{+}$, the \emph{successor} of $\alpha$. In \textit{2}, we write $\gamma = \sup(X)$, the \emph{supremum} of $X$. If $\alpha = \beta^{+}$ for some ordinal $\beta$, we say $\alpha$ is a \emph{successor ordinal}, and otherwise $\alpha$ is a \emph{limit ordinal}. For example, $0$ is a limit, $n \in \N$ is a successor, $\omega$ is a limit. Note that $\alpha$ is a limit if and only if $\alpha = \sup(I_{\alpha})$.
+
+When doing induction or recursion for ordinals, we often deal with successors and limits in separate cases. We often treat $0$ as different to other limits as well.
+
+We can then define addition and multiplication for ordinals recursively as follows:
+\begin{itemize}
+\item $\alpha + 0 = \alpha$
+\item $\alpha + \beta^{+} = (\alpha + \beta)^{+}$
+\item $\alpha + \gamma = \sup\{\alpha + \delta : \delta < \gamma\}$
+\item $\alpha \cdot 0 = 0$
+\item $\alpha \cdot \beta^{+} = \alpha \cdot \beta + \alpha$
+\item $\alpha \cdot \gamma = \sup\{\alpha\delta : \delta < \gamma\}$.
+\end{itemize}
+
+However we have a problem - recursion doesn't work here since the ordinals do not form a set. We can get around this though.
+
+Let $\alpha$ be an ordinal and suppose we want to define $\alpha + \beta$ for all ordinals $\beta$. Given an ordinal $\gamma$ we can define $\alpha + \beta$ recursively for all $\beta \in I_{\gamma}$ as above, since $I_{\gamma}$ is a set. Suppose we restrict this definition to $\beta \in I_{\gamma'}$ for some $\gamma' < \gamma$. Then this is the same as the direct definition on $I_{\gamma'}$. Hence we have uniquely defined $\alpha + \beta$ for all $\beta$, since $\beta \in I_{\beta^+}$.
+
+What about induction? Suppose we have some statement $p(\alpha)$ about an ordinal $\alpha$ such that for all $\alpha$, $(\forall \beta  \alpha, p(\beta)) \implies p(\alpha)$. Take an ordinal $\alpha$. By induction, for all $\gamma \in I_{\alpha^+}, p(\gamma)$. Hence $p(\alpha)$. So in fact $p(\alpha)$ holds for all ordinals $\alpha$.
+
+\begin{lemma}
+Let $\alpha, \beta, \gamma$ be ordinals. Then
+\begin{enumerate}
+\item $\beta \leq \gamma \implies \alpha + \beta \leq \alpha+\gamma$
+\item $\beta < \gamma \implies \alpha + \beta < \alpha + \gamma$
+\item $\gamma$ a non zero limit ordinal $\implies \alpha+\gamma$ a limit ordinal
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item We do this by induction on $\gamma$. If $\beta = \gamma$ then it is obvious, so assume $\beta < \gamma$. For $\gamma = 0$, there is no such $\beta$, so done. Otherwise, if $\gamma=  \delta^+, \beta < \delta^+ \implies \beta \leq \delta \implies \alpha + \beta \leq \alpha + \delta < (\alpha + \delta)^+ = \alpha + \delta^+ = \alpha+\gamma$. The final case is $\gamma$ is a non-zero limit. Then $\beta < \gamma \implies \alpha+\gamma = \sup\{\alpha + \delta : \delta < \gamma\} \geq \alpha+\beta$.
+
+\item Suppose $\beta < \gamma$. Then $\beta^+ \leq \gamma$, so $\alpha + \beta < (\alpha + \beta)^+ = \alpha +\beta^+ \leq \alpha +\gamma$.
+
+\item Suppose instead that $\alpha + \gamma = \delta^+$ for some $\delta$. Then $\delta < \alpha + \gamma = \sup\{\alpha + \epsilon : \epsilon < \gamma\}$, so $\delta < \alpha + \epsilon$ for some $\epsilon < \gamma$. As $\gamma$ is a limit, then $\epsilon^{+} < \gamma$. Then $\alpha + \gamma = \delta^+ \leq (\alpha + \epsilon)^+ = \alpha + \epsilon^+ < \alpha + \gamma$ by \textit{2.}. \contr
+\end{enumerate}
+\end{proof}
+\begin{proposition}
+Let $\alpha, \beta, \gamma$ be ordinals. Then $(\alpha+\beta)+\gamma = \alpha + (\beta + \gamma)$
+\end{proposition}
+\begin{proof}
+We use induction on $\gamma$. In the case $\gamma = 0, (\alpha + \beta) + 0 = \alpha + \beta = \alpha + (\beta + 0)$.
+
+If $\gamma = \delta^+$, then $(\alpha + \beta) + \delta^+ = ((\alpha+\beta) + \delta)^+ = (\alpha + (\beta + \delta))^+ = \alpha + (\beta+\delta)^+ = \alpha + (\beta+ \delta^+)$.
+
+
+If $\gamma$ is a non-zero limit, then $(\alpha + \beta) + \gamma = \sup(X)$ where $X = \{(\alpha+\beta)+\delta : \delta < \gamma\} = \{\alpha + (\beta+\delta) : \delta < \gamma\}$. Meanwhile, by \textbf{2.10} part 3, $\beta + \gamma$ is a limit, and so $\alpha + (\beta+ \gamma) = \sup(Y)$ where $Y = \{\alpha + \epsilon : \epsilon < \beta + \gamma\}$. If $\delta < \gamma$ then by \textbf{2.10} part 2, $\beta+ \delta < \beta + \gamma$ so $X \subset Y$, and so $(\alpha + \beta) + \gamma \leq \alpha + (\beta+\gamma$. On the other hand, if $\zeta \in Y$, then $\zeta = \alpha + \epsilon$ for some $\epsilon < \beta + \gamma = \sup\{\beta + \delta : \delta  < \gamma\}$. Hence $\epsilon \leq \beta + \delta$ for some $\delta < \gamma$. Let $\eta = \alpha + (\beta + \delta)$. Then \textbf{2.10} part 1, $\eta \geq \zeta$ and also $\eta \in X$. Hence $\sup(X) \geq \sup(Y)$, so $(\alpha + \beta) + \gamma \geq \alpha + (\beta+\gamma)$, and so $(\alpha+\beta)+\gamma = \alpha +(\beta+\gamma)$.
+\end{proof}
+
+The definition in this section is the \emph{inductive} definition of arithmetic, whilst the one in the previous section was the \emph{synthetic} definition. It is often better to work with the synthetic definition than the inductive one. Fortunately however, they coincide.
+
+\begin{proposition}
+The synthetic and inductive definitions of ordinal addition coincide.
+\end{proposition}
+\begin{proof}
+Let $+$ denote the synthetic definition. Then for all $\alpha$, $\alpha + 0 = \alpha$, and also $\alpha+\beta^+ = \leftarrow \alpha \rightarrow \leftarrow \beta \rightarrow \cdot = (\alpha+\beta)^+$
+
+Finally, if $\alpha$ is an ordinal and $\gamma$ is a non-zero limit ordinal,t ehn $\alpha + \gamma = \leftarrow \alpha \rightarrow \leftarrow \sup\{\delta:\delta<\gamma\}\rightarrow = \sup(\alpha+\delta: \delta <\gamma\}$, by noting that $\delta$ is the order type of $I_{\delta}$, and the $I_{\delta}$ are nested so $\sup \leftrightarrow \cup$.
+
+Hence by induction on $\beta$ the definitions agree on $\alpha + \beta$.
+\end{proof}
+\begin{proposition}
+The synthetic and inductive definitions of ordinal multiplication coincide.
+\end{proposition}
+\begin{proof}
+Left as an exercise for sheet 2.
+\end{proof}
+
+Can we define ordinal exponentiation? It's clear what to do inductively, but not so much synthetically. We define:
+\begin{itemize}
+\item $\alpha^0 = 0^+$
+\item $\alpha^{\delta^+} = \alpha^{delta}\alpha$
+\item $\alpha^{\beta}$ for $\beta$ a non-zero limit to be $\sup\{\alpha^\delta: \delta<\beta\}$.
+\end{itemize}
+
+\subsection{Uncountable Ordinals}
+In \textbf{\textsection 1.4} our list of indices $0,1,2,\ldots, \omega,\ldots, \omega 2, \ldots, \epsilon_0$ are some ordinals. We've found lots of them, but in fact only countably many - $\epsilon_0 = \sup\{\omega, \omega^{\omega},\ldots\}$. Since $\alpha$ is the order type of $I_{\alpha}$, equivalently each of these ordinals is countable. However, there are more:
+\begin{proposition}
+There exists an uncountable ordinal.
+\end{proposition}
+\begin{proof}
+Let $X \subset \powset(\N \times \N)$ be the set of all well-orderings of subsets of $\N$. Let $Y = \{\ord(x)  : x \in X\}$. Then $Y$ is precisely the set o countable ordinals. Let $\omega_1 = \sup(Y)$. Suppose $\omega_1$ is countable. Then $\omega_1 \in Y$ and the proper initial segment $Y_{(<\omega_1)}$ has the same order type as $Y$. \contr
+\end{proof}
+A couple of remarks:
+\begin{itemize}
+\item $\omega_1$ is the least uncountable ordinal.
+\item The ordinal $\omega_1$ is not the supremum of any countably set of countable ordinals. Indeed, if $Z$ is a countable set of countable ordinals, then $\sup Z$ is the order-type of $\bigcup_{\alpha \in Z}I_{\alpha}$, a countable union of countable sets.
+\end{itemize}
+\begin{theorem}
+Let $S$ be a set. Then there exists an ordinal $\gamma$ with no injection $\gamma \to S$.
+\end{theorem}
+\begin{proof}
+Same as the previous proposition with $\N$ replaced by $S$.
+\end{proof}
+Theorem \textbf{2.15} is called \emph{Hartog's Lemma}. This makes sense of the statement in \textbf{\textsection 1.4} that we eventually run out of stuff, with a formal proof to follow in the next section.
+
+\section{Posets and Zorn's Lemma}
+A \emph{\underline{p}artially \underline{o}rdered \underline{set} (poset)} is a set $P$ with a relation $\leq$ satisfying:
+\begin{enumerate}
+\item $(x\leq y, y\leq z) \implies x \leq z$
+\item $\forall x \in P, x\leq x$
+\item $(x\leq y, y\leq x) \implies y = x$
+\end{enumerate}
+If $(P, \leq)$ is a poset and we define $x<y$ to mean $x \leq y$ and $x \neq y$, then
+\begin{enumerate}
+\item $(x<y, y<z) \implies x < z$
+\item $x \nless x$
+\end{enumerate}
+
+Conversely, we can check that if $P$ is a set and $<$ is a relation on $P$ satisfying the above then $\leq$ gives a partial order on $P$. We use $>, \geq$ in the obvious way.
+
+A \emph{Hasse diagram} of $(P, \leq)$ consists of a point for each $x \in P$ and line upwards from $x$ to $y$ if $y$ \emph{covers} $x$, i.e. that $y > x$ and there is no $z$ with $y > z > x$.
+
+\hspace*{-1em}\underline{Examples}
+\begin{enumerate}
+\item Any totally ordered set is a poset.
+\item Any subset of a poset is a poset.
+\item For any set $X$, $\powset(X)$ is a poset under inclusion.
+\item In a similar vein, take $\N$ with $|$ (divides). This is a poset.
+\item We have the finite set with Hasse diagram given by:
+\begin{center}
+\begin{tikzpicture}
+\node[circle, fill] (a) at (0,3) {};
+\node[circle, fill] (b) at (-1,2) {};
+\node[circle, fill] (c) at (0,2) {};
+\node[circle, fill] (d) at (1,2) {};
+\node[circle, fill] (e) at (0,1) {};
+\node[circle, fill] (f) at (1,1) {};
+\node[circle, fill] (g) at (0,0) {};
+\draw (a) -- (b) -- (g);
+\draw (a) -- (c) -- (e) -- (g);
+\draw (a) -- (d) -- (f) -- (g);
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+
+Let $(P, \leq)$ be a poset. We say that $x \in P$ is \emph{greatest} if for all $y \in P, y \leq x$. We say that $x \in P$ is \emph{maximal} if for all $y \in P$, $y \geq x \implies y = x$. If $S \subset P$, an \emph{upper bound} for $S$ is an $x \in P$ such that $y \in S \implies y \leq x$. We can similarly define \emph{least}, \emph{minimal}, and \emph{lower bound}. If $S$ has a least upper bound we denote it by $\sup(S)$ or by $\bigvee S$, read ``join $S$". Similarly, if we have a greatest lower bound or infimum of $S \subseteq P$, we denote it by $\inf(S)$ or $\bigwedge S$, read ``meet $S$". We have the diagram:
+\begin{center}
+\begin{tikzpicture}
+\node[circle, draw, minimum size=3em] (v) at (0,2) {$a \vee b$};
+\node[circle, draw, minimum size=3em] (a) at (-2,0) {$a$};
+\node[circle, draw, minimum size=3em] (b) at (2,0) {$b$};
+\node[circle, draw, minimum size=3em] (n) at (0,-2) {$a \wedge b$};
+\draw (v) -- (a) -- (n) (v) -- (b) -- (n);
+\end{tikzpicture}
+\end{center}
+\hspace*{-1em}\underline{Examples:}
+\begin{enumerate}
+\item In $(\powset S, \subseteq)$, $S$ is greatest and $\emptyset$ is least.
+\item In $(\N, \leq)$, $0$ is least. There is no greatest or maximal element.
+\item Take the finite set with diagram given by:\\
+\begin{minipage}{0.2\textwidth}
+\centering
+\begin{tikzpicture}
+\node[circle, draw] (a) at (-0.7,1) {$a$};
+\node[circle, draw] (b) at (0.7,1) {$b$};
+\node[circle, draw] (c) at (0,0) {$c$};
+\draw (a) -- (c) (b) -- (c);
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+We have $a$ is maximal, but $a$ is not greatest since $a \ngeq b$. $b$ is maximal as well. $c$ is both minimal and least.
+\end{minipage}
+\end{enumerate}
+Note that $a$ greatest implies that $a$ is maximal, and if $P$ has a greatest element then it must be unique. If every subset of $P$ has a supremum then we say that $P$ is \emph{complete}. If $P$ is complete then $P$ is non-empty, as $\bigvee\emptyset \in P$. In fact, $\bigvee\emptyset$ is the least element of $P$. $P$ also has a greatest element, $\bigvee P$.
+
+\hspace*{-1em}\underline{Examples:}
+\begin{enumerate}
+\item $(\powset S, \subseteq)$ is complete. $\bigvee \mathcal{A} = \bigcup_{A \in \mathcal{A}} A, \bigwedge \mathcal{A} = \bigcap_{A \in \mathcal{A}} A$.
+\item $([0,1], \leq)$ is complete.
+\item $(\R, \leq)$ is not complete.
+\end{enumerate}
+If $(P, \subseteq)$ is a poset then a \emph{chain} is a subset $C \subseteq P$ such that for all $x, y \in C$ either $x \leq y$ or $y \leq x$. If every chain has a supremum, we say that $P$ is \emph{chain-complete.} Note again that chain complete implies nonempty since the empty set is a chain.
+
+\hspace*{-1em}\underline{Examples:}
+\begin{enumerate}
+\item In $(\N,1)$, the set $\{4^n : n \in \N\}$ is a chain.
+\item In $(\R, \leq)$, $\Q$ is a chain, and so is $\R$.
+\end{enumerate}
+
+A \emph{lattice} $L$ is a poset in which every finite subset has both a supremum and an infimum. For $a, b \in L$, we write $a \vee b = \bigvee \{a, b\}$ and $a \wedge b = \bigwedge \{a, b\}$. Note that $L$ has a least element $\bigwedge \emptyset$ and a greatest element $\bigvee \emptyset$. We say that a lattice $L$ is a \emph{Boolean algebra} if:
+\begin{enumerate}
+\item For all $a,b,c \in L$, $a \wedge (b \vee c) = (a \wedge b)\vee(a \wedge c)$
+\item For all $a,b,c \in L$, $a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c)$
+\item For all $a \in L$ there is $b \in L$, $a \vee b = \bigwedge \emptyset, a \wedge b = \bigvee \emptyset$
+\end{enumerate}
+These rules are essentially saying $L$ behaves like a powerset, with $\wedge$ corresponding to $\cap$ and $\vee$ corresponding to $\cup$. Then the first two rules are de Morgan's laws, and the third is the notion of a complement.
+
+\subsection{Zorn's Lemma and Applications}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=5]
+\tikzset{rotate=-45}
+\fill [MaterialYellow500] (0, 0) ellipse [x radius=1/3, y radius=  1];
+\fill [MaterialYellow500] (0, 0) ellipse [x radius=3/4, y radius=7/8];
+\fill [MaterialYellow600] (270:1/3 and   1) arc (270:450:1/3 and   1);
+\fill [MaterialYellow600] (270:3/4 and 7/8) arc (270:450:3/4 and 7/8);
+\begin{scope}[shift=(90:9/10), rotate=-135]
+\fill [MaterialGreen500] 
+  (0,0) arc (45:135:1/2 and 4/5) arc (225:315:1/2 and 3/5);
+\fill [MaterialGreen700] 
+  (0,0) arc (45:135:1/2 and 4/5) -- cycle;
+\tikzset{rotate=90, scale=3/4}
+\fill [MaterialGreen500] 
+  (0,0) arc (45:135:1/2 and 4/5) arc (225:315:1/2 and 3/5);
+\fill [MaterialGreen700] 
+  (0,0) arc (45:135:1/2 and 4/5) -- cycle;
+\end{scope};
+\end{tikzpicture}
+\caption{Zorn's Lemon}
+\end{figure}
+\begin{theorem}[Zorn's Lemma]
+Let $(P, \leq)$ be a poset in which every chain has an upper bound. Then $P$ has a maximal element.
+\end{theorem}
+The idea is that, if not, we can take $x_0$ to be the upper bound of the empty set, then if $x_0$ is not maximal there is $x_1 > x_0$, and then we get another chain indexed by the ordinals, and eventually run out of stuff.
+\begin{proof}
+Suppose $P$ has no maximal element. Then for any $x \in P$, we can find $x' \in P$ with $x' > x$. Moreover, for any chain $C \subseteq P$ we can find $C^{\ast} \in P$ such that for all $x \in C$, $C^{\ast} > x$, for instance take $y$ to be an upper bound for $C$ and let $C^{\ast} = y'$.
+
+By Hartog's Lemma, we can find an ordinal $\gamma$ such that there is no injection from $\gamma \to P$.
+
+Recursively for $\alpha < \gamma$ define $x_{\alpha}$ as follows:
+\begin{itemize}
+\item[$\alpha=0$:] $x_0 = \emptyset^{\ast}$ - we can use any element of $P$
+\item[$\alpha=\beta^+:$] $x_{\beta^+} = x_{\beta}'$
+\item[Otherwise:] $\alpha$ is a non-zero limit, so let $x_{\alpha} = \{x_{\delta} : \delta < \alpha\}^{\ast}$.
+\end{itemize}
+We can do this because $\{x_\delta : \delta < \alpha\}$ is a chain as $x_{\zeta} > x_{\xi} \iff \zeta > \xi$, and the ordinals are totally ordered.
+
+Then $\alpha \mapsto x_{\alpha}$ is an injection $I_\gamma \to P$, and $I_\gamma \cong \gamma$. \contr
+\end{proof}
+But can we actually let $x_{\alpha} = \{x_{\delta} : \delta < \alpha\}^{\ast}$? Even though we know the thing on the right is a chain, we don't know that until we're halfway through the recursion - when we define what $x_\alpha$ will be, we are saying its the star of something that may or may not be a chain. It is only once we find out what this something is that we know it is indeed a chain and we can take a star of it, and this first assignment is slightly dodgy. To get around this, we use the technical fix of cabbages:
+
+\textbf{Cabbages.} Take something not in $P$, for instance a cabbage that we happen to have lying around. For $\alpha < \gamma$, define $x_\alpha \in P\cup \{$cabbage$\}$ exactly as above, except for $\alpha$ a non-zero limit.
+
+Then set for $\alpha$ a non-zero limit, let $x_\alpha = \begin{cases} \{x_\delta:\delta<\alpha\}^{\ast} & \text{this set is a chain}\\ \text{cabbage} & \ow\end{cases}$, and also define cabbage$' = $ cabbage. By induction, we don't get any cabbage. In these proofs, cabbages are implicitly assumed.
 \end{document}

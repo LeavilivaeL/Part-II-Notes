@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  27 JAN 2020 11:55
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  30 JAN 2020 19:18
  system commands enabled.
 **"Quantum Information and Computation.tex"
 ("./Quantum Information and Computation.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.827 seconds
+luaotfload | main : initialization completed in 0.987 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -834,7 +834,16 @@ h.
 \MDopostkern=\muskip12
 \MDodotkern=\muskip13
 )
-\c@theorem=\count141
+("C:/Program Files/MiKTeX 2.9/tex/latex/enumitem/enumitem.sty"
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip53
+\enit@outerparindent=\dimen260
+\enit@toks=\toks47
+\enit@inbox=\box64
+\enit@count@id=\count141
+\enitdp@description=\count142
+)
+\c@theorem=\count143
 )
 ("./Quantum Information and Computation.aux")
 \openout1 = Quantum Information and Computation.aux
@@ -891,17 +900,17 @@ LaTeX Font Info:    ... okay on input line 5.
 ABD: EveryShipout initializing macros
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count142
-\scratchdimen=\dimen260
-\scratchbox=\box64
-\nofMPsegments=\count143
-\nofMParguments=\count144
-\everyMPshowfont=\toks47
-\MPscratchCnt=\count145
-\MPscratchDim=\dimen261
-\MPnumerator=\count146
-\makeMPintoPDFobject=\count147
-\everyMPtoPDFconversion=\toks48
+\scratchcounter=\count144
+\scratchdimen=\dimen261
+\scratchbox=\box65
+\nofMPsegments=\count145
+\nofMParguments=\count146
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count147
+\MPscratchDim=\dimen262
+\MPnumerator=\count148
+\makeMPintoPDFobject=\count149
+\everyMPtoPDFconversion=\toks49
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -917,7 +926,7 @@ Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks49
+\pdftexcmds@toks=\toks50
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
 8.
@@ -980,15 +989,15 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ("./Quantum Information and Computation.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 30065 strings out of 494305
+ 30388 strings out of 494305
  100000,1144653 words of node,token memory allocated
  510 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 55 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 1:2,2:590,3:137,4:25,5:255,6:20,7:3713,8:73,9:319,10:15,11:286
- 33231 multiletter control sequences out of 65536+200000
+   avail lists: 1:2,2:582,3:143,4:25,5:255,6:20,7:3709,8:73,9:314,10:15,11:286
+ 33547 multiletter control sequences out of 65536+200000
  78 fonts using 5146087 bytes
- 64i,20n,96p,1107b,254s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,20n,96p,1107b,261s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/pro
 gram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/prog
 ram files/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program f
@@ -1010,7 +1019,7 @@ ic/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eu
 fm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm7.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Quantum Information and Computation.pdf (7 pages, 207912 bytes
+Output written on Quantum Information and Computation.pdf (7 pages, 209608 bytes
 ).
 
 PDF statistics: 143 PDF objects out of 1000 (max. 8388607)

@@ -30,18 +30,18 @@ For example, the channel might be an optical or electrical telegraph, modems, au
 \item (Noisy coding) \textsc{Isbn}. In the \textsc{Isbn} encoding, every book is given a 10 digit number $a_1a_2\ldots a_{10}$, with $\sum_{i=1}^{10} (11-i)a_i \equiv 0 \mod 11$. This is adapted to the \textit{channel}, in the sense that the likely errors to occur will be 1 incorrect digit, or accidentally transposing two digits, which this code is resistant to (will return an error rather than an erroneous result).
 \end{itemize}
 
-A \emph{communication channel} accepts symbols from some alphabet $\mathcal{A} = \{a_1, a_2, \ldots, a_r\}$ (e.g. $\{0,1\}, \{a,b,\ldots,z\}$), and outputs symbols from an alphabet $\mathcal{B} = \{b_1, \ldots, b_s\}$. The channel is modelled by the probabilities:
+A \emph{communication channel} accepts symbols from some alphabet $\mathscr{A} = \{a_1, a_2, \ldots, a_r\}$ (e.g. $\{0,1\}, \{a,b,\ldots,z\}$), and outputs symbols from an alphabet $\mathscr{B} = \{b_1, \ldots, b_s\}$. The channel is modelled by the probabilities:
 \begin{center}$\P(y_1,y_2,\ldots,y_n$ received$| x_1,x_2,\ldots,x_n$ sent$) = \prod_{i=1}^{n} \P(y_i$ received$| x_i$ sent$)$\end{center}
 
 A \emph{discrete memoryless channel (DMC)} is a channel with $p_{ij} = \P(b_j$ received$|a_i$ sent$)$ the same for each channel usage and independent of any past or future channel usages.
 
 The \emph{channel matrix} is $P = (p_{ij})$, an $r \times s$ stochastic matrix.
 
-\underline{Examples:} The \emph{binary symmetric channel (BSC)} with error probability $p \in [0,1]$ has $\mathcal{A} = \mathcal{B} = \{0,1\}$. The channel matrix is $\begin{pmatrix} 1-p & p \\ p & 1-p \end{pmatrix}$. A symbol is transmitted correctly with probability $1-p$.
+\underline{Examples:} The \emph{binary symmetric channel (BSC)} with error probability $p \in [0,1]$ has $\mathscr{A} = \mathscr{B} = \{0,1\}$. The channel matrix is $\begin{pmatrix} 1-p & p \\ p & 1-p \end{pmatrix}$. A symbol is transmitted correctly with probability $1-p$.
 
-The \emph{binary erasure channel} has input alphabet $\{0,1\}$, and output alphabet $\{0, 1, \ast\}$, where we miss a bit is probability $p$, giving channel matrix $\begin{pmatrix} 1-p & 0 & p \\ 0 & 1-p & 0\end{pmatrix}$. We can model $n$ uses of a channel by the \emph{n\th extension} with input alphabet $\mathcal{A}^n$, and output alphabet $\mathcal{B}^n$.
+The \emph{binary erasure channel} has input alphabet $\{0,1\}$, and output alphabet $\{0, 1, \ast\}$, where we miss a bit is probability $p$, giving channel matrix $\begin{pmatrix} 1-p & 0 & p \\ 0 & 1-p & 0\end{pmatrix}$. We can model $n$ uses of a channel by the \emph{n\th extension} with input alphabet $\mathscr{A}^n$, and output alphabet $\mathscr{B}^n$.
 
-A \emph{code} $c$ of \emph{length} $n$ is a function $c: M \to \mathcal{A}^n$ where $M$ is the set of all possible messages. Implicitly, we also have a decoding rule $\mathcal{B}^n \to M$.\\
+A \emph{code} $c$ of \emph{length} $n$ is a function $c: M \to \mathscr{A}^n$ where $M$ is the set of all possible messages. Implicitly, we also have a decoding rule $\mathscr{B}^n \to M$.\\
 The \emph{size} of $c$ is $m = |M|$. \\
 The \emph{information rate} is $\rho(c) = \frac{1}{n}\log_2(m)$. \\
 The \emph{error rate} is $\hat{e}(c) = \max_{x\in M} \{\P($error$|x$ sent$)\}$.
@@ -57,21 +57,21 @@ See \textbf{9.3}
 
 \section{Noiseless Coding}
 \subsection{Prefix-free Codes}
-For an alphabet $\mathcal{A}, |\mathcal{A}|<\infty$, let $\mathcal{A}^{\ast} = \bigcup_{n\geq 0} \mathcal{A}^n$, the set of all finite strings from $\mathcal{A}$. The \emph{concatenation} of strings $x = x_1\ldots x_r$ and $y = y_1\ldots y_s$ is $xy = x_1\ldots x_ry_1\ldots y_s$.
+For an alphabet $\mathscr{A}, |\mathscr{A}|<\infty$, let $\mathscr{A}^{\ast} = \bigcup_{n\geq 0} \mathscr{A}^n$, the set of all finite strings from $\mathscr{A}$. The \emph{concatenation} of strings $x = x_1\ldots x_r$ and $y = y_1\ldots y_s$ is $xy = x_1\ldots x_ry_1\ldots y_s$.
 
-Let $\mathcal{A}, \mathcal{B}$, be alphabets. A \emph{code} is a function $c:\mathcal{A} \to \mathcal{B}^{\ast}$. The strings $c(a)$ for $a \in \mathcal{A}$ are called \emph{codewords} (cws). If $x, y \in \mathcal{B}^{\ast}$ then $x$ is a \emph{prefix} of $y$ if $y=xz$ for some $z \in \mathcal{B}^{\ast}$.
+Let $\mathscr{A}, \mathscr{B}$, be alphabets. A \emph{code} is a function $c:\mathscr{A} \to \mathscr{B}^{\ast}$. The strings $c(a)$ for $a \in \mathscr{A}$ are called \emph{codewords} (cws). If $x, y \in \mathscr{B}^{\ast}$ then $x$ is a \emph{prefix} of $y$ if $y=xz$ for some $z \in \mathscr{B}^{\ast}$.
 
-For example, we have the Greek fire code, found in the writings of Polybius around 280 BC. $\mathcal{A} = \{\alpha, \beta, \ldots, \omega\}, \mathcal{B} = \{1,2,3,4,5\}$, with code $\alpha \mapsto 11, \beta \mapsto 12, \ldots, \psi \mapsto 53, \omega \mapsto, 54$, where $xy$ means ``$x$ torches held up, and another $y$ torches nearby".
+For example, we have the Greek fire code, found in the writings of Polybius around 280 BC. $\mathscr{A} = \{\alpha, \beta, \ldots, \omega\}, \mathscr{B} = \{1,2,3,4,5\}$, with code $\alpha \mapsto 11, \beta \mapsto 12, \ldots, \psi \mapsto 53, \omega \mapsto, 54$, where $xy$ means ``$x$ torches held up, and another $y$ torches nearby".
 
-The English language is even a code: we can let $\mathcal{A}$ be words in a given dictionary, and $\mathcal{B} = \{a,b,\ldots,z,\text{\textvisiblespace}\}$, where the coding function is to spell the word and follow it with a space.
+The English language is even a code: we can let $\mathscr{A}$ be words in a given dictionary, and $\mathscr{B} = \{a,b,\ldots,z,\text{\textvisiblespace}\}$, where the coding function is to spell the word and follow it with a space.
 
-We send a message $x_1\ldots x_n \in \mathcal{A}^{\ast}$ as $c(x_1)\ldots c(x_n) \in \mathcal{B}^{\ast}$. So $c$ extends to a function $c^{\ast}:\mathcal{A}^{\ast} \to \mathcal{B}^{\ast}$.
+We send a message $x_1\ldots x_n \in \mathscr{A}^{\ast}$ as $c(x_1)\ldots c(x_n) \in \mathscr{B}^{\ast}$. So $c$ extends to a function $c^{\ast}:\mathscr{A}^{\ast} \to \mathscr{B}^{\ast}$.
 
-$c$ is \emph{decipherable}/\emph{decidable} if $c^{\ast}$ is injective, so that each string in $\mathcal{B}^{\ast}$ could have come from at most one message. Note that it isn't sufficient to just have $c$ injective, although clearly this is necessary:
+$c$ is \emph{decipherable}/\emph{decidable} if $c^{\ast}$ is injective, so that each string in $\mathscr{B}^{\ast}$ could have come from at most one message. Note that it isn't sufficient to just have $c$ injective, although clearly this is necessary:
 
-$\mathcal{A} = \{1,2,3,4\}, \mathcal{B} = \{0,1\}, c:1\mapsto 0, 2\mapsto 1, 3\mapsto 00, 4\mapsto 01$. Then $c^{\ast}(114) = 0001 = c^{\ast}(312)$.
+$\mathscr{A} = \{1,2,3,4\}, \mathscr{B} = \{0,1\}, c:1\mapsto 0, 2\mapsto 1, 3\mapsto 00, 4\mapsto 01$. Then $c^{\ast}(114) = 0001 = c^{\ast}(312)$.
 
-If $|\mathcal{A}|=m, |\mathcal{B}|=a$, then we say $c$ is an \emph{a-ary code of size m}. 2-ary = \emph{binary}, 3-ary=\emph{ternary}.
+If $|\mathscr{A}|=m, |\mathscr{B}|=a$, then we say $c$ is an \emph{a-ary code of size m}. 2-ary = \emph{binary}, 3-ary=\emph{ternary}.
 
 We aim to construct decipherable codes with short word lengths. Assuming $c$ is injective, the following are always decipherable:
 \begin{itemize}
@@ -82,7 +82,7 @@ We aim to construct decipherable codes with short word lengths. Assuming $c$ is 
 Note that both of the first two are special cases of prefix-free codes. Prefix-free codes are often called \emph{instantaneous} or \emph{self-punctuating} codes. Note that not all decipherable codes are prefix-free: $0\mapsto 01, 1 \mapsto 011$ is decipherable but not prefix free.
 
 \begin{theorem}[Kraft's Inequality]
-Let $|\mathcal{A}| = m, |\mathcal{B}| = a$. A prefix-free code $c:\mathcal{A} \to \mathcal{B}^{\ast}$ with word lengths $\ell_1, \ldots, \ell_m$ exists if and only if:
+Let $|\mathscr{A}| = m, |\mathscr{B}| = a$. A prefix-free code $c:\mathscr{A} \to \mathscr{B}^{\ast}$ with word lengths $\ell_1, \ldots, \ell_m$ exists if and only if:
 \begin{align*}
 \sum_{i=1}^{m} a^{-\ell_i} &\leq 1 \tag{\ast}
 \end{align*}
@@ -91,7 +91,7 @@ Let $|\mathcal{A}| = m, |\mathcal{B}| = a$. A prefix-free code $c:\mathcal{A} \t
 Rewrite (\ast) as $\sum_{\ell=1}^s n_{\ell}a^{-\ell} \leq 1 (\star)$, where $n_{\ell}$ is the number of codewords of length $\ell$ and $s = \max_{1 \leq i \leq m} \ell_i$.
 
 \begin{itemize}
-\item[$\implies$] If $c:\mathcal{A} \to \mathcal{B}^{\ast}$ is prefix-free, then $n_1 a^{s-1} + n_2 a^{s-2} + \ldots n_s \leq a^s$, since the \textsc{Lhs} is the number of strings of length $s$ in $\mathcal{B}$ with some codeword of $c$ as a prefix, and \textsc{Rhs} is the number of strings of length $s$. Dividing by $a^{s}$ gives $(\star)$.
+\item[$\implies$] If $c:\mathscr{A} \to \mathscr{B}^{\ast}$ is prefix-free, then $n_1 a^{s-1} + n_2 a^{s-2} + \ldots n_s \leq a^s$, since the \textsc{Lhs} is the number of strings of length $s$ in $\mathscr{B}$ with some codeword of $c$ as a prefix, and \textsc{Rhs} is the number of strings of length $s$. Dividing by $a^{s}$ gives $(\star)$.
 
 \item[$\impliedby$] Given $n_1, \ldots, n_s$ satisfying $(\star)$, we need to construct a prefix-free code $c$ with $n_\ell$ codewords of length $\ell$ for all $\ell \leq s$. We use induction on $s$. The case $s=1$ is clear: we have $(\star)$ gives $n_1 \leq a$, so we can choose a code.
 
@@ -106,12 +106,12 @@ where the first $s-1$ terms on \textsc{Lhs} sum to the number of strings of leng
 \begin{theorem}[McMillan]
 Any decipherable code satisfies Kraft's inequality
 \end{theorem}
-\begin{proof}[Karush]
-Let $c:\mathcal{A} \to \mathcal{B}^{\ast}$ be a decipherable code with codewords of lengths $\ell_1, \ldots, \ell_m$. Let $s = \max_{1 \leq i\leq m} \ell_i$. Then for $R \in \N:$
+\begin{proof}[Proof (Karush).]
+Let $c:\mathscr{A} \to \mathscr{B}^{\ast}$ be a decipherable code with codewords of lengths $\ell_1, \ldots, \ell_m$. Let $s = \max_{1 \leq i\leq m} \ell_i$. Then for $R \in \N:$
 \begin{align*}
 \left(\sum_{i=1}^{m} a^{-\ell_i}\right)^R = \sum_{l=1}^{Rs} b_{\ell}a^{-\ell}
 \end{align*}
-where $b_{\ell} = |\{x \in \mathcal{A}^R : c^{\ast}(x)$ has length $\ell\}| \leq |\mathcal{B}^{\ell}| = a^{\ell}$, using the fact that $c^{\ast}$ is injective. Then:
+where $b_{\ell} = |\{x \in \mathscr{A}^R : c^{\ast}(x)$ has length $\ell\}| \leq |\mathscr{B}^{\ell}| = a^{\ell}$, using the fact that $c^{\ast}$ is injective. Then:
 \begin{align*}
 \left(\sum_{i=1}^m a^{-\ell_i}\right)^R &\leq \sum_{l=1}^R a^\ell a^{-\ell} = Rs\\
 \sum_{i=1}^m a^{-\ell_i} &\leq (Rs)^{\frac1R} \to 1 \text{ as } R \to \infty
@@ -178,7 +178,7 @@ $H(p_1, \ldots, p_n) \leq \log n$ with equality if and only if $p_1 = \ldots = p
 Take $q_1 = \ldots = q_n = \frac1n$ in \textbf{2.1}.
 \end{proof}
 
-Let $\mathcal{A} = \{\mu_1, \ldots, \mu_m\}$, and $|\mathcal{B}| = a$, where $m, a\geq 2$. The random variable $X$ takes values $\mu_1, \ldots, \mu_m$ with probabilities $p_1, \ldots, p_m$. We say a code $c:\mathcal{A} \to \mathcal{B}^{\ast}$ is \emph{optimal} if it is a decipherable code with smallest possible expected word length, $\E S = \sum_i p_i \ell_i$.
+Let $\mathscr{A} = \{\mu_1, \ldots, \mu_m\}$, and $|\mathscr{B}| = a$, where $m, a\geq 2$. The random variable $X$ takes values $\mu_1, \ldots, \mu_m$ with probabilities $p_1, \ldots, p_m$. We say a code $c:\mathscr{A} \to \mathscr{B}^{\ast}$ is \emph{optimal} if it is a decipherable code with smallest possible expected word length, $\E S = \sum_i p_i \ell_i$.
 
 \begin{theorem}[Shannon's Noiseless Coding Theorem]
 The expected word length $\E S$ of an optimal code satisfies:
@@ -187,7 +187,7 @@ The expected word length $\E S$ of an optimal code satisfies:
 \end{align*}
 \end{theorem}
 \begin{proof}
-For the lower bound, take $c: \mathcal{A} \to \mathcal{B}^{\ast}$ decipherable with word lengths $\ell_1, \ldots, \ell_m$. Then set $q_i = \frac{a^{-\ell_i}}{D}$ where $D = \sum_{i=1}^m a^{-\ell_i}$. Now we have that $\sum_{i=1}^m q_i = 1$. By Gibbs,
+For the lower bound, take $c: \mathscr{A} \to \mathscr{B}^{\ast}$ decipherable with word lengths $\ell_1, \ldots, \ell_m$. Then set $q_i = \frac{a^{-\ell_i}}{D}$ where $D = \sum_{i=1}^m a^{-\ell_i}$. Now we have that $\sum_{i=1}^m q_i = 1$. By Gibbs,
 \begin{align*}
 H(X) &\leq -\sum_{i=1}^m p_i \log q_i\\
 &= -\sum p_i\left(-\ell_i \log a - \log D\right)\\
@@ -282,19 +282,19 @@ Suppose messages $\mu_1, \ldots, \mu_m$ are sent with probabilities $p_1,\ldots,
 Otherwise, modify $c$ by swapping the $i\th$ and $j\th$ codewords, or deleting the last letter of each codeword of maximal length. The modified code is still prefix-free but has shorter expected word length, contradicting optimality of $c$.
 \end{proof}
 \section{Joint Entropy}
-If $X,Y$ are random variables with value in $\mathcal{A}$ and $\mathcal{B}$. Then $(X,Y)$ is also a random variable with entropy $H(X,Y)$, the \emph{joint entropy} of $X,Y$.
+If $X,Y$ are random variables with value in $\mathscr{A}$ and $\mathscr{B}$. Then $(X,Y)$ is also a random variable with entropy $H(X,Y)$, the \emph{joint entropy} of $X,Y$.
 \begin{align*}
-H(X,Y) = -\sum_{x \in \mathcal{A}} \sum_{y \in \mathcal{B}} \P(X=x, Y=y)\log \P(X=x, Y=y)
+H(X,Y) = -\sum_{x \in \mathscr{A}} \sum_{y \in \mathscr{B}} \P(X=x, Y=y)\log \P(X=x, Y=y)
 \end{align*}
 We can of course generalise this to any finite number of random variables. We will use Gibb's (\textbf{2.1}) to prove:
 \begin{lemma}
-Let $X,Y$ be random variables taking values in $\mathcal{A}, \mathcal{B}$. Then:\begin{align*}
+Let $X,Y$ be random variables taking values in $\mathscr{A}, \mathscr{B}$. Then:\begin{align*}
 H(X,Y) \leq H(X) + H(Y)
 \end{align*}
 with equality if and only if $X$ and $Y$ are independent.
 \end{lemma}
 \begin{proof}
-Let $\mathcal{A} = \{x_1, \ldots, x_m\}, \mathcal{B} = \{y_1, \ldots, y_n\}$. Set $p_{ij} = \P(X=x_i, Y=y_i), p_i = \P(X=x_i), q_i = \P(Y=y_i)$. Then Gibb's inequality with $\{p_{ij}\}$ and $\{p_iq_j\}$ gives:
+Let $\mathscr{A} = \{x_1, \ldots, x_m\}, \mathscr{B} = \{y_1, \ldots, y_n\}$. Set $p_{ij} = \P(X=x_i, Y=y_i), p_i = \P(X=x_i), q_i = \P(Y=y_i)$. Then Gibb's inequality with $\{p_{ij}\}$ and $\{p_iq_j\}$ gives:
 \begin{align*}
 -\sum_{i,j} p_{ij}\log p_{ij} \leq -\sum_{i,j} p_{ij}\log(p_iq_j) &= -\sum_i\left(\sum_j p_{ij}\right) \log p_i - \sum_j \left(\sum_i p_{ij}\right) \log q_j\\
 &= -\sum_i p_i \log p_i -\sum_j q_j \log q_j
@@ -354,9 +354,394 @@ C = \left.\begin{cases} & c_1+c_3+c_5+c_7 = 0\\ c \in \F_2^7 : & c_2+c_3+c_6+c_7
 \end{enumerate}
 The bits $c_3,c_5,c_6,c_7$ are arbitrary and $c_1, c_2, c_4$ are forced. The information rate is $\frac47$.
 
-Given $x \in \F_2^7$, we form the \emph{syndrome} $z = (z_1,z_2,z_4) \in \F_2^7$, where $z_1 = x_1+x_3+x_5+x_7,$ $z_2 = x_2+x_3+x_6+x_7,$ $z_4 = x_4+x_5+x_6+x_7$. If $x \in C$ then $z = (0,0,0)$. If $d(x,c) = 1$ for some $c \in C$ then $x_i$ and $c_i$ differ for $i = z_1 + 2z_2 + 4z_4$.
+Given $x \in \F_2^7$, we form the \emph{syndrome} $z = (z_1,z_2,z_4) \in \F_2^7$, where $z_1 = x_1+x_3+x_5+x_7,$ $z_2 = x_2+x_3+x_6+x_7,$ $z_4 = x_4+x_5+x_6+x_7$. If $x \in C$ then $z = (0,0,0)$. If $d(x,c) = 1$ for some $c \in C$ then $x_i$ and $c_i$ differ for $i = z_1 + 2z_2 + 4z_4$. This can be checked easily for $c=0$ with a case by case check of the seven binary sequences of six 0s and one 1, e.g. $x=0010000$ gives a syndrome $z = (1,1,0), i = 1+2+0 = 3$.
 
+\begin{lemma}
+$d$ is a metric on $\F_2^n$.
+\end{lemma}
+\begin{proof}
+Immediately, $d(x,y) \geq 0$, with equality if and only if $x=y$, and $d(x,y)=d(y,x)$. For the triangle inequality, note that if $x$ and $z$ differ at position $i$ then either $x,y$ differ at $i$ or $y,z$ differ at $i$. So every difference appearing in $d(x,z)$ appears in $d(x,y)+d(y,z)$, so $d(x,z) \leq d(x,y)+d(y,z)$.
+\end{proof}
 
+Note that $d(x,y) = \sum_i d_1(x_i,y_i)$ where $d_1$ is the discrete metric on $\F_2$. We define the \emph{minimum distance} of a code to be $\min_{c_1 \neq c_2} d(c_1,c_2)$.
 
+\begin{lemma}
+Let $C$ have minimal distance $d$. Then:
+\begin{enumerate}
+\item $C$ is $(d-1)$-error detecting, but cannot detect all sets of $d$ errors.
+\item $C$ is $\floor{\frac{d-1}{2}}$-error correcting, but cannot correct all sets of $\floor{\frac{d-1}{2}}+1$ errors.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item $d(c_1,c_2) \geq d$ for all distinct $c_1, c_2 \in C$. So $C$ is $(d-1)$-error detecting. But $d(c_1, c_2)=d$ for some $c_1, c_2 \in C$. So $C$ cannot detect all sets of errors.
 
+\item Define the closed Hamming ball with center $x \in \F_2^n$, radius $r\geq 0$ as $B(x,r) = \{y \in \F_2^n: d(x,y)\leq r\}$. Now $C$ is $e$-error correcting if and only if, for all $c_1 \neq c_2 \in C$, we have $B(c_1, e) \cap B(c_2, e) = \emptyset$.
+
+If $x \in B(c_1,e) \cap B(c_2,e )$, then $d(c_1,c_2) \leq d(c_1,x)+d(x,c_2) \leq 2e$. So if $d \geq 2e+1$, then $C$ is $e$-error correcting, with $e = \floor{\frac{d-1}{2}}$. For the second part, take $c_1, c_2 \in C$ with $d(c_1, c_2) = d$. Then suppose $x \in \F_2^n$ differs from $c_1$ in $e$ digits where $c_1, c_2$ differ too. Then $d(x,c_1) = e, d(x,c_2) = d-e$. If $d < 2e$ then $B(c_1, e) \cap B(c_2, d-e) \neq 0$, and so $C$ cannot correct all sets of $e$-errors. Then take $e = \ceil{\frac{d}{2}} = \floor{d-1}{2}+1$.
+\end{enumerate}
+\end{proof}
+As a point of a notation, an $[n,m]$-code with minimum distance $d$ will be denoted as an $[n,m,d]$-code.
+
+\hspace*{-1em}\underline{Examples:}
+\begin{enumerate}
+\item Repetition of length $n$ is an $[n,2,n]$-code.
+\item Simple parity check code of length $n$ is an $[n, 2^{n-1}, 2]$-code.
+\item Hamming's code is 1-error correcting, so $d\geq 3$. 0000000, 1110000 are both codewords, so it is a $[7,16,3]$-code, and hence 2-error correcting.
+\end{enumerate}
+
+\section{Covering Estimates}
+Denote $V(n,r) = |B(x,r)| = \sum_{i=0}^r \binom{n}{i}$, independent of $x \in \F_2^n$, as the \emph{volume} of the ball (i.e. the number of points it contains).
+
+\begin{lemma}[Hamming's Bound]
+An $e$-error correcting code of length $n$ has:
+\begin{align*}
+|C| \leq \frac{2^n}{V(n,e)}
+\end{align*}
+\end{lemma}
+\begin{proof}
+Suppose $C$ is $e$-error correcting. Then $B(c_1, e) \cap B(c_2, e) = \emptyset$ for all $c_1 \neq c_2 \in C$. Then $\sum_{c \in C} |B(c,e)| \leq |\F_2^n| = 2^n$, i.e. $|C|V(n,e) \leq 2^n$.
+\end{proof}
+A code $C$ of length $n$ that can correct $e$ errors is \emph{perfect} if $|C|=\frac{2^n}{V(n,e)}$. Equivalently, a code is perfect if for all $x \in \F_2^n$ there is a unique $c \in C$ such that $d(x,c) \leq e$, or $\F_2^n = \bigcup_{c\in C}B(c,e)$, i.e. any $e+1$ errors will make you decode incorrectly.
+
+For example, Hamming's $[7,16,3]$-code is perfect, as $\frac{2^7}{7+1} = 2^4 = |C|$. Note that if $\frac{2^n}{V(n,e)} \notin \Z$ then there is no perfect $e$-error correcting code of length $n$, and even if $2^n/V(n,e)$ is an integer is may be the case that no perfect code exists.
+
+Define \emph{A(n,d)} $= \max\{m : \exists [n,m,d]$-code$\}$. For instance, $A(n,1) = 2^n, A(n,n) = 2, A(n,2) = 2^{n-1}$.
+
+\begin{lemma}
+$A(n,d+1) \leq A(n,d)$
+\end{lemma}
+\begin{proof}
+Let $m = A(n,d+1)$, and pick a code $C$ with parameters $[n,m,d+1]$. Let $c_1, c_2 \in C$ with $d(c_1,c_2) = d+1$. Let $c_1'$ differ from $c_1$ in exactly one of the places where $c_1, c_2$ differ. Then $d(c_1', c_2) = d$. If $c \in C\setminus\{c_1\}$, then $d(c,c_1)\leq d(c,c_1')+d(c_1', c_1) \implies d(c_1, c_1') \geq d$.
+
+Replacing $c_1$ by $c_1'$ gives an $[n,m,d]$-code i.e. $m \leq A(n,d)$.
+\end{proof}
+
+\begin{corollary}
+Equivalently, $A(n,d) = \max\{m : \exists [n,m,d']-$code for some $d'\geq d\}$.
+\end{corollary}
+\begin{theorem}
+\begin{align*}
+\frac{2^n}{V(n,d-1)} \leq A(n,d) \leq \frac{2^n}{V(n, \floor{\frac{d-1}{2}})}
+\end{align*}
+The lower bound is called the Gilbert-Shannon-Varshanov (GSV) bound, whilst the upper bound follows from Hamming's bound.
+\end{theorem}
+\begin{proof}[Proof of GSV]
+Let $m = A(n,d)$, and let $C$ be a $[n,m,d]$-code. Then there cannot exist $x \in \F_2^n$ with $d(x,c) \geq d$ for all $c \in C$, otherwise we could replace $C$ by $C \cup \{x\}$, contradicting maximality of $d(x,c)$. Hence $\F_2^n = \bigcup_{c\in C} B(c, d-1)$. Hence $2^n \leq m V(n, d-1)$.
+\end{proof}
+For example, take $n=10, d=3$. Then $V(n,2) = 56, V(n,1)=11$, and so these bounds give $\frac{2^10}{56} \leq A(10,3) \leq \frac{2^10}{11}$, i.e. $19\leq A(10,3)\leq 93$, but in fact we know computationally that it is between 72 and 79.
+
+\subsection{Asymptotics}
+We study $\frac{\log A(n, \floor{n\delta})}{n}$ as $n \to \infty$ to see how large the information rate can be for a given error rate.
+\begin{proposition}
+Let $0 < \delta < \frac12$. Then:
+\begin{enumerate}
+\item $\log V(n, \floor{n \delta}) \leq n H(\delta)$.
+\item $\frac1n \log A(n, \floor{n\delta}) \geq 1- H(\delta)$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Assuming \textit{1.} we see by the GSV bound, $A(n, \floor{n\delta}) \geq \frac{2}{V(n, \floor{n\delta}-1} \geq \frac{2^n}{V(n, \floor{n\delta})}$, so $\frac{\log A(n, \floor{n\delta})}{n} \geq 1 - \frac{\log V(n, \floor{n\delta})}{n} \geq 1- H(\delta)$, and so \textit{1.}$\implies$\textit{2.}
+
+For \textit{1.} observe $H(\delta)$ is increasing for $\delta \leq \frac12$, so \textsc{wlog} we can assume $n\delta \in \Z$. Then:
+\begin{align*}
+1 &= (\delta + (1-\delta))^n\\
+&= \sum_{i=0}^n \binom{n}{i} \delta^i (1-\delta)^{n-i}\\
+&\geq \sum_{i=0}^{n\delta} \binom{n}{i} \delta^i (1-\delta)^{n-i}\\
+&= (1-\delta)^n \sum_{i=0}^{n\delta} \binom{n}{i} \left(\frac{\delta}{1-\delta}\right)^i\\
+&\geq (1-\delta)^n \sum \binom{n}{i} \left(\frac{\delta}{1-\delta}\right)^{n\delta}\\
+&= \delta^{n\delta}(1-\delta)^{n(1-\delta)}V(n,n\delta)\\
+0 &\geq n\delta\log\delta + n(1-\delta)\log(1-\delta)+\log V(n,n\delta)\\
+0 &\geq -nH(\delta) + \log V(n,n\delta)
+\end{align*}
+\end{proof}
+This constant $H(\delta)$ is the best possible, in the sense that:
+\begin{proposition}
+\begin{align*}
+\lim_{n\to\infty} \frac{\log V(n, \floor{n\delta})}{n} = H(\delta)
+\end{align*}
+\end{proposition}
+\begin{proof}
+\textsc{Wlog} we may assume that $0 < \delta < \frac12$. Let $0 \leq r \leq \frac{n}{2}$. Recall that $V(n,r) = \sum_{i=0}^r \binom{n}{i}$. Then:
+\begin{align*}
+\binom{n}{r} \leq V(n,r) \leq (r+1)\binom{n}{r} \tag{(\ast)}
+\end{align*}
+From Stirling's approximation, $\log\binom{n}{r} = -r\log \frac{r}{n} - (n-r)\log\frac{n-r}{n} + \mathcal{O}(\log n) = nH(\frac{r}{n}) + \mathcal{O}(\log n)$.
+
+Then from $(\ast)$, we have:
+\begin{align*}
+H(\frac{r}{n}) + \mathcal{O}\left(\frac{\log n}{r}\right) \leq \frac{\log V(n,r)}{n} \leq H\left(\frac{r}{n}\right) + \mathcal{O}\left(\frac{\log n}{n}\right)\\
+\therefore \lim_{n\to\infty} \frac{\log V(n, \floor{n\delta})}{n} = H(\delta)
+\end{align*}
+\end{proof}
+\section{New Codes from Old}
+Suppose $C$ is an $[n,m,d]$-code. Then the \emph{parity check digit extension} $C^+$ of $C$ is the code of length $n+1$ given by:
+\begin{align*}
+C^+ = \{(c_1, \ldots, c_n, \sum_{i=1}^n c_i) : (c_1, \ldots, c_n) \in C\}
+\end{align*}
+where the summation is done modulo 2. It is an $[n+1, m, d']$-code where $d' = d$ or $d+1$.
+
+We can also delete the $i\th$ digit from each codeword for $1 \leq i\leq n$, giving a \emph{truncated} or \emph{punctured} codeword (depending on if $i=n$ or $i<n$ respectively), called $C^-$, with parameters $[n-1, m, d']$ where $d-1 \leq d' \leq d$.
+
+Finally, given some $1 \leq i \leq n, \alpha \in \F_2$, we can create the \emph{shortened} or \emph{punctured} code $C'$ of $C$ is $\{(c_1, \ldots, c_{i-1},c_{i+1}, \ldots, c_n) : (c_1, \ldots, c_{i-1}, \alpha, c_{i+1} \ldots, c_n) \in C\}$. This has parameters $[n-1, m', d']$ with $d' \geq d$ and $m' \geq \frac{m}{2}$ for $c$ a suitable choice of $\alpha$.
+
+\section{AEP and Shannon's First Coding Theorem}
+A \emph{source} is a sequence of random variables $X_1, X_2, \ldots$ taking values in some alphabet $\mathscr{A}$. A source is \emph{Bernoulli} or \emph{memoryless} if $X_1, \ldots$ are independently identically distributed (\textsc{iid}). A source $X_1, \ldots$ is \emph{reliably encodable at rate r} if there are subsets $A_n \subseteq \mathscr{A}^n$ such that:
+\begin{enumerate}
+\item $\lim_{n\to \infty} \frac{\log|A_n|}{n} = r$
+\item $\lim_{n\to \infty} \P[(X_1, \ldots, X_n)\in A_n] = 1$
+\end{enumerate}
+The \emph{information rate} $H$ of a source is the infimum of all reliable encoding ratesso that $0 \leq H \leq \log |\mathscr{A}|$. Shannon's first coding theorem computes the information rate of certain sources, including Bernoulli sources.
+
+\subsection{Reminder from 1A Probability}
+A \emph{probability space} is given by a triple $(\Omega, \mathscr{F}, \P)$ where $\mathscr{F} \subset \powset(\Omega)$ is a set of \emph{events} and $\P$ is a \emph{probability measure}, and a \emph{random variable} $X$ is a function defined on $\Omega$ with some range. It has a \emph{probability mass function} $p: x \mapsto \P(X=x)$
+
+We say that a sequence of random variables $X_1, X_2, \ldots$ \emph{converges in probability} to $\lambda \in \R$ means that
+\begin{align*}
+\forall\;\epsilon > 0, \lim_{n \to \infty} \P(|X_n -\lambda| \geq \epsilon) = 0
+\end{align*}
+We write $X_n \xrightarrow{\P} \lambda$ as $n \to \infty$.
+
+\begin{theorem}[Weak Law Of Large Numbers, \textsc{wlln}]
+Let $X_1, X_2, \ldots$ be \textsc{iid} discrete real-valued random variables with finite expected value $\mu$. Then:
+\begin{align*}
+\frac1n \sum_{i=1}^n X_i \xrightarrow{\P} \mu\text{ as } n\to \infty
+\end{align*}
+\end{theorem}
+\begin{proof}
+See Carne, theorem 10.3.
+\end{proof}
+\begin{lemma}
+The information rate of a Bernoulli source $X_1, X_2, \ldots$ is at most the expected word length of an optimal code $c:\mathscr{A} \to \{0,1\}^{\ast}$ for $X_i$.
+\end{lemma}
+\begin{proof}
+Let $\ell_1, \ell_2, \ldots$ be the lengths of codewords when we encode $X_1, X_2, \ldots$ using $c$. Then given $\epsilon >0$, let $A_n = \{x \in \mathscr{A}^n : c^{\ast}(x)$ has length $< n(\E[\ell_i] + \epsilon)\}$. Then:
+\begin{align*}
+\P\left[(X_1, \ldots, X_n) \in A_n\right] &= \P\left[\sum \ell_i < n(\E[\ell_i] +\epsilon)\right]\\
+&\geq \P\left(\left|\frac1n \sum\ell_i - \E[\ell_i]\right| < \epsilon\right)\\
+&\to 1 \text{ as } n \to \infty
+\end{align*}
+Now $c$ is decipherable so $c^{\ast}$ is injective, and hence $|A_n| \leq 2^{n(\E[\ell_i]+\epsilon)}$. Making $A_n$ larger if required, we may take $|A_n| =\floor{2^{n(\E[\ell_i]+\epsilon)}}$. Hence $\frac{\log|A_n|}{n} \to \E[\ell_i] + \epsilon$. So $X_1, X_2, \ldots$ is reliably encodable at a rate $r = \E[\ell_i] +\epsilon$ for any $\epsilon > 0$, and hence the information rate is at most $\E[\ell_i]$.
+\end{proof}
+\begin{corollary}
+A Bernoulli source has information rate less than $H(X_1) + 1$.
+\end{corollary}
+\begin{proof}
+Use \textbf{8.2} and the Noiseless Coding theorem \textbf{2.3}.
+\end{proof}
+
+Now suppose we encode $X_1, X_2, \ldots$ in blocks:
+\begin{align*}
+\underbrace{X_1, \ldots, X_N}_{Y_1}, \underbrace{X_{N+1}, \ldots, X_{2N}}_{Y_2}, \ldots
+\end{align*}
+such that $Y_1, Y_2, \ldots$ take values in $\mathscr{A}^N$. We can check that if $X_1,  X_2, \ldots$ has information rate $H$, then $Y_1, Y_2, \ldots$ has information rate $NH$.
+
+\begin{proposition}
+The information rate$H$ of a Bernoulli source $X_1, X_2, \ldots$ is at most $H(X_1)$.
+\end{proposition}
+\begin{proof}
+Apply \textbf{8.3} to $Y_1, Y_2, \ldots$ to get:
+\begin{align*}
+NH < H(Y_1) + 1 = H(X_1, \ldots, X_N) + 1 = \sum_{i=1}^N H(X_i) + 1 = NH(X_i)+1
+\end{align*}
+i.e. $H < H(X_1) + \frac1N$ for all $N \geq 1$, and so $H \leq H(X_1)$.
+\end{proof}
+
+\hrule
+\subsection{Typical Sequences}
+This content is nonexaminable, but is required to prove the examinable result that $H = H(X_1)$.
+
+\hspace*{-1em}As a motivational example, toss a biased coin with head probability $p$, and let $X_i$ be the outcome of the $i\th$ flip. If we toss a large number, say $N$, times, we expect that we will get about $pN$ heads and $(1-p)N$ tails. The probability of any particular sequence of $pN$ heads and $(1-p)N$ tails is $p^{pN}(1-p)^{(1-p)N} = 2^{-NH(X)}$.
+
+We say that a source $X_1, X_2, \ldots$ satisfies the \emph{Asymptotic Equipartition Property (AEP)} for some constant $H \geq 0$ if:
+\begin{align*}
+-\frac1n\log p(X_1, \ldots, X_n) \to H \text{ as } n \to \infty
+\end{align*}
+\begin{lemma}
+The AEP for a source $X_1, x_2, \ldots$ is equivalent to the following:\\
+$\forall\;\epsilon>0 \exists n_0(\epsilon) \st \forall\;n\geq n_0(\epsilon) \exists T_n \subseteq \mathscr{A}^n \st$
+\begin{itemize}
+\item $P[(X_1, \ldots, X_n) \in T_n] > 1-\epsilon$
+\item $\forall\;(x_1, \ldots, x_n) \in T_n, 2^{-n(H+\epsilon)} \leq p(x_1, \ldots, x_n) \leq 2^{-n(H-\epsilon)}$
+\end{itemize}
+The $T_n$ are called \emph{typical sets}, and the $(x_1, \ldots, x_n) \in T_n$ are \emph{typical sequences}.
+\end{lemma}
+\begin{proof}
+If $(x_1, \ldots, x_n) \in \mathscr{A}^n$ then we have the following equivalence:
+\begin{align*}
+2^{-n(H+\epsilon)} \leq p(x_1, \ldots, x_n) \leq 2^{-n(H-\epsilon)} \iff |-\frac1n \log p(x_1, \ldots, x_n) - H| \leq \epsilon \tag{\dagger}
+\end{align*}
+Both AEP and the claimed equivalent results say that $P((X_1, \ldots, X_N)\text{ satisfies } \dagger) \to 1$ as $n \to \infty$.
+\end{proof}
+
+\begin{theorem}[Shannon's First Coding Theorem]
+If a source $X_1, X_2, \ldots$ satisfies the AEP with constant $H$ then it has information rate $H$.
+\end{theorem}
+\begin{proof}
+Let $\epsilon >0$ and let $T_n \subseteq \mathscr{A}^n$ be typical sets. Then for all $(x_1, \ldots, x_n) \in T_n$:
+\begin{align*}
+p(x_1, \ldots, x_n) \geq 2^{-n(H+\epsilon)} \implies 1 \geq |T_n|2^{-n(H+\epsilon)} \implies \frac{\log|T_n|}{n} \leq (H+\epsilon)
+\end{align*}
+Taking $A_n = T_n$ in the definition of reliable encoding, we see that the source is reliably encodeable at rate $H+\epsilon$. As $\epsilon >0$, the information rate is $\leq H$.
+
+Conversely, if $H=0$ we're done, otherwise pick $0 <\epsilon < \frac{H}{2}$. Suppose for a contradiction that the source is reliably encodeable at rate $H-2\epsilon$, say, with sets $A_n \subseteq \mathscr{A}^n$. Let $T_n \subseteq \mathscr{A}^n$ be typical sets. Then for all $(x_1, \ldots, x_n) \in T_n, p(x_1, \ldots, x_n) \leq 2^{-n(H-\epsilon)}$
+
+Hence $\P(A_n \cap T_n) \leq 2^{-n(H-\epsilon)}$, and so $\frac{\log\P(A_n\cap T_n)}{n} \leq (H-\epsilon) + \frac{\log |A_n|}{n}\xrightarrow{n \to \infty} -\epsilon$. So $\P(A_n \cap T_n) \to 0$ as $n \to \infty$. But $\P(T_n) \leq \P(T_n\cap A_n) + \P(\mathscr{A}^n \setminus A_n) \to 0 + 0 = 0$ as $n \to \infty$, contradicting typicality of $T_n$. Hence the source cannot be reliably encoded at rate $H-2\epsilon$, and so the information rate must be $\geq H$, and hence $=H$.
+\end{proof}
+\section{Capacity and Shannon's Second Coding Theorem}
+Given a random variable $X$ with mass function $p_X$, we can construct a new random variable $p(X) = p_X \circ X$, taking values in $[0,1]$. Then $H(X) = \E(-\log p(X))$. For example, if $X,Y$ are independent, then $p(X,Y) = p(X)p(Y)$, and so $-\log p(X,Y) = -\log p(X) - \log p(Y) \implies H(X,Y) = H(X)+H(Y)$.
+
+\begin{corollary}
+A Bernoulli source $X_1, X_2, \ldots$ has information rate $H(X_1) = H$.
+\end{corollary}
+\begin{proof}[Proof*]
+$p(X_1, \ldots, X_n) = p(X_1)\ldots p(X_n)$, and hence we have:
+\begin{align*}
+-\frac{\log p(X_1, \ldots X_n)}{n} = -\frac{1}{n}\sum_{i=1}^n \log p(X_i) \xrightarrow{\P} H(X_i)
+\end{align*}
+by the weak law of large numbers, and using the fact that the $X_i$ are i.i.d. Check as an exercise that the AE holds with constant $H(X_1)$ using the definition of convergence in probability. Hence by \textbf{8.6} we are done.
+\end{proof}
+Note that \textbf{8.4} gave us an information rate $\leq H(X_1)$, without the use of the AEP. The AEP can also be used for noiseless coding - we encode the typical sequences with a block code and the atypical sequences arbitrarily, since they rarely occur. Many sources of interest, not just Bernoulli sources, satisfy the AEP. Under suitable conditions, the sequence $\frac1n H(X_1, \ldots, X_n)$ is decreasing and the AEP is satisfied with constant $H \lim_{n\to \infty} \frac{H(X_1,\ldots, X_n}{n}$.
+
+Consider a communication channel with input of alphabet $\mathscr{A}$, and output $B$. A code of length $n$ is a subset $C \subseteq \mathscr{A}^n$. The \emph{error rate}
+\begin{align*}
+\hat{e}(C) = \max \P(\text{error }|c\text{ sent})
+\end{align*}
+
+The \emph{information rate} is $\rho(C) = \frac{\log |C|}{n}$.
+
+The channel can \emph{transmit reliably} at rate $R$ if there are codes $C_1, C_2, \ldots$ with $C_n$ of length $n$, and:
+\begin{itemize}
+\item $\lim_{n \to \infty} \rho(C_n) = R$.
+\item $\lim_{n \to \infty} \hat{e}(C_n) = 0$.
+\end{itemize}
+The \emph{operational capacity} is the supremum of all reliable transmission rates.
+
+Assume a source has information rate $r$ bits per symbol, and emits symbols at $s$ symbols per second, whilst the channel has capacity $R$ bits per transmission and can can transmit symbols at $S$ transmissions per second. Usually $S=s=1$. If $rs \leq RS$ then we can encode and transmit reliably, and if $rs > RS$ we cannot.
+
+\begin{proposition}
+A binary symmetric channel with error probability $p < \frac{1}{4}$ has non-zero capacity.
+\end{proposition}
+\begin{proof}
+We use the $GSV$ bound. Pick $\delta$ with $2p <\delta  < \frac12$. We claim reliable transmission rate of $R = 1-H(\delta) > 0$.
+
+Let $C_n$ be a code of length $n$ with minimum distance $\floor{n\delta}$ of maximal size. Them $|C_n| = A(n, \floor{n\delta}) \geq 2^{n(1-H(\delta)} = 2^{nR}$.
+
+Replacing $C_n$ by a subcode we can assume $|C_n| = \floor{2^{nR}}$ with minimum distance still $\geq \floor{n\delta}$
+
+Now, with minimum distance decoding, $\hat{e}(C_n) \leq \P($in $n$ uses the BSC makes more than $\frac{n\delta-1}{2}$ errors$)$.
+
+Pick $\epsilon > 0$ with $p+\epsilon < \frac{\delta}{2}$. For $n$ sufficiently large we have that $\frac{n\delta-1}{2} = n(\frac{\delta}{2} - \frac{1}{2n}) > n(p+\epsilon)$.
+
+Hence $\hat{e}(C) \leq \P($BSC makes more than $n(p+\epsilon)$ errors$) \to 0$, as we will see in the next lemma.
+\end{proof}
+\begin{lemma}
+Let $\epsilon > 0$. A BSC with error probability $p$ is used to transmit $n$ digits. Then:
+\begin{align*}
+\lim_{n \to \infty} \P(\text{BSC makes at least }n(p+\epsilon)\text{ errors}) = 0
+\end{align*}
+\end{lemma}
+\begin{proof}
+If $U_i$ is the Bernoulli random variable that digit $i$ is mistransmitted. Then $U_i$ are i.i.d. with probability $p$. So $\E[U_i] = p$. Then the probability we are interested in is $\P(\sum U_i \geq n(p+\epsilon)) \leq \P(|\frac{1}{n}\sum U_i -p| \geq \epsilon) \to 0$ by the \textsc{wlln}.
+\end{proof}
+
+\subsection{Fano's Inequality}
+Let $X,Y$ be random variables taking values in the alphabets $\mathscr{A}, \mathscr{B}$. Then:
+\begin{itemize}
+\item $H(X|Y=y) = -\sum_{x \in \mathscr{A}} \P(X=x|Y=y)\log \P(X=x|Y=y)$
+\item $H(X|Y) = \sum_{y \in \mathscr{B}} \P(Y=y)H(X|Y=y)$
+\end{itemize}
+Clearly $H(X|Y) \geq 0$.
+\begin{lemma}
+\begin{align*}
+H(X,Y) = H(X|Y) + H(Y)
+\end{align*}
+\end{lemma}
+\begin{proof}
+\begin{align*}
+H(X|Y) &= -\sum_{x\in\mathscr{A}} \sum_{y \in \mathscr{B}} \P(X=x|Y=y)\P(Y=y)\log \P(X-x|Y=y)\\
+&= -\sum_{x\in\mathscr{A}} \P(X=x, Y=y) \log \frac{\P(X=x, Y=y}{\P(Y=y)}\\
+&= -\sum_{(x,y)\in\mathscr{A}\times\mathscr{B}}\underbrace{\P(X=x,Y=y)\log\P(X=x,Y=y)}_{H(X,Y)} + \underbrace{\P(X=x, Y=y)\log\P(Y=y)}_{-H(Y)}\\
+&= H(X,Y) - H(Y)
+\end{align*}
+\end{proof}
+\begin{corollary}
+$H(X|Y) \leq H(X)$ with equality if and only if $X,Y$ are independent.
+\end{corollary}
+\begin{proof}
+Combine \textbf{4.1} with \textbf{9.4}.
+\end{proof}
+We can replace $X,Y$ by random variables $X_1, X_2, \ldots, X_r$ and $Y_1, Y_2, \ldots, Y_s$, and similarly define $H(X_1, \ldots, X_r|Y_1, \ldots, Y_s)$\footnote{$H(X,Y|Z)$ means ``the entropy of ($X$ and $Y$) given $Z$", \textsc{not} ``the entropy of $X$ and ($Y$ given $Z$)"}.
+
+\begin{lemma}
+\begin{align*}
+H(X|Y) \leq H(X|Y, Z) + H(Z)
+\end{align*}
+\end{lemma}
+\begin{proof}
+\begin{align*}
+H(X,Y,Z) &= H(Z|X,Y) + H(X,Y) = H(Z | X, Y) + H(X|Y) + H(Y)\\
+H(X,Y,Z) &= H(X|Y,Z) + H(Y,Z) = H(X|Y, Z) + H(Z|Y) + H(Y)\\
+\therefore H(X|Y) &= -H(Z|X,Y) + H(X|Y,Z) + H(Z|Y)\\
+&\leq H(X|Y,Z) + H(Z) 
+\end{align*}
+\end{proof}
+\begin{proposition}[Fano's Inequality]
+Let $X,Y$ be random variables taking values in $\mathscr{A}$, where $|\mathscr{A}| = m$. Let $p = \P(X\neq Y)$. Then:
+\begin{align*}
+H(X|Y) \leq H(p) + p \log(m-1)
+\end{align*}
+\end{proposition}
+\begin{proof}
+Let $Z = \begin{cases} 0 & X = Y \\ 1 & X \neq Y\end{cases}$. Then $\P(Z=0) = 1-p, \P(Z=1) = p$. So $H(Z) = H(p)$. By \textbf{9.6},
+\begin{align*}
+H(X|Y) \leq H(p) + H(X|Y,Z)\tag{\ast}
+\end{align*}
+Then we have two cases:
+\begin{itemize}
+\item[$Z=0$:] We must have $X=y$, so $H(X|Y=y, Z=0) = 0$.
+\item[$Z=1$:] Just $m-1$ remaining possibilities for $X$, so $H(X|Y=y, Z=1) \leq \log(m-1)$.
+\end{itemize}
+Hence we have:
+\begin{align*}
+H(X|Y,Z) &= \sum_{y,z} \P(Y=y, Z=z)H(X|Y=y,Z=z)\\
+&\leq \sum_y \P(Y=y, Z=1)\log(m-1)\\
+&= \P(Z=1)\log(m-1) = p\log(m-1)
+\end{align*}
+Then by $(\ast)$, $H(X|Y) \leq H(p) + p \log(m-1)$.
+\end{proof}
+We will apply this result later when $X$ takes values in $\mathscr{A}$ and $Y$ is the result of passing codewords through a channel and then decoding, where $p$ will be the probability of error.
+
+If $X,Y$ are random variables, then we define the \emph{mutual information} of $X$ and $Y$ to be:
+\begin{align*}
+I(X;Y) \coloneqq H(X) - H(X|Y)
+\end{align*}
+By \textbf{4.1} and \textbf{9.4}, $I(X;Y) = H(X) + H(Y) - H(X,Y) \geq 0$, with equality if and only if $X$ and $Y$ are independent. We also see from this form that $I(X;Y) = I(Y;X)$.
+
+Given a DMC with input alphabet $\mathscr{A}$ of size $m$, and output alphabet $\mathscr{B}$. Let $X$ be a random variable taking values in $\mathscr{A}$ used as an input to the channel. Let $Y$ be the random variable output, depending on both $X$ and the channel matrix.
+
+We define the \emph{information capacity} to be the $\max_X I(X;Y)$, where the maximum is taken over all probability distributions $(p_1, \ldots, p_m)$ for $X$. Since the space of random variables for $X$ is a closed and bounded subset of $\R^m$, by Heine-Borel it is compact and, since $I$ is continuous, the maximum is attained. Note that the information capacity depends only on the channel matrix.
+
+\begin{theorem}[Shannon's Second Coding Theorem]
+For a DMC, the operational capacity is equal to the information capacity.
+\end{theorem}
+We will prove $\leq$ in general, and $\geq$ for a binary symmetric channel only. 
+
+For example, with a BSC with error probability $p$, input $X$, output $Y$, then $\P(X=0) = \alpha, \P(X=1) = 1-\alpha$, and so $\P(Y=0) = \alpha(1-p) + (1-\alpha)p; \P(Y=1) = (1-\alpha)(1-p) + \alpha p$.
+
+Then $C = \max_{\alpha} I(X;Y) = \max_\alpha \left[H(\alpha(1-p) + (1-\alpha)p) - H(p)\right] = 1-H(p$, where the max attained at $\alpha = \frac12$. So the information capacity $C = 1+p\log p + (1-p)\log(1-p)$. We can plot this on a graph:
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ymin=0, ymax=1, xmin=0, xmax=1]
+\addplot[samples=200, blue, ultra thick] (x, {1+x*log2(x) + (1-x)*log2(1-x)});
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+At $p=0,1$ the channel transmits perfectly, whilst at $p=\frac{1}{2}$ no information can be transmitted. We can choose to calculate $H(Y)-H(Y|X)$ or $H(X)-H(X|Y)$ to find the information - often one is easier than the other, for example with the binary erasure channel with erasure probability $p$.
+
+$\P(X=0) = \alpha, \P(X=1) = 1-\alpha, \P(Y = 0) = \alpha(1-p), \P(Y=\ast) = p, \P(Y=1) =(1-\alpha)(1-p)$
+
+Then $H(X|Y=0) = 0, H(X|Y = \ast) = H(\alpha), H(X|Y = 1) = 0$, and so $H(X|Y) = pH(\alpha)$.
 \end{document}

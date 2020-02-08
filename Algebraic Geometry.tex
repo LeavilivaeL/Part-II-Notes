@@ -1,4 +1,6 @@
-\documentclass[10pt,a4paper]{article}
+\documentclass[10pt,a4paper,rgb]{article}
+\newcommand{\A}{\mathbb{A}}
+
 \input{./preamble.tex}
 
 \title{Algebraic Geometry}
@@ -30,54 +32,54 @@ In $\C^3$, if $X = \{(x,y,z) \in \C^3 : x^3 + y^3 + z^3 = 1\}$, then $X$ contain
 In $\R^3$, consider the equation $1+x^3+y^3+z^3 = (1+x+y+z)^3$. %find pic of this
 
 \section{Basic Setup}
-Fix a field $K$. We define an \emph{affine n-space over K} to be $\mathbb{A}^n \coloneqq K^n$. Let $A \coloneqq K[x_1,x_2,\ldots,x_n]$ be the polynomial ring in $n$ variables over $K$, and let $S \subseteq A$ be a subset of $A$. We then define $Z(S)$, the \emph{zero set of S} to be the set of all $n$-tuples $(a_1,\ldots,a_n) \in \mathbb{A}^n$ where $f(a_1,\ldots,a_n) = 0$ for all $f \in S$.
+Fix a field $K$. We define an \emph{affine n-space over K} to be $\mathbb{A}^n \coloneqq K^n$. Let $A \coloneqq K[x_1,x_2,\ldots,x_n]$ be the polynomial ring in $n$ variables over $K$, and let $S \subseteq A$ be a subset of $A$. We then define $\V(S)$, the \emph{vanishing locus of S} to be the set of all $n$-tuples $(a_1,\ldots,a_n) \in \mathbb{A}^n$ where $f(a_1,\ldots,a_n) = 0$ for all $f \in S$.
 
 \begin{proposition}
 \item
 \begin{enumerate}
-\item $Z(\{0\}) = \mathbb{A}^n$
-\item $Z(A) = \emptyset$
-\item $Z(S_1\cdot S_2) = Z(S_1) \cup Z(S_2)$, where $S_1\cdot S_2 = \{f_1\cdot f_2 : f_1 \in S_1, f_2 \in S_2\}$.
-\item Let $I$ be an index set, $S_i \subseteq A$ for each $i \in I$. Then $\bigcap_{i \in I} Z(S_i) = Z(\bigcup_{i \in I} S_i)$
+\item $\V(\{0\}) = \mathbb{A}^n$
+\item $\V(A) = \emptyset$
+\item $\V(S_1\cdot S_2) = \V(S_1) \cup \V(S_2)$, where $S_1\cdot S_2 = \{f_1\cdot f_2 : f_1 \in S_1, f_2 \in S_2\}$.
+\item Let $I$ be an index set, $S_i \subseteq A$ for each $i \in I$. Then $\bigcap_{i \in I} \V(S_i) = \V(\bigcup_{i \in I} S_i)$
 \end{enumerate}
 \end{proposition}
 \begin{proof} \textit{1., 2.} are obvious
 \begin{enumerate}
-\item If $p \in Z(S_1) \cup Z(S_2)$, then either $p \in Z(S_1)$ or $p \in Z(S_2)$. If $p \in Z(S_1)$, then $f_1(p) = 0$ for all $f_1 \in S_1$, and so $f_1(p)\cdot f_2(p) = 0$ for all $f_1 \in S_1, f_2 \in S_2$, so $p \in Z(S_1\cdot S_2)$, and similarly for if $p \in Z(S_2)$.
+\item If $p \in \V(S_1) \cup \V(S_2)$, then either $p \in \V(S_1)$ or $p \in \V(S_2)$. If $p \in \V(S_1)$, then $f_1(p) = 0$ for all $f_1 \in S_1$, and so $f_1(p)\cdot f_2(p) = 0$ for all $f_1 \in S_1, f_2 \in S_2$, so $p \in \V(S_1\cdot S_2)$, and similarly for if $p \in \V(S_2)$.
 
-Conversely, suppose that $p \in Z(S_1\cdot S_2)$, and $p \notin Z(S_1)$. Then there is some $f_1 \in S_1$ with $f_1(p) \neq 0$. But $f_1(p)\cdot f_2(p) = 0$ for all $f_2 \in S_2$, and so $f_2(p) = 0$ for all $f_2 \in S_2)$, so $p \in Z(S_2)$.
+Conversely, suppose that $p \in \V(S_1\cdot S_2)$, and $p \notin \V(S_1)$. Then there is some $f_1 \in S_1$ with $f_1(p) \neq 0$. But $f_1(p)\cdot f_2(p) = 0$ for all $f_2 \in S_2$, and so $f_2(p) = 0$ for all $f_2 \in S_2)$, so $p \in \V(S_2)$.
 
-\item If $p \in Z(S_i)$ for all $i \in I$, then $f_i(p) = 0$ for all $f_i \in S_i$, and so for all $f \in \bigcup_{i} S_i$, so $p \in Z(\bigcup_{i \in I}S_i)$.
+\item If $p \in \V(S_i)$ for all $i \in I$, then $f_i(p) = 0$ for all $f_i \in S_i$, and so for all $f \in \bigcup_{i} S_i$, so $p \in \V(\bigcup_{i \in I}S_i)$.
 
-Conversely, if $p \in Z(\bigcup_i S_i)$, then $f(p) = 0$ for all the polynomials in $\bigcup_i S_i$, and so $p \in \bigcap_i S_i$.
+Conversely, if $p \in \V(\bigcup_i S_i)$, then $f(p) = 0$ for all the polynomials in $\bigcup_i S_i$, and so $p \in \bigcap_i S_i$.
 \end{enumerate}
 \end{proof}
 These four properties should remind you of the four axioms for a topology.
 
-A subset of $\mathbb{A}^n$ is \emph{algebraic} if it of the form $Z(S)$ for some $S\subseteq A$. A \emph{Zariski open set} in $\mathbb{A}^n$ is a set of the form $\mathbb{A}^n \setminus Z(S)$ for some $S \subseteq \mathbb{A}^n$. This proposition tells us that the Zariski open sets define a topology on $\mathbb{A}^n$, called the \emph{Zariski topology}.
+A subset of $\mathbb{A}^n$ is \emph{algebraic} if it of the form $\V(S)$ for some $S\subseteq A$. A \emph{Zariski open set} in $\mathbb{A}^n$ is a set of the form $\mathbb{A}^n \setminus \V(S)$ for some $S \subseteq \mathbb{A}^n$. This proposition tells us that the Zariski open sets define a topology on $\mathbb{A}^n$, called the \emph{Zariski topology}.
 
 \underline{Examples:}
 \begin{enumerate}
 \item $K = \C$. The Zariski open (or closed) subsets of $\C^n = \mathbb{A}^n$ are in particular open (or closed) in the usual Euclidean sense, but not vice versa.
-\item For any $K$, consider $\mathbb{A}^1, A = K[x], S \subseteq K[x]$. If $S$ has a non-zero element, then $Z(S)$ is finite. Thus the closed sets are the finite subsets of $\mathbb{A}^1$, and all of $\mathbb{A}^1$. The open sets are $\emptyset$ and all the co-finite sets (i.e. sets with finite complement).
+\item For any $K$, consider $\mathbb{A}^1, A = K[x], S \subseteq K[x]$. If $S$ has a non-zero element, then $\V(S)$ is finite. Thus the closed sets are the finite subsets of $\mathbb{A}^1$, and all of $\mathbb{A}^1$. The open sets are $\emptyset$ and all the co-finite sets (i.e. sets with finite complement).
 \end{enumerate}
 
 Recall that, if $A$ is any commutative ring with $S \subseteq A$ a subset, then the \emph{ideal generated by S} is the ideal $A \supseteq \angle{S} = \{\sum_{i=1}^q f_ig_i : q \geq 0, f_i \in S, g_i \in A\}$, or the smallest ideal of $A$ containing $S$.
 
 \begin{lemma}
-Let $S \subseteq A = K[x_1, \ldots, x_n]$. Then $Z(S) = Z(\angle{S})$.
+Let $S \subseteq A = K[x_1, \ldots, x_n]$. Then $\V(S) = \V(\angle{S})$.
 \end{lemma}
 \begin{proof}
-If $p \in Z(S)$, then for $f_1, \ldots, f_q \in S; g_1, \ldots, g_q \in A$ we have:
+If $p \in \V(S)$, then for $f_1, \ldots, f_q \in S; g_1, \ldots, g_q \in A$ we have:
 \begin{align*}
 \left(\sum_{i=1}^q f_ig_i\right)(p) = \sum_{i=1}^q f_i(p)g_i(p) = \sum_{i=1}^p 0\cdot g_i(p) = 0
 \end{align*}
-So $p \in Z(\angle{S})$, and so $Z(S)\subseteq Z(\angle{S})$. 
+So $p \in \V(\angle{S})$, and so $\V(S)\subseteq \V(\angle{S})$. 
 
-\hspace*{-1em}The other inclusion follows from the fact that $S \subseteq \angle{S}$, we must have $Z(\angle{S}) \subseteq Z(S)$.
+\hspace*{-1em}The other inclusion follows from the fact that $S \subseteq \angle{S}$, we must have $\V(\angle{S}) \subseteq \V(S)$.
 \end{proof}
 
-Let $X \subseteq \mathbb{A}^n$ be a subset. Define $I(X) \coloneqq \{f \in A : f(p) = 0 \;\forall p \in X\}$, the \emph{ideal of X}. Note that $I(X)$ is indeed an ideal, since if $f, g \in I(X)$ then $f+g \in I(X)$, and if $f \in I(X), g \in A$, then $f\cdot g \in I(X)$. Note that if $S_1\subseteq S_2 \subseteq A_1$, then $Z(S_2) \subseteq Z(S_1)$, and if $X_1 \subseteq X_2$, then $I(X_2) \subseteq I(X_1)$.
+Let $X \subseteq \mathbb{A}^n$ be a subset. Define $I(X) \coloneqq \{f \in A : f(p) = 0 \;\forall p \in X\}$, the \emph{ideal of X}. Note that $I(X)$ is indeed an ideal, since if $f, g \in I(X)$ then $f+g \in I(X)$, and if $f \in I(X), g \in A$, then $f\cdot g \in I(X)$. Note that if $S_1\subseteq S_2 \subseteq A_1$, then $\V(S_2) \subseteq \V(S_1)$, and if $X_1 \subseteq X_2$, then $I(X_2) \subseteq I(X_1)$.
 
 The \emph{radical} of an ideal $I \subset A$ is the set $\sqrt{I} \coloneqq \{x \in A: \exists n\in\N \st x^n \in I\}$. This is defined in general for any commutative ring $A$, not just polynomial rings.
 
@@ -91,28 +93,28 @@ If $f, g \in \sqrt{I}$, there is $n, m$ such that $f^n, g^m \in I$. Then $(f+g)^
 \begin{proposition}
 \item
 \begin{enumerate}
-\item If $X \subseteq \mathbb{A}^n$ is algebraic, then $Z(I(X)) = X$.
-\item If $I \subseteq A$ is an ideal, then $I(Z(I)) \supseteq \sqrt{I}$.
+\item If $X \subseteq \mathbb{A}^n$ is algebraic, then $\V(I(X)) = X$.
+\item If $I \subseteq A$ is an ideal, then $I(\V(I)) \supseteq \sqrt{I}$.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
 \item
 \begin{enumerate}
-\item Since $X$ is algebraic $X = Z(I)$ for some $I \subseteq A$. Certainly $I \subseteq I(X)$, and so $Z(I(X)) \subseteq Z(I) = X$. But $X \subseteq Z(I(X))$ trivially, and so $X = Z(I(X))$.
+\item Since $X$ is algebraic $X = \V(I)$ for some $I \subseteq A$. Certainly $I \subseteq I(X)$, and so $\V(I(X)) \subseteq \V(I) = X$. But $X \subseteq \V(I(X))$ trivially, and so $X = \V(I(X))$.
 
-\item If $f \in \sqrt{I}$, then $f^n \in I$ for some $n$, and so $f^n$ vanishes on $Z(I)$, thus $f$ vanishes on $Z(I)$. Hence $f \in I(Z(I))$.
+\item If $f \in \sqrt{I}$, then $f^n \in I$ for some $n$, and so $f^n$ vanishes on $\V(I)$, thus $f$ vanishes on $\V(I)$. Hence $f \in I(\V(I))$.
 \end{enumerate}
 \end{proof}
 \begin{theorem}[Hilbert Nullstellensatz]
-Let $K$ be algebraically closed. Then $I(Z(I)) = \sqrt{I}$.
+Let $K$ be algebraically closed. Then $I(\V(I)) = \sqrt{I}$.
 \end{theorem}
 \begin{proof}
 Deferred until later.
 \end{proof}
 
-\hspace*{-1em}\underline{Example:} If $K = \R$, $I = \angle{x^2+y^2+1} \subseteq \R[x,y]$, then $Z(I) = \emptyset$, so $I(Z(I)) = \R[x,y] \neq \sqrt{I}$.
+\hspace*{-1em}\underline{Example:} If $K = \R$, $I = \angle{x^2+y^2+1} \subseteq \R[x,y]$, then $\V(I) = \emptyset$, so $I(\V(I)) = \R[x,y] \neq \sqrt{I}$.
 
-\hspace*{-1em}We define an \emph{affine (algebraic) variety} to be an algebraic subset of $\mathbb{A}^n$. Very often we can decompose affine varieties into smaller subsets. For instance, $Z(\angle{xy}) = + = - \cup | = Z(\angle{x}) \cup Z(\angle{y})$. If $Y \subseteq X$ is a non-empty closed subset, then we say $Y$ is \emph{irreducible} if whenever $Y = Y_1 \cup Y_2$ with $Y_1, Y_2$ closed, then either $Y_1 = Y$ or $Y_2 = Y$.  In the Euclidean topology on $\C^n$, the irreducible subsets are single points, but under the Zariski topology they are much more interesting. We will now turn to the question of identifying when an algebraic set is irreducible.
+\hspace*{-1em}We define an \emph{affine (algebraic) variety} to be an algebraic subset of $\mathbb{A}^n$. Very often we can decompose affine varieties into smaller subsets. For instance, $\V(\angle{xy}) = + = - \cup | = \V(\angle{x}) \cup \V(\angle{y})$. If $Y \subseteq X$ is a non-empty closed subset, then we say $Y$ is \emph{irreducible} if whenever $Y = Y_1 \cup Y_2$ with $Y_1, Y_2$ closed, then either $Y_1 = Y$ or $Y_2 = Y$.  In the Euclidean topology on $\C^n$, the irreducible subsets are single points, but under the Zariski topology they are much more interesting. We will now turn to the question of identifying when an algebraic set is irreducible.
 
 \begin{proposition}
 If $X_1, X_2 \subseteq \mathbb{A}^n$, then $I(X_1 \cup X_2) = I(X_1) \cap I(X_2)$.
@@ -140,9 +142,9 @@ Let $K$ be algebraically closed. Then an algebraic set $X \subseteq \mathbb{A}^n
 \begin{proof}
 \item
 \begin{itemize}
-\item[$\implies$] If $f\cdot g \in I(X)$, then $X \subseteq Z(f\cdot g) = Z(f) \cup Z(g)$. So $X = (X \cap Z(f)) \cup (X \cap Z(g))$. Irreducibility implies that \textsc{wlog} $X = X\cap Z(f)$, i.e. $X \subseteq Z(f)$ as $Z(f), Z(g), X$ are closed. Then $f \in I(X)$, and so $I(X)$ is prime.
+\item[$\implies$] If $f\cdot g \in I(X)$, then $X \subseteq \V(f\cdot g) = \V(f) \cup \V(g)$. So $X = (X \cap \V(f)) \cup (X \cap \V(g))$. Irreducibility implies that \textsc{wlog} $X = X\cap \V(f)$, i.e. $X \subseteq \V(f)$ as $\V(f), \V(g), X$ are closed. Then $f \in I(X)$, and so $I(X)$ is prime.
 
-\item[$\impliedby$] If $P$ is prime with $Z(P) = X_1 \cup X_2$, $X_1, X_2$ closed. Then $I(X_1) \cap I(X_2) = I(X_1\cup X_2) = I(Z(P)) = \sqrt{P}$ by the Nullstellensatz. But if $f^n \in P$, then $f \in P$, and so $\sqrt{P} = P$. Hence $I(X_1)\cap I(X_2) = P$, and $P = I(X_1)$ or $I(X_2)$, so $Z(P) = X_1$ or $X_2$.
+\item[$\impliedby$] If $P$ is prime with $\V(P) = X_1 \cup X_2$, $X_1, X_2$ closed. Then $I(X_1) \cap I(X_2) = I(X_1\cup X_2) = I(\V(P)) = \sqrt{P}$ by the Nullstellensatz. But if $f^n \in P$, then $f \in P$, and so $\sqrt{P} = P$. Hence $I(X_1)\cap I(X_2) = P$, and $P = I(X_1)$ or $I(X_2)$, so $\V(P) = X_1$ or $X_2$.
 \end{itemize}
 \end{proof}
 So if $K$ is algebraically closed, then we have a one-to-one correspondence between algebraic subsets and radical ideals, and between irreducible algebraic subsets and prime ideals. This correspondence suggests that, just as prime ideals are the ``building blocks" of ideals, so too are irreducible varieties the building blocks of algebraic sets.
@@ -160,7 +162,7 @@ Let $Y \in \mathcal{S}$ be a minimal element. Since $Y \in \mathcal{S}$, $Y$ is 
 
 If $Y = \bigcup_{i=1}^n Y_i$, with $Y_i$ irreducible varieties, $Y_i \subseteq Y_j$ for $i \neq j$, then $Y_i, \ldots, Y_n$ are the \emph{irreducible components} of $Y$.
 
-\hspace*{-1em}\underline{Example:} $Z(xy) = Z(x)\cup Z(y)$. Note that $Z(x)$ is irreducible because $(x)$ is a prime ideal in $K[x,y]$ - to see this observe $K[x,y]/(x) \cong K[y]$ is an integral domain. So the irreducible component of $Z(xy)$ are $Z(x)$ and $Z(y)$, or the two coordinate axes.
+\hspace*{-1em}\underline{Example:} $\V(xy) = \V(x)\cup \V(y)$. Note that $\V(x)$ is irreducible because $(x)$ is a prime ideal in $K[x,y]$ - to see this observe $K[x,y]/(x) \cong K[y]$ is an integral domain. So the irreducible component of $\V(xy)$ are $\V(x)$ and $\V(y)$, or the two coordinate axes.
 
 \begin{proposition}
 The irreducible components of $Y$ are unique up to ordering.
@@ -169,9 +171,9 @@ The irreducible components of $Y$ are unique up to ordering.
 Exercise.
 \end{proof}
 
-\hspace*{-1em}\underline{Example:} $A = K[x_1, \ldots, x_n]$ is a unique factorisation domain (UFD). If $f \in A\setminus\{0\}$, then $f$ is irreducible if and only if $(f)$ is prime. If instead, $f = f_1\ldots f_n$ is a factorisation into irreducible components, then $Z(f) = Z(f_1)\cup\ldots\cup Z(f_n)$ is the irreducible decomposition  of $Z(f)$.
+\hspace*{-1em}\underline{Example:} $A = K[x_1, \ldots, x_n]$ is a unique factorisation domain (UFD). If $f \in A\setminus\{0\}$, then $f$ is irreducible if and only if $(f)$ is prime. If instead, $f = f_1\ldots f_n$ is a factorisation into irreducible components, then $\V(f) = \V(f_1)\cup\ldots\cup \V(f_n)$ is the irreducible decomposition  of $\V(f)$.
 
-For instance, $Z(y^2-x^3+x)$, the diagram on the first page of these notes, is irreducible.
+For instance, $\V(y^2-x^3+x)$, the diagram on the first page of these notes, is irreducible.
 
 \section{Regular and Rational Functions}
 In algebraic geometry we are interested in polynomial functions, i.e. $f: \mathbb{A}^n \to K$ for some $f \in A = K[x_1, \ldots, x_n]$. Then, given $X \subseteq \mathbb{A}^n$ closed, we get $f|_X : X \to K$. Note that if there are $f,g \in A$ with $f|_X = g|_X$, then $(f-g)|_X = 0$, and so $f-g \in I(X)$.
@@ -197,7 +199,285 @@ Deferred until after Hilbert's Nullstellensatz.
 
 Recall that, if $A$ is an integral domain, then we define the \emph{field of fractions} of $A$ to be $\Big\{\frac{f}{g} : f \in A, g \in A \setminus\{0\}\Big\}/\thicksim$, with $\frac{f}{g} \thicksim \frac{f'}{g'}$ if $fg' = f'g$. This is, as the name would suggest, a field.
 
-If $X \subseteq \mathbb{A}^n$ is an irreducible variety, then we define the \emph{function field} of $X$ to be the field of fractions of $A(X)$. We denote this $K(X)$. Note that $A(X)$ is an integral domain if and only if $X$ is irreducible. Then $f \in K(X)$ can be written as $f=\frac{g}{h}$ for $g,h \in A(X)$, and this is a regular function on $X \setminus Z(h)$.
+If $X \subseteq \mathbb{A}^n$ is an irreducible variety, then we define the \emph{function field} of $X$ to be the field of fractions of $A(X)$. We denote this $K(X)$. Note that $A(X)$ is an integral domain if and only if $X$ is irreducible. Then $f \in K(X)$ can be written as $f=\frac{g}{h}$ for $g,h \in A(X)$, and this is a regular function on $X \setminus \V(h)$.
+
+\section{Morphisms}
+A map $f:X \to Y$ between affine varieties is a \emph{morphism} if:
+\begin{enumerate}
+\item $f$ is continuous in the Zariski topology (i.e. the induced topologies on $X$ and $Y$)
+\item For all open $V \subseteq Y$ and for any regular function $\varphi: V \to K$, the map $\varphi \circ f: f^{-1}(V) \to K$ is also regular.
+\end{enumerate}
+The lecturer appreciates that this is a conceptually difficult definition, but has no idea how to make it clearer.
+
+If $f:X \to Y$ is a morphism, then for any $\varphi \in A(Y), \varphi\circ f$ is a regular function on $X$, and hence $\varphi \circ f \in A(X)$ by \textbf{2.1}. This defines a map $f^{\#}:A(Y) \to A(X); \varphi \mapsto \varphi\circ f$.
+
+Note that $f^{\#}$ is a $K$-algebra homomorphism:
+\begin{itemize}
+\item $f^{\#}(\varphi_1+\varphi_2) = (\varphi_1+\varphi_2)\circ f = \varphi_1 \circ f + \varphi_2 \circ f = f^{\#}(\varphi_1) + f^{\#}(\varphi_2)$.
+\item $f^{\#}(\varphi_1\cdot\varphi_2) = f^{\#}(\varphi_1)f^{\#}(\varphi)$
+\item For $a \in K$, $f^{\#}(a \cdot \varphi) = f^{\#}(a)f^{\#}(\varphi) = af^{\#}(\varphi)$
+\end{itemize}
+
+\begin{theorem}
+There is a one-to-one correspondence between morphisms $f:X \to Y$ of affine varieties and $K$-algebra homomorphisms $f^{\#}:A(Y)\to A(X)$.
+\end{theorem}
+\begin{proof}
+We've seen how to get $f^{\#}$ from $f$. So now suppose we have $f^{\#}:A(Y) \to A(X)$ a $K$-algebra homomorphism given. Suppose $X \subseteq \mathbb{A}^n, Y \subseteq \mathbb{A}^m$. Then:
+\begin{align*}
+A(X) = \frac{K[x_1, \ldots, x_n]}{I(X)}\hspace{7em}A(Y) = \frac{K[y_1, \ldots, y_m]}{I(Y)}
+\end{align*}
+Let $\bar{y_i}$ be the element of $A(Y)$ represented by $y_i$, and let $f_i = f^{\#}(\bar{y_i}) \in A(X)$.
+
+Then let $f: X \to \mathbb{A}^m$ be given by $f(p) = (f_1(p),\ldots, f_m(p))$. We claim that the image of $f$ lies in $Y$.
+
+We have the maps $K[y_1, \ldots, y_m] \xrightarrow{\text{quotient map}} A(Y) \xrightarrow{f^{\#}} A(X)$ given by $y_i \mapsto \bar{y_i} \mapsto f_i$, and so $g \mapsto g(f_1, \ldots, f_m)$.
+
+Then since $g \in I(Y)$, we have $g(f_1, \ldots, f_m) = 0$ in $A(X)$, and so in particular, evaluating at $p$, we get $g(f_1(p), \ldots, f_m(p)) = 0$ as desired. Note that if $\varphi \in A(Y)$ we can write $\varphi = \bar{g}$ for some $g \in K[y_1, \ldots, y_m]$, and then $f^{\#}(\varphi) = g(f_1, \ldots, f_m) \in A(X)$. Hence $f$ is a map from $X$ to $Y$.
+
+Next, we must show that $f:X \to Y$ is a morphism.
+
+For continuity, we show that if $Z \subseteq Y$ is closed, then $f^{-1}(Z) \subseteq X$ is closed. For this, note $I(Z) \supseteq I(Y)$, and write $\overline{I(Z)}$ for the image $I(Z)/I(Y)$ in $A(Y)$. This is the ideal of regular functions on $Y$ vanishing on $Z$.
+\begin{align*}
+\V(f^{\#}(\overline{I(Z)})) &= \{p \in X : g(p) = 0 \forall g \in f^{\#}(\overline{I(Z)})) \subseteq A(X)\}\\
+&= \{p \in X : (h\circ f)(p) = 0 \forall h \in \overline{I(Z)}\}\\
+&= \{p \in X : f(p) \in \V(\overline{I(Z)})\}\\
+&= \{p \in X : f(p) \in Z \}\\
+&= f^{-1}(Z)
+\end{align*}
+If $I$ denotes the inverse image of $f^{\#}(I(Z))$ under the quotient map $K[x_1, \ldots, x_n] \to A(X)$. Then $\V(I) = \V(f^{\#}(\overline{I(Z)}))$, and in particular $f^{-1}(z)$ is closed.
+
+If $\varphi \in \mathcal{O}_Y(U)$, i.e. $\varphi:U \to K$ is regular, we need to show that $\varphi \circ f: f^{-1}(U) \to K$ is regular. Let $p \in f^{-1}(U)$. Then there exists a neighbourhood $V \subseteq U$ of $f(p)$ on which $\varphi|_V = \frac{g}{h}$ for $g, h \in A(Y)$ with $h$ non-vanishing on $V$.
+
+Then $(\varphi \circ f)|_{f^{-1}(V)} = \varphi|_V \circ f = \frac{g}{h}\circ f = \frac{g\circ f}{h\circ f} = \frac{f^{\#}(g)}{f^{\#}(h)}$. Here, $f^{\#}(g). f^{\#}(h) \in A(X)$, and $f^{\#}(h) = h \circ f$ does not vanish on $f^{-1}(V)$. Hence $\varphi\circ f$ is regular as desired, and hence a morphism.
+\end{proof}
+
+The moral of this notationally heavy proof is that a morphism $f: X\to Y$ is given by a choice of polynomials $f_1, \ldots, f_n \in K[x_1, \ldots, x_n]$ such that $f(p) = (f_1(p), \ldots, f_m(p)) \in Y$ for all $p \in X$.
+
+\hspace*{-1em}\underline{Example:} $f: \mathbb{A}^1 \to \mathbb{A}^2; t \mapsto (t, t^2)$, so that $f_1(t) = t, f_2(t) = t^2$. Then $f^{\#}$ is a homomorphism of rings from $K[y_1, y_2] \to K[t]$, with $f^{\#}(y_1) = t, f^{\#}(y_2) = t^2$. Note that $y_1^2-y_2 \in \ker f^{\#}$, so in fact we have a $K$-algebra homomorphism, $f^{\#}:K[y_1, y_2]/(y_1^2-y_2) \to K[t]$, inducing a morphism $f:\mathbb{A}^1 \to Y = \V(y_1^2-y_2)$, a parabola.
+
+We say $X$ and $Y$ as affine varieties are \emph{isomorphic} if there is $f:X \to Y, g:Y \to X$ both morphisms with $f\circ g = \id_Y, g \circ f = \id_X$.
+
+\begin{corollary}
+$X$ and $Y$ are isomorphic if and only if $A(X)$ and $A(Y)$ are isomorphic as $K$-algebras.
+\end{corollary}
+
+\section{Projective Space}
+Consider the two lines $\ell_1 = \V(x), \ell_2 = \V((1+1/t)x + 1)$, for $t$ some parameter in $K$. Then the intersection $\ell_1 \cap \ell_2$ is is a single point for $t \neq \infty$. However, at $t = \infty$ the lines are parallel, and so we have lost this intersection. We think of this as being a failure of compactness, and introduce the idea of projective space to restore this compactness.
+
+Let $U$ be a vector space of dimension $n+1$ over $K$. Then the \emph{projectivization} of $U$, $\P(U)$ is the set of all 1-dimensional subspaces of $U$. We will write $\P^n \coloneqq \P(K^{n+1})$.
+
+For example, $\P^1 = \P(K^2) = \{$nonzero vectors in $K^2\}/$scaling action of $K^{\ast}$, where by this scaling action we identify $(1,1) \thicksim (2,2) \thicksim (-1,-1)$. More formally, this is the quotient space $\left(\mathbb{A}_K^2\setminus\{0\}\right)/ \thicksim$ where $(z_0,z_1) \thicksim (\lambda z_0, \lambda z_1)$ for $\lambda \in K^{\ast}$, so that the equivalence classes of $\thicksim$ are straight lines through the origin.
+
+Why does this ``compactify" $\mathbb{A}^1$? Consider the subset of $\P^1$ given by $\{(z_0, z_1) \in \P^1 : z_0 \neq 0\} = \{(1, z_1/z_0) : z_0 \neq 0, z_1 \in K\}$, using the equivalence relation. But this is isomorphic to $\mathbb{A}^1$, by picking $z_1 = z_0 k$ for $k \in K$, so $\P^1$ contains all the information about $\mathbb{A}^1$ by encoding each element in $\mathbb{A}^1$ as the gradient of a line in $\mathbb{A}^2$, together with some missing information, where $z_0 = 0$. In the $\mathbb{A}^1$ ``view" of $\P^1$, this point is the point at infinity, which seems special or distinguished in some way, but we view it as a line in $\mathbb{A}^2$, it is simply another straight line through the origin $\{(0,t) : t \in K\}$.
+
+We can think of $\P^1$ in another way - if we draw in the unit circle centered on the origin in the $\mathbb{A}^2$ view of $\P^1$, we see we have a bijection between the straight lines through the origin (elements of $\P^1$ as defined) and pairs of antipodal points on the unit circle. So we can also view $\P^1$ as the unit circle in $\mathbb{A}^2$ with antipodal points identified.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+\includegraphics[scale=.1]{plane.png}
+\caption{$\P^2$ as the straight lines in $\A^2$, so that points of the same colour are identified}
+\end{subfigure}\\
+\begin{subfigure}{.4\textwidth}
+\includegraphics[scale=.1]{line.png}
+\caption{$\P^2$ as the corresponding points in $\A^1$, i.e. the gradients of lines. Note the point at infinity}
+\end{subfigure}\hfill
+\begin{subfigure}{.4\textwidth}
+\includegraphics[scale=.1]{circle.png}
+\caption{$\P^2$ as the points on a circle, with antipodal points identified (points of the same colour)}
+\end{subfigure}
+\end{figure}
+
+For $\P^2_K$, consider $\P^2_K \supseteq \mathcal{U}_0 = \{(z_0,z_1,z_2):z_0 \neq 0\} = \{(1,z_1/z_0,z_2/z_0):z_0\neq 0\} \cong \mathbb{A}_K^2$. The missing stuff at infinity is $\P^2 \setminus \mathcal{U}_0 = \{(0,z_1, z_2): (z_1,z_2) \neq (0,0)\}/$scaling $ \cong \P^1$. Similarly as in the $\P^1$, we can think of $\P^2$ as being a sphere with antipodal points identified.
+
+In general, in $\P^n$ with \emph{homogeneous coordinates} $[z_0, \ldots, z_n]$, (where the square brackets indicates that we are working with an equivalence class of coordinates)\footnote{Also used in literature are the notations $(z_0:z_1:\ldots:z_n)$ or $[z_0:z_1:\ldots:z_n]$} we have subsets $\mathcal{U}_i = \{(z_0, \ldots, z_n):z_i \neq 0\}\cong \mathbb{A}_k^n$ for $0\leq i\leq n$, we have $\P_K^n \setminus \mathcal{U}_i = \P_K^{n-1}$.
+
+\subsection{Projective Varieties}
+We want to extend our idea of an affine variety to some sort of ``projective variety" in projective space. The idea of polynomial function in $z_0, \ldots, z_n$ is not well defined on points in projective space, because of the scaling that we have quotiented out by. For instance, take the polynomial $f=z_0 + 1$ as a function on $\P_K^2$. We expect to obtain values in $K$ for $f(p)$ where $p \in \P_K^2$. But $(1,0,0) \thicksim (-1,0,0)$ are equivalent in $\P_K^2$, and $f(1,0,0) = 2, f(-1,0,0) = 0$, so $f$ is not well defined on $\P^2_K$.
+
+It's not so much a problem that the value of the polynomial isn't well defined, and we never really used this property in the affine case. We only cared that the points where it was zero, $\V(f)$, was well defined. Similarly, in the projective case, we can see that the polynomial will have a well defined zero set when $f(A p) = B f(p)$ for fixed constants $A, B$ independent of $p$. Plugging this into the definition of a polynomial, we obtain the following criterion:
+
+A polynomial $f \in K[z_0, \ldots, z_n]$ is \emph{homogeneous of degree d} if $f(\lambda p) = \lambda^d f(p)$ for all $\lambda \in K^{\ast}, p \in \mathbb{A}_K^n$. Equivalently, if the total degree of every term is $d$.
+\begin{itemize}
+\item $z_0^2 + 2z_1z_2 + 8z_2^2$ is homogeneous, as the total degree of each term is 2.
+\item $z_0 + z_1^2 + 2z_2^3 + 1$ is not homogeneous, as the terms have total degree 1, 2, 3, 0 respectively.
+\end{itemize}
+
+A \emph{projective hypersurface} in $\P_K^n$ is the vanishing set $\V(f)\subseteq \P_K^n$ for a $f$ a homogeneous polynomial in $K[z_0, \ldots, z_n]$. This \textit{is} well defined, since $f$ is homogeneous.
+
+An ideal in $K[z_0, \ldots, z_n]$ is \emph{homogeneous} if it is generated by homogeneous polynomials, not necessarily of the same degree.
+\begin{lemma}
+The following two conditions are equivalent for an ideal $I \subseteq K[z_0, \ldots, z_n]$:
+\begin{enumerate}
+\item $I$ is homogeneous.
+\item If $f \in I$, then every constituent in $f$ of degree $r$, denoted $f_{[r]}$ also lies in $I$.
+\end{enumerate}
+\end{lemma}
+By this we mean that every polynomial $f \in K[z_0, \ldots, z_n]$ can be written as a sum $\sum_{r=0}^d f_{[r]}$ where $f_{[r]}$ is homogeneous of degree $r$. For example:
+\begin{align*}
+z_0 + 2z_1^2 + z_0z_2 + z_2^3 + 3z_2 = \underbrace{0}_{f_{[0]}} + \underbrace{z_0 + 3z_2}_{f_{[1]}} + \underbrace{2z_1^2 + z_0z_2}_{f_{[2]}} + \underbrace{z_2^3}_{f_{[3]}}
+\end{align*}
+\begin{proof}
+\textit{2.}$\implies$\textit{1.} is immediate, since $I$ is generated by the constituent parts of all of its polynomials, which are all homogeneous.
+
+For the other direction, let $I = \angle{f_j}$ where $f_j$ is homogeneous of degree $d_j$. Then for $f \in I$, $f = \sum_j h_j f_j$ where $h_j$ is arbitrary and $f_j$ is homogeneous.
+
+Now split $h_j$ into its constituent homogeneous pieces, so that $h_j = \sum_r h_{j[r]}$, a sum of terms of degree $r$. Then $f_{[r]} = \sum h_{j[d_j-r]} f_{j[r]}$. Now $f_{j[r]} = f_j$ if $r = d_j$, and $0$ otherwise since $f_j$ is homogeneous, so $f_{j[r]} \in I$. Then $f_{[r]}$ is a sum of terms $hg$ for $g \in I, h \in K[z_0, \ldots, z_n]$, and so $f_{[r]} \in I$ as required.
+\end{proof}
+
+Let $I \subseteq K[z_0, \ldots, z_n]$ be a homogeneous ideal. Then the associated \emph{projective variety} is $\V(I) = \{P \in \P^n_K : f(P) = 0 \forall f \in I\}$, which by the previous lemma is the same as saying $f(P)$ vanishes for every homogeneous $f \in I$. Projective space then inherits a Zariski topology in three ways:
+\begin{enumerate}
+\item Closed sets are given by $\V(I)$ for $I \subseteq K[z_0, \ldots, z_n]$ homogeneous.
+\item $\P^n_K$ is covered by $n+1$ open sets $\mathcal{U}_i = \P^n_K \setminus \{z_i = 0\}$, each in bijection with $\mathbb{A}^n_K$ which has a Zariski topology, so each $\mathcal{U}_i$ has a Zariski topology. Now declare a subset $C \subseteq \P^n_K$ closed if and only if $C \cap \mathcal{U}_i = 0$ for all $i$.
+\item We describe $\P^n_K = \big(\mathbb{A}^{n+1}_K \setminus \{(0,0,0)\}\big)/\thicksim$, and then inherit the topology as a quotient topology of the Zariski topology on $\mathbb{A}_K^n$.
+\end{enumerate}
+\begin{lemma}
+These three topologies are equivalent.
+\end{lemma}
+\begin{proof}
+Exercise for a topology course.
+\end{proof}
+We call this topology the \emph{Zariski topology on $\P^n_K$}.
+
+Notice that, via description 3, $\P_\C^n$ is a compact topological space and even Hausdorff with respect to the second ``Euclidean" topology, by observing it is a quotient of a unit hypersphere. We will often draw diagrams of projective space using this Euclidean topology, although this structure cannot be detected using the Zariski topology. The Zariski topology is weird, so we don't draw diagrams using it.
+
+Let $\mathcal{U}_0 \subseteq \P_K^n$ be the locus where $Z_0 \neq 0$, and let $X = \V(f)$ for some $f \in K[\mathbf{z}]$. Then $X \cap \mathcal{U}_0$ can be described by $\V\Big(f\big(1, \frac{z_1}{z_0}, \ldots, \frac{z_n}{z_0}\big)\Big)$. As a consequence, every projective variety $X \subseteq \P_K^n$ is a union of $n+1$ affine varieties, as $\bigcup_{i=0}^n X \cap \mathcal{U}_i$.
+
+A projective variety $X \subseteq \P_K^n$ is irreducible if $X$ cannot be written as a union $X = X_1 \cup X_2$ with the $X_i$ nonempty proper subvarieties.
+
+Let $X \subseteq \P_K^n$ be a projective variety. Then the \emph{homogeneous ideal of X} $I^h(X)$ is the ideal generated by all homogeneous polynomials vanishing on $X$.
+
+\begin{lemma}
+$X$ is irreducible if and only if $I^h(X)$ is a prime ideal.
+\end{lemma}
+\begin{proof}
+This is the same as in the affine case, observing the following fact: If $J \subseteq K[\mathbf{z}]$ is homogeneous and non-prime then there exist $F, G \in K[\mathbf{z}]$ homogeneous with $FG \in J$ but neither $F$ nor $G$ in $J$.
+\end{proof}
+Hence, via our discussion in the affine case, every projective variety has a unique irreducible component decomposition. Consider the ideal $I \subseteq K[\mathbf{z}]$ given by $I = \angle{z_0, \ldots z_n}$. Then $\V(I) = \emptyset$ in $\P_K^n$ as $(0,\ldots, 0) \notin \P^n_K$.
+
+\begin{theorem}[Projective Nullstellensatz]
+\item
+\begin{enumerate}
+\item If $I \subseteq K[\mathbf{z}]$ is a homogeneous ideal such that $\V(I) = \emptyset \subseteq \P^n_K$, then $I \supseteq \angle{z_0^m: \ldots: z_n^m}$ for some $m > 0$.
+
+\item If $X = \V(I)$ with $I$ homogeneous, then $I^h(X) = \sqrt{I}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Essentially the same as the affine case, which will come later.
+\end{proof}
+
+If $X \subseteq \P^n_K$ is a projective variety, then every algebraic function $X \to \C$ is constant, by Liouville's theorem. This is why we introduce the idea of rational functions.
+
+\subsection{Rational Functions}
+Let $X \subseteq \P_K^n$ be an irreducible projective variety. Then we define the \emph{function field} $K(X)  = \left\{\frac{f}{g} : f,g\text{ homogeneous of same degree }, g \in I^h (X)\right\} / \thicksim$, where $\frac{f_1}{g_1} \thicksim \frac{f_2}{g_2} \iff f_1g_2-g_1f_2 \in I^h(X)$.
+
+Note that these ratios of polynomials of the same degree are well defined on projective space - when the scaling term of $\lambda^d$ comes out in the numerator and the denominator it cancels, so that $\frac{f(\lambda z)}{g(\lambda z)} = \frac{f(z)}{g(z)}$.
+
+We need to check that $K(X)$ is well defined, i.e. that the equivalence relation $\thicksim$ is indeed an equivalence relation, and also that $K(X)$ is a field. The first of these requires that $I^h(X)$ is prime.
+
+The set of degree $d$ homogeneous polynomials in variables is a $K$-vector space denoted $\mathcal{O}_{\P^n}(d)$, where $\dim_K \mathcal{O}_{\P^n}(d) = |\{\text{monomials of degree $d$ in $z_0, \ldots, z_n$}\}| = \binom{n+d}{d}$.
+
+We can think of $(n+1)\times(n+1)$ matrices (i.e. elements of $GL(n+1,K)$) as changing coordinates in $K^{n+1}$, and inducing a change of homogeneous coordinates on $\P^n_K$. These changes of coordinates are unique up to scaling, so we have the group of matrices corresponding to changes of homogeneous coordinates given by $\P GL(n+1, K) \cong GL(n+1, K)/\text{scaling}$.
+
+For example, $\P GL(2, \C)$ is the group of M\"obius transformations on $\P^1_\C$.
+
+Let $p_1, \ldots, p_{n+2}$ be a set of points in $\P^n_K$ such that no $n+1$ of these lie in a hyperplane $\V(f)$ for $f \in \mathcal{O}_{\P^n}(1)$. Then there exists a change of coordinates $\phi : \P^n_K \to \P^n_K$ such that:
+\begin{align*}
+\phi(p_1) &= [1:0:\ldots:0]\\
+\phi(p_2) &= [0:1:\ldots:0]\\
+&\vdots\\
+\phi(p_{n+1}) &= [0:0:\ldots:1]\\
+\phi(p_{n+2}) &= [1:1:\ldots:1]
+\end{align*}
+This is a simple exercise in linear algebra. Hence we can see that $\P GL(n+1, K)$ acts transitively on the set of collections of $n+2$ points in general position. This follows by choosing an appropriate basis of $K^{n+1}$.
+
+\begin{proposition}
+Let $F \in \mathcal{O}_{\P^2} (d)$ and assume that $F$ is irreducible. Let $c = \V(F)$ and $\ell \subseteq \P^2$ be a line (i.e. $\ell = \V(G)$ for $G \in \mathcal{O}_{\P^2}(1)$. Then $\#\ell \cap c \leq d$, and in fact there exist positive integers $m_p(c, \ell)$ for $p \in c\cap \ell$ such that $\sum_{p \in c\cap\ell} m_p(c, \ell) = d$.
+\end{proposition}
+\begin{proof}
+Choose coordinates $z_0, z_1, z_2$ on $\P^2_K$ such that the following things hold:
+\begin{itemize}
+\item $\ell = \V(z_2)$
+\item $[0:1:0] \notin c$
+\end{itemize}
+This implies that $c \cap \ell \subseteq \P_K^2 \setminus \{z_0 = 0\}$. But this is $\P_K^2 \setminus \mathcal{U}_0 \cong \mathbb{A}^2_K$, and so we can work in the affine case.
+
+If we choose $x = \frac{z_1}{z_0}, y = \frac{z_2}{z_0}$, then $c \cap \{z_0 \neq 0\} = \V(f(x_y)), f(x,y) = F(1,x,y)$. Now, since $[0:1:0] \notin c$, $f(x,y)$ has degree $d$ in the $x$ variable. Hence $c\cap \ell = \{f(x,y) = 0\}$, and the result follows by the fundamental theorem of algebra, where the $m_p(c, \ell)$ are the multiplicities of the roots.
+\end{proof}
+This implies that any two distinct lines in $\P^2_K$ intersect at a point.
+
+in fact, if $C = \V(F_1), D = \V(F_2)$ for $F_i \in \mathcal{O}_{\P^2}(d_i)$ irreducible, then $C \cap D$ is $d_1d_2$ points counted with multiplicity (Bezout's theorem).
+
+\begin{lemma}
+Let $F$ and $G$ be homogeneous polynomials that are coprime, with $\deg(F), \deg(G) \leq 2$. Then
+\begin{align*}
+\# \V(F) \cap \V(G) \leq \deg(F)\deg(G)
+\end{align*}
+\end{lemma}
+\begin{proof}
+Omitted, similar to proposition above.
+\end{proof}
+\begin{proposition}
+Let $p_1, \ldots, p_5 \in \P^2_K$, where no three lie on a line. Then there exists a unique \emph{conic curve} $C = \V(F), F \in \mathcal{O}_{\P^2}(2)$ passing through $p_1, \ldots, p_5$. Moreover, $C$ is irreducible.
+\end{proposition}
+\begin{proof}
+Suppose there existed two conics $C_1, C_2$ through the points. Then they intersect at $>4$ points, so they contradict the lemma above. But why does such a conic exist?
+
+Any conic is given by $\V(a_1z_0^2+a_2z_1^2+a_3z_2^2+a_4z_1z_2+a_5z_0z_1+a_6z_0z_2) = \V(F)$ where $(a_1, \ldots, a_6) \in K^2\setminus \{\mathbf{0}\}$. Now each condition that $\V(p_i) = 0$ is a linear condition in the coefficients $a_1, \ldots, a_6$. Linear algebra guarantees a one dimensional solution, but they are all multiples of each other so we get a unique irreducible polynomial $F$, and so $C$ exists and is irreducible.
+\end{proof}
+If $F \in \mathcal{O}_{\P^2}(3)$, $\V(F)$ is usually called an elliptic curves.
+
+\subsection{The Rational Normal Curve, or the Twisted Cubic, and Other Short Stories}
+Suppose we have a map from $\P^1 \to \P^3$, where $[x_0:x_1]\mapsto [x_0^3:x_0^2x_1:x_0x_1^2:x_2^3]$. We call this map the \emph{twisted cubic}. In the affine patch $\{x_0 \neq 0\}$, this is given by $\A^1 \to \A^3; t \mapsto (t, t^2, t^3)$, the \emph{rational normal curve}. The image of this map is an algebraic variety with equations
+\begin{align}
+z_0z_2 - z_1^2 &= 0\\
+z_0z_3 - z_1z_2 &= 0\\
+z_1z_3 - z_2^2 &= 0
+\end{align}
+Take another map from $\P^1 \times \P^1 \to \P^3; ([x_0:x_1], [y_0:y_1]) \mapsto [x_0y_0:x_0y_1:x_1y_0:x_1y_1]$ - it is easy to check this is well defined. This map in injective onto $\P^3$, and its image is precisely the vanishing locus of equation (2) - this can be checked by considering the affine patches where the map becomes a morphism $\mathbb{A}^1 \to \mathbb{A}^3$. The vanishing locus of $(z_0z_3 - z_1z_2)$ endows $\P^1 \times \P^1$ with the structure of a projective algebraic variety.
+
+We call $\Sigma_{1,1} \subseteq \P^3$ the image of $\P^1 \times \P^1$ under this map.
+\begin{enumerate}
+\item $\Sigma_{1,1}$ contains a family of lines $\{L_t\}_{t \in \P^1}$ such that $L_t \cap L_{t'} = \emptyset$ if $t \neq t'$.
+\item There is in fact another family $\{M_t\}_{t \in \P^1}$ of disjoint lines such that $M_t \cap L_{t'} = \ast$, some single point, for all $t, t' \in \P^1$.
+\end{enumerate}
+We get these lines by fixing one coordinate of $\P^1$ and letting the other vary - in this way injectivity gives the families of lines.
+
+If $X$ is an irreducible projective variety, then its field of rational functions is given by
+\begin{align*}
+K(X) &= \left\{ \frac{F}{G} : F, G \in K[\mathbf{z}] \text{ homogeneous of same degree, } G \notin I^h(X)\right\}/\thicksim\\
+\frac{F_1}{G_1} \thicksim \frac{F_2}{G_2} & \iff F_1G_2 - F_2G_2 \in I^h(X)
+\end{align*}
+However, computing $K(X)$ is a pain - checking if things are members of ideals is a pain to do. Instead, we can compute $K(X)$ via the affine case.
+
+\subsection{Projective Closures}
+If $f \in K[z_1, \ldots, z_n]$, then $\V(f) \subseteq \A^n_k.$ If we consider $\A_K^n=\P_K^n\setminus \{z_0 =0\}$, we can consider the Zariski closure of $\V(f)$ in $\P^n_K$. To do this, we need to \emph{homogenize} our polynomials. Say $d$ is the maximum degree of a variable $z_i$ appearing in $f$. Then $f^h \coloneqq z_0^d f(z_1/z_0, \ldots, z_n/z_0)$. For example, if $f(z_1,z_2) = z_1^3 + z_1z_2, f^h(z_0,z_1,z_2) = z_1^3 + z_0z_1z_2$.
+
+Similarly for an ideal $I \subseteq K[z_1, \ldots, z_n]$, we define $I^h$ to be $\angle{f^h | f \in I} \subseteq K[Z_0, \ldots, Z_n]$
+
+\begin{lemma}[Computing Projective Closures]
+If $X^0 \subseteq \A^n_K$, is an affine variety given by $\V(I)$, then $\bar{X^0} \subseteq \P^n_K$, $(\A^n_K = \P^n_K \setminus \{z_0 = 0\})$, in the Zariski topology, is given by $\V(I^h)$.
+\end{lemma}
+\begin{proposition}
+Let $X \subseteq \P^n_K$ be an irreducible projective variety given by $\bar{X^0}$ for $X^0 \subseteq \A^n_K$ an affine variety. Then $K(X) = \{\text{Field of fractions of }K[X^0]\} = K(X^0)$.
+\end{proposition}
+
+For example:
+\begin{enumerate}
+\item $K(\P^n_K) \cong K(z_1, \ldots, z_n)$
+\item If $C \subseteq \P^3_K$ is the twisted cubic, then $K(C) \cong K(z)$. Then $C$ is the projective closure of $\{(t, t^2, t^3) \subseteq \A^3 : t \in K\}$, which has coordinate ring $K[z]$.
+\item Let $\mathbb{G}_m = \V(xy-1) \subseteq \mathbb{A}^2_K$. The coordinate ring of $\mathbb{G}_m$ is the fraction field of $K[z, z^{-1}]$, i.e. $K(z)$. Notice that the fraction field of $K[z] = K(\A^1_K) = K(\P^1_K) = K(z)$, so $\mathbb{G}_m \subseteq \A^1_K \subseteq \P^1_K$.
+\end{enumerate}
+
+\begin{proof}[Proof of Lemma]
+The goal is to show that $X = \V(I^h)$ is the smallest closed set containing $X^0 = \V(I)$. Assume there exists $Y \supseteq X^0$ closed in $\P^n_K$. Observe that $Y = \V(J)$ for some homogeneous ideal $J \subseteq K[\mathbf{Z}]$. Given any $F \in J$ homogeneous then there exists $f \in K[z_1, \ldots, z_n]$ such that $F = Z_0^d f^h$ for some $d \geq 0$. 
+
+Observe now that $z_0^d f^h$ vanishes on $X^0$, so $f$ vanishes on $X^0$. This implies that $f \in \sqrt{I}$, or $f^m \in I$ for some $m \geq 1$, and then $(f^m)^h = (f^h)^m \in I^h \implies Z_0^d (f^h)^m \in I^h$. This implies that $J \subseteq \sqrt{I^h}$, so $Y \supseteq X$.
+\end{proof}
+
+
+
 
 
 \end{document}

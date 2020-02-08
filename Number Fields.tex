@@ -317,6 +317,226 @@ Let $H = \sum \Z \omega_j \subset \o_K$. Then \textbf{6.2} implies that $\Disc(\
 \section{Ideals I}
 \underline{Example:} $\Q(\sqrt{-5}) = K$, $\o_K = \Z[\sqrt{-5}].$ Then $6=2\cdot 2 = (1+\sqrt{-5})(1-\sqrt{-5})$, and so $\o_K$ is not a UFD. But it turns out that we can restore unique factorisation by replacing elements of $\o_K$ by ideals. 
 
+\begin{proposition}
+\item
+\begin{enumerate}
+\item Let $I \subset \o_K$ be a nonzero ideal. Then $I = \bigoplus_{i=1}^n \Z\alpha_i$ for some $\Q$-linearly independent $\alpha_i \in I$, and $(\o_K:I)^2 = \frac{Disc(I)}{d_K}$
+\item If $0 \neq \alpha \in \o_K$, then $(\o_K:\alpha\o_K) = |\Nn_{K/\Q}(\alpha)|$.
+\end{enumerate}
+\end{proposition}
+If $I \subset \o_K$ is a nonzero ideal, its \emph{norm} is $\Nn(I) \coloneqq (\o_K:I) \in \Z_{>0}$.
+\begin{proof}
+\item
+\begin{enumerate}
+\item Since $\o_K$ is finitely generated as an abelian group, so is $I$. Let $0 \neq \alpha \in I$, and let $\omega_1, \ldots, \omega_n$ be an integral basis for $K$. Then $\alpha\omega_1, \ldots, \alpha\omega_n$ are $\Q$-linearly independent elements of $I$< so $I$ has rank $n$. By proposition \textbf{5.2}, $I$ is free, and the second statement comes from lemma \textbf{6.2}.
+\item If $I = \alpha \o_K$ is principal, then we can take $\alpha_i = \alpha \omega_i$ in (1.), and then $\Disc(I) = \Disc(\alpha\omega_i) = (\det \sigma_i(\alpha\omega_j))^2 = (\det \sigma_i(\alpha)\sigma_i(\omega_j))^2 = \Nn_{K/\Q}(\alpha)^2 d_K$.
+
+And so by (1.), $(\o_k:\alpha\o_k)^2 = (\Nn_{K/\Q}(\alpha))^2$.
+\end{enumerate}
+\end{proof}
+\begin{corollary}
+\item
+\begin{enumerate}
+\item $I \neq \{0\} \implies I \cap \Z \neq \{0\}$.
+\item There are only finitely many ideals of a given norm.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Considering the quotient ring $\o_K/I$, we see that for any $x$ in this ring, $\Nn(I)x = 0$ by Lagrange, and so $\Nn(I) \in I$.
+\item If $I$ is of norm $M$, then $M \in I$, and so $\sigma_K \supset I \supset M\sigma_K$. There is a bijection between ``ideals of $\sigma_K$ containing $M\sigma_K$" and ``ideals of $\o_K/M\o_K$" by isomorphism theorems. his second set is finite as $\o_K/M\o_K$ is finite.
+\end{enumerate}
+\end{proof}
+Recall that an ideal $P\subset \o_K$ is \emph{prime} if $P \neq \o_K$ and for all $\alpha, \beta \in \o_K, \alpha\beta \in P \implies \alpha \in P$ or $\beta \in P$. Equivalently, $\o_K/P$ is an integral domain.
+
+\begin{lemma}
+Let $P \subset \o_K$ be a prime ideal.
+\begin{enumerate}
+\item Either $P = \{0\}$ or $P$ is a maximal ideal.
+\item If $P \neq \{0\}$ then $P \cap \Z = p\Z$ for some prime $p$, and $\Nn(p) = p^f$ is a power of $p$ for some $1 \leq f \leq n$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item If $P \neq \{0\}$ then as $P$ has finite index, $\o_K/P$ is a finite integral domain, so a field, and hence $P$ is a maximal ideal.
+\item By \textbf{7.2}(\textit{1.}), if $P \neq 0$ then $P \cap \Z$ is nonempty, so contains some $m \geq 1$. As $P$ is prime, some prime factor $p$ of $m$ belongs to $P$. Therefore $\Z \supset P \cap \Z \supset p\Z$. As $P \cap \Z$ is an ideal of $\Z$, and $P \neq \o_K$, $P \cap \Z = p\Z$, then $(p) \subset P \subsetneq \o_K$, so $(\o_K : P)$ divides $(\o_K:(p)) = p^n$.
+\end{enumerate}
+\end{proof}
+From now on, when we refer to a prime ideal, we will mean a non zero prime ideal. We will also use the following conventions on arithmetic of ideals:
+\begin{align*}
+I+J &= \{\alpha+\beta : \alpha \in I, \beta \in J\}\\
+IJ &= \{\text{finite sums }\sum\alpha_i\beta_j : \alpha_i \in I, \beta_j \in J\}
+\end{align*}
+Every ideal of $\o_K$ is finitely generated as an ideal, and so we say that $\o_K$ is \emph{Noetherian}. If $\alpha_1, \ldots, \alpha_k \in \o_K$, we write $(\alpha_1, \ldots, \alpha_k)$ for the ideal they generate. So if $\alpha \in \o_K$, $(\alpha)$ is the principal ideal $\alpha \o_K$. Other texts will use angle brackets or square brackets for this notation.
+
+Then we see that $(\alpha_1, \ldots, \alpha_n) + (\beta_1, \ldots, \beta_m) = (\alpha_1, \ldots, \alpha_n, \beta_1, \ldots, \beta_m)$, and $(\alpha_1, \ldots, \alpha_n)(\beta_1, \ldots, \beta_m) = (\alpha_1\beta_1, \ldots, \alpha_1\beta_m, \alpha_2\beta_1, \ldots, \alpha_n\beta_m)$.
+
+\section{Ideals II: Unique Factorisation Boogaloo}
+As an example, take $K = \Q(\sqrt{-5}).$ We was before that $\o_K = \Z[\sqrt{-5}]$ is not a UFD, and so not a PID either, as $6 = 2\cdot 3 = (1+\sqrt{-5})(1-\sqrt{-5})$.
+
+These are both distinct factorisations into irreducibles, which can be checked using the norm. $\Nn_{K/\Q}(x+y\sqrt{-5}) = x^2+5y^2$. $\Nn_{K/\Q}(2) = 4$, so if if $2=\alpha\beta$ for $\alpha, \beta$ not units, then by multiplicativity of norm, $\Nn_{K/\Q}(\alpha) = \pm 2 = x^2+5y^2$, which has no solutions in the integers.
+
+Some ideal computations:
+\begin{align*}
+\left(2,1+\sqrt{-5}\right)^2 &= \left(4,2(1+\sqrt{-5}),(1+\sqrt{-5})^2\right) = \left(4,2+2\sqrt{-5},-4+2\sqrt{-5}\right) = (2)\\
+(3, 1+\sqrt{-5})(3, 1-\sqrt{-5}) &= (3)\\
+(2, 1+\sqrt{-5})(3, 1\pm\sqrt{-5}) &= (1\pm \sqrt{-5})\\
+\text{And so: }(6) &= (2, 1+\sqrt{-5})^2(3,1+\sqrt{-5})(3,1-\sqrt{-5})
+\end{align*}
+As an exercise, check that $\Nn(2, 1+\sqrt{-5}) = 2, \Nn(3, 1\pm\sqrt{-5})=3$, so these ideals are all maximal, since they have prime norm, and hence are prime. One can check that this is the only factorisation of $(6)$ as a product of prime ideals.
+
+\begin{lemma}
+If $I \subset \o_K$ is a non-zero ideal, with $\alpha \in K \st \alpha I \subset I$, then $\alpha \in \o_K$.
+\end{lemma}
+\begin{proof}
+$\alpha I \subset I \implies \alpha^k I \subset I$ for all $k \geq 0$. Let $0 \neq \beta \in I$. Then $\Z[\alpha]\beta \subset I$, and so $\Z[\alpha]\beta$ is a finitely generated $\Z$-module, since $I$ is, so $\Z[\alpha]$ is finitely generated, and hence $\alpha \in \o_K$.
+\end{proof}
+Note that this proof relies on the fact that $\o_K$ is all the algebraic integers. It fails if you replace $\o_K$ by a subring. We will next seek to prove that every $I = \prod P_i^{a_i}$ where $P_i$ are prime ideals is a unique representation, i.e. we have unique factorisation into prime ideals. 
+
+\begin{lemma}
+\item
+\begin{enumerate}
+\item Let $I \neq \{0\}$ be an ideal. Then there are prime ideals $P_1, \ldots, P_r$ not necessarily such that $I \supseteq P_i P_2\ldots P_r$.
+\item Let $P, P_1, \ldots, P_r$ be prime ideals with $P \supseteq P_1 \ldots P_r$. Then $P = P_i$ for some $i$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item We do this by induction on $\Nn(I)$. If $I = \o_K$ or $I=P$ is prime, then there is nothing to prove. Otherwise, there exists $\alpha, \beta \in \o_K \setminus I$ with $\alpha\beta \notin I$. Then $I+(\alpha) \supsetneq I, I+(\beta) \supsetneq I$. By induction, $I+(\alpha) \supset P_1\ldots P_r, I+(\beta) \supset Q_1\ldots Q_s$ for $P_i, Q_i$ prime ideals. Then $P_1\ldots P_r Q_1 \ldots Q_s \subset (I+(\alpha))(I+(\beta)) = I^2 + \alpha I + \beta I + (\alpha\beta) \subseteq I$
+
+\item Suppose $P \neq P_1$ and let $\alpha \in P_1 \setminus P$, since prime ideals are maximal $P \nsubseteq P_1, P_1 \nsubseteq P$. Then for all $\beta \in P_2 \ldots P_r, \alpha\beta \in P_1 \ldots P_r \subset P$, so, as $P$ prime, $\beta \in P$. So $P_w \ldots P_r \subset P$, and repeat until one of the $P_i$ is equal to $P$.
+\end{enumerate}
+\end{proof}
+\begin{corollary}
+Let $I \subset \o_K$ be a nonzero proper ideal, $0 \neq \alpha \in I$. Then there exists $\beta \in \o_K \setminus (\alpha)$ such that $\beta I \subset (\alpha)$.
+\end{corollary}
+\begin{proof}
+Let $P$ be a prime ideal containing $I$. It is enough to find $\beta \in \o_K \setminus(\alpha)$ with $\beta P \subset (\alpha)$. By \textbf{8.2}, there are prime ideals $P_1, \ldots, P_r$ with $(\alpha) \supset P_1 \ldots P_r$. Choose such a collection of primes with $r$ minimal. Then $P \supset (\alpha)$, without loss of generality we may take $P = P_1$. Then $(\alpha) \nsupseteq P_2 \ldots P_r$, so let $\beta \in P_2 \ldots P_r \setminus (\alpha)$. Then $\beta I \subset PP_2 \ldots P_r = P_1 P_2 \ldots P_r \subset (\alpha)$ as required.
+\end{proof}
+\begin{theorem}[``Ideals are invertible"]
+Let $I \subset \o_K$ be a nonzero ideal. Then there exists a nonzero ideal $J$ such that $IJ$ is principal.
+\end{theorem}
+\begin{proof}
+If $I = \o_K$ then $J = \o_K$ will do. So assume $I \subsetneq \o_K$ and that the result holds for every $I' \supsetneq I$. Pick $0 \neq \alpha \in I$, and choose $\beta$ as in \textbf{8.3}. Then $\alpha^{-1}\beta \notin \o_K$ and $\alpha^{-1}\beta I \subset \o_K$. So by \textbf{8.1}, $\alpha^{-1}\beta I \nsubseteq I$, and so $I \subsetneq I' \coloneqq I + \alpha^{-1}\beta I$. So by induction, there is a nonzero ideal $J'$ with $I'J' = (\gamma)$. Let $J = \alpha J' + \beta J' = (\alpha, \beta)J'$. Then $IJ = (\alpha, \beta) I J' = \alpha I' J' = (\alpha\gamma)$ is principal.
+\end{proof}
+The key point in this proof which is obscured is that if $I = P \ni \alpha$ and $\beta$ are as in \textbf{8.3}, then $(\alpha \beta)P = (\alpha)$.
+
+Now we come to the main theorem of this section:
+\begin{theorem}
+Let $I,J,I'$ be nonzero ideals of $\o_K$. Then
+\begin{enumerate}
+\item If $IJ = I'J$ then $I = I'$ \hfill(Cancellation)
+\item $I \supset J$ if and only if there is an ideal $H$ with $IH = J$ \hfill(To divide is to contain)
+\item There are unique distinct prime ideals $P_1, \ldots, P_r$ and integers $a_i \geq 1$ such that $I = P_1^{a_1}\ldots P_r^{a_r}$.\hfill(Unique prime factorisation)
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\item
+\begin{enumerate}
+\item By \textbf{8.4}, there is $J'$ with $JJ' = (\alpha)$ principal. Then $\alpha I = IJJ' = I'JJ' = \alpha I' \implies I = I'$.
+\item The ``if" direction is clear. Suppose that $I \supset J$, and let $II' = (\alpha)$ as in \textbf{8.4}. Then $JI' \subset (\alpha)$, and so $H \coloneqq \alpha^{-1}JI' \subset \o_K$ is an ideal, and $IH=\alpha^{-1}JII' = J$.
+\item Existence we do by induction in $\Nn(I)$. If $I \neq \o_K$, let $P$ be prime, $P \supset I$. Then by part 2, $I = PJ$ for some ideal $J$, and by part 1, $I \neq J$. But $J \supseteq I$, and so by induction, $J$ is a product of prime ideals, and hence so is $I$.
+
+For uniqueness, suppose $I = P_1\ldots P_K = Q_1\ldots Q_{\ell}$. If $k=0, I = \o_K$, so $\ell = 0$ so done. Otherwise, as $I \subset P_1$, we have $P_1 = Q_j$ for some $j$ by \textbf{8.1}.  Reordering, $P_1 = Q_1$, and so $P_2\ldots P_k = Q_2\ldots Q_\ell$, and finish by induction 
+\end{enumerate}
+\end{proof}
+We say two ideals $I,J$ are \emph{equivalent} if there are nonzero $\alpha, \beta \in \o_K$ such that $\alpha I = \beta J$. It is trivial to check that this is an equivalence relation. 
+
+\begin{theorem}
+The set of equivalence classes of ideals is an abelian group under multiplication, the \emph{ideal class group} $Cl(K)$ of $K$. The identity element is the class of principal ideals.
+\end{theorem}
+\begin{proof}
+All axioms are trivial to check apart from existence of inverses, but this follows from \textbf{8.4}
+\end{proof}
+
+Alternatively, we can define a \emph{fractional ideal} to be a subset of $K$ of the form $\alpha I$, for $I \subseteq \o_K$ some nonzero ideal, and $0 \neq \alpha \in K$. We can then multiply fractional ideals in the same way as ideals, and define a \emph{principal fractional ideal} to be any $\alpha\o_K$ for $\alpha$ nonzero.
+
+\begin{theorem}
+The set of fractional ideals of $K$ is an abelian group under multiplication, and is freely generated by the prime ideals of $\o_K$. The principal fractional ideals form a normal subgroup, and the quotient is the class group $Cl(K)$.
+\end{theorem}
+Remark: if $I \subseteq \o_K$ is a nonzero ideal, then its inverse in the group of fractional ideals is $\alpha^{-1}J$, where $IJ = (\alpha)$.
+\begin{proposition}
+The following are equivalent:
+\begin{enumerate}
+\item $\o_K$ is a principal ideal domain.
+\item $\o_K$ is a unique factorisation domain.
+\item $Cl(K) = \{1\}$ is trivial.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\textit{1.} and \textit{3.} are equivalent by definition: $Cl(K) = \{1\}$ if and only if every ideal is equivalent to $\o_K$, i.e. if every ideal is principal. Moreover, we know from GRM that every principal ideal domain is a unique factorisation domain, so \textit{1.}$\implies$\textit{2.}, so the only part to prove is that \textit{2.}$\implies$\textit{1.}
+
+It is enough to show that, if $P$ is prime, then $P$ is principal. Let $\alpha \in P\setminus\{0\}$, and factor $\alpha = \prod \pi_i$, where $\pi_i$ are irreducible. As $P$ is prime, some $\pi_i \in P$ - \textsc{wlog} take it to be $\pi_1$. Then since $\pi_1$ is an irreducible in a UFD, $(\pi_1)$ is a prime ideal and hence maximal, so from $(\pi_1) \subseteq P \subseteq \o_K$ we must have $P = (\pi_1)$ or $\o_K$, both principal.
+\end{proof}
+\begin{theorem}
+Let $I, J \subseteq \o_K$ be nonzero ideals. Then $\Nn(IJ) = \Nn(I)\Nn(J)$.
+\end{theorem}
+\begin{proof}
+It is sufficient to prove, by unique factorisation into primes, that if $P$ is prime, then $\Nn(IP)=\Nn(I)\Nn(P)$. Obviously, $\Nn(IP) = (\o_K : I)(I:IP)$, so \textsc{stp} that $(I:IP) = \Nn(P)$. 
+
+By cancellation, $I \neq IP$. We claim that, if $IP \subset J \subset I$, then $J = I$ or $J = IP$. Indeed, as $J \subset I, J = IJ'$ for some $J'$, so $P \subset J' \subset \o_K$ by cancellation, and so $J' = P$ or $\o_K$.
+
+Let $\alpha \in I \setminus IP$. Then $IP + (|alpha) = I$ by the claim. Consider the ($\o_K$-module) homomorphism given by $\tilde{\alpha}: \o_K/P \to I/IP; \tilde{\alpha}(\beta+P) = \alpha\beta +IP$. It is surjective, since $\Im(\tilde{\alpha}) = ((\alpha) + IP)/IP = I/IP$. Also, $\tilde{\alpha}$ is a homomorphism of $(\o_K/P)$-vector spaces.
+
+$\dim_{\o_K/P} (\o_K/P) = 1$; as $I \neq IP$, $\dim_{\o_K/P} ( I/IP) \geq 1$. As it is surjective, we must have $\dim(I/IP) = 1$, and so $\o_K/P \cong I/IP$, and so $\Nn(P) = (I:IP)$ as required.
+\end{proof}
+
+This fails for $R = \Z[2\sqrt{2}]$ and prime ideal $P = (2, 2\sqrt{2})$, since $\Nn(P) = 2$, whereas $P^2 = (4, 4\sqrt{2})$, so $\Nn(P^2) = 8 \neq 2 \cdot 2$.
+
+\section{Factorisation of Rational Primes}
+If $I \subset \o_K$, then $I \ni n = \prod p^{a(p)}$ for some $n \geq 1$ (e.g. $n = \Nn(I)$). So if we first factor $(p)$, we can figure out how to factor $I \supset \prod (p)^{a(p)}$
+
+\begin{theorem}
+Let $p$ be a rational prime and $\{P_1 : 1 \le i \leq r\}$ the prime ideals containing $p$. Let $\Nn(P_i) = p^{f_i}$, for $f_i \geq 1$. Then $(p) = P_1^{e_1} \ldots P_r^{e_r}$ for integers $e_i \geq 1$ satisfying $\sum_i e_i f_i = n$.
+\end{theorem}
+\begin{proof}
+The factorisation exists for some $e_i \geq 1$ by \textbf{8.5}. Now $\prod \Nn(P_i)^{e_i} = \Nn((p)) = |\Nn_{K/\Q}((p))| = p^n$, and so $\sum e_i f_i = n$.
+\end{proof}
+$f_i$ is called the \emph{residue class degree} of $P_i$, and $e_i$ is called the \emph{ramification index/degree} of $P_i$. We say that $p$ is \emph{ramified} in $K$ if some $e_i >1$, and is \emph{totally ramified} if $e_1 = n$, so $r = 1 = f_i$. $p$ is \emph{inert} if $(p)$ is prime so $(r = 1 = e_1, f_1 = n)$, and \emph{splits completely} if $r = n$ and so $(e_i = f_i = 1$ for all $i$).
+
+We will show soon that only finitely many primes $p$ can be ramified, but for now let's think about how to compute the decomposition $(p) = \prod P_i^{e_i}$. The following often works:
+\begin{theorem}[Dedekind's Criterion]
+Let $K = \Q(\theta), \theta \in \o_K$, the minimal polynomial $g = m_{\theta} \in \Z[x]$, and let $p$ be prime such that $p \nmid (\o_K : \Z[\theta])$. Let the reduction $\bar{g} \in \F_p[x]$ factor as $\bar{g} = \prod_{i=1}^r \bar{g}_i^{e_i}$, $\bar{g}_i \in \F_p[x]$ distinct irreducibles, and $e_i \geq 1$.
+
+Let $g_i \in \Z[x]$ be monic, whose reduction mod $p$ is $\bar{g}_i$. Then $(p) = \prod_{i=1}^r P_i^{e_i}$, where $P_i = (p, g_i(\theta))$ are distinct prime ideals. Moreover, $N(P_i) = p^{f_i}$, where $f_i = \deg g_i$.
+\end{theorem}
+\begin{proof}
+We will often use the 3\th[rd] isomorphism theorem: if $J \subset I \subset R$, then $R/I  \cong (R/J)/(I/J)$.
+
+First assume $\o_K = \Z[\theta]$.
+\begin{itemize}
+\item[Step 1:]  Since $\bar{g}_i \in \F_p[x]$ is irreducible, $\o_K/P_i = \Z[\theta]/(p, g_i(\theta)) \cong Z[x]/(g, p, g_i) \cong \F_p[x]/(\bar{g}, \bar{g}_i) = \F_p[x]/(\bar{g}_i)$, is a finite field with $p^{f_i}$ elements. So $P_i$ is prime of norm $p^{f_i}$.
+
+\item[Step 2:] $g = \prod g_i^{e_i} +ph, h \in \Z[x]$, and so:
+\begin{align*}
+\prod P_i^{e_i} = \prod (p, g_i(\theta))^{e_i} \subset \prod(p, g_i(\theta)^{e_i}) \subset (p, \prod g_i(\theta)^{e_i}) = (p, ph(\theta)) = (p)
+\end{align*}
+since $g(\theta) = 0$. But then comparing norms, we have $N(\prod P_i^{e_i}) = p^{\sum e_if_i}; N((p))=p^n$, where $n = \deg \bar{g} = \sum e_i \deg \bar{g}_i = \sum e_i f_i$. So we have equality $\prod P_i^{e_i} = (p)$.
+\end{itemize}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

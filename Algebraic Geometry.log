@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  7 FEB 2020 12:58
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  12 FEB 2020 13:33
  system commands enabled.
 **"Algebraic Geometry.tex"
 ("./Algebraic Geometry.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.919 seconds
+luaotfload | main : initialization completed in 3.616 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1011,20 +1011,43 @@ Overfull \hbox (33.46284pt too wide) in paragraph at lines 286--287
 [][] 
  []
 
-[7] [8<./plane.png><./line.png><./circle.png>] [9] [10] [11] [12] [13]
-("./Algebraic Geometry.aux"))
+[7] [8<./plane.png><./line.png><./circle.png>] [9] [10] [11] [12] [13] [14]
+[15]
+LaTeX Font Info:    Try loading font information for U+euf on input line 573.
+ ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/ueuf.fd"
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+)
+Package pgfplots info on input line 607: Overriding colorspace to rgb due to xco
+lor configuration.
+Package pgfplots info on input line 624: Overriding colorspace to rgb due to xco
+lor configuration.
+
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 605--640
+[]$[]$ $[]$ 
+ []
+
+Package pgfplots info on input line 649: Overriding colorspace to rgb due to xco
+lor configuration.
+Package pgfplots info on input line 658: Overriding colorspace to rgb due to xco
+lor configuration.
+
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 646--665
+[]$[]$ $[]$ 
+ []
+
+[16] [17] [18] ("./Algebraic Geometry.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 31295 strings out of 494305
+ 31504 strings out of 494305
  100000,1144653 words of node,token memory allocated
  521 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 3 glue, 4 kern, 1 glyph, 9 attribute, 55 glue_spec,
  9 attribute_list, 2 write nodes
-   avail lists: 1:3,2:2529,3:1048,4:38,5:338,6:22,7:3547,8:46,9:381,10:10,11:198
+   avail lists: 1:3,2:4180,3:1489,4:90,5:350,6:30,7:3547,8:46,9:403,10:11,11:198
 
- 34435 multiletter control sequences out of 65536+200000
- 90 fonts using 6379071 bytes
- 69i,15n,100p,1090b,2083s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34637 multiletter control sequences out of 65536+200000
+ 97 fonts using 6785647 bytes
+ 69i,18n,100p,1090b,2221s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/p
 rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman6-regular.otf><c:/progra
 m files/miktex 2.9/fonts/opentype/public/lm/lmroman9-regular.otf><c:/program fil
@@ -1044,18 +1067,23 @@ e1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on Algebraic Geometry.pdf (13 pages, 993604 bytes).
+2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmsy9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/eu
+ler/eufm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/
+msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm
+10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pf
+b>
+Output written on Algebraic Geometry.pdf (18 pages, 1068686 bytes).
 
-PDF statistics: 207 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 242 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

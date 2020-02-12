@@ -178,7 +178,7 @@ For instance, $\V(y^2-x^3+x)$, the diagram on the first page of these notes, is 
 \section{Regular and Rational Functions}
 In algebraic geometry we are interested in polynomial functions, i.e. $f: \mathbb{A}^n \to K$ for some $f \in A = K[x_1, \ldots, x_n]$. Then, given $X \subseteq \mathbb{A}^n$ closed, we get $f|_X : X \to K$. Note that if there are $f,g \in A$ with $f|_X = g|_X$, then $(f-g)|_X = 0$, and so $f-g \in I(X)$.
 
-Let $X \subseteq \mathbb{A}^n$ be an algebraic set. We define the \emph{coordinate ring} of $X$ to be $A(X) \coloneqq A/I(X)$.
+Let $X \subseteq \mathbb{A}^n$ be an affine variety. We define the \emph{coordinate ring} of $X$ to be $A(X) \coloneqq A/I(X)$. The lecturer also uses the notation $K[X]$ to mean the same thing. I'm not sure why, but if you ever think we're doing some sort of polynomial ring in an affine variety, it's probably  because of this.
 
 If $X$ is irreducible and $U \subseteq X$ is open, then a \emph{regular function} on $U$ is a function $f:U \to K$ such that, for every $p \in U$, there is an open neighbourhood $p \in V \subseteq U$, and functions $g, h \in A(X)$, with $h(q) \neq 0$ for all $q \in V$ and $f = g/h$ on $V$, i.e. everywhere in $U$ it is \textit{locally} a ratio of two polynomials.
 
@@ -473,11 +473,220 @@ For example:
 \begin{proof}[Proof of Lemma]
 The goal is to show that $X = \V(I^h)$ is the smallest closed set containing $X^0 = \V(I)$. Assume there exists $Y \supseteq X^0$ closed in $\P^n_K$. Observe that $Y = \V(J)$ for some homogeneous ideal $J \subseteq K[\mathbf{Z}]$. Given any $F \in J$ homogeneous then there exists $f \in K[z_1, \ldots, z_n]$ such that $F = Z_0^d f^h$ for some $d \geq 0$. 
 
-Observe now that $z_0^d f^h$ vanishes on $X^0$, so $f$ vanishes on $X^0$. This implies that $f \in \sqrt{I}$, or $f^m \in I$ for some $m \geq 1$, and then $(f^m)^h = (f^h)^m \in I^h \implies Z_0^d (f^h)^m \in I^h$. This implies that $J \subseteq \sqrt{I^h}$, so $Y \supseteq X$.
+Observe now that $Z_0^d f^h$ vanishes on $X^0$, so $f$ vanishes on $X^0$. This implies that $f \in \sqrt{I}$, or $f^m \in I$ for some $m \geq 1$, and then $(f^m)^h = (f^h)^m \in I^h \implies Z_0^d (f^h)^m \in I^h$. This implies that $J \subseteq \sqrt{I^h}$, so $Y \supseteq X$.
 \end{proof}
 
+\begin{proof}[Proof Sketch]
+There is a natural bijection between $K(X)$ and $K(X^0)$, obtained as follows:
+
+Given $\frac{f}{g} \in K(X^0)$, then we can produce an element of $K(X)$ by homogenization and topping up the degree: let $m = \max\deg\{f,g\}$. Then $\frac{Z_0^m f(z_1/z_0, \ldots, z_n/z_0)}{Z_0^m g(z_1/z_0, \ldots, z_n/z_0)} \in K(X)$.
+
+Conversely, given  $\frac{F(Z_0, \ldots, Z_n)}{G(Z_0, \ldots, Z_n)}$, we produce a rational function on $X^0$, by $\frac{F(1, z_1, \ldots, z_n)}{G(1, z_1, \ldots, z_n)} \in K(X^0)$. It easy but painful to check that these are mutual inverses.
+\end{proof}
+
+Given $\varphi \in K(X)$, write $\varphi = \frac{F}{G}$ for $F, G \in \mathcal{O}_{\P^n}(d)$, and then we obtain a function $\varphi:X \setminus \mathbb{V}(G) \to K$.
+
+Given $F_0, \ldots, F_m \in \mathcal{O}_{\P^n}(d)$, we obtain a map
+\begin{align*}
+\underline{F}: \P_K^n \setminus \bigcap_i \V(F_i)  &\to \P_K^m\\
+[Z_0:\ldots:Z_n] \mapsto [F_0(Z_0, \ldots, Z_n):\ldots:F_n(Z_0,\ldots, Zn)]
+\end{align*}
+We write $\underline{F}:\P_K^n \dashrightarrow \P_K^m$, where the dashed arrow means the function is partially defined. Given this $\underline{F}$, the set $\bigcap_i \V(F_i)$ is called the \emph{base locus}.
+
+We say two rational maps $\underline{F}, \underline{G}$ are equivalent on a projective variety $X \subseteq \P_K^n$ if $F_iG_j - F_jG_i \in I(X)$ for all $i,j$. note that they can possibly have different base loci.
+
+Given $\varphi:X \dashrightarrow \P_K^n$, an (equivalence class of) rational map $P \in X$ is a \emph{regular point} for $\varphi$ if there exists a representative $\varphi = \underline{F}$ such that $P \notin$ the base locus of $\underline{F} = \bigcap_i \mathbb{V}(F_i)$. We can then define a \emph{morphism} of projective varieties to be a rational map $\varphi: X \dashrightarrow \P_K^n$ with the property that $P$ is a regular for $\varphi$ for all $P \in X$. We write $\varphi: X \to \P_K^m$.
+
+Let $P \in \P_K^n$ be any point and $\P_K^{n-1} \cong H \subseteq \P_K^n$ be a hyperplane such that $P \notin H$. Then define the \emph{projection away from P} as follows: given $Q \in \P_K^n$, let $\overline{PQ}$ be the unique line passing through these points. Then define $\varphi$:
+\begin{align*}
+\varphi: \P_K^n &\dashrightarrow \P_K^{n-1} \cong H\\
+Q &\mapsto \overline{PQ} \cap H
+\end{align*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=2]
+\draw (0,0)--(4,0)--(4,4)--(0,4)--(0,0);
+\draw[red] (0,1.3125)--(4,3.5625);
+\draw[blue] (0.2,4) -- (1.3,0) node[above right] {$H$};
+\draw[red] (0,3.6)--(4,2.8);
+\draw[red] (0.6,0)--(3.8,4);
+
+\node[circle, draw, fill, label={[green!80!black]above left:$P$}, inner sep=0.1em, green!80!black] (P) at (3,3) {};
+\node[circle, draw, fill, label={above:$Q_1$}, inner sep=0.1em] (Q1) at (2,3.2) {};
+\node[circle, draw, fill, label={above right:$\varphi(Q_1)$}, inner sep=0.1em] (pQ1) at (0.32804,3.53439) {};
+\node[circle, draw, fill, label={above:$Q_2$}, inner sep=0.1em] (Q2) at (1.4,2.1) {};
+\node[circle, draw, fill, label={[shift={(-.6,-.2)}]:$\varphi(Q_2)$}, inner sep=0.1em] (pQ1) at (0.81326,1.76996) {};
+\node[circle, draw, fill, label={above left:$Q_3$}, inner sep=0.1em] (Q3) at (3.4,3.5) {};
+\node[circle, draw, fill, label={[shift={(-.6,-.3)}]:$\varphi(Q_3)$}, inner sep=0.1em] (pQ1) at (1.12093,0.65115) {};
+\end{tikzpicture}
+\caption{The projection $\varphi$ away from $P$ in $\P^2$ onto $H \cong \P^1$}
+\end{figure}
 
 
+To honestly check this is a rational map, change coordinates such that $H = \{Z_n = 0\}$ and $P = [0:\ldots:0:1]$. Then the rational map is given by:
+\begin{align*}
+\P^n &\dashrightarrow \P^n\\
+[Z_0\ldots:Z_n] &\mapsto [Z_0:\ldots:Z_{n-1}]
+\end{align*}
 
+The \emph{degree d Veronese morphism} is given as follows. Choose a basis for $\mathcal{O}_{\P^n}(d)$, say $F_1, \ldots, F_{\binom{n+d}{d}}$. Then:
+\begin{align*}
+\mathcal{V}_d:\P^n &\to \P^{\binom{n+d}{d}-1}\\
+P &\mapsto [\ldots : F_j(P):\ldots]
+\end{align*}
+Then the twisted cubic is simply the degree 3 Veronese map of $\P^1$.
+
+Given a rational map $\varphi:X \dashrightarrow Y$ defined by restriction from a rational map $\P^n_K \dashrightarrow \P^m_K$, we define $\Dom \varphi$ to be the  set of all regular points for $\varphi$ on $X$. Then $\varphi$ is said to be \emph{dominant} if $\varphi(\Dom \varphi)$ is Zariski dense.
+
+Let $X$ and $Y$ be irreducible. A rational map $\varphi : X \dashrightarrow Y$ is called \emph{birational} if there exists a rational map $\varphi: Y \dashrightarrow X$ such that $\varphi \circ \psi$ and $\psi \circ \varphi$ are the identity whenever they are defined. We say a projective variety $A$ is birational to another projective variety $B$ whenever there exists some birational map between them, or we might say that $A$ and $B$ are birational.
+
+For example:
+\begin{itemize}
+\item $A^n$ and $\P^n$ are birational
+\item $\V(y^2-x^3)$ is birational to $\A^1$
+\item $\V(y^2-x^3+x) \subseteq \A^2_K$ is \textit{not} birational to $\A_K^1$ for $\charr K \neq 2$.
+\end{itemize}
+\begin{theorem}
+Let $X$ and $Y$ be projective varieties. Then $X$ is birational to $Y$ if and only if $K(X) \cong K(Y)$.
+\end{theorem}
+
+A \emph{quasi-projective variety} is a Zariski open subset of a projective variety, i.e. $\V(I) \setminus \V(J)$ for two ideals $I, J$. Note that, since $\emptyset$ is a projective variety, every projective variety is also a quasi-projective variety.
+
+\section{Products}
+If $X$ and $Y$ are quasi-projective varieties, then $X \times Y$ is also a quasi-projective variety. If $X$ and $Y$ are projective (or irreducible), then $X \times Y$ is also projective (or irreducible), respectively.
+
+This fact relies on the fact that, given $\P^n_K$ and $\P^m_K$, the set $\P^n_K \times \P^m_K$ is naturally a projective variety, and the rest follows from basic topological arguments.
+
+We can approach this from the point of view of creating a Zariski topology on $\P^n_K \times \P^m_K$ using what we already know - a point $P \in \P^n_K \times \P^m_K$ is given by $([a_0:\ldots:a_n],[b_0:\ldots:b_m])$ where we can scale the first and second parts \textit{independently}. We then can consider some appropriate notion of a \emph{bihomogeneous} polynomial in $(n+1)+(m+1)$ variables, obtaining an algebraic structure by using their vanishing loci.
+
+Here however, we will use a slightly different approach:
+\subsection{Segre Embedding}
+The \emph{Segre embedding} is the map:
+\begin{align*}
+\sigma_{n,m}:\P^n_K \times \P^m_K &\to \P^{(n+1)(n+1)-1}_K\\
+([x_0:\ldots:x_n],[y_0:\ldots:y_m]) &\mapsto [\ldots: x_iy_j:\ldots]
+\end{align*}
+\begin{claim}
+$\sigma_{n,m}$ is injective.
+\end{claim}
+\begin{proof}
+Let $c = [\ldots:C_{ij}:\ldots] \in \Im(\sigma_{n,m})$ and $(a,b) \in \sigma_{n,m}^{-1}(\{c\})$, say $a = [A_0:\ldots:A_n], b = [B_0:\ldots:B_m]$.
+
+We may assume, up to a change of coordinates, that $C_{0,0} = 1$, so $A_0 = B_0 = 1$. This then forces that $B_i = C_{0,i}$ and $A_j = C_{j,0}$, so $a,b$ are unique, so $\sigma_{n,m}$ is injective.
+\end{proof}
+\begin{claim}
+The image of $\sigma_{n,m}$ is closed.
+\end{claim}
+\begin{proof}
+The equations are $\{Z_{ij}Z_{k\ell} - Z_{i\ell}Z_{kj} = 0\}$ for all $i,j,k,\ell$. Checking that $\Im(\sigma_{m,n})$ is equal to the vanishing locus of these equation is a locally affine calculation which is left as an exercise.
+\end{proof}
+Note that the projection maps
+\begin{tikzpicture}
+\node (a) at (0,1.2) {$\P_K^n \times \P_K^m$};
+\node (b) at (-1.2,0) {$\P_K^n$};
+\node (c) at (1.2,0) {$\P_K^m$};
+\draw[->] (a) -- node[midway, left] {$\pi_1$} (b);
+\draw[->] (a) -- node[midway, right] {$\pi_2$} (c);
+\end{tikzpicture}
+are both morphisms.
+
+\subsection{The Blow-up}
+The \emph{blowup} of $\A^2_K$ at the origin is given as follows:
+\begin{align*}
+\Bl_{(0,0)}\A^2 = \left\{((x,y),[z:w]) \in \A^2_K \times \P^1_K | xz-yw = 0\right\}
+\end{align*}
+Since $\A^2 \times \P^1 \to \A^2$ is a morphism, there is an induced morphism:
+\begin{align*}
+\Bl_{(0,0)}\A^2_K \xrightarrow{\pi} \A^2_K
+\end{align*}
+If $P \in \A^2_K, P \neq (0,0)$ then $\pi^{-1}(P)$ is exactly one point. In fact, $\Bl_{(0,0)}\A^2 \setminus \pi^{-1}(0,0) \to \A^2_{K}\setminus \{(0,0)\}$ is then invertible, and so $\pi$ is birational map. If instead $P = (0,0)$ then $\pi^{-1}(P) = \P^1_K$.
+
+\begin{figure}
+\begin{subfigure}{0.5\textwidth}
+\begin{tikzpicture}
+\begin{axis}[axis lines=middle, xmin=-3, xmax=3, ymin=-3, ymax=3, xtick=\empty, ytick=\empty, xticklabels=\empty, yticklabels=\empty]
+\addplot[olive, domain=-3:3] (x,x);
+\addplot[olive, domain=-3:3] (x,2*x);
+\addplot[olive, domain=-3:3] (x,1/2*x);
+\addplot[olive, domain=-3:3] (x,4*x);
+\addplot[olive, domain=-3:3] (x,1/4*x);
+\addplot[olive, domain=-3:3] (x,-1*x);
+\addplot[olive, domain=-3:3] (x,-2*x);
+\addplot[olive, domain=-3:3] (x,-4*x);
+\addplot[olive, domain=-3:3] (x,-1/2*x);
+\addplot[olive, domain=-3:3] (x,-1/4*x);
+\end{axis}
+\end{tikzpicture}
+\caption{$\A^2$}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\begin{tikzpicture}
+\begin{axis}[xmin=-3, xmax=3, ymin=-3, ymax=3, xtick=\empty, ytick=\empty, xticklabels=\empty, yticklabels=\empty]
+\addplot[red, domain=-3:3] (x, {rad(atan(-x-1))-2});
+\addplot[olive, domain=-3:3] (x,{1.5*x-0.4});
+\addplot[olive, domain=-3:3] (x,{1.6*x+0.4});
+\addplot[olive, domain=-3:3] (x,{1.8*x+1.2});
+\addplot[olive, domain=-3:3] (x,{2.2*x+2.5});
+\addplot[olive, domain=-3:3] (x,{4*x+8});
+\addplot[olive, domain=-3:3] (x,{8*x+30});
+\addplot[olive, domain=-3:3] (x,{x-1.5});
+\addplot[olive, domain=-3:3] (x,{0.8*x-2});
+\addplot[olive, domain=-3:3] (x,{0.5*x-2.5});
+\addplot[olive, domain=-3:3] (x,{20*x+55});
+\end{axis}
+\end{tikzpicture}
+\caption{$\Bl_{(0,0)}\A^2$}
+\end{subfigure}
+\end{figure}
+We can think of $\P^1$ as separating lines through the origin based on incoming slope. The notion of blowups can be generalised to $\Bl_Z X$ for $Z \subseteq X$ some closed subvariety.
+
+\section{Smoothness, Tangent Spaces, and Dimension}
+Given $X \subseteq \P^n_{\C}$ a variety, we want to know when $X$ viewed in Euclidean space is a manifold.
+\begin{figure}[H]
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tikzpicture}[scale = 1]
+\begin{axis}[xticklabels={,,}, yticklabels={,,,}, xtick=\empty, ytick=\empty]
+\addplot[blue, ultra thick, domain=-3:3, samples=200] (x, {x^3-3*x});
+\end{axis}
+\end{tikzpicture}
+\caption{$\V(f)$ for $f = y-x^3+3x$}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tikzpicture}[scale = 1]
+\begin{axis}[xticklabels={,,}, yticklabels={,,,}, xtick=\empty, ytick=\empty]
+\addplot[blue, ultra thick, domain=0:3] (x, {x^(3/2)});
+\addplot[blue, ultra thick, domain=0:3, samples=200] (x, {-x^(3/2)});
+\end{axis}
+\end{tikzpicture}
+\caption{$\V(f)$ for $f = y^2-x^3$}
+\end{subfigure}
+\end{figure}
+The curve on the left is smooth, and forms a manifold, whilst the curve on the right has a cusp, so does not form a manifold. We will end up calling it singular.
+\subsection{Hypersurfaces}
+Let $X = \V(f) \subseteq \A^n_K$. A line in $\A^n_K$ through a point $P = (a_1, \ldots, a_n) \in X$ is given by
+\begin{align*}
+L = \{ (a_1+b_1t, \ldots, a_n+b_nt)| t \in K\}
+\end{align*}
+where $(b_1, \ldots, b_n) \in K^n \setminus \{\mathbf{0}\}$. 
+
+We say $L$ is \emph{tangent to X at P} if $g(t) = f(a_1+b_1t, \ldots, a_n+b_nt)$ vanishes to order 2 at $t=0$. More precisely, let
+\begin{align*}
+f^{lin} \coloneqq \sum_i \frac{\partial f}{\partial z_i}(P)(z_i-a_i)
+\end{align*}
+be the \emph{linearisation} of $f$ near $P$. Then we can define the affine tangent space to $X$ at $P$ by:
+\begin{align*}
+T_{X,P}^{aff} \coloneqq \V(f^{lin}) \subseteq \A_K^n
+\end{align*}
+As a sanity check, make sure that this gives the usual tangent line for $y=f(x)$.
+
+For example, in the case $X = \V(y^2-x^3)$, we calculate $f^{lin}$ at $(0,0)$ to be $0$, and so $T_{X, (0,0)}^{aff}$ is $\A^2_K$.
+
+A point $P$ on $X = \V(f)$ is called singular if $T_{x, P}$ has dimension $n$. A non-singular point is also called a smooth point.
+
+\begin{proposition}
+Given $X = \V(f)$, the set of singular points is a closed proper subset. In other words, the set of smooth points is dense.
+\end{proposition}
 
 \end{document}

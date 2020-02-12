@@ -738,10 +738,142 @@ Then $C = \max_{\alpha} I(X;Y) = \max_\alpha \left[H(\alpha(1-p) + (1-\alpha)p) 
 \addplot[samples=200, blue, ultra thick] (x, {1+x*log2(x) + (1-x)*log2(1-x)});
 \end{axis}
 \end{tikzpicture}
+\caption{Capacity as a function of $p$ for a binary symmetric channel}
 \end{figure}
 At $p=0,1$ the channel transmits perfectly, whilst at $p=\frac{1}{2}$ no information can be transmitted. We can choose to calculate $H(Y)-H(Y|X)$ or $H(X)-H(X|Y)$ to find the information - often one is easier than the other, for example with the binary erasure channel with erasure probability $p$.
 
 $\P(X=0) = \alpha, \P(X=1) = 1-\alpha, \P(Y = 0) = \alpha(1-p), \P(Y=\ast) = p, \P(Y=1) =(1-\alpha)(1-p)$
 
-Then $H(X|Y=0) = 0, H(X|Y = \ast) = H(\alpha), H(X|Y = 1) = 0$, and so $H(X|Y) = pH(\alpha)$.
+Then $H(X|Y=0) = 0; H(X|Y = \ast) = H(\alpha); H(X|Y = 1) = 0$, and so $H(X|Y) = pH(\alpha)$. So $C = \max_\alpha (H(\alpha) - pH(\alpha)) = 1-p$, where the maximum value is attained for $\alpha =\frac12$.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ymin=0, ymax=1, xmin=0, xmax=1]
+\addplot[samples=200, blue, ultra thick] (x, {1-x});
+\end{axis}
+\end{tikzpicture}
+\caption{Capacity as a function of $p$ for a binary erasure channel}
+\end{figure}
+
+We can now model using a channel $n$ times, called the \emph{n\th extension}, i.e. replace input and output alphabets $\mathscr{A}, \mathscr{B}$ by $\mathscr{A}^n, \mathscr{B}^n$.
+
+\begin{lemma}
+The $n\th$ extension of a discrete memoryless channel with information capacity $C$ has information capacity $nC$.
+\end{lemma}
+\begin{proof}
+The input $X_1, \ldots, X_n$ determines the output $Y_1, \ldots, Y_n$, and since the channel is memoryless, $H(Y_1,\ldots,Y_n|X_1,\ldots,X_n) = \sum_i H(Y_i|X_1, \ldots, X_n) = \sum_i H(Y_i|X_i)$.
+\begin{align*}
+I(X_1, \ldots, X_n; Y_1, \ldots, Y_n) &= H(Y_1, \ldots, Y_n) - H(Y_1, \ldots, Y_n|X_1, \ldots, X_n)\\
+&= H(Y_1, \ldots, Y_n) - \sum_{i=1}^n H(Y_i|X_i)\\
+&\leq \sum_{i=1}^n \left[ H(Y_i) - H(Y_i|X_i)\right]\\
+&= \sum_{i=1}^n I(X_i; Y_i) \leq nC
+\end{align*}
+To finish, we must find $X_1, \ldots X_n$ giving equality - take $X_i$ to be i.i.d. with $I(X_i, Y_i) = C$, giving equality at the second $\leq$. Then the $Y_i$ are i.i.d. so we have equality at the first $\leq$. So the maximum possible value is $nC$.
+\end{proof}
+
+\begin{proposition}
+For a DMC the operational capacity is at most the information capacity.
+\end{proposition}
+\begin{proof}
+Let $C$ be the information capacity. Suppose that reliable transmission is possible at some $R>C$, i.e. there is a sequence $C_1, C_2, \ldots$, with $C_n$ of length $n$ such that $\lim_{n\to \infty} \rho(C_n) = R$, and $\lim_{n\to\infty} \hat{e}(C_n) = 0$.
+
+We define the \emph{average error rate} $e(C_n) = \frac{1}{|C_n|}\sum_{c \in C_n}\P(\text{error}|c\text{ sent})$, so that $e(C_n) \leq \hat{e}(C_n)$. Hence $e(C_n) \to 0$ as $n \to \infty$. Then let $X$ be a random variable equidistributed in $C_n$. Transmit $X$ and decode to obtain $Y$. So $e(C_n) = \P(X\neq Y)$. Then $H(X) = \log|C_n| = \log\floor{2^{nR}} \geq nR -1$ for sufficiently large $n$. By Fano's inequality,
+\begin{align*}
+H(X|Y) \leq 1 +e(C_n)\log(|C_n|-1) \leq 1 + e(C_n)n\rho(C_n)
+\end{align*}
+By the previous proposition,
+\begin{align*}
+nC \geq I(X,Y) &= H(X) - H(X|Y) \\
+&\geq \log|C_n| - (1+e(C_n)n\rho(C_n))\\
+&= n\rho(C_n) - e(C_n)n\rho(C_n) - 1\\
+\therefore e(C_n)n\rho(C_n) &\geq n(\rho(C_n) - C)-1\\
+e(C_n) &\geq \frac{\rho(C_n) - C}{\rho(C_n)} - \frac{1}{n\rho(C_n)} \to \frac{R-C}{R}
+\end{align*}
+But $R>C$, so $e(C_n) \not\to 0$ as $n \to \infty$. \contr
+\end{proof}
+
+\begin{proposition}
+Consider the Binary Symmetric Channel with error probability $p$. Let $R < 1- H(p)$. Then there exists a sequence of codes $C_1, C_2, \ldots$, with $C_n$ of length $n$ and size $\floor{2^{nR}}$, such that:
+\begin{align*}
+\lim_{n \to \infty} \rho(C_n) &= R\\
+\lim_{n \to \infty} e(C_n) &= 0
+\end{align*}
+Note this is $e(C_n)$, not $\hat{e}(C_n)$.
+\end{proposition}
+\begin{proof}
+We use the method of random codes.
+
+Without loss of generality, assume $p <\frac12$. Let $\epsilon > 0$ be such that $p + \epsilon < \frac12$ and $R < 1 - H(p + \epsilon)$. This is always possible since $H$ is continuous. Let $m = \floor{2^{nR}}$ and pick $C \in \mathscr{C} = \{[n,m]-$binary codes$\}$ and random. Note $|\mathscr{C}| = \binom{2^n}{m}$. Let $\mathscr{X}$ be a random variable equidistributed throughout $\mathscr{C}$, say $\mathscr{X} = \{X_1, \ldots, X_m\}$ where the $X_i$ are random variables taking values in $\F_2^n$, such that:
+\begin{align*}
+\P(X_i = x_i | \mathscr{X} = C) = \begin{cases} \frac1m & x_i \in C \\ 0 & \ow \end{cases}
+\end{align*}
+Notice that $\P(X_2 = x_2| X_1 = x_1) = \begin{cases} \frac{1}{2^n-1} & x_1\neq x_2\\ 0 & \ow \end{cases}$
+
+Send $X = X_1$ through the BSC, receive $Y$, and decode to obtain $Z$. Under the minimum distance decoding, $\P(X \neq Z) = \frac{1}{|\mathscr{C}|}\sum_{C \in \mathscr{C}} e(C)$.
+
+It then suffices to show that $\P(X \neq Z) \to 0$ as $n \to \infty$. Let $r = \floor{n(p+2)}$.
+\begin{align*}
+\P(X \neq Z) &\leq \P(B(Y,r) \cap \mathscr{X} \neq \{X\})\\
+&= \underbrace{\P(X \notin B(Y,r))}_{(i)} + \underbrace{\P(B(Y,r) \cap \mathscr{X} \supsetneq \{X\})}_{(ii)}
+\end{align*}
+\begin{itemize}
+\item[$(i)$:] $\P(X \notin B(Y,r)) = \P($BSC makes more than $r$ errors$) \to 0$ as $n \to \infty$ by \textbf{9.3}.
+\item[$(ii)$:] \begin{align*}
+\P(B(Y,r) \cap \mathscr{X} \supsetneq \{X\}) &\leq \sum_{i=2}^m \P(X_i \in B(Y,r)\text{ and }X_1 \in B(Y,r))\\
+&\leq \sum_{i=2}^m \P(X_i \in B(Y,r) | X_1 \in B(Y,r))\\
+&= (m-1)\frac{V(n,r)-1}{2^n-1}\\
+&\leq m\frac{V(n,r)}{2^n}\\
+&\leq 2^{nR}2^{nH(p+\epsilon)}2^{-n} = 2^{n(R-(1-H(p+\epsilon)))} \to 0
+\end{align*}
+since $R < 1-H(p+\epsilon)$
+\end{itemize}
+\end{proof}
+\begin{proposition}
+We can replace $e$ by $\hat{e}$ in the previous proposition.
+\end{proposition}
+\begin{proposition}
+Pick $R'$ such that $R<R'<1-H(p)$. Then the previous proposition constructs $C_1', C_2', \ldots$, with $C_n'$ of length $n$, size $\floor{2^{nR'}}$, and $e(C_n') \to 0$ as $n \to \infty$.
+
+Order then codewords of $C_n'$ by $\P($error$|c\sent)$, and delete the worse half them to give $C_n$. Then we have $|C_n| = \floor{\frac{|C_n'|-1}{2}}, \hat{e}(C_n) \leq 2e(C_n')$. Then $\rho(C_n) \to R$ and $\hat{e}(C_n) \to 0$ as $n \to \infty$.
+\end{proposition}
+Note that:
+\begin{enumerate}
+\item \textbf{9.12} says we can transmit reliably at any rate $R < 1-H(p)$ so the capacity is at least $1-H(p)$. But, by \textbf{9.10}, the capacity at most $1-H(p)$, and hence the BSC with error probability has capacity $1-H(p)$.
+
+\item The proof shows that good codes exist, but it does not tell us how to find them.
+\end{enumerate}
+\section{Interlude: An Application to Gambling}
+Let $0 < p < 1$, $n>0$, and $0 \leq w <1$. A coin is tossed $n$ times in succession. $P(H) = p$ and, if I pay $k$ ahead of a particular throw, then I get back $kn$ if the throw is head, but nothing if the throw is a tail.
+
+What is my strategy?
+\begin{itemize}
+\item If $pn <1$, then don't bet - your expected winnings is $<0$.
+\item If $pn >1$, then we want to bet, but how much? A larger bet means more winnings, but also more risk. What proportion $w$ of our total wealth should we bet?
+\end{itemize}
+Note that $w$ is always the same, only the size of the fortune changes. Let the fortune by $X_j$ after the $j\th$ throw. I bet $wX_j$, retaining $(1-w)X_j$. My fortune $X_{j+1}$ after the $(j+1)\th$ throw is:
+\begin{align*}
+X_{j+1} = \begin{cases} X_j(Xn + 1-w) & j\th \text{ throw is H}\\X_j(1-w) & j\th\text{ throw is T}\end{cases}
+\end{align*}
+Put $Y_{j+1} = \frac{X_{j+1}}{X_j} = \begin{cases} wn + (1-2) & H \\ 1-w & T\end{cases}$.
+
+Then we try to maximise the log of our fortune: let $\E\log Y_i = \bar{\mu}4, \Var(\log Y_i) = \bar{\sigma}^2$. If $a > 0$ then:
+\begin{align*}
+\P\left(\left| \frac{\log Y_1+\ldots + \log Y_n}{n} - \bar{\mu}\right|\geq a\right) & \leq \frac{\bar{\sigma}^2}{na^2}
+\end{align*}
+by Chebyshev's inequality. But $\sum \log Y_i = \log X_i$, so we have:
+\begin{align*}
+\P\left(\left| \frac{\log X_n}{n} - \bar{\mu}\right|\geq a\right) & \leq \frac{\bar{\sigma}^2}{na^2}
+\end{align*}
+i.e., for all $\epsilon > 0$, $\delta > 0$, there is some $N$ such that
+\begin{align*}
+\P\left(\left| n^{-1}\log(X_n) - \bar{\mu}\right| \geq \delta\right) \leq \epsilon\;\;\forall\;\N
+\end{align*}
+\begin{lemma}
+Consider one single toss of a coin with $\P(H) = p < 1$. Suppose that a bet on heads has payout ratio of $n$. Suppose that we have a bankroll of $1$ unit and we bet $w$ on $H$, retaining $1-w$ for $0\leq 1 \leq 1$. If $Y$ is the expected value of our fortune after the throw then
+\begin{align*}
+\E(\log Y) = p\log(1+(n-1)w) + (1-p)\log(1-w)
+\end{align*}
+The value of $\E(\log Y)$ is maximised by taking $w = 0$ if $np \leq 1$ and setting $w = \frac{np-1}{n-1}$ if $np > 1$.
+\end{lemma}
+A better who maximises the $\log$ of his or her fortune is called a \emph{Kelly better}, and is following \emph{Kelly's rule}, since Kelly in 1956 showed how to do this using information theory.
 \end{document}

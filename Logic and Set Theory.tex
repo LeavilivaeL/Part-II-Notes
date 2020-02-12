@@ -598,7 +598,7 @@ A \emph{lattice} $L$ is a poset in which every finite subset has both a supremum
 \end{enumerate}
 These rules are essentially saying $L$ behaves like a powerset, with $\wedge$ corresponding to $\cap$ and $\vee$ corresponding to $\cup$. Then the first two rules are de Morgan's laws, and the third is the notion of a complement.
 
-\subsection{Zorn's Lemma and Applications}
+\subsection{Zorn's Lemma}
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=5]
@@ -645,4 +645,75 @@ But can we actually let $x_{\alpha} = \{x_{\delta} : \delta < \alpha\}^{\ast}$? 
 \textbf{Cabbages.} Take something not in $P$, for instance a cabbage that we happen to have lying around. For $\alpha < \gamma$, define $x_\alpha \in P\cup \{$cabbage$\}$ exactly as above, except for $\alpha$ a non-zero limit.
 
 Then set for $\alpha$ a non-zero limit, let $x_\alpha = \begin{cases} \{x_\delta:\delta<\alpha\}^{\ast} & \text{this set is a chain}\\ \text{cabbage} & \ow\end{cases}$, and also define cabbage$' = $ cabbage. By induction, we don't get any cabbage. In these proofs, cabbages are implicitly assumed.
+
+\subsection{Applications of Zorn's Lemma}
+The general method of applying Zorn's Lemma is as follows:
+\begin{enumerate}
+\item Define a suitable poset.
+\item Check every chain has an upper bound.
+\item Use Zorn to find a maximal element $x$.
+\item Check $x$ is the thing we are looking for.
+\end{enumerate}
+It is not unusual for most of the work to come in step 4.
+\begin{corollary}
+Let $P$ be a set of primitive propositions, and let $S \subset L = L(P)$ be consistent. Then there is a consistent $\bar{S} \subset L$ with $S \subset \bar{S}$ and for all $p \in L$, $p \in \bar{S}$ or $\neg p \in \bar{S}$.
+\end{corollary}
+\begin{proof}
+Let $X$ be the poset  $\{R\subset L | R$ consistent and $S \subset R\}$, ordered by $\subset$. Let $\mathscr{C} \subset X$ be a chain. If $\mathscr{C} = \emptyset$ then $S \in X$ is an upper bound for $\mathscr{C}$. 
+
+Suppose $\mathscr{C} \neq \emptyset$. Let $Q = \bigcup_{R \in \mathscr{C}} R$. Then for all $R \in \mathscr{C}, R \subset Q$. As $\mathscr{C} \neq \emptyset$, there exists $R \in \mathscr{C}$ and $S \subset R \subset Q$. Suppose that $Q$ is inconsistent, i.e. that $Q \vdash \bot$. As proofs are finite, there are some $q_1, \ldots, q_n \in Q$ such that $\{q_1, \ldots, q_n\}\vdash\bot$. For each $i$, pick $R_i \in \mathscr{C}$ with $q_i \in R_i$. As $\mathscr{C}$ is a chain and there are only finitely many of $R_1, \ldots, R_n$, there exists $j$ such that $R_i \subseteq R_j$ for all $i$. Then $q_1, \ldots, q_n \in R_j$, and so $R_j \vdash \bot$. \contr
+
+Hence $Q$ is consistent. Thus $Q \in X$ is an upper bound for $\mathscr{C}$. By Zorn's lemma, $X$ has a maximal element $\bar{S}$. Let $p \in L$ and suppose $p \notin \bar{S}$. Then $\bar{S} \cup \{p\}$ is inconsistent, as otherwise $\bar{S} \cup \{p\} \in X$ with $\bar{S} \subsetneq \bar{S}\cup\{p\}$. That is, $\bar{S}\cup\{p\} \vdash \bot$, and so by the deduction theorem $\bar{S} \vdash (p \implies \bot)$, i.e. $\bar{S} \vdash \neg p$. So, similarly to the above, $\neq p \in \bar{S}$.
+\end{proof}
+This fills the gap in the proof of the Model Existence Lemma, thus finishing the proof of the completeness theorem. It is very common when using Zorn to consider a poset of the form $(X, \subseteq)$ where $X \subseteq \powset(A)$ for some set $A$. If $\mathscr{C}$ is a chain in $X$, an obvious guess for an upper bound for $\mathscr{C}$ is $Q = \bigcup_{R \in \mathscr{C}} R$. Clearly for all $R \in \mathscr{C}$, $R \subseteq Q$, but often work is needed to show that $Q \in X$, so that $Q$ is genuinely an upper bound for $\mathscr{C}$ in $X$. Also, care must be taken to remember that $\emptyset$ si a chain, and often needs t be considered separately.
+
+\begin{corollary}
+Every vector space has a basis.
+\end{corollary}
+\begin{proof}
+Let $V$ be a vector space over a field $k$. Let $P = \{S \subseteq V | S$ is linearly independent$\}$, ordered by $\subseteq$. Let $\mathscr{C} \subseteq P$ be a chain, and let $R = \bigcup_{S \in \mathscr{C}}S$. Suppose that $R$ is linearly dependent. Then there are some $n \in \N\setminus\{0\}$, and some distinct $v_1, \ldots, v_n \in R$ and some $\lambda_1, \ldots, \lambda_n \in k$ with $\sum_{i=1}^n \lambda_i v_i = 0$. For each $i$, pick $S_i \in \mathscr{C}$ with $v_i \in S_i$. As $\mathscr{C}$ is a chain, there is some $j$ for which $S_i \subseteq S_j$ for all $i =1, \ldots, n$. Then $v_1, \ldots, v_n \in S_j$ , so $S_j$ is linearly dependent. \contr
+
+Hence $R$ is linearly independent, and so $R$ is an upper bound for $\mathscr{C}$. By Zorn, $P$  has a maximal element $B$. Certainly $B$ is linearly independent. Suppose there is some $v \in V \setminus \spann{B}$. We show that $B \cup\{v\}$ is linearly independent. Indeed, if not then we have a linear combination $\mu v - \sum_{i=1}^n \lambda_i b_i = 0$, where $b_i \in B$, but then $v = \sum \mu^{-1}\lambda_i b_i \in \spann{B}$\contr. But then $B\cup\{v\} \in P$, and $B \subsetneq B\cup\{v\}$, \contr maximality of $B$.
+
+So $B$ is a linearly independent set spanning $V$, and so $B$ is a basis for $V$.
+\end{proof}
+
+\begin{corollary}[Bourbaki-Witt Theorem]
+Let $(X, \leq)$ be a poset, and let $X$ be chain-complete, and $f: X \to X$ be such that for all $x \in X, f(x) \geq x$. Then $f$ has a fixed point.
+\end{corollary}
+\begin{proof}
+By Zorn $X$ has a maximal element $x$. Then $f(x) \in X, f(x) \geq x$, so by maximality $f(x) = x$.
+\end{proof}
+
+\begin{corollary}[Well-Ordering Principle]
+Every set can be well-ordered.
+\end{corollary}
+\begin{proof}
+Let $X$ be a set. Let $P = \{(Y,R) | Y\subset X$ and $R$ is a well-ordering of $Y\}$. Define $(Y,R)\leq (Z,S)$ if $Y \subset Z$ and $R,S$ agree on $Y$, and $Y$ is an initial segment of $Z$ in $S$. Then $(P, \leq)$ is a poset. Let $\mathscr{C} \subset P$ be a chain, say $\mathscr{C} = \{(Y_i, R_i) | i \in I\}$. Let $Y = \bigcup_{I \in I} Y_i$. Define a relation $R$ on $Y$ as follows: if $x,y \in Y$ then choose $j, k \in I$ such that $x \in Y_j$ and $y \in Y_k$. If $Y_j \subset Y_K$ then $xRy \iff xR_k y$, otherwise $Y_k \subset Y_j$ in which case $xRy \iff xR_j y$.
+
+It is easy to show that $R$ is a total ordering of $Y$. We must show further that it is a well ordering. Let $A \subset Y$ with $A \neq \emptyset$. Then there exists $x \in A$, so $x \in Y_{\ell}$ for some $\ell \in I$, so $A \cap Y_{\ell} \neq \emptyset$. But we know $Y_{\ell}$ is well ordered by $R_{\ell}$, so $A \cap Y_{\ell}$ has an $R_\ell$-least element, $z$, say. So $z$ is also the $R$-least element of $A \cap Y_\ell$, and hence $R$ is a well ordering of $Y$.
+
+Thus, $(Y,R) \in P$ and is an upper bound for $\mathscr{C}$. Then by Zorn, $P$ has a maximal element $(Z,S)$. Suppose there is some $x \in X \setminus Z$. Then $S \cup \{(z, x) | z \in Z \cup \{x\}\}$ is a well ordering of $Z \cup \{x\} \supsetneq Z$, and $Z$ is an initial segment. \contr
+
+Hence $Z = X$ and $S$ is a well ordering of $X$.
+\end{proof}
+\subsection{The Axiom of Choice}
+In the proof of Zorn's Lemma (ZL), we had to make infinitely many arbitrary choices, e.g. for all $x \in X$, pick some $x' > x$. We've done this quite a bit throughout tripos, for instance in IA Numbers and Sets, when we proved that a countable union of countable sets is countable by picking an ordering of each set so that we can move along the list diagonally.
+
+\begin{axiom}[The Axiom of Choice]
+Let $\{X_i | i \in I\}$ be a set of non-empty sets. Then there exists a function $f: I \to \bigcup_{i \in I}X_i$ such that, for all $i \in I$, $f(i) \in X_i$.
+\end{axiom}
+The function $f$ is sometimes called a \emph{choice function} for the collection $\{X_i|i \in I\}$.
+
+The axiom of choice (AC) has a different feel from our other usual assumptions about sets, e.g. it doesn't explicitly construct anything, so it can be of interest to see if we've used it. For example we used AC when proving Zorn's Lemma, but it might be an interesting question to ask if we needed to. What does this even mean? To give a sensible answer, we'd need to axiomatise set theory, and think about proof systems, and then show that if we only assume axioms other than AC then Zorn's Lemma would no longer be a theorem. This would take a lot of work (c.f. Russell and Whitehead, Principia Mathematica). For now, we will do a similar thing - assume Zorn's Lemma and use it to prove AC.
+\begin{proof}
+Let $\{X_i | i \in I\}$ be a collection of non-empty sets, and let
+\begin{align*}
+P = \left\{\left.g \subset \powset\left(I \times \bigcup_{i \in I} X_i \right) \right| g:J\to \bigcup_{i\in I}X_i, J \subseteq I; \forall i \in \dom(g), g(i) \in X_i\right\}
+\end{align*}
+ordered by inclusion. Not $g \subset g'$ means $\dom g \subset \dom g'$ and $g'|_{\dom g} = g$. Let $\mathscr{C}$ be a chain in $P$. Let $h = \bigcup_{g \in \mathscr{C}} g$. Then $h$ is a function with $\dom h = \bigcup_{g\in \mathscr{C}} \dom g$.
+
+Moreover, $h \in P$ and is an upper bound for $\mathscr{C}$. So by Zorn $P$ has a maximal element $f$. Suppose $i \in I \setminus \dom f$. Pick $x \in X_i$\footnote{We can do this without using AC since we are only making one choice, and that is precisely what it means for a set to be nonempty - we can pick an element from it}. Then $f \subsetneq f \cup \{(i, x)\} \in P$. \contr
+So $f$ is our required choice function.
+\end{proof}
 \end{document}

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  6 FEB 2020 12:30
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  12 FEB 2020 11:59
  system commands enabled.
 **"Number Fields.tex"
 ("./Number Fields.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.325 seconds
+luaotfload | main : initialization completed in 1.206 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1036,16 +1036,26 @@ cmm/m/it/10 Z\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ]\OML/cmm/m/it/
 1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; []\OT1/cmr/m/n/10 ) =
  []
 
-[12] [13] ("./Number Fields.aux"))
+[12] [13]
+Overfull \hbox (0.77994pt too wide) in paragraph at lines 570--571
+[]\TU/lmr/m/n/10 Let $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 )$ \
+TU/lmr/m/n/10 be an in-te-gral ba-sis for $\OML/cmm/m/it/10 K$\TU/lmr/m/n/10 . 
+Write $\OML/cmm/m/it/10  \OT1/cmr/m/n/10 = [][] \OML/cmm/m/it/10 b[][]$ \TU/l
+mr/m/n/10 for $\OML/cmm/m/it/10 b[] \OMS/cmsy/m/n/10 2 \U/msb/m/n/10 Z$\TU/lmr/
+m/n/10 . Then $[][] \OML/cmm/m/it/10 b[] [][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 
+[][]\OT1/cmr/m/n/10 ) =
+ []
+
+[14] ("./Number Fields.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 30815 strings out of 494305
+ 30820 strings out of 494305
  100000,1144653 words of node,token memory allocated
  532 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 55 glue_spec
 , 10 attribute_list, 2 write nodes
-   avail lists: 1:4,2:803,3:218,4:48,5:341,6:26,7:3329,8:62,9:467,10:10,11:150
- 33960 multiletter control sequences out of 65536+200000
+   avail lists: 1:4,2:803,3:218,4:48,5:343,6:26,7:3329,8:62,9:467,10:10,11:150
+ 33965 multiletter control sequences out of 65536+200000
  84 fonts using 5992423 bytes
  64i,20n,96p,1085b,345s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf>
@@ -1077,9 +1087,9 @@ s/type1/public/amsfonts/euler/eufm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 c/amsfonts/symbols/msam7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
 fonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
 s/symbols/msbm7.pfb>
-Output written on Number Fields.pdf (13 pages, 320861 bytes).
+Output written on Number Fields.pdf (14 pages, 334843 bytes).
 
-PDF statistics: 204 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 207 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  12 FEB 2020 11:59
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  13 FEB 2020 10:56
  system commands enabled.
 **"Number Fields.tex"
 ("./Number Fields.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.206 seconds
+luaotfload | main : initialization completed in 1.146 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1046,50 +1046,60 @@ m/n/10 . Then $[][] \OML/cmm/m/it/10 b[] [][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10
 [][]\OT1/cmr/m/n/10 ) =
  []
 
-[14] ("./Number Fields.aux"))
+[14]
+Overfull \hbox (2.21999pt too wide) in paragraph at lines 603--638
+[]$[]$ $[]$ 
+ []
+
+[15] [16] ("./Number Fields.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 30820 strings out of 494305
+ 30971 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 532 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 55 glue_spec
-, 10 attribute_list, 2 write nodes
-   avail lists: 1:4,2:803,3:218,4:48,5:343,6:26,7:3329,8:62,9:467,10:10,11:150
- 33965 multiletter control sequences out of 65536+200000
- 84 fonts using 5992423 bytes
- 64i,20n,96p,1085b,345s stack positions out of 5000i,500n,10000p,200000b,50000s
-<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf>
-<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/p
-rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman6-regular.otf><c:/progra
-m files/miktex 2.9/fonts/opentype/public/lm/lmroman7-regular.otf><c:/program fil
-es/miktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program files/mi
-ktex 2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/program files/miktex 2.
-9/fonts/opentype/public/lm/lmroman10-bolditalic.otf><c:/program files/miktex 2.9
-/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files/miktex 2.9/fon
-ts/opentype/public/lm/lmroman12-bold.otf><c:/program files/miktex 2.9/fonts/open
-type/public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9/fonts/opentype
-/public/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cmextra/cmex7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-r7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/euler/eufm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/euler/eufm7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/symbols/msam7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/symbols/msbm7.pfb>
-Output written on Number Fields.pdf (14 pages, 334843 bytes).
+ 536 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 11 attribute, 55 glue_spec
+, 11 attribute_list, 2 write nodes
+   avail lists: 1:4,2:2300,3:609,4:104,5:346,6:26,7:3329,8:62,9:528,10:10,11:150
 
-PDF statistics: 207 PDF objects out of 1000 (max. 8388607)
+ 34116 multiletter control sequences out of 65536+200000
+ 94 fonts using 6661023 bytes
+ 64i,20n,96p,1085b,944s stack positions out of 5000i,500n,10000p,200000b,50000s
+<c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman9-regular.otf><c:/p
+rogram files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/p
+rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/progra
+m files/miktex 2.9/fonts/opentype/public/lm/lmroman6-regular.otf><c:/program fil
+es/miktex 2.9/fonts/opentype/public/lm/lmroman7-regular.otf><c:/program files/mi
+ktex 2.9/fonts/opentype/public/lm/lmroman10-italic.otf><c:/program files/miktex 
+2.9/fonts/opentype/public/lm/lmroman10-bold.otf><c:/program files/miktex 2.9/fon
+ts/opentype/public/lm/lmroman10-bolditalic.otf><c:/program files/miktex 2.9/font
+s/opentype/public/lm/lmroman10-regular.otf><c:/program files/miktex 2.9/fonts/op
+entype/public/lm/lmroman12-bold.otf><c:/program files/miktex 2.9/fonts/opentype/
+public/lm/lmroman12-regular.otf><c:/program files/miktex 2.9/fonts/opentype/publ
+ic/lm/lmroman17-regular.otf><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmex
+tra/cmex7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmsy9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm10
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm7.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam7.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm5.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on Number Fields.pdf (16 pages, 383581 bytes).
+
+PDF statistics: 236 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

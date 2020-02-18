@@ -850,6 +850,7 @@ What is my strategy?
 \item If $pn <1$, then don't bet - your expected winnings is $<0$.
 \item If $pn >1$, then we want to bet, but how much? A larger bet means more winnings, but also more risk. What proportion $w$ of our total wealth should we bet?
 \end{itemize}
+
 Note that $w$ is always the same, only the size of the fortune changes. Let the fortune by $X_j$ after the $j\th$ throw. I bet $wX_j$, retaining $(1-w)X_j$. My fortune $X_{j+1}$ after the $(j+1)\th$ throw is:
 \begin{align*}
 X_{j+1} = \begin{cases} X_j(Xn + 1-w) & j\th \text{ throw is H}\\X_j(1-w) & j\th\text{ throw is T}\end{cases}
@@ -876,4 +877,144 @@ Consider one single toss of a coin with $\P(H) = p < 1$. Suppose that a bet on h
 The value of $\E(\log Y)$ is maximised by taking $w = 0$ if $np \leq 1$ and setting $w = \frac{np-1}{n-1}$ if $np > 1$.
 \end{lemma}
 A better who maximises the $\log$ of his or her fortune is called a \emph{Kelly better}, and is following \emph{Kelly's rule}, since Kelly in 1956 showed how to do this using information theory.
+
+Shannon's Second Coding theorem says that information can be transmitted over a channel at a rate close to the capacity with negligible error rate, provided that we're allowed arbitrarily long messages. Kelly's rule says that a gambler can, with high probability, increase her fortune at a certain optimum rate, provided that she can continue to bet for long enough.
+
+\section{Algebraic Coding Theory}
+\subsection{Linear Codes}
+A code $C \in \F_2^n$ is \emph{linear} if $0 \in C$ and $x, y \in C \implies x+y \in C$. I.e., $C$ is an $\F_2$-vector subspace of $\F_2^n$. The \emph{rank} of $C$ is its dimension as an $\F_2$-vector subspace. A linear code of length $n$, rank $k$ is denoted an \emph{(n,k)-code}, using round brackets instead of square brackets. If its minimum distance is $d$, it is an $(n,k,d)$-code.
+
+Let $v_1, \ldots, v_k$ be a basis for $C$. Then $C = \left\{\sum_{i=1}^k \lambda_i v_i : \lambda_i \in \F_2\right\}$, so $|C| = 2^k$, and $(n,k)$-codes are $[n,2^k]$-codes. The information rate is then $\frac{k}{n}$.
+
+The \emph{weight} of $x \in \F_2^n$, denoted $w(x) = d(x,0)$.
+
+\begin{lemma}
+The minimum distance of a linear code is the minimum weight of a non-zero codeword.
+\end{lemma}
+\begin{proof}
+Suppose $d(x,y) = d$. Then $d(x+y, y+y) = d(x+y,0) = w(x+y) = d$, and $x+y \in C$ as $C$ is linear.
+\end{proof}
+
+For $x, y \in \F_2^n$, let $x\cdot y = \sum_{i=1}^n x_iy_i \in \F_2$. Note that there are $x \neq 0$ with $x\cdot x = 0$. We then define the \emph{parity check code} defined by $P \subseteq \F_2^n$ to be $C = \{x \in \F_2^n : p\cdot x = 0 \;\forall p\in P\}$.
+
+We've already seen some examples of this:
+\begin{itemize}
+\item $P = \{111\ldots 1\}$ gives the simple parity check code.
+\item $P = \{1010101,0110011,0001111\}$ gives Hamming's original code.
+\end{itemize}
+\begin{lemma}
+Every parity check code is linear.
+\end{lemma}
+\begin{proof}
+$0 \in C$ as $p\cdot 0 = 0\;\forall p \in P$. If $x, y \in C$, then $p\cdot(x+y)=p\cdot x+p\cdot y = 0+0 = 0$, so $x+y \in P$,
+\end{proof}
+
+If $C \subset \F_2^n$ is a linear code, then the \emph{dual code} of $C$, $C^{\bot} = \{x\in\F_2^n: x\cdot y =0 \;\forall y \in C\}$.
+
+This is a parity check code so is linear. Note that $C \cap C^{\bot}$ can be larger than $\{0\}$.
+
+\begin{lemma}
+$\rank(C) + \rank(C^{\bot}) = n$
+\end{lemma}
+\begin{proof}
+Linear algebra using $C^{\bot}$ is the annihilator of $C$, or see later.
+\end{proof}
+\begin{lemma}
+If $C$ is linear, then $(C^{\bot})^{\bot} = C$, and in particular $C$ is a parity check code.
+\end{lemma}
+\begin{proof}
+If $x \in C$ then $x \cdot y = 0$ for all $y \in C^{\bot}$. Hence $x \in (C^{\bot})^{\bot}$, and so $C \subseteq (C^{\bot})^{\bot}$.
+
+Then $\rank(C) = n - \rank(C^{\bot}) = n-(n-\rank((C^{\bot})^{\bot})) = \rank(C^{\bot})^{\bot})$, and so $C = (C^{\bot})^\bot$.
+\end{proof}
+
+Let $C$ be a $(n,k)$-code. Then we have a couple of useful matrices:
+\begin{enumerate}
+\item A \emph{generator matrix} $G$ for $C$ is a $k\times n$ matrix with rows a basis of $C$.
+\item A \emph{parity check matrix} $H$ for $C$ is a generator matrix for $C^\bot$.
+\end{enumerate}
+The codewords in $C$ can be viewed as linear combinations of row of $G$, or as linear dependence relations between the columns of $H$.
+
+\subsection{Syndrome Decoding}
+If $C$ is an $(n,k)$linear code, then the syndrome of $x \in \F^n_2$ is $Hx$. If we receive $x = c+z$ where $c$ is a codeword and $z$ is an error pattern, then $Hx = Hc+Hz = Hz$.
+
+If $C$ is $e$-error correcting, we pre-compute $Hz$ for all $z$ with $w(z) \leq e$. On receiving $x \in \F_2^n$ we look for $Hx$ in our list. Then if $Hx = Hz$, $H(x-z) = 0$, so $c = x-z \in C$ with $d(x,c) \leq e$.
+
+Codes $C_1, C_2 \in \F_2^n$ are \emph{equivalent} if, reordering each codeword of $C_1$ using the same permutation each time, gives the codewords of $C_2$. Usually we only consider codes up to equivalence.
+
+\begin{proposition}
+Every $(n,k)$-linear code is equivalent to one with generator matrix of the form $G = (I_k | B)$ for some $k \times (n-k)$ matrix $B$.
+\end{proposition}
+\begin{proof}
+Using elementary row operations we can transform $G$ into row echelon form
+\begin{align*}
+G_{ij} = \begin{cases} 0 & j < \ell(i)\\1 & j = \ell(i) \end{cases}
+\end{align*}
+for some $\ell(1) <\ell(2) < \ldots < \ell(k)$. Permuting the columns replaces the code by an equivalent code, and so \textsc{wlog} we can assume $\ell(i) = i$ for all $i$. Then we can cancel all the non-zero off diagonal entries on the left hand square of $G$, to get it in the form $(I_k|B)$.
+\end{proof}
+If we have a message $y \in \F_2^k$ viewed as a row matrix, we encode it as $yG$. If $G$ is in the form of \textbf{11.5}, then $yG = (y|yB)$ where $y$ is the message and $yB$ are check digits. Any code whose codewords can be split up in this manner is called \emph{systematic}. This form of the generator matrix will let us prove \textbf{11.3} without working with dual spaces:
+\begin{proof}[Proof of 11.3]
+Without any loss of generality, we may take $C$ to have generator matrix $G = (I_k|B)$. $G$ has $k$ linearly independent columns, so the linear map $c:\F_2^n \to \F_2^k; x \mapsto Gx$ is surjective with kernel $C^{\bot}$. By the rank nullity, $\dim \F_2^n = \rank C + \rank C^{\bot}$.
+\end{proof}
+\begin{lemma}
+An $(n,k)$-linear code with generator matrix $G = (I_k |B)$ has parity check matrix $H = (B^t |I_{n-k})$.
+\end{lemma}
+\begin{proof}
+$GH^t = (I_k |B)\left(\frac{B}{I_{n-k}}\right) = B+B = 0$, so the rows of $H$ generate a subcode of $C^{\bot}$. But the rank of $H = n-k$since $H$ contains $I_{n-k}$ as a submatrix and $n-k = \rank C^{\bot}$, so $C^{\bot}$ has generator matrix $H$, and $H$ is a parity check matrix for $C$.
+\end{proof}
+\section{Examples of Codes}
+\subsection{Hamming Codes}
+For $d \geq 1$ let $n = 2^d - 1$. Let $H$ be the $d \times n$ matrix whose columns are the non zero elements of $\F_2^d$. The \emph{Hamming (n,n-d)-code} is the linear code with parity check matrix $H$. For example with $d = 3$:
+\begin{align*}
+H = \begin{pmatrix} 1&0&1&0&1&0&1\\0&1&1&0&0&1&1\\0&0&0&1&1&1&1\end{pmatrix}
+\end{align*}
+\begin{lemma}
+The minimum distance of the $(n,n-d)$-Hamming code $C$ is $d(C) = 3$. It is a perfect 1-error correcting code.
+\end{lemma}
+\begin{proof}
+The codewords of $C$ are dependence relations between the columns of $H$. Any two columns of $H$ are linearly independent, so there are no codewords of weight at most 2. Hence $d(C) \geq 3$. Noting that $11100\ldots 0 \in C$, we have $d(C) = 3$. It is 1-error correcting by \textbf{5.3}. Moreover, $\frac{2^n}{V(n,1)} = \frac{2^n}{n+1} = 2^{n-d} = |C|$, so $C$ is perfect.
+\end{proof}
+\subsection{Reed-Muller Codes}
+Take some finite set $X$ of size $n$ say. Then there is a correspondence between $\powset(X)$ and $\F_2^n$ given by indicator functions. Moreover, we have that the following set-theoretic operations in $\powset(X)$ correspond to vector operations on $\F_2^n$:
+\begin{align*}
+A \Delta B = (A \setminus B) \cup (B \setminus A) &\xleftrightarrow{\hspace{2cm}} x+y = (x_1+y_1,\ldots, x_n+y_n)\\
+A \cap B &\xleftrightarrow{\hspace{2cm}} x \wedge y = (x_1y_1, \ldots, x_ny_n)
+\end{align*}
+Take $X = F_2^d$, so $n = 2^d$. Let $v_0 = \one_X = (1,1,\ldots, 1)$. Let $v_i = \one_{H_i}$ for $1 \leq i \leq d$, where $H_i = \{p \in X : p_i = 0\}$, the coordinate hyperplane.
+
+Then the \emph{Reed-Muller code RM(d,r)} of order $r$ where $0\leq r\leq d$ of length $2^d$ si the linear code spanned by $v_0$ and all wedge products of $r$ or fewer of the $v_i$. By convention, the empty wedge is $v_0$. For example, with $d = 3, X = \F_2^3$ in binary number order:
+\begin{center}
+\begin{tabular}{c|cccccccc}
+$X$&000&001&010&011&100&101&110&111\\\hline
+$v_0$&1&1&1&1&1&1&1&1\\
+$v_1$&1&1&1&1&0&0&0&0\\
+$v_2$&1&1&0&0&1&1&0&0\\
+$v_3$&1&0&1&0&1&0&1&0\\
+$v_1\wedge v_2$&1&1&0&0&0&0&0&0\\
+$v_2\wedge v_3$&1&0&0&0&1&0&0&0\\
+$v_1\wedge v_3$&1&0&1&0&0&0&0&0\\
+$v_1\wedge v_2\wedge v_3$&1&0&0&0&0&0&0&0
+\end{tabular}
+\end{center}
+Note that:
+\begin{itemize}
+\item RM(3,0): spanned by $v_0$, is a repetition code of length 8.
+\item RM(3,1): spanned by $v_0,v_1,v_2,v_3$, is a parity check extension of Hamming's original code.
+\item RM(3,2): an $(8,7)$-code, which is actually a simple parity check code.
+\item RM(3,3): the trivial code for $\F_2^8$.
+\end{itemize}
+\begin{theorem}
+\item
+\begin{enumerate}
+\item The vectors $v_{i_0} \wedge \ldots \wedge v_{i_j}$ form a basis for $\F_2^n$.
+\item The rank of $RM(d,r) = \sum_{s=0}^r \binom{d}{s}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\item
+\begin{enumerate}
+\item We've listed $\sum_{s=0}^d \binom{d}{s} = (1+1)^d = 2^d$ vectors, so it's enough to check spanning, i.e. that $RM(d,d) = \F_2^n$. Let $p \in X$. Put $y_i = \begin{cases} v_i & p_i=0\\ v_0+v_i & p_i=1\end{cases}$. Then $\one_{\{p\}} = y_1 \wedge \ldots \wedge y_d$, and we can expand this using distributivity to get $\one_{\{p\}} \in RM(d,d)$. But $\{\one_{\{p\}} : p \in X\}$ spans $\F_2^n$, and so the given vectors form a basis.
+\item $RM(d,r)$ is spanned by $v_{i_1} \wedge \ldots \wedge v_{i_s}$ for $1 \leq i < \ldots <i_s \leq d$ with $0 \leq s \leq r$. These vectors are linearly independent by part \textit{1.}, and so form a basis. Hence $\rank RM(d, r) = \sum_{s=0}^r \binom{d}{s}$.
+\end{enumerate}
+\end{proof}
 \end{document}

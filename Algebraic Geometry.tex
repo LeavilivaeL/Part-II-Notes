@@ -675,18 +675,107 @@ We say $L$ is \emph{tangent to X at P} if $g(t) = f(a_1+b_1t, \ldots, a_n+b_nt)$
 \begin{align*}
 f^{lin} \coloneqq \sum_i \frac{\partial f}{\partial z_i}(P)(z_i-a_i)
 \end{align*}
-be the \emph{linearisation} of $f$ near $P$. Then we can define the affine tangent space to $X$ at $P$ by:
+be the \emph{linearisation} of $f$ near $P$. Then we can define the \emph{affine tangent space to X at P} by:
 \begin{align*}
 T_{X,P}^{aff} \coloneqq \V(f^{lin}) \subseteq \A_K^n
 \end{align*}
-As a sanity check, make sure that this gives the usual tangent line for $y=f(x)$.
+As a sanity check, make sure that this gives the usual tangent line for $y=f(x)$. Note that $T^{aff}_{X,P}$ is centered at the $P$, not at the origin. By shifting it to the origin by translation by $P$, we get the \emph{tangent space to X at P}, given by:
+\begin{align*}
+T_{X,P}  = \left\{v \in K^n | \sum v_i \frac{\partial f}{\partial z_i}(P) = 0 \;\forall f \in I\right\}
+\end{align*}
+where $X = \V(I)$. Then $T_{X,P} + P = T_{X,P}^{aff}$.
 
 For example, in the case $X = \V(y^2-x^3)$, we calculate $f^{lin}$ at $(0,0)$ to be $0$, and so $T_{X, (0,0)}^{aff}$ is $\A^2_K$.
 
-A point $P$ on $X = \V(f)$ is called singular if $T_{x, P}$ has dimension $n$. A non-singular point is also called a smooth point.
+\subsection{Digression On Cubics}
+Let $f_2 \in \mathcal{O}_{\P^2}(3)$ such that $\V(f_2)$ is smooth. Then $\V(f^2)$ is an \emph{elliptic curve}. In particular, $K(E)$ is not isomorphic to $K(z)$. We say that $X$ is \emph{rational} if $X$ is birational to $\P^r$ for some $r$.
+
+Let $f_3 \in \mathcal{O}_{\P^3}(3)$. We call $\V(f_3)$ a \emph{cubic surface}. We'll take $f_3 = z_0^2z_1 + z_1^2z_2 + z_2^2z_3+z_3^2z_0$, and let $S = \V(f_3)$. Consider the rational map $\varphi: S \dashrightarrow \P^2$, taking $[z_0:\ldots:z_3]\mapsto [z_0z_3:z_1z_2:z_2z_3]$. We can also take some map $\psi:\P^2 \dashrightarrow S$ such that $\varphi\circ\psi$ and $\psi \circ\varphi$ are the identity map, and so $K(S) = K(z_1,z_2)$, and $S$ is smooth. This holds for any smooth cubic surface in $\P^3_K$, and they are all rational.
+
+If $f_4 \in \mathcal{O}_{\P^4}(3)$, then $\V(f_4) = X$ is sometimes called a \emph{cubic threefold} - it was a landmark result of the late 20\th century to prove that $X$ is not rational.
+
+If $f_5 \in \mathcal{O}_{\P^5}(3)$. and $Y=\V(f_5)$ is a smooth \emph{cubic fourfold}, then the rationality of $Y$ is an open question.
+
+\subsection{Dimension and Smoothness}
+Let $X$ be an irreducible variety. Then we define the \emph{dimension} of $X$ as:
+\begin{align*}
+\dim X = \min_{p \in X} \{\dim T_{X,p}\}
+\end{align*}
+If $X$ is reducible, the we can write it uniquely as a union of irreducible varieties $X_1 \cup \ldots \cup X_n$, and let $\dim X = \max_{i}\dim X_i$. If all $X_i$ have the same dimension, then $X$ is \emph{pure}.
+
+A point $p \in X$ is said to be \emph{smooth} if $\dim_K X = \dim_K T_{X, p}$, and a non-smooth point is said to be \emph{singular}.
 
 \begin{proposition}
-Given $X = \V(f)$, the set of singular points is a closed proper subset. In other words, the set of smooth points is dense.
+Let $X$ be a variety. Then the set of singular points is a closed proper subvariety.
 \end{proposition}
+\begin{proof}
+It suffices to treat the case where $X$ is affine so $X  = \V(I)$ for $I = \angle{f_1, f_2, \ldots, f_n} \subseteq K[\mathbf{x_i}]$.
+
+Treating $\left(\frac{\partial f_j}{\partial z_i}(p)\right)$ as a matrix, we then have from the definition $\dim_K T_{X,p} = n-\rank \left(\frac{\partial f_j}{\partial z_i}(p)\right)$. The locus where this rank is $\leq n-r$ for any $r \in \N$ is the closed subvariety given by the vanishing of the $(n-r)\times (n-r)$ minors.
+\end{proof}
+Morally what this tells us, since open subsets of varieties are dense, is that most points on an algebraic variety are smooth points.
+
+\begin{proposition}
+If $X$ and $Y$ are irreducible and birational then $\dim X = \dim Y$.
+\end{proposition}
+
+Let $\phi : X \dashrightarrow Y$ be a rational map regular at $p \in X$, where $X \subseteq \A_K^n, Y \subseteq \A_K^m$. Then we can write $\phi = (f_1, \ldots, f_m)$, where $f_j \in K(z_1, \ldots, z_n)$ is regular at $p$. We can then define $d\phi_p : T_{X,p} \to T_{Y, \phi(p)}$, the \emph{differential of $\phi$ at p}, defined by:
+\begin{align*}
+d\phi_p(\mathbf{v}) = \left(\sum_{i=1}^n v_i \frac{\partial f_j}{\partial z_i}(p)\right)_j
+\end{align*}
+It follows from the chain rule that $d\phi_p(\mathbf{v})$ does indeed lie in $T_{Y, \phi(p)}$ - checking this is left as an exercise.
+
+If $X \dashrightarrow_\phi Y \dashrightarrow_\psi Z$, and $p \in \dom(\phi)$, $\phi(p) \in \dom(\psi)$, then $d\psi_{\phi(p)}\circ d\phi_p = d(\psi \circ \phi)_p$.
+
+Proposition \textbf{6.2} follows immediately from this.
+
+We might ask the following question: if $X$ is a variety, is $X$ isomorphic to a \emph{hypersurface}? The answer to this question is no - consider $X = \V(xy,yz,zx)$, a union of the coordinate axes in $\A^3$. We might think this is isomorphic (it is certainly \textit{homeomorphic}) to a \emph{planar triple point}, e.g. $\A^2 \supseteq Y = \V(xy(x-y))$. Then $X \ncong Y$ because the dimension $T_{X,(0,0,0)}$ is 3, and $Y$ can have no such point.
+
+\begin{theorem}
+Given any irreducible variety $X$ there exists a hypersurface $Y$ such that $X$ is birational to $Y$, i.e. $K(X) = K(Y)$.
+\end{theorem}
+The proof of this will come later, but first we'll have a short digression on field theory.
+
+Let $L$ be a finitely generated field extension of $K$. The field $L$ is called a \emph{purely transcendental extension} of $K$ if there exist elements $x_1, \ldots, x_n$ algebraically independent\footnote{i.e. with no polynomial equation in $x_i, i \neq j$ with $x_j$ a root.} over $K$ such that $L = K(x_1, \ldots, x_n)$.
+
+\begin{proposition}
+Let $L/K$ be a finitely generated field extension. Then there exists a subfield $K \subseteq M \subseteq L$ purely transcendental over $K$ such that $L/M$ is algebraic and separable. Moreover, $L = M(y)$ for some $y \in L$.
+\end{proposition}
+\begin{proof}[Proof (Characteristic 0)]
+Since $L$ is finitely generated, we know that $L = K(x_1, \ldots, x_m)$. There is a maximal algebraically independent subset of $\{x_i\}$. Re-order this set such that $\{x_1,\ldots, x_n\}$ form this subset. Then take $M = K(x_1, \ldots, x_n)$, which is purely transcendental. Then by finite generation $L/M$ is finite and algebraic, and in characteristic 0 separability is automatic. For the final statement, apply the theorem of the primitive element.
+\end{proof}
+The integer $n$ will turn out to be unique and equal to $\dim X$ where $X$ is a variety with $K(X) = L$.
+\begin{proposition}
+Let $L = K(x_1, \ldots, x_n)$ be pure transcendental, and $x_{n+1}$ is algebraic. Then the ideal $I = \{g \in K[z_1, \ldots, z_{n+1}] : g(\mathbf{x}) = 0\}$ is principal, i.e. $I = (f)$. Moreover, if $f$ contains the variable $z_i$, then the set $\{x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_{n+1}\}$ is algebraically independent.
+\end{proposition}
+\begin{proof}
+Since $\{x_i\}$ are algebraically independent, the subring $L \supseteq R = K[x_1, \ldots, x_n]$ is isomorphic to the polynomial ring in $n$ variables, and in particular is a UFD.
+
+Then let $h \in L[t]$ be the minimal irreducible polynomial for $x_{n+1}$. Let $b$ be the LCM of the denominators of its coefficients. So then if we take $f = b\cdot h$, where $f \in K[x_1, \ldots, x_n, t]$. Since $h$ is irreducible, the Gauss lemma implies that $f$ is irreducible in $R$.
+
+Let $g \in K[z_1, \ldots, z_{n+1}]$ be an element of $I$. In $K[t]$, $g$ is a multiple of $h$. Again by the Gauss lemma, if $h$ divides $g$ then $f$ divides $g$, and so $I$ is principal and generated by $f$.
+
+For the last part, assume $\{x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_{n+1}\}$ was algebraically dependent. Then there exists $g \in I$ not containing $z_i$ such that $g(x_1, \ldots, x_{n+1}) = 0$. But $f$ divides $g$, which is a contradiction.
+\end{proof}
+\begin{corollary}
+If $X$ is an irreducible variety and $K(X)$ is its function field, then:
+\begin{align*}
+\dim X = \tr \deg_K K(X)
+\end{align*}
+\end{corollary}
+\begin{proof}
+Exercise - reduce the the case where $X = \V(f)$ and apply the second part of the previous proposition.
+\end{proof}
+\begin{proof}[Proof of 6.3]
+Given $X$ irreducible, apply the \textbf{6.5} to $K(X)$. So $K(X) \equiv \text{FractionField}(K[z_1, \ldots, z_n]/(f))$
+\end{proof}
+\begin{theorem}[Affine Nullstellensatz I]
+Every maximal ideal in $K[z_1, \ldots, z_n]$ is of the form $m  = (z_1a_1, \ldots, z_na_n)$ for $a_i \in K$. If $I\subsetneq K[\mathbf{z}_i]$ is a non-unit ideal, then $\V(I) \neq \emptyset$.
+\end{theorem}
+\begin{proof}[Proof in uncountable case]
+For the first part, clearly every ideal of that form is maximal. Conversely, let $m \subseteq K[\mathbf{z}_i]$. Consider $L = K[\mathbf{z}_i]/m$, which is a field, and let $a_i = z_i + m$. If $L = K$, then $a_i \in K$ as required. Otherwise, $L/K$ must be transcendental.
+
+Take $t \in L\setminus K$. Then $K \subseteq K(t) \subseteq L$, and $t$ is transcendental. now, let $U_m = \angle{a_1^{m_1}\ldots a_n^{m_n}}$ where $\sum m_i = m$. These are all finite dimensional over $K$, but $\bigcup_m U_m = K$. Observe for each $c \in K$, the elements $\frac{1}{t-c}$ are linearly independent. But there are uncountably many of them. Only finitely many lie in each $U_m$, so we get a contradiction.
+\end{proof}
 
 \end{document}

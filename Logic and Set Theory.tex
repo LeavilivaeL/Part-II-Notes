@@ -467,7 +467,7 @@ The synthetic and inductive definitions of ordinal addition coincide.
 \begin{proof}
 Let $+$ denote the synthetic definition. Then for all $\alpha$, $\alpha + 0 = \alpha$, and also $\alpha+\beta^+ = \leftarrow \alpha \rightarrow \leftarrow \beta \rightarrow \cdot = (\alpha+\beta)^+$
 
-Finally, if $\alpha$ is an ordinal and $\gamma$ is a non-zero limit ordinal,t ehn $\alpha + \gamma = \leftarrow \alpha \rightarrow \leftarrow \sup\{\delta:\delta<\gamma\}\rightarrow = \sup(\alpha+\delta: \delta <\gamma\}$, by noting that $\delta$ is the order type of $I_{\delta}$, and the $I_{\delta}$ are nested so $\sup \leftrightarrow \cup$.
+Finally, if $\alpha$ is an ordinal and $\gamma$ is a non-zero limit ordinal, then $\alpha + \gamma = \leftarrow \alpha \rightarrow \leftarrow \sup\{\delta:\delta<\gamma\}\rightarrow = \sup(\alpha+\delta: \delta <\gamma\}$, by noting that $\delta$ is the order type of $I_{\delta}$, and the $I_{\delta}$ are nested so $\sup \leftrightarrow \cup$.
 
 Hence by induction on $\beta$ the definitions agree on $\alpha + \beta$.
 \end{proof}
@@ -481,7 +481,7 @@ Left as an exercise for sheet 2.
 Can we define ordinal exponentiation? It's clear what to do inductively, but not so much synthetically. We define:
 \begin{itemize}
 \item $\alpha^0 = 0^+$
-\item $\alpha^{\delta^+} = \alpha^{delta}\alpha$
+\item $\alpha^{\delta^+} = \alpha^{\delta}\alpha$
 \item $\alpha^{\beta}$ for $\beta$ a non-zero limit to be $\sup\{\alpha^\delta: \delta<\beta\}$.
 \end{itemize}
 
@@ -716,4 +716,145 @@ ordered by inclusion. Not $g \subset g'$ means $\dom g \subset \dom g'$ and $g'|
 Moreover, $h \in P$ and is an upper bound for $\mathscr{C}$. So by Zorn $P$ has a maximal element $f$. Suppose $i \in I \setminus \dom f$. Pick $x \in X_i$\footnote{We can do this without using AC since we are only making one choice, and that is precisely what it means for a set to be nonempty - we can pick an element from it}. Then $f \subsetneq f \cup \{(i, x)\} \in P$. \contr
 So $f$ is our required choice function.
 \end{proof}
+
+However, in the case where the index set $I$ is finite, AC \textit{does} follow from our assumptions. For instance, if $I = \{a,b,c\}$, then if we have nonempty sets $X_a, X_b, X_c$, we can, by definition write $x_a \in X_a, x_b \in X_b, x_c \in X_c$. Then we can write down our choice function $ = \{(a, x_a), (b, x_b), (c, x_c)\}$.
+
+Another way of thinking of the axiom of choice is that, if $X_i \neq \emptyset$ for all $i \in I$, then the Cartesian product $\prod_{i \in I} X_i \neq \emptyset$.
+
+Do we need AC to prove the well ordering principle? Note that we can prove the axiom of choice from the well ordering principle by well ordering $\bigcup_i X_i$ and choosing the least element of $X_i$.
+
+Bourbaki-Witt does not need the axiom of choice though.
+
+\section{Cardinals}
+Let $X$ and $Y$ be sets. If there is a bijection $X \to Y$ we say $X,Y$ \emph{have the same cardinality}, and write $|X| = |Y|$.
+
+Note that $|X|=|X|; |X|=|Y|\implies|Y|=|X|$, and $(|X|=|Y|,|Y|=|Z|) \implies |X|=|Z|$.
+
+We want to define cardinals in such a way that every set $X$ has the same cardinality as precisely one cardinal. By WOP every set $X$ can be well-ordered, so $X$ has the same cardinality as some ordinal.
+
+We then define the \emph{cardinality} $\card(X)$ to be the least ordinal with the same cardinality as $X$. 
+
+If $X, Y$ are sets, then we write $|X|\leq |Y|$ to mean there is an injection from $X$ to $Y$. Clearly $|X|\leq |X|$, and $(|X|\leq |Y|, |Y|\leq |Z|) \implies |X|\leq|Z|$. Moreover, by Cantor-Schr\"oder-Bernstein, if $|X|\leq |Y|$ and $|Y| \leq |X|$, then $|X|=|Y|$.
+
+But then the question is what are the cardinals? We define an ordinal $\alpha$ to be \emph{initial} if for all $\beta \alpha$ there is no bijection $\beta \to \alpha$. For example, 0,1,2,3,\ldots are all initial ordinals. $\omega, \omega_1$ are also initial ordinals. However, no ordinal $\alpha$ with $\omega <\alpha <\omega_1$ is initial.
+
+For $\alpha$ an ordinal, we can define $\omega_\alpha$ recursively:
+\begin{itemize}
+\item[$\alpha=0$:] $\omega_0 = \omega$
+\item[$\alpha=\beta^+$:] $\omega_{\beta^+}$ is the least ordinal with no injection to $\omega_{\beta}$ which exists by Hartog's lemma.
+\item[$\alpha$ limit:] $\omega_\alpha = \sup\{\omega_{\delta} : \delta < \alpha\}$.
+\end{itemize}
+For every $\alpha$, $\omega_\alpha$ is an infinite initial ordinal. We can also prove the converse: it is easy to show by induction that, for all $\alpha, \omega_\alpha \geq \alpha$.
+
+Now let $\alpha$ be an infinite initial ordinal. Then it is easy to check that, if $\delta$ is least with $\omega_\delta \geq \alpha$, then $\alpha = \omega_\delta$.
+
+We then write $\aleph_\alpha = \card(\omega_\alpha)$, so that the cardinals are $0,1,2,\ldots$ and the infinite cardinals, the $\aleph_\alpha$ for $\alpha$ ordinals. We have two different notations for the same thing because sometimes we want to think about it as a cardinal and sometimes as an ordinal. The important thing about cardinals is that there is precisely one of each cardinality - the fact that we've defined them as ordinals to make this work is not important.
+
+\subsection{Cardinal Arithmetic}
+Let $\kappa, \lambda$ be cardinals. We define:
+\begin{itemize}
+\item $\kappa + \lambda = \card(\{0\}\times \kappa \cup \{1\}\times \lambda\}$
+\item $\kappa\lambda = \card(\kappa\times \lambda)$
+\item $\kappa^{\lambda} = \card(\{f| f:\lambda\to\kappa\})$
+\end{itemize}
+Warning: this is not the same definition of exponentiation as for ordinals, as for instance $2^{\omega_0} = \omega_0$, but $2^{\aleph_0} = \card(\powset(\N)) \neq \card(\N) = \aleph_0$.
+
+\begin{proposition}
+\item
+\begin{enumerate}
+\item $(\kappa + \lambda) + \mu = \kappa + (\lambda + \mu)$
+\item $\kappa + \lambda = \lambda + \kappa$
+\item $(\kappa\lambda)\mu = \kappa(\lambda\mu)$
+\item $\kappa\lambda = \lambda\kappa$
+\item $\kappa(\lambda+\mu) = \kappa\lambda + \kappa\mu$
+\item $(\kappa\lambda)^\mu = \kappa^\mu\lambda^\mu$
+\item $\kappa^{\lambda + \mu} = \kappa^{\lambda}\kappa^\mu$
+\item $(\kappa^\lambda)^\mu = \kappa^{\lambda\mu}$.
+\end{enumerate}
+\end{proposition}
+This is left as an exercise, but we'll illustrate an example here. For, say, \textit{5.}, we need to find a bijection:
+\begin{align*}
+f:\kappa\times\left((\{0\}\times\lambda)\cup(\{1\}\times \mu)\right) \to \left(\{0\}\times(\kappa\times\lambda)\right)\cup\left(\{1\}\times(\kappa\times\mu)\right)
+\end{align*}
+So take $f(x,(n,y)) = (n,(x,y))$ - this does the job.
+
+In fact, addition and multiplication are easy because:
+\begin{proposition}
+Let $\kappa$ be an infinite cardinal. Then $\kappa\kappa =\kappa$.
+\end{proposition}
+\begin{proof}
+We have $\kappa = \aleph_\alpha$ for some ordinal $\alpha$. Think of $\kappa$ as the initial ordinal $\omega_\alpha$, so it is well-ordered.
+
+We then need to show that $\omega_\alpha \times \omega_\alpha$.
+
+Well order $\omega_\alpha \times \omega_\alpha$ by $(x,y) < (z,w)$ if:
+\begin{itemize}
+\item $\max(x,y) < \max(z,w)$, or
+\item $y = w \geq x,z$ and $ x < z$, or
+\item $x = z > y,w$ and $y < w$, or
+\item $y = z, y \geq x, z > w$.
+\end{itemize}
+This looks like a mess, but we can think of it more clearly with a picture:
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw[->] (0,0) -- (5,0) node[below] {$\omega_\alpha$};
+\draw[->] (0,0) -- (0,5) node[left] {$\omega_\alpha$};
+\draw[lightgray,->] (0.3,0.5)--(0.8,0.5);
+\draw[lightgray,->] (0.3,1.5)--(1.8,1.5);
+\draw[lightgray,->] (1.5,0.3)--(1.5,0.8);
+\draw[lightgray,->] (0.3,2.5)--(2.8,2.5);
+\draw[lightgray,->] (2.5,0.3)--(2.5,1.8);
+\draw[lightgray,->] (0.3,3.5)--(3.8,3.5);
+\draw[lightgray,->] (3.5,0.3)--(3.5,2.8);
+\foreach \x [count = \i] in {0,1,4,9}{
+	\node (\x) at (0.5,-0.5+\i) {\x};
+}
+\foreach \x [count = \i] in {3,2,5,10}{
+	\node (\x) at (1.5,-0.5+\i) {\x};
+}
+\foreach \x [count = \i] in {7,8,6,11}{
+	\node (\x) at (2.5,-0.5+\i) {\x};
+}
+\foreach \x [count = \i] in {13,14,15,12}{
+	\node (\x) at (3.5,-0.5+\i) {\x};
+} 
+\draw[thick, red!60!brown] (1,0)--(1,1)--(0,1) (2,0)--(2,2)--(0,2) (3,0)--(3,3)--(0,3) (4,0)--(4,4)--(0,4);
+\end{tikzpicture}
+\end{figure}
+In this well-ordering, what can we say about the order-type of $\omega_\alpha\times\omega_\alpha$?
+
+Consider a proper initial segment $(\omega_\alpha \times \omega_\alpha)_{(<\delta)}$. As $\omega_\alpha$ is initial and hence a limit, $\delta = \beta \times \beta$ for some $\beta < \omega_\alpha$. Then, writing $I = (\omega_\alpha \times \omega_\alpha)_{(<\delta)}$, in fact $I \subset \beta \times \beta$. As $\omega_\alpha$ is initial, $\card(\beta) < \card(\omega_\alpha)$, so either $\beta$ is finite, in which case $\beta \times \beta$ is finite, or $\beta$ is infinite, in which case by the inductive hypothesis, $\card(\beta \times \beta) = \card(\beta)$.
+
+In either case, $\card(\beta \times \beta) < \aleph_\alpha$, and so $\ord(I) < \omega_\alpha$. Hence $\card(\omega_\alpha\times\omega_\alpha) \leq \card(\omega_\alpha)$, so $\kappa\kappa \leq\kappa$. But clearly $\kappa \leq \kappa\kappa$, and so $\kappa\kappa = \kappa$ as claimed.
+\end{proof}
+\begin{corollary}
+Let $\kappa, \lambda$ be infinite cardinals. Then:
+\begin{align*}
+\kappa+\lambda = \kappa\lambda = \max(\kappa,\lambda)
+\end{align*}
+\end{corollary}
+\begin{proof}
+\textsc{Wlog} $\kappa \geq \lambda$. Then:
+\begin{align*}
+\kappa \leq \kappa+\lambda \leq \kappa+\kappa = 2\kappa \leq \kappa\lambda\leq \kappa\kappa =\kappa
+\end{align*}
+\end{proof}
+\hspace*{-1em}\underline{Examples:}
+\begin{enumerate}
+\item $\card{\R} = \card{\powset(\N)} = 2^{\alpha_0}$.
+\item Let $X$ be the set of real sequences. What is $\card(X)$? Well, $\card(X) = \card(\R^\N) = (2^{\aleph_0})^{\aleph_0}=2^{\aleph_0\aleph_0}=2^{\aleph_0}$, i.e. there is a bijection from the set of the reals to the set of real sequences.
+\end{enumerate}
+What about exponentiation? This turns out to be \underline{\underline{HARD}}. What is $2^{\aleph_0}$? We know that $2^{\aleph_0} = \aleph_\alpha$ for some $\alpha \geq 1$. We could guess that $2^{\aleph_0} = \alpha_1$, but it is impossible to prove one way or the other, even using the axiom of choice as we have been. We cannot prove that $\R$ has an uncountable subset that doesn't biject with $\R$.
+
+One thing that is true: for any $\kappa, 2^{\kappa} > \kappa$. This is left as an exercise - show there is no bijection $\powset(X) \to X$ for any $X$.
+
+\subsection{A Slight Remark on the Axiom of Choice}
+This whole section has been heavily dependent on AC. We even needed AC to define what the cardinals are! In fact, without AC, we can still define a nice definition of cardinals and define arithmetic, with the basic properties still holding. However, we can no longer prove:
+\begin{itemize}
+\item Every infinite cardinal is $\aleph_\alpha$ for some ordinal $\alpha$
+\item \textbf{4.2} and \textbf{4.3} only work for the $\aleph$ cardinals, but not necessarily for the other cardinals that might exist.
+\item For cardinals $\kappa, \lambda$ we have either $\kappa \leq \lambda$ or $\lambda \leq \kappa$.
+\end{itemize}
+We can still prove that $(\kappa\leq\lambda, \lambda\leq\kappa)\implies \kappa=\lambda$.
 \end{document}

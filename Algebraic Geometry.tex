@@ -3,6 +3,24 @@
 
 \input{./preamble.tex}
 
+\usetikzlibrary{svg.path}
+\definecolor{gG}{RGB}{ 60, 186,  84}
+\definecolor{gY}{RGB}{244, 194,  13}
+\definecolor{gB}{RGB}{ 72, 133, 237}
+\definecolor{gR}{RGB}{219,  50,  54}
+\newlength\htG
+\protected\def\google{\settoheight{\htG}{G}%
+  \begin{tikzpicture}[yscale=-1,scale=(\htG/240pt),baseline=(baseline)]
+    \fill[fill=gG] svg {m797.49 249.7h35.975v-240.75h-35.975z};
+    \coordinate (baseline) at (current bounding box.south);
+    \fill[fill=gB] svg {m246.11 116.18h-116.57v34.591h82.673c-4.0842 48.506-44.44 69.192-82.533 69.192-48.736 0-91.264-38.346-91.264-92.092 0-52.357 40.54-92.679 91.371-92.679 39.217 0 62.326 25 62.326 25l24.22-25.081s-31.087-34.608-87.784-34.608c-72.197-0.001-128.05 60.933-128.05 126.75 0 64.493 52.539 127.38 129.89 127.38 68.031 0 117.83-46.604 117.83-115.52 0-14.539-2.1109-22.942-2.1109-22.942z};
+    \fill[fill=gR] svg {m341.6 91.129c-47.832 0-82.111 37.395-82.111 81.008 0 44.258 33.249 82.348 82.673 82.348 44.742 0 81.397-34.197 81.397-81.397 0-54.098-42.638-81.959-81.959-81.959zm0.47563 32.083c23.522 0 45.812 19.017 45.812 49.66 0 29.993-22.195 49.552-45.92 49.552-26.068 0-46.633-20.878-46.633-49.79 0-28.292 20.31-49.422 46.741-49.422z};
+    \fill[fill=gY] svg {m520.18 91.129c-47.832 0-82.111 37.395-82.111 81.008 0 44.258 33.249 82.348 82.673 82.348 44.742 0 81.397-34.197 81.397-81.397 0-54.098-42.638-81.959-81.959-81.959zm0.47562 32.083c23.522 0 45.812 19.017 45.812 49.66 0 29.993-22.195 49.552-45.92 49.552-26.068 0-46.633-20.878-46.633-49.79 0-28.292 20.31-49.422 46.741-49.422z};
+    \fill[fill=gB] svg {m695.34 91.215c-43.904 0-78.414 38.453-78.414 81.613 0 49.163 40.009 81.765 77.657 81.765 23.279 0 35.657-9.2405 44.796-19.847v16.106c0 28.18-17.11 45.055-42.936 45.055-24.949 0-37.463-18.551-41.812-29.078l-31.391 13.123c11.136 23.547 33.554 48.103 73.463 48.103 43.652 0 76.922-27.495 76.922-85.159v-146.77h-34.245v13.836c-10.53-11.347-24.93-18.745-44.04-18.745zm3.178 32.018c21.525 0 43.628 18.38 43.628 49.768 0 31.904-22.056 49.487-44.104 49.487-23.406 0-45.185-19.005-45.185-49.184 0-31.358 22.619-50.071 45.66-50.071z};
+    \fill[fill=gR] svg {m925.89 91.02c-41.414 0-76.187 32.95-76.187 81.57 0 51.447 38.759 81.959 80.165 81.959 34.558 0 55.768-18.906 68.426-35.845l-28.235-18.787c-7.3268 11.371-19.576 22.484-40.018 22.484-22.962 0-33.52-12.574-40.061-24.754l109.52-45.444-5.6859-13.318c-10.58-26.08-35.26-47.86-67.92-47.86zm1.4268 31.413c14.923 0 25.663 7.9342 30.224 17.447l-73.139 30.57c-3.1532-23.667 19.269-48.017 42.915-48.017z};
+  \end{tikzpicture}%
+}
+
 \title{Algebraic Geometry}
 \begin{document}
 \maketitle
@@ -276,15 +294,15 @@ We can think of $\P^1$ in another way - if we draw in the unit circle centered o
 \centering
 \begin{subfigure}{.5\textwidth}
 \includegraphics[scale=.1]{plane.png}
-\caption{$\P^2$ as the straight lines in $\A^2$, so that points of the same colour are identified}
+\caption{$\P^1$ as the straight lines in $\A^2$, so that points of the same colour are identified}
 \end{subfigure}\\
 \begin{subfigure}{.4\textwidth}
 \includegraphics[scale=.1]{line.png}
-\caption{$\P^2$ as the corresponding points in $\A^1$, i.e. the gradients of lines. Note the point at infinity}
+\caption{$\P^1$ as the corresponding points in $\A^1$, i.e. the gradients of lines. Note the point at infinity}
 \end{subfigure}\hfill
 \begin{subfigure}{.4\textwidth}
 \includegraphics[scale=.1]{circle.png}
-\caption{$\P^2$ as the points on a circle, with antipodal points identified (points of the same colour)}
+\caption{$\P^1$ as the points on a circle, with antipodal points identified (points of the same colour)}
 \end{subfigure}
 \end{figure}
 
@@ -444,7 +462,7 @@ We call $\Sigma_{1,1} \subseteq \P^3$ the image of $\P^1 \times \P^1$ under this
 \end{enumerate}
 We get these lines by fixing one coordinate of $\P^1$ and letting the other vary - in this way injectivity gives the families of lines.
 
-If $X$ is an irreducible projective variety, then its field of rational functions is given by
+If $X$ is an irreducible projective variety, then its \emph{field of rational functions} is given by
 \begin{align*}
 K(X) &= \left\{ \frac{F}{G} : F, G \in K[\mathbf{z}] \text{ homogeneous of same degree, } G \notin I^h(X)\right\}/\thicksim\\
 \frac{F_1}{G_1} \thicksim \frac{F_2}{G_2} & \iff F_1G_2 - F_2G_2 \in I^h(X)
@@ -778,4 +796,59 @@ For the first part, clearly every ideal of that form is maximal. Conversely, let
 Take $t \in L\setminus K$. Then $K \subseteq K(t) \subseteq L$, and $t$ is transcendental. now, let $U_m = \angle{a_1^{m_1}\ldots a_n^{m_n}}$ where $\sum m_i = m$. These are all finite dimensional over $K$, but $\bigcup_m U_m = K$. Observe for each $c \in K$, the elements $\frac{1}{t-c}$ are linearly independent. But there are uncountably many of them. Only finitely many lie in each $U_m$, so we get a contradiction.
 \end{proof}
 
+\section{Curves}
+An \emph{algebraic curve} is an algebraic variety of dimension 1. 
+\begin{proposition}
+If $X$ is an irreducible curve and $W \subseteq X$ is a proper closed subvariety, then $w$ is finite.
+\end{proposition}
+\begin{proof}
+We've already proven this for plane curves. We can assume $X$ is affine and let $I(X)$ be the associated ideal, and that $W$ is irreducible. By the Nullstellensatz, we know that $I(X) \subsetneq I(W)$, and let $\varphi : W \injection X$ be the inclusion map - this induces a homomorphism of coordinate rings given by restriction $\varphi^{\ast}: K[X] \to K[W]$.
+
+If $W$ is not a point, then $K[W] \neq K$, so take $t \in K[W] \setminus K$. The element $t$ is transcendental over $K$. Then take $0 \neq x \in K[x]$ with $\varphi^{\ast}(x) = 0$ and $y \in K[X]$ with $\varphi^{\ast}(y) = t$. Note that $x$ and $y$ are algebraically independent, but $\dim X = 1\implies \tr \deg K(X) = 1$ so we get a contradiction.
+\end{proof}
+\subsection{Basic Structure on Curves}
+Let $X$ be an irreducible curve. Given $p \in X$, the \emph{local ring of X at p} is defined to be $\mathcal{O}_{X,p} = \mathcal{O}_p = \{\frac{f}{g} : f,g \in K[X], g(p) \neq 0\}$ - the functions defined on some open set containing $p$.
+
+Then $\mathcal{O}_{X,p} \supseteq m_p = \{F \in \mathcal{O}_{X,p} : F(p) = 0\}$. It is an easy exercise to show that $m_p$ is an ideal, and almost as easy to show that it is maximal. Moreover, $\mathcal{O}_{X,p} \setminus \mathcal{O}_{X,p}^{\ast}$, the set of non-units in $\mathcal{O}_{X,p}$, is precisely $m_p$, so $m_p$ is the unique maximal ideal in $\mathcal{O}_{X,p}$.
+
+This definition of a local ring is similar to one from commutative algebra: a \emph{local ring} is a commutative ring that is not a field with a unique maximal ideal.
+
+For example, if $X$ is an irreducible curve, $\mathcal{O}_{X,p}$ is a local ring. Other examples of local rings include $\C\llbracket t\rrbracket$, the formal power series in $t$, with unique maximal ideal generated by $t$. 
+
+\begin{theorem}
+If $X$ is an irreducible curve and $p \in X$ is a smooth point, then the ideal $m_p \trianglelefteq \mathcal{O}_{X,p}$ is principal.
+\end{theorem}
+We will refer to a generator of $m_o$ as a \emph{local parameter/coordinate} at $p$.
+\begin{proof}
+Assume $p \in X_0 \subseteq \A_K^n$ is an affine patch of $X$ at $p$. After a change of coordinates, we can assume that $p$ is the origin. We can write $K[X_0] = \frac{K[z_1, \ldots, z_n]}{I(X_0)} = K[x_1, \ldots, x_n]$ as an algebra \underline{\textsc{not}} as a polynomial ring - the $x_i$s can have relations. They are just the images of the $z_i$s under the quotient map.
+
+Then $\mathcal{O}_{X,p} = \mathcal{O}_{X_0,p} = \{\frac{f}{g} : f,g \in K[X_0], g \notin (x_1, \ldots, x_n)\}$. So then $m_p = \{\frac{f}{g} : f,g \in K[X_0], f \in (x_1, \ldots, x_n), g \notin (x_1, \ldots , x_n)\} = x_1\mathcal{O}_{X,p} + \ldots + x_n\mathcal{O}_{X,p}$.
+
+We change coordinates, so that $T_{X,p}^{aff} = T_{X,p} = \{z_2 = z_3 = \ldots = z_n = 0\}$. Since the $z_i$ linearise equations for $X_0$, there exist functions $f_2, \ldots, f_n \in I(X_0)$ such that $f_i = z_i - h_i$ where $h_i$ has no terms of degree $\leq 1$. In $\mathcal{O}_{X,p}$ we have $x_i = h_i(x_1, \ldots, x_n) \in (x_1^2, x_1x_2, \ldots, x_n^2) = m_p^2$.
+
+Note that this implies that the image of $x_1$ inside $m_p/{m_p^2}$ is a generator as a $K$-vector space, $K[X_0]/m = \mathcal{O}_{X,p}/{m_p}$.
+
+In turn, by applying Nakayama's Lemma, we can conclude that $x_1$ generates $m_p$.
+\end{proof}
+\begin{lemma}[Nakayama's Lemma]
+Let $R$ be a local ring with maximal ideal $m$, and let $M$ be a finitely generated $R$-module. If $mM = M$ then $M = 0$.
+\end{lemma}
+\begin{proof}
+\google
+\end{proof}
+\begin{corollary}
+If $(R,m)$ are as above, and if $t_1, \ldots, t_r \in m$ generate $m/m^2$, as an $R/{m}$-vector space, then they generate $m$.
+\end{corollary}
+This is the corollary we need to finish off the proof.
+\begin{proof}
+Let $n = \angle{t_1, \ldots, t_n} \subseteq m$. If the images of $\{t_i\}$ generate $m/{m^2}$, then $n+m^2 = m+m^2 \implies n+m^2/n = m+m^2/n \implies m(m/n) = (m/n)$. So by Nakayama, $m/n = 0$, and $m = n$.
+\end{proof}
+
+\begin{corollary}
+Let $p \in X$ be a smooth point, then $\mathcal{O}_{X,p}$ is a discrete valuation ring, i.e. there exist $\ord_p : K(X)^\ast \to \Z$ such that:
+\begin{align*}
+\mathcal{O}_{X,p} &= \{f \in K(X)^\ast |\ord_p(f) \geq 0\} \cup \{0\}\\
+m_p &= \{f \in \mathcal{O}_{x,p} : \ord_p(f) > 0\}\cup\{0\}
+\end{align*}
+\end{corollary}
 \end{document}

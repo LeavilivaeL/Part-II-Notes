@@ -1017,4 +1017,53 @@ Note that:
 \item $RM(d,r)$ is spanned by $v_{i_1} \wedge \ldots \wedge v_{i_s}$ for $1 \leq i < \ldots <i_s \leq d$ with $0 \leq s \leq r$. These vectors are linearly independent by part \textit{1.}, and so form a basis. Hence $\rank RM(d, r) = \sum_{s=0}^r \binom{d}{s}$.
 \end{enumerate}
 \end{proof}
+
+Let $C_1, C_2$ be linear codes of length $n$ with $C_2 \subseteq C_1$. The \emph{bar product} $C_1|C_2 = \{(x|x+y) : x \in C_1, y \in C_2\}$. It is a linear code of length $2n$.
+\begin{lemma}
+\item
+\begin{enumerate}
+\item $\rank(C_1|C_2) = \rank C_1 + \rank C_2$
+\item $d(C_1|C_2) = \min\{2d(C_1), d(C_2)\}$
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{enumerate}
+\item $C_1$ has a basis $x_1, \ldots, x_k$, $C_2$ has a basis $y_1, \ldots, y_\ell$. Then $C_1|C_2$ has a basis given by $\{(x_i|x_i: 1\leq i \leq k\}\cup\{(0|y_i):1\leq i \leq \ell\}$.
+
+So $\rank(C_1|C_2) = k + \ell = \rank C_1 + \rank C_2$.
+
+\item Take $x \in C_1, y \in C_2$ not both zero so that $(x|x+y) \in C_1|C_2$ is non-zero. Then if $y \neq 0, w(x|x+y) \geq w(y) \geq d(C_2)$. Meanwhile if $y=0$, then $w(x|x+y) = 2w(x) \geq 2d(C_1)$.
+
+Hence $d(C_1|C_2) \geq \min \{2d(C_1), d(C_2)\}$. For equality, take $x$ of weight $d(C_1)$, $y$ of weight $d(C_2)$. Then $x|0$ or $0|y$ attains the bound.
+\end{enumerate}
+\end{proof}
+\begin{theorem}
+\item
+\begin{enumerate}
+\item $RM(d,r) = RM(d-1,r-1)|RM(d-1,r-1)$
+\item $RM(d,r)$ has minimum distance $2^{d-r}$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\item
+\begin{enumerate}
+\item $RM(d-1, r-1) \subseteq RM(d-1, r)$, so the bar product is defined. Order the elements of $X = \F_2^d$ such that $v_d = (0\ldots 0 |1\ldots 1)$ where each part has length $2^{d-1}$, and let $v_i = (v_i'|v_i')$
+
+Take $z \in RM(d,r)$, then $z$ is a sum of wedge products of $v_1, \ldots, v_d$. So $z = x+(y \wedge v_d)$ for $x,y$ sums of wedge products of $v_1, \ldots, v_{d-1}$. Then $x = (x'|x')$ for some $x' \in RM(d-1,r)$, and $y = (y'|y')$ for some $y' \in RM(d-r, r-1)$.
+
+Then $z = (x'|x') + (y'|y')\wedge (0\ldots 0|1\ldots 1) = (x'|x'+y') \in RM(d-1,r)|RM(d-1,r-1)$. The converse is similar, or argue using cardinalities.
+
+\item If $r=0$ then $RM(d,0)$ is a repetition code of length $n = 2^d$, which has minimum distance $2^{d-0}$. If $r=d$, then $RM(d,d)$ is the trivial code which has minimum distance $1=2^{d-d}$. We prove the case $0 < r < d$ by induction on $d$. The minimum distance of $RM(d-1,r) = 2^{d-1-r}$ and of $RM(d-1,r-1)$ is $2^{d-r}$. So by the previous lemma, the minimum distance of $RM(d,r) = \min \{2\cdot 2^{d-r-1}, 2^{d-r}\} = 2^{d-r}$.
+\end{enumerate}
+\end{proof}
+
+\section{Cyclic Codes}
+A linear code $C \subseteq \F_2^n$ is \emph{cyclic} if $(a_0, a_1, \ldots, a_{n-1}) \in C \implies (a_{n-1}, a_0, a_1, \ldots, a_{n-2}) \in C$. We can identify $\F_2^n$ with $\F_2[x]/(x^n-1)$, via $(a_0,a_1, \ldots, a_{n-1}) \leftrightarrow a_0 + a_1x+\ldots+a_{n-1}x^{n-1}$.
+\begin{lemma}
+$C \subseteq \F_2[x]/(x^n-1)$ is cyclic if and only if $C \trianglelefteq \F_2[x]/(x^n-1)$.
+\end{lemma}
+
+
+
 \end{document}

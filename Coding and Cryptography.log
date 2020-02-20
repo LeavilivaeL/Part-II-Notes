@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  17 FEB 2020 09:57
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  19 FEB 2020 09:58
  system commands enabled.
 **"Coding and Cryptography.tex"
 ("./Coding and Cryptography.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.099 seconds
+luaotfload | main : initialization completed in 0.855 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1736,7 +1736,7 @@ LaTeX Font Info:    Try loading font information for U+dsrom on input line 983.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/doublestroke/udsrom.fd"
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 ) [25] [26]
-("./Coding and Cryptography.aux"))
+[27] ("./Coding and Cryptography.aux"))
 
 Here is how much of LuaTeX's memory you used:
  31462 strings out of 494305
@@ -1744,7 +1744,7 @@ Here is how much of LuaTeX's memory you used:
  521 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 3 glue, 4 kern, 1 glyph, 9 attribute, 55 glue_spec,
  9 attribute_list, 2 write nodes
-   avail lists: 1:5,2:2373,3:737,4:32,5:372,6:22,7:3480,8:74,9:600,10:11,11:183
+   avail lists: 1:5,2:2374,3:737,4:55,5:376,6:24,7:3480,8:74,9:600,10:11,11:183
  34607 multiletter control sequences out of 65536+200000
  83 fonts using 5982167 bytes
  64i,21n,100p,1095b,1996s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1778,9 +1778,9 @@ pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/rsfs/rsfs10.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/rsfs/rsfs7.pfb>
-Output written on Coding and Cryptography.pdf (26 pages, 394589 bytes).
+Output written on Coding and Cryptography.pdf (27 pages, 402898 bytes).
 
-PDF statistics: 253 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 256 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

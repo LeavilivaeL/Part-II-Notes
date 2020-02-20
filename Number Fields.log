@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  18 FEB 2020 12:45
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  20 FEB 2020 10:58
  system commands enabled.
 **"Number Fields.tex"
 ("./Number Fields.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.719 seconds
+luaotfload | main : initialization completed in 0.881 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1061,7 +1061,7 @@ in y). (see also unbounded coords=jump).
 NOTE: coordinate (0Y0.0e0],5Y0.0e0]) has been dropped because it is unbounded (i
 n y). (see also unbounded coords=jump). 
 [16]
-Overfull \hbox (4.68416pt too wide) in paragraph at lines 750--751
+Overfull \hbox (4.68416pt too wide) in paragraph at lines 748--749
 []\TU/lmr/bx/n/10 Corol-lary 10.7. []\TU/lmr/m/it/10 Let $\OML/cmm/m/it/10 I \O
 MS/cmsy/m/n/10  \U/euf/m/n/10 o[]$ \TU/lmr/m/it/10 be a nonzero ideal. Then $\
 OML/cmm/m/it/10 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 I\OT1/cmr/m/n/10 )$ \TU/lmr/
@@ -1070,17 +1070,26 @@ T1/cmr/m/n/10 (\OML/cmm/m/it/10 I\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 j[] \OT1/cmr
 /m/n/10 =
  []
 
-[17] [18] ("./Number Fields.aux"))
+[17]
+NOTE: coordinate (0Y0.0e-3],4Y0.0e0]) has been dropped because it is unbounded (
+in y). (see also unbounded coords=jump). 
+NOTE: coordinate (0Y0.0e0],4Y0.0e0]) has been dropped because it is unbounded (i
+n y). (see also unbounded coords=jump). 
+NOTE: coordinate (0Y0.0e-3],5Y0.0e0]) has been dropped because it is unbounded (
+in y). (see also unbounded coords=jump). 
+NOTE: coordinate (0Y0.0e0],5Y0.0e0]) has been dropped because it is unbounded (i
+n y). (see also unbounded coords=jump). 
+[18] [19] ("./Number Fields.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 31385 strings out of 494305
+ 31391 strings out of 494305
  100000,1144653 words of node,token memory allocated
  532 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 55 glue_spec
 , 10 attribute_list, 2 write nodes
-   avail lists: 1:4,2:2302,3:609,4:104,5:347,6:26,7:3329,8:68,9:528,10:10,11:150
+   avail lists: 1:4,2:2302,3:609,4:104,5:349,6:26,7:3329,8:68,9:528,10:10,11:150
 
- 34530 multiletter control sequences out of 65536+200000
+ 34536 multiletter control sequences out of 65536+200000
  94 fonts using 6661023 bytes
  69i,20n,100p,1085b,2072s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman9-regular.otf><c:/p
@@ -1117,9 +1126,9 @@ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam7.pfb><C:/Program Files
 /MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/amsfonts/symbols/msbm5.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on Number Fields.pdf (18 pages, 407030 bytes).
+Output written on Number Fields.pdf (19 pages, 418947 bytes).
 
-PDF statistics: 246 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 249 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

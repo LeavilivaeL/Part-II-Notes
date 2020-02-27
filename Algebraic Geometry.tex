@@ -818,7 +818,7 @@ For example, if $X$ is an irreducible curve, $\mathcal{O}_{X,p}$ is a local ring
 \begin{theorem}
 If $X$ is an irreducible curve and $p \in X$ is a smooth point, then the ideal $m_p \trianglelefteq \mathcal{O}_{X,p}$ is principal.
 \end{theorem}
-We will refer to a generator of $m_o$ as a \emph{local parameter/coordinate} at $p$.
+We will refer to a generator of $m_p$ as a \emph{local parameter/coordinate} at $p$.
 \begin{proof}
 Assume $p \in X_0 \subseteq \A_K^n$ is an affine patch of $X$ at $p$. After a change of coordinates, we can assume that $p$ is the origin. We can write $K[X_0] = \frac{K[z_1, \ldots, z_n]}{I(X_0)} = K[x_1, \ldots, x_n]$ as an algebra \underline{\textsc{not}} as a polynomial ring - the $x_i$s can have relations. They are just the images of the $z_i$s under the quotient map.
 
@@ -845,10 +845,188 @@ Let $n = \angle{t_1, \ldots, t_n} \subseteq m$. If the images of $\{t_i\}$ gener
 \end{proof}
 
 \begin{corollary}
-Let $p \in X$ be a smooth point, then $\mathcal{O}_{X,p}$ is a discrete valuation ring, i.e. there exist $\ord_p : K(X)^\ast \to \Z$ such that:
+If $X$ is an irreducible curve and $p \in X$ be a smooth point, then the maximal ideal $m_p \subseteq \mathcal{O}_{X,p}$ of functions vanishing at $p$ is principal, and $\mathcal{O}_{X,p}$ is a discrete valuation ring, i.e. there exists $\ord_p : K(X)^\ast \to \Z$ such that:
 \begin{align*}
 \mathcal{O}_{X,p} &= \{f \in K(X)^\ast |\ord_p(f) \geq 0\} \cup \{0\}\\
 m_p &= \{f \in \mathcal{O}_{x,p} : \ord_p(f) > 0\}\cup\{0\}
 \end{align*}
 \end{corollary}
+\begin{proof}
+We know $m_p = (\pi_p)$ as $m_p$ is principal by \textbf{7.2}, and so $m_p^n = (\pi_p^n)$. We will examine $J = \bigcap_n m_p^n$. Observe that $m_p J = J$, so $J = 0$ by Nakayama's lemma.
+
+Then for $f \in \mathcal{O}_{X,p}$, define $\ord_p(f)$ to be the largest $n \in \Z_{\geq 0}$ such that $f \in m_p^n$. If $f \in K(X)^\ast\setminus \mathcal{O}_{X,p}$, then $f^{-1} \in \mathcal{O}_{X,p}$. In this case, we define $\ord_p(f) = -\ord_p(f^{-1}) \in \Z_{\leq 0}$.
+\end{proof}
+We will also use $v_p(x) = \ord_p(x)$ as an alternative notation. By convention, we wil say that $v_p(0) = +\infty$, so that $v_p:K(X)^{\ast} \to \Z\cup\{\infty\}$.
+
+\begin{corollary}
+If $X$ is a smooth projective curve and $X \dashrightarrow_\varphi \P^m$ is a rational map then $\varphi$ is a morphism.
+\end{corollary}
+\begin{proof}
+Let $\varphi = (\varphi_0, \ldots, \varphi_m)$ and $p \in X$ as above. Pick a local parameter $\pi_p$ at $p$, and calculate $\min_i\{v_p(\varphi_i)\} = n$, say. Then replace $(\varphi_0, \ldots, \varphi_m)$ with $(\pi_p^{-n}\varphi_0, \ldots, \pi_p^{-n}\varphi_m)$ to get an equivalent rational map, but this time regular at $p$.
+\end{proof}
+
+\begin{corollary}
+Any birational map of smooth projective curves
+\begin{align*}
+\varphi: X_1 \dashrightarrow X_2
+\end{align*}
+is an isomorphism. A smooth projective curve is uniquely determined by the field of functions. 
+\end{corollary}
+\begin{theorem}
+The image of a projective variety under a morphism is closed.
+\end{theorem}
+\begin{proof}
+\google
+\end{proof}
+\begin{corollary}
+Any morphism of projective irreducible curves is either surjective or constant.
+\end{corollary}
+\begin{proof}
+Given $\varphi:X_1\to X_2$, since $\varphi(X_1)$ is closed and connected, then $\varphi(X_1) = X_2$ or $\varphi(X_1) = \bullet$.
+\end{proof}
+\begin{proposition}
+Let $\varphi:X_1 \to X_2$ be a non-constant morphism of algebraic curves. Then:
+\begin{itemize}
+\item $\varphi$ is a finite map, i.e. $|\varphi^{-1}(p)|<\infty$ for all $p \in X_2$
+\item We have a pullback $\varphi^\ast:K(X_2)\injection K(X_1)$ exhibiting $K(X_1)$ as a finite algebraic extension of $K(X_2)$.
+\end{itemize}
+\end{proposition}
+\begin{proof}
+The first statement is clear since $\varphi^{-1}(p)$ is closed for all $p \in X_2$. For the second part, observe that $\varphi(X_1)$ is infinite since $k = \bar{k}$ so $\varphi(X_1)$ is dense, so $\varphi^\ast$ makes sense. Now $K(X_2)$ lives inside $K(X_1)$ which is transcendental over $K$ but algebraic over $K(t)$, so the extension $[K(X_1):K(X_2)]$ is finite.
+\end{proof}
+The number of preimages of $p \in X_2$ is finite, but can depend on the choice of $p$. For example, if we take $\P^1_{\C} \to \P^1_\C$ by squaring. Then $\varphi^{-1}(0) = 0, \varphi^{-1}(\infty), \varphi^{-1}(a) = \pm \sqrt{a}$.
+
+Given $\varphi:X_1\ to X_2$ a morphism of irreducible curves, the \emph{degree of $\varphi$}, $\deg \varphi = \deg[K(X_1):K(X_2)]$. When $\varphi^\ast$ is separable, it is a fact that $\deg \varphi$ is equal to the maximum number of preimages of points in $X_2$. Store this fact as true without asking for proof, or just \google it.
+
+What about the non-generic points in $X_2$ and their preimages?
+
+Given $\varphi: X_1 \to X_2$ as before and $p \in X_1$, define the \emph{ramification index} of $\varphi$ at $p$ to be $\ord_p (\varphi^{\ast} \pi_q )$ where $\pi_q$ is a local parameter for $X_2$ near $\varphi(p) = q$.
+
+\begin{theorem}
+Let $\varphi:X_1 \to X_2$ be a morphism of projective irreducible curves.
+\begin{enumerate}
+\item If $\varphi$ is non-constant, then $\varphi$ is surjective.
+\item If $X_1$ and $X_2$ are smooth, then for any $q \in X_2$, $\deg \varphi = \sum_{p \in \varphi^{-1}(q)} e_p$ where $e_p$ is the ramification index at $p$.
+\item If $\charr(K) = 0$ or if $\varphi^{\ast}$ is separable, then $e_p = 1$ generically, i.e. outside a finite set.
+\end{enumerate}
+\end{theorem}
+\begin{proposition}
+Let $X$ be a smooth projective curve and $f \in K(X)$ is regular for all points $p \in X$. Then $f \in K$.
+\end{proposition}
+\begin{proof}
+Examine $\varphi= 1\cdot f : X \to \P^1$. The image must include $\infty$ if $\varphi$ is non-constant, but this contradicts regularity of $f$.
+\end{proof}
+
+\subsection{Brill-Noether Problem}
+Let $X$ be a smooth projective irreducible curve. For what integers $r, d \geq 0$ does $X$ admit a morphism (embedding):
+\begin{align*}
+X \xrightarrow{\varphi} \P_K^r
+\end{align*}
+where $\varphi$ has degree $d$? ($\varphi(x)$ should not be contained in a hyperplane). (We say the \emph{degree} of $\varphi$ is the number of preimages of a generically chosen hyperplane in $\P^r$).
+
+We won't answer this question because it is too hard, but we will try to make some progress in this direction. We will need the Riemann-Roch theorem, Riemann-Hurwitz theorem, and the ideas of genus and canonical divisor.
+
+Let $X$ be a curve and $\varphi:X \to \P^r_K$ be a morphism. The map $\varphi$ is given by rational functions $(\varphi_0, \ldots, \varphi_r)$. If we consider the open set $\P^r_K\setminus \{z_r = 0\}$, we can divide by $\varphi_r$ to get $\left\{\frac{\varphi_i}{\varphi_r}\right\}_{i=0}^{r-1}$ rational function on an open set of $X$.
+
+In other words, given $\varphi:X \to \P^r_K$ we get $r$ rational functions, say $f_1, \ldots, f_r \in K(X)$ which are undefined on precisely the same points: where $\varphi_r = 0$. In fact we can say more - they are also undefined in the same way in the sense of orders of poles from complex analysis: given $f \in K(X)$ and $p \in X$, we say that $f$ has a \emph{pole} at $p$ if $\ord_p(f) < 0$, and that the order of this pole is $-\ord_p(f)$.
+
+A \emph{divisor} $D$ on a curve $X$ is an element of the group $\Div(X) = \bigoplus_{p \in X}\Z p$ - all finite $\Z$-linear combinations of points. The \emph{degree} of a divisor $D = \sum a_i p_i$ is given by $\deg D = \sum a_i$. As a point of notation, $\Div^d(X) = \{D \in \Div(X) : \deg D = d\}$.
+
+A rational function $f \in K(X)^{\ast}$ gives rise to a divisor as follows:
+\begin{align*}
+\div(f) = \sum_{p\in X} \ord_p(f) \cdot p
+\end{align*}
+\begin{lemma}
+For $f \in K(X)^{\ast}$, $\div(f) \in \Div(X)$, i.e. $\ord_p(f) = 0$ for all but finitely many $p \in X$. In fact, $\deg(\div(f)) = 0$.
+\end{lemma}
+\begin{proof}
+Given $f$, take $\varphi: X \to \P^1; x\mapsto [1:f(x)]$. We need to calculate the zeroes and poles of $f$, which correspond to the points of $X$ mapping to $0$ and $\infty$ respectively. Take a local parameter $t$ around $0$ and $\frac1t$ around $\infty$. Then applying the results from the basic structure on curvs:
+\begin{align*}
+\deg(\varphi) = \sum_{p\in X, p \mapsto 0} e_p = \sum_{p \in X, p \mapsto \infty} e_p
+\end{align*}
+where in each case the $e_p$s give the orders of zeros and poles.  In particular, the weighted numbers of zeroes and poles are equal.
+\end{proof}
+The image of the homomorphism $\div$ is contained in $\Div^0(X)$, and is called the \emph{set of principal divisors}.
+\begin{proposition}
+Every degree 0 divisor on $\P^1$ is principal.
+\end{proposition}
+\begin{proof}
+Exercise.
+\end{proof}
+The \emph{Jacobian group} of $X$ is $\Div^0(X)/\{\div(f):f\in K(X)^{\ast}\}$, and the \emph{Picard group} of $X$ is $\Div(X)/\{\div(f): f \in K(X)^{\ast}\}$.
+
+As a fun fact, over $\C$, $\Jac(X)$ is a projective variety, and is homeomorphic to $(S^1)^g$ for some $g \in \N$.
+
+\subsection{Hyperplane Sections}
+Given $X \subseteq \P_K^r$, the coordinate functions on $\P_K^r \setminus \{z_r = 0\}\cong \A^r_K$ give rational function on $X$ which are morphisms away from $X \cap \{Z_r = 0\}$. Let $L \in \mathcal{O}_{\P^r}(1)$ and $H = \V(L)$ and $X \nsubseteq H$. Then define $\div(L) = \sum_{p\in X}n_p p$,where $n_p = v_p(L/z_i)$ for any coordinate $z_i(p) \neq 0$ - this doesn't depend on $i$. Then $n_p$ is nonzero only for $p \in Z \cap H$. Note that these are not principal because $\deg L$ is $\geq$ than the number of intersection points of $X$ and $H$.
+
+Keep in mind that $\overline{\V(y-x^2)}$ in $\P^2$, then $\div(X)$ is $2\cdot(0,0)$.
+
+Given $D, E \in \Div^d(X)$, we say that $D \thicksim E$ (linear equivalence) if $D-E = \div f$. 
+
+\begin{proposition}
+Given $X \subseteq \P_K^r$ and $L_1, L_2 \in \mathcal{O}_{\P^r}(1)$ such that $\V(L_i) \nsupseteq X$, then $\div(L_1) \thicksim \div(L_2)$.
+\end{proposition}
+\begin{proof}
+$\div(L_1) - \div(L_2) = \div(L_1/L_2)$.
+\end{proof}
+
+If $X$ is a projective curve it can be exhibited as $\V(I) \subseteq \P^N$ for different choices of $I, N$. Is there a canonical way of doing so?
+
+Last time, we saw that, given $X \subseteq \P^r$ a curve and $L \in \mathcal{O}_{\P^r}(1)$ and $H = \V(L)$, we obtained a divisor on $X$ whose support lies on $H \cap X$, defined by $\div(L) = \sum n_p p$ where $n_p = \ord_p(L/z_i)$ for some $z_i(p) \neq 0$.
+
+If $H$ is chosen generically then $\div(L) = \sum_{p\in X} [p]$. For divisors $D_1, D_2$ given by $D_i = \div(L_i)$, where $L_1, L_2 \in \mathcal{O}_{\P^r}(1)$, the principal divisor. $\div(L_1/L_2) = D_1-D2 \implies D_1 \thicksim D_2$.
+
+There's no reason to restrict $H$ to be a hyperplane - any hypersurface will do. Analogously, given $F \in \mathcal{O}_{\P^r}(d)$ with $\V(F) \nsupseteq X$, we can define $\div(F)$ on $X$ by taking $n_p = \ord_p(F/z_i^d)$ for $z_i(p) \neq 0$.
+
+\begin{theorem}[Bezout's Theorem]
+Given $X \subseteq \P^2$ and $Y = \V(F)$, $F \in \O_{\P^2}(d)$. If $\deg(X) = c$, then $\#(X\cap Y) \leq cd$, and we have equality if we count with multiplicity.
+\end{theorem}
+\begin{proof}
+Take $F = \prod_{i=1}^d L_i$, of generically chosen linear forms, and then reduce to the case already proved.
+\end{proof}
+A divisor $D \in \Div(X)$ is \emph{effective} if $D = \sum n_p[p]$ with $n_p \geq 0$.
+
+Let $D$ be a divisor. We want to consider rational functions on $X$ with poles bounded by $D$. We define:
+\begin{align*}
+L(D) = \{0\} \cup \{f \in K(X)^{\ast} : \div(f) + D\text{ is effective}\}
+\end{align*}
+It is easy to see that this is a vector space over $K$. It is harder to see that if $D \thicksim E$ then there is an isomorphism $L(D) \xrightarrow{\cong}L(E)$, and it is a non-examinable fact that $L(D)$ is always finite dimensional.
+
+If $D \thicksim E$ then $D-E = \div(g)$ for $g \in K(X)^{\ast}$. Now observe that multiplication by $g$ gives $L(D) \xrightarrow{\times g} L(E)$.
+
+Given $L(D)$, if we choose a basis $F_1, \ldots, F_s$, we obtain a morphism:
+\begin{align*}
+X &\to \P^s\\
+p &\mapsto [1:F_1(p):\ldots:F_s(p)]
+\end{align*}
+\begin{proposition}
+Given a divisor $D$, let $\ell(D) = \dim_K L(D)$.
+\begin{enumerate}
+\item If $\deg D < 0$, then $\ell(D) = 0$.
+\item For any $p \in X$, $\ell(D) \leq \ell(D-p)+1$.
+\item If $\deg D \geq 0$, $\ell(D) \leq d+1$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\item
+\begin{enumerate}
+\item Suppose $f \in L(D)$ is nonzero. Then $E = \div(f) + D \geq 0$, so is effective. But $E$ has the same degree as $D$ since $\deg(\div(f)) = 0$ \contr.
+\item Consider the following map. If $p \in X$ and $n = n_p$, writing $\sum n_p[p] = D$, pick a local parameter at $p$ and consider:
+\begin{align*}
+L(D) &\to K\\
+f &\mapsto \pi_p^n f(p)
+\end{align*}
+$L(D-p)$ is the kernel of this map.
+\item Apply 2. repeatedly.
+\end{enumerate}
+\end{proof}
+The residue theorem from complex analysis says that, given a meromorphic function on $\P^1$, $\sum_{p \in \P^1} Res(f,p) = 0$. There is a similar statement for Riemann surfaces.
+
+\subsection{Differentials}
+Let $L/K$ be an extension. The space of \emph{Kahler differentials} is the quotient $M/N$ where $M = \text{vector space over $K$ generated by symbols } \delta x, x \in L$, and $N$ is the vector space of relations given by $\delta(x+y)=\delta x+\delta y$, $\delta(xy) = x\delta y-y\delta x$, $\delta a =0$ for $a \in K$. 
+
+The image of $\delta x$ in $M/N$ is denoted $dx$. We define $\Omega_{L/K} = M/N$. There is a canonical map $K \to \Omega_{L/K}$, $f \mapsto df$.
+
+We will now develop a meaningful way to take $\omega \in \Omega_{L/K}$ for $L = K(X)$, and produce a canonical divisor class $\div(\omega) \in \Pic(X)$.
 \end{document}

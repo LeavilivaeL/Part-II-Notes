@@ -944,23 +944,175 @@ We've used the informal notations $x \leq y$ for $\leq xy$, and the abbreviation
 
 We also have the \emph{theory of total orders}, using the same language as posets, but including an extra sentence in the theory: $(\forall x)(\forall y)(x \leq y \vee y \leq x)$. 
 
+The \emph{language of ordered fields} has $\Omega = \{a, m  0, i, 0, 1\}, \Pi = \{\leq\}, \alpha(a) = \alpha(m) = \alpha(\leq) = 2, \alpha(-)= \alpha(i) = 1, \alpha(0) = \alpha(1) = 0$. As an exercise, write down the theory of ordered fields.
 
+The \emph{language of graphs} has $\Omega = \emptyset, \Pi = \{a\}, \alpha(a) = 2$. The \emph{theory of graphs} is:
+\begin{align*}
+T = \{(\forall x) \neq a xx,\\
+(\forall x)(\forall y)(axy \implies ayx)\}
+\end{align*}
 
+\subsection{Semantic Entailments}
+Let $L = L(\Sigma) = L(\Omega, \Pi, \alpha)$ be a first order language. An \emph{L-structure} is a non-empty set $A$ endowed with, for each $f \in \Omega$, a function $f_A : A^{\alpha(f)} \to A$ and for each $\varphi \in \Pi$, a subset $\varphi_A \subseteq A^{\alpha(\varphi)}$.
 
+An important thing to note is that, if $L$ is say the language of groups, an $L$-structure need not be a group.
 
+A term $t$ is \emph{closed} if it has no free variables. A symbol $c \in \Omega$ is a \emph{constant} if $\alpha(c) = 0$. If $p$ is a formula and $x$ a variable, $t$ is a term, then we write $p[t/x]$ for the formula obtained by replacing every free occurrence of $x$ in $p$ by $t$.
 
+Let $A$ be an $L$-structure. For each closed term $t$, we define the \emph{interpretation} $t_A$ inductively as follows:
+\begin{itemize}
+\item For $c$ a constant, we have defined $c_A : A^{0} \to A$ - think of $c_A \in A$ by identifying it with the unique element of $\Im(c_A)$. 
 
+\item $(ft_1\ldots t_n)_A = f_A ((t_1)_A, \ldots, (t_n)_A)$ for $f \in \Omega$, $\alpha(f) = n, t_1, \ldots, t_n$ all closed terms.
+\end{itemize}
+For $p$ a sentence, we define the interpretation $p_A \in \{0,1\}$ of $p$ in $A$ as follows:
 
+We start with the atomic formulae, so that:
+\begin{itemize}
+\item $p = \bot$. Then $\bot_A = 0$.
+\item $p = (s = t)$ for $s, t$ closed terms. Then $(s=t)_A = \begin{cases} 1 & s_A = t_A \\ 0 & \ow \end{cases}$
+\item $p = \phi t_1\ldots t_n$ where $\phi \in \Pi, \alpha(\phi) = n$, $t_1, \ldots, t_n$ closed terms. Then $(\phi t_1\ldots t_n)_A = \begin{cases} 1 & ((t_1)_A, \ldots, (t_n)_A) \in \phi_A \\0 & \ow\end{cases}$.
+\end{itemize}
+Then for non-atomic formulae we proceed inductively:
+\begin{itemize}
+\item $p = (q \implies r)$. Then $q,r$ are sentences, so define $(q \implies r)_A = \begin{cases} 0 & q_A = 1, r_A = 0\\ 1 & \ow\end{cases}$.
 
+\item $p = (\forall x)q$ for some formula $q$. As $p$ is a sentence, the only possible free variable in $q$ is $x$. We want something like ``substitute every $a \in A$ into $q$ in place of $x$, and if what we get is always true then so is $p$".
 
+We introduce a new constant for each $a \in A$. That is, let $\bar{A} = \{\bar{a}:a \in A\}$ be a set of symbols, where $a \mapsto \bar{a}$ is a bijection $A \to \bar{A}$. Assume \textsc{wlog} $\bar{A} \cap (\Omega \cup \Pi) = \emptyset$. Let $\Omega' = \Omega \cup \bar{A}$ and extend $\alpha$ to $\alpha'$ by setting $\alpha'(\bar{a}) = 0$ for all $a \in A$. Let $L' = L(\Omega', \Pi, \alpha')$. Then extend our interpretation of $A$ as an $L$-structure to being an $L'$-structure by interpreting $\bar{a}_A = a$.
 
+Then, for each $a \in A, q[\bar{a}/x]$ is a sentence. So define:
+\begin{align*}
+((\forall x)q)_A = \begin{cases} 1 & (q[\bar{a}/x])_A = 1 \text{ for all } a \in A \\ 0 & \ow \end{cases}
+\end{align*}
 
+Let $L$ be a language and $A$ an $L$-structure. If $p$ is a sentence with $p_A = 1$, we say that $p$ is \emph{satisfied} or \emph{true} in $A$, or that $A$ is a \emph{model} of $p$. If $T$ is a theory, we say $A$ is a \emph{model} of $T$ if for all $p \in T$, $A$ is a model of $p$.
 
+If $T$ is a theory and $p$ is a sentence such that every model of $T$ is a model of $p$ we say that $T$ \emph{semantically entails} $p$, and we write $T \taut p$. If $\emptyset \taut p$, we write $\taut p$ and say $p$ is a \emph{tautology}. So $p$ is a tautology if and only if it is true in every $L$-structure.
 
+For example, if $T$ is the theory of groups in the language $L$ of groups then an $L$-structure is a group if and only if it is a model of $T$. We have:
+\begin{align*}
+T \taut (\forall x)((\forall y)(mxy=y \wedge myx = y)\implies(x=e))
+\end{align*}
+Sometimes we need to interpret a formula $p$ with free variables. Suppose the set of free variables of $p$, $FV(p) \subset \{w_0, \ldots, w_{n-1}\}$. We can then define the interpretation of $p$ as $p_A \subset A^n$ by:
+\begin{align*}
+p_A = \{(a_0, \ldots, a_{n-1} \in A^n : (p[\bar{a}_0/w_0]\ldots[\bar{a_{n-1}}/w_{n-1}])_A = 1\}
+\end{align*}
+We say $A$ is a model of $p$ if $p_A = A^n$
+\end{itemize}
+Note that this final definition is independent of $n$, and is consistent with our earlier definition in the case where $p$ is a sentence.
 
+\subsection{Syntactic Entailment}
+There are seven logical axioms:
+\begin{enumerate}
+\item $p \implies (q \implies p)$\hfill($p,q$ formulae)
+\item $(p \implies (q\implies r))\implies((p\implies q)\implies (q \implies r))$\hfill($p,q,r$ formulae)
+\item $((p \implies \bot)\implies \bot)\implies p$\hfill($p$ a formula)
+\item $(\forall x)(x=x)$\hfill($x$ a variable)
+\item $(\forall x)(\forall y)((x=y) \implies (p \implies p[y/x]))$\hfill($x,y$ variables, $p$ formula with $y$ not bound)
+\item $(\forall x)p \implies p[t/x]$\hfill($x$ variable, $t$ term, $p$ formula with no bound free variable of $t$)
+\item $(\forall x)(p\implies q)\implies(p\implies (\forall x) q)$\hfill($x$ variable, $p,q$ formulae, $x$ not free in $p$)
+\end{enumerate}
+Note that every axiom is a tautology. Note also that one instance of axiom $6$ is $(\forall x)\bot \implies \bot$. If we allow $\emptyset$ as an L-structure, then in $\emptyset$, $(\forall x)\bot$ is true, and so that would imply $\bot$ is true, making axiom 6 not a tautology. This is why we insisted that L-structures had to be non-empty.
 
+We also have two deduction rules:
+\begin{itemize}
+\item Modus ponens: from $p$ and $p\implies q$ we can infer $q$.
+\item Generalisation: From $p$ we can infer $(\forall x)p$ as long as $x$ didn't appear free in any premise used in the proof of $p$.
+\end{itemize}
+Let $S$ be a set of formulae and $p$ a formula. A \emph{proof} of $p$ from $S$ is a sequence $\ell_1, \ell_2, \ldots, \ell_n =p$ of formulae, sometimes called \emph{lines}, such that each line is an axiom or an element of $S$ or can be inferred from earlier lines by a deduction rule. If there is a proof of $p$ from $S$, we say $S$ \emph{syntactically entails} or \emph{proves} $p$ and write $S \vdash p$. If $S = \emptyset$, we write $\vdash p$.
 
+\begin{proposition}[Deduction Theorem]
+Let $S$ be a set of formulae and $p,q$ be formulae. Then $S \vdash (p \implies q)$ if and only if $S \cup \{p\} \vdash q$.
+\end{proposition}
+\begin{proof}
+Exactly the same as in chapter 1 with one new case: when assuming $S \cup \{p\}\vdash q$ and carrying out our induction on the lines of the proof, we may come across a line of the proof of $q$ from $S \cup \{p\}$ of the form $(\forall x)r$ that is inferred from an earlier line $r$ by (Gen).
+\begin{itemize}
+\item[Case 1] $x$ does not appear free in $p$. By induction hypothesis, $S \vdash (p \implies r)$. Then by (Gen), $S \vdash (\forall x)(p \implies r)$. So $S \vdash (\forall x)(p \implies r)$, and by (A7) and (MP), $S \vdash (p \implies (\forall x) r)$.
+\item[Case 2] $x$ does appear free in $p$. Then as we inferred $(\forall x)r$ from $r$ by (Gen), we cannot have used $p$ in the proof of $r$ from $S \cup \{p\}$. So in fact $S \vdash r$, and by (Gen), $S\vdash (\forall x)r$. Then by (A1) and (MP), $S \vdash (p \implies (\forall x)r)$.
+\end{itemize}
+\end{proof}
+\subsection{Completeness Theorem}
+Examinable: statements of results.
+Non-examinable: everything else.
 
+\begin{proposition}[Soundness Theorem]
+Let $S$ be a set of sentences and $p$ a sentence with $S \vdash p$. Then $S \taut p$.
+\end{proposition}
+\begin{proof}
+Induction on the lines of the proof.
+\end{proof}
+
+The next step and heart of the proof, is to show that if $S$ is consistent (i.e. $S \nvdash \bot$), then $S$ has a model ($S\nvDash \bot$).
+
+Let $S$ be a consistent set of sentences in a language $L = (\Omega, \Pi, \alpha)$. Then we let $A$ be the collection of closed terms of $L$ made into an $L$-structure via:
+\begin{enumerate}
+\item $f \in \Omega, \alpha(f) = n: f_A(t_1, \ldots, t_n)  = (ft_1\ldots t_n)_A$.
+\item $\phi \in \Pi, \alpha(\phi) = n: \phi_A = \{(t_1, \ldots, t_n) \in A^n : S \vdash \phi t_1 \ldots t_n\}$.
+\end{enumerate}
+In general, this is not yet a model of $S$:
+
+\hspace*{-1em}\underline{Problem 1:} E.g. (GT): $e, mee \in A$, and we know that $S \vdash (e=mee)$, but $(e=mee)$ is not true in $A$.
+
+\hspace*{-1em}\underline{Solution:} Quotient out by the equivalence relation $t \thicksim u$ if $S \vdash (t=u)$.
+
+\hspace*{-1em}\underline{Problem 2:} E.g. $L$ has constants $a,b,c$ and $S = \{(a=b) \vee (a=c)\}$. Then $S \nvdash (a=b)$ and $S \nvdash (a=c)$. So $(a=b)\vee (a=c)$ not true even in $A/\thicksim$.
+
+\hspace*{-1em}\underline{Solution:} Use Zorn's lemma on $S$ to complete it.
+
+\hspace*{-1em}\underline{Problem 3:} E.g $\Omega = \{a, f\}, \Pi = \emptyset, \alpha(a) = 0, \alpha(f) = 1$. If $S = \{(\exists x)(fx=a)\}$. Then $A = \{a,fa,ffa,fffa,\ldots\}$. We could extend $S$ to a complete theory with included $\neg(fa=a), \neg(ffa=a), \ldots$.
+
+\hspace*{-1em}\underline{Solution:} Add a constant $b$ to the language and add the sentence $fb=a$ to $S$. It is easy to check that if $S$ is consistent then so is $S \cup \{(fb=a)\}$. And indeed, $S$ is still consistent if we do this simultaneously for every formula in $S$ of the form $(\exists x)p$, adding a new constant for each. We say that $S$  \emph{has witnesses} if whenever $(\exists x)p \in S$ there is a constant $b$ with $p[b/x] \in S$.
+
+However, if $S$ has witnesses and then we extend it to a complete theory, it may no longer have witnesses. If $S$ is complete and we add witnesses, we may make $S$ incomplete. The solution is to just repeatedly solve problems 2 and 3.
+
+\begin{proposition}[Model Existence Lemma]
+Let $S$ be a consistent theory. Then $S$ has a model.
+\end{proposition}
+\begin{proof}[Sketch proof.]
+Let $L_0$ be the language of the theory $S$. By Zorn, we can extend $S$ to a complete consistent theory $S_1$. Next, extend $S_1$ to a consistent theory $T_1$ that has witnesses in a language $L_1 \supset L_0$. Now by Zorn again, we can extend $T_1$ to a complete consistent theory $S_2$. Then add witnesses to give a consistent theory $T_2$ in language $L_2 \supset L_2$.
+
+We get a sequence of consistent theories $S \subset S_1 \subset T_1 \subset S_2 \subset T_2 \subset \ldots$, and languages $L_0 \subset L_1 \subset L_2 \subset \ldots$, such that each $S_i$ is complete and each $T_i$ has witnesses and $S_i, T_{i+1}$ are in language $L_{i+1}$.
+
+Let $\bar{L} = \bigcup_{i=0}^\infty L_i$ and $\bar{S} = \bigcup_{i=1}^\infty S_i$.
+
+Then $\bar{S}$ is a complete consistent theory with witnesses in the language $\bar{L}$.
+
+Let $A$ be the set of closed terms in the language $\bar{L}$, and let $\thicksim$ be the relation on $A$ defined by $s \thicksim t$ if and only if $\bar{S} \vdash (s=t)$. Then we can check that $\thicksim$ is an equivalence relation on $A$, and makes $A/\thicksim$ into an $\bar{L}$-structure as described previously. Now it is easy to check inductively that for any sentence $p$ in language $\bar{L}$ then $p$ is true in $A/\thicksim$ if and only if $\bar{S} \vdash p$.
+\end{proof}
+The other results now follow exactly as in chapter 1.
+\begin{corollary}[Adequacy Theorem]
+Let $S$ be a theory, $p$ a sentence with $S \taut p$. Then $S \vdash p$.
+\end{corollary}
+\begin{theorem}[G\"odel's Completeness Theorem For First-Order Logic]
+$S \vdash p \iff S \taut p$.
+\end{theorem}
+
+\subsection{Applications}
+Back to everything examinable.
+\begin{corollary}[The Compactness Theorem]
+Let $S$ be a set of sentences such that every finite subset of $S$ has a model. Then $S$ has a model.
+\end{corollary}
+\begin{proof}
+This is obvious if we use completeness to replace ``has a model" by ``is consistent", since proofs are finite.
+\end{proof}
+Unfortunately, we no longer have a decidability theorem as in this system it is not obvious how to check if $S \taut p$.
+
+A typical application of compactness is to try to axiomatize the theory of finite groups in the language of groups. Suppose $T$ is the theory of finite groups.
+
+We enrich our language by adding new constants $c_0, c_1, c_2, \ldots$, and for all $i,j \in \N$ with $i \neq j$ add $\neg(c_i =c_j)$ to $T$ to create a new theory $T'$. Now any finite subset of $T'$ has a model, as there are arbitrarily large finite groups, so by compactness $T'$ has a model, which must be an infinite  model of $T$. \contr
+
+The same method gives:
+\begin{proposition}
+If $T$ is a theory with arbitrarily large finite models then $T$ has an infinite model.
+\end{proposition}
+Even more:
+\begin{theorem}[Upward Lowenhein-Skolem Theorem]
+Let $T$ be a theory with an infinite model and $\kappa$ a cardinal. Then $T$ has a model of cardinality $\geq \kappa$.
+\end{theorem}
+\begin{proof}
+Do the same thing but with $\kappa$ new constants.
+\end{proof}
 
 
 \end{document}

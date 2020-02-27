@@ -22,10 +22,12 @@
 \usepackage{pgfplots}
 \usepackage{mathdots}
 \usepackage{enumitem}
+\usepackage{soul}
 \setitemize{wide}
 
 \setlength{\parindent}{1em}
 
+\let\st\relax
 \newcommand{\st}{\text{ s.t. }}
 \newcommand{\contr}{\lightning}
 \newcommand{\im}{\mathfrak{i}}
@@ -71,6 +73,7 @@
 \newcommand{\colvec}[1]{\begin{pmatrix} #1 \end{pmatrix}}
 \newcommand{\sent}{\text{ sent}}
 \newcommand{\received}{\text{ received}}
+\newcommand{\example}[1][]{\hspace*{-1em}\underline{Example#1:}}
 
 \DeclareMathOperator{\ex}{ex}
 \DeclareMathOperator{\id}{id}
@@ -107,6 +110,11 @@
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\covol}{covol}
 \DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\Div}{Div}
+\let\div\relax
+\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\Pic}{Pic}
 
 \let\emph\relax
 \DeclareTextFontCommand{\emph}{\bfseries\em}

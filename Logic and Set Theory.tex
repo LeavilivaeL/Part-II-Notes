@@ -1107,12 +1107,99 @@ The same method gives:
 If $T$ is a theory with arbitrarily large finite models then $T$ has an infinite model.
 \end{proposition}
 Even more:
-\begin{theorem}[Upward Lowenhein-Skolem Theorem]
+\begin{theorem}[Upward Lowenheim-Skolem Theorem]
 Let $T$ be a theory with an infinite model and $\kappa$ a cardinal. Then $T$ has a model of cardinality $\geq \kappa$.
 \end{theorem}
 \begin{proof}
 Do the same thing but with $\kappa$ new constants.
 \end{proof}
+\begin{theorem}[Downward Lowenheim-Skolem Theorem]
+A consistent theory in a countable language has a countable model.
+\end{theorem}
+\begin{proof}
+Take the model used in the proof of the Model Existence Lemma.
+\end{proof}
+These two theorems say that a first-order theory cannot uniquely specify an infinite structure. What's going on?
 
+\subsection{Peano Arithmetic}
+It is well known that $\N$ is uniquely specified by the \emph{Peano axioms}:
+\begin{itemize}
+\item $0 \in \N$
+\item $n \in \N \implies s(n) \in \N$, the \emph{successor} of $\N$
+\item $n \in \N \implies s(n) \neq 0$
+\item $m \neq n \implies s(m) \neq s(n)$
+\item If $p(0)$ and for all $n$, $p(n) \implies p(s(n))$, then for all $n, p(n)$.
+\end{itemize}
 
+We try to make this a first-order theory. We'll also include $+, \times$.
+
+The \emph{language of Peano arithmetic} has $\Omega = \{0,s,a,m\}, \Pi = \emptyset, \alpha(0)=0, \alpha(s) = 1, \alpha(a)=\alpha(m) = 2$. Then the theory PA has axioms:
+\begin{enumerate}
+\item $(\forall x) \neq (0 = sx)$
+\item $(\forall x)(\forall y)((sx=sy) \implies (x=y))$
+\item $(\forall y_1)\ldots(\forall y_n)(\forall x)(p[0/x] \wedge (\forall z)p[z/x]\implies p[sz/x]) \implies p)$ where $p$ is a formula with free variables $\{y_1, \ldots, y_n, x\}$.
+\item $(\forall x)(ax0 = x)$
+\item $(\forall x)(\forall y)(axsy = saxy)$
+\item $(\forall x)(mx0 = 0)$
+\item $(\forall x)(\forall y)(mxsy = amxyx)$
+\end{enumerate}
+Now $\N$ is a model of PA with $0_\N = 0, s_\N(b) = b+1, a_\N(b,c) = b+c, m_\N(b,c) = bc$. So by Upward Lowenheim-Skolem, PA has an uncountable model. Doesn't this contradict that the Peano axioms uniquely specify $\N$.
+
+No: genuine induction says that if $X \subset \N$ with $0 \in X$ and for all $n \in \N, n \in X \implies n+1 \in X$, then $X = \N$. We know $\N$ has uncountably many subsets.
+
+We say a subset $S \subset \N$ is \emph{definable} if there is a PA-formula $p$ with $FV(p) = \{w\}$ such that $p_\N = S$. First-order induction only tells us about the definable subsets, of which there are only countably many. So first order induction is weaker than genuine induction.
+
+Why do we have parameters $y_1, \ldots, y_n$ in axiom 3? We wan tot prove things like for all $\ell, m, n$ that $\ell + (m+n) = (\ell + m) + n$. We can do a lot with definable subsets:\\
+\example{s}
+\begin{enumerate}
+\item Set of squares: $(\exists y)(myy = w)$
+\item Set of primes: $\neg(w=1) \wedge (\forall y)((\exists z)(w=myz) \implies ((y=w)\vee (y=s0))$
+\item Set of powers of 2: $(\forall y)(((y\text{ prime})\wedge(y|w)) \implies y = 2)$.
+\end{enumerate}
+Harder problems/exercises are to show that the powers of 4 or of 10 are definable.
+
+Our next hope is that maybe PA is a complete theory, so that anything that is true in $\N$ is provable in PA. Not even this is true: we can find a sentence $p$ in the language of PA with PA $\nvdash p$ and PA$\nvdash \neq p$:
+
+We will find a statement $p$ that says $`PA \nvdash p'$. Then suppose that $PA\vdash p$. Then $p$ is true in a model e.g. $\N$, so $PA\nvdash p$ \contr. Hence by completeness $PA \vdash  \neg p$. Then $\neg p$ is true in $\N$. So $PA \vdash p$, so $PA \vdash \bot$, but $PA$ has a model. \contr.
+
+We can extend the definition of definable to subsets of $\N^k$ and partial function $\N^k \to \N$. It can be shown that every recursive function is definable. Church's Thesis says that for any sane model of computation, computable function are precisely the recursive functions. So we can assume any function or set given by an algorithm is definable in PA.
+
+A formula in PA is a finite strin from $(, ), =, \bot, \forall, \implies, w, ', 0,s,a,m$. Number these symbols $1, \ldots, 12$. A formula $p$ corresponds to a finite sequence $(n_1, \ldots, n_k)$ of numbers between 1 and 12. So $p$ can be represented by the single number $2^{n_1}3^{n_2}\ldots p_k^{n_k}$ where $p_k$ is the $k\th$ prime. We call this the \emph{G\"odel number} (or just \emph{code}) of $p$. Then coding and decoding are recursive.
+
+Write $c(p)$ for the code of $p$. If $n$ codes a formula, call it $S_n$. Given a proof of $S_{n_1}, S_{n_2}, \ldots, S_{n_k}$, we can code it by the single number $2^{n_1}3^{n_2}\ldots p_k^{n_k}$. Now let $U = \{(m,n) \in \N^2 : n$ codes a formula and $m$ codes a proof of $S_n\}$. Then $U$ is recursive, so there is some PA-formula $\theta$ with $FV(\theta)  = \{x, y\}$, saying ``$y$ codes a formula and $x$ codes a proof of $S_y$."
+
+Let $\varphi$ be $(\exists x)\theta$, i.e. ``$y$ codes a provable formula". For $n$ a natural number, write $\bar{n}$ for the term $\underbrace{ss\ldots s}_n 0$ of $PA$. Let $p$ be a formula with $c(p) = n$. Suppose that $PA \vdash p$. Then let $m$ be the code of some proof of $p$. Then $PA \vdash \theta[\bar{m}/x][\bar{n}/y]$, so $PA\vdash \varphi[\bar{n}/y]$. Conversely, suppose $PA \vdash \varphi[\bar{n}/y]$. Then $\N$ is a model of $PA$, so $\varphi[\bar{n}/y]$ is true in $\N$, so $\exists m \in \N$ with $(m,n) \in U$. So $m$ codes a proof of $p$. So $PA \vdash p$.
+
+Hence $PA$ proves $p$ if and only if $PA$ proves $p$ is provable.
+
+Let $V = \{m \in \N: m$ codes a formula with $FV(S_m) = \{w\}\}$. Let $f:V \to \N$ be defined by $f(m) = c(S_m[\bar{m}/w])$. Now $V$ is recursive, so there is a formula $\psi$ of $PA$ with $FV(\psi) = \{w\}$, saying ``$w$ codes a formula with free variables $\{w\}$." Moreover, the function $f$ is recursive and so definable in $PA$. Thus we have a formula $\xi = \psi \wedge \neq \varphi[f(w)/w]$. Finally, let $h$ be the code for $\xi$ and $p$ be $\xi[\bar{h}/w]$. What does $p$ say?
+
+``$h$ codes a formula with $FV(S_h) = \{w\}$, and $S_h[\bar{h}/w]$ is unprovable", i.e. ``$p$ is unprovable." Hence by the previous discussion, we have:
+\begin{theorem}[G\"odel's First Incompleteness Theorem]
+The theory $PA$ is incomplete.
+\end{theorem}
+The incompleteness of $PA$ is essential. Note that $p$ must be true in $\N$, as if $p$ is false then $p$ is provable. But maybe $PA\cup\{p\}$ is complete? - No. The same proof works as $\N$ is still a model. But what if we let $T$ be the set of all true formulae in $\N$? This theory is clearly complete, so the incompleteness theorem won't work. Hence the only possibility is that $T$ is not recursive, and so truth is not recursive.
+\section{Set Theory}
+This chapter is essentially a worked example of the previous chapter. We want to know what the universe of sets looks like. The idea is to start from $\emptyset$ and build up from there.
+\subsection{The Axioms of Zermelo-Fraenkel Set Theory}
+The \emph{language of sets} has $\Omega = \emptyset, \Pi = \{\in\}, \alpha(\epsilon) = 2$. For readability, we write $x \in y$ for $\in x y$.
+
+The \emph{theory of sets}, $ZF$, consists of axioms as follows:
+\begin{enumerate}
+\item \underline{Extensionality.} ``If two sets have the same elements, they are equal."
+\begin{align*}
+(\forall x)(\forall y)((\forall z)(z \in x) \iff (z\in y)) \implies (x=y))\tag{Ext}
+\end{align*}
+Note that the converse is a logical theorem.
+\item \underline{Separation.} We want something like ``if $p$ is a formula with free variable $x$ then $\{x|p\}$ is a set." However, we don't want something like $p = \neg (x \in x)$. Instead, we say ``we can form a subset of all elements with property $p$."
+\begin{align*}
+(\forall t_1)\ldots(\forall t_n)(\forall y)(\exists z)(\forall x)((x \in z) \iff ((x \in y)\wedge p))\tag{Sep}
+\end{align*}
+where $p$ is a formula with free variables $\{t_1, \ldots, t_n, x\}$. We introduce the notation $\{x \in y|p\}$ for the set $z$ in the axiom. This is more of an \emph{axiom scheme} - we have one instance of it for each formula $p$.
+\item \underline{Empty set.} ``The empty set exists."
+\begin{align*}
+(\exists x)(\forall y) \neq (y \in x) \tag{Emp}
+\end{align*}
+By (Ext) the empty set is unique, and we denote it by $\emptyset$. That is, $z \in \emptyset$ is an abbreviation for $((\exists x)(\forall y) \neq (y \in x))\wedge (z \in x)$. Similarly for the notation introduced after (Sep).
+\end{enumerate}
 \end{document}

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  26 FEB 2020 11:03
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  2 MAR 2020 10:55
  system commands enabled.
 **"Logic and Set Theory.tex"
 ("./Logic and Set Theory.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 3.498 seconds
+luaotfload | main : initialization completed in 1.043 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -996,7 +996,7 @@ LaTeX Font Info:    Try loading font information for U+euf on input line 964.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/ueuf.fd"
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) [24] [25] [26]
-[27] [28] ("./Logic and Set Theory.aux"))
+[27] [28] [29] [30] [31] ("./Logic and Set Theory.aux"))
 
 Here is how much of LuaTeX's memory you used:
  31363 strings out of 494305
@@ -1004,7 +1004,7 @@ Here is how much of LuaTeX's memory you used:
  532 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 55 glue_spec
 , 10 attribute_list, 2 write nodes
-   avail lists: 1:2,2:1322,3:382,4:72,5:359,6:31,7:3655,8:86,9:268,10:21,11:146
+   avail lists: 1:2,2:1322,3:382,4:72,5:363,6:32,7:3655,8:86,9:268,10:21,11:149
  34499 multiletter control sequences out of 65536+200000
  82 fonts using 5832855 bytes
  64i,16n,96p,1092b,832s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1039,9 +1039,9 @@ onts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts
 e1/public/amsfonts/symbols/msbm7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
 blic/rsfs/rsfs10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/rsfs/rsfs7.
 pfb>
-Output written on Logic and Set Theory.pdf (28 pages, 397066 bytes).
+Output written on Logic and Set Theory.pdf (31 pages, 415696 bytes).
 
-PDF statistics: 259 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 269 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

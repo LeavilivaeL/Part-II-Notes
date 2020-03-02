@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  26 FEB 2020 11:06
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  2 MAR 2020 09:59
  system commands enabled.
 **"Coding and Cryptography.tex"
 ("./Coding and Cryptography.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.937 seconds
+luaotfload | main : initialization completed in 0.991 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1765,17 +1765,25 @@ Overfull \hbox (9.50632pt too wide) in paragraph at lines 1118--1119
 -a-tor poly-no-mial for the dual code. 
  []
 
-[28] [29] [30] [31] [32] ("./Coding and Cryptography.aux"))
+[28] [29] [30] [31] [32] [33] [34]
+Overfull \hbox (12.33688pt too wide) in paragraph at lines 1401--1402
+[]\TU/lmr/m/n/10 As-sume the aux-il-iary poly-no-mi-als $\OML/cmm/m/it/10 P\OT1
+/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; Q\OT1/cmr/m/
+n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )$ \TU/lmr/m/n/10 each have dis-tinct r
+oots $\OML/cmm/m/it/10 []; [] ; []; []; [] ; []$
+ []
+
+[35] ("./Coding and Cryptography.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 31731 strings out of 494305
+ 31733 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 684 words of node memory still in use:
-   5 hlist, 2 vlist, 2 rule, 3 glue, 4 kern, 17 glyph, 24 attribute, 55 glue_spe
-c, 24 attribute_list, 2 write nodes
-   avail lists: 1:5,2:2345,3:737,4:55,5:383,6:24,7:3464,8:74,9:601,10:11,11:183
- 34867 multiletter control sequences out of 65536+200000
- 87 fonts using 6443271 bytes
+ 708 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 17 glyph, 26 attribute, 55 glue_spe
+c, 26 attribute_list, 2 write nodes
+   avail lists: 1:5,2:2341,3:737,4:57,5:390,6:24,7:3463,8:74,9:600,10:11,11:182
+ 34869 multiletter control sequences out of 65536+200000
+ 89 fonts using 6536167 bytes
  64i,25n,100p,1095b,1996s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmmono10-regular.otf><<C:\
 Users\Harry\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/doublestroke/dpi600\
@@ -1808,9 +1816,9 @@ C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/public/rsfs/rsfs10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/rsfs/rsfs7.pfb>
-Output written on Coding and Cryptography.pdf (32 pages, 446262 bytes).
+Output written on Coding and Cryptography.pdf (35 pages, 467542 bytes).
 
-PDF statistics: 279 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 288 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

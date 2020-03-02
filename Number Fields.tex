@@ -440,7 +440,7 @@ Let $I,J,I'$ be nonzero ideals of $\o_K$. Then
 \item The ``if" direction is clear. Suppose that $I \supset J$, and let $II' = (\alpha)$ as in \textbf{8.4}. Then $JI' \subset (\alpha)$, and so $H \coloneqq \alpha^{-1}JI' \subset \o_K$ is an ideal, and $IH=\alpha^{-1}JII' = J$.
 \item Existence we do by induction in $\Nn(I)$. If $I \neq \o_K$, let $P$ be prime, $P \supset I$. Then by part 2, $I = PJ$ for some ideal $J$, and by part 1, $I \neq J$. But $J \supseteq I$, and so by induction, $J$ is a product of prime ideals, and hence so is $I$.
 
-For uniqueness, suppose $I = P_1\ldots P_K = Q_1\ldots Q_{\ell}$. If $k=0, I = \o_K$, so $\ell = 0$ so done. Otherwise, as $I \subset P_1$, we have $P_1 = Q_j$ for some $j$ by \textbf{8.1}.  Reordering, $P_1 = Q_1$, and so $P_2\ldots P_k = Q_2\ldots Q_\ell$, and finish by induction 
+For uniqueness, suppose $I = P_1\ldots P_k = Q_1\ldots Q_{\ell}$. If $k=0, I = \o_K$, so $\ell = 0$ so done. Otherwise, as $I \subset P_1$, we have $P_1 = Q_j$ for some $j$ by \textbf{8.1}.  Reordering, $P_1 = Q_1$, and so $P_2\ldots P_k = Q_2\ldots Q_\ell$, and finish by induction 
 \end{enumerate}
 \end{proof}
 We say two ideals $I,J$ are \emph{equivalent} if there are nonzero $\alpha, \beta \in \o_K$ such that $\alpha I = \beta J$. It is trivial to check that this is an equivalence relation. 
@@ -479,7 +479,7 @@ It is sufficient to prove, by unique factorisation into primes, that if $P$ is p
 
 By cancellation, $I \neq IP$. We claim that, if $IP \subset J \subset I$, then $J = I$ or $J = IP$. Indeed, as $J \subset I, J = IJ'$ for some $J'$, so $P \subset J' \subset \o_K$ by cancellation, and so $J' = P$ or $\o_K$.
 
-Let $\alpha \in I \setminus IP$. Then $IP + (|alpha) = I$ by the claim. Consider the ($\o_K$-module) homomorphism given by $\tilde{\alpha}: \o_K/P \to I/IP; \tilde{\alpha}(\beta+P) = \alpha\beta +IP$. It is surjective, since $\Im(\tilde{\alpha}) = ((\alpha) + IP)/IP = I/IP$. Also, $\tilde{\alpha}$ is a homomorphism of $(\o_K/P)$-vector spaces.
+Let $\alpha \in I \setminus IP$. Then $IP + (\alpha) = I$ by the claim. Consider the ($\o_K$-module) homomorphism given by $\tilde{\alpha}: \o_K/P \to I/IP; \tilde{\alpha}(\beta+P) = \alpha\beta +IP$. It is surjective, since $\Im(\tilde{\alpha}) = ((\alpha) + IP)/IP = I/IP$. Also, $\tilde{\alpha}$ is a homomorphism of $(\o_K/P)$-vector spaces.
 
 $\dim_{\o_K/P} (\o_K/P) = 1$; as $I \neq IP$, $\dim_{\o_K/P} ( I/IP) \geq 1$. As it is surjective, we must have $\dim(I/IP) = 1$, and so $\o_K/P \cong I/IP$, and so $\Nn(P) = (I:IP)$ as required.
 \end{proof}
@@ -493,7 +493,7 @@ If $I \subset \o_K$, then $I \ni n = \prod p^{a(p)}$ for some $n \geq 1$ (e.g. $
 Let $p$ be a rational prime and $\{P_1 : 1 \le i \leq r\}$ the prime ideals containing $p$. Let $\Nn(P_i) = p^{f_i}$, for $f_i \geq 1$. Then $(p) = P_1^{e_1} \ldots P_r^{e_r}$ for integers $e_i \geq 1$ satisfying $\sum_i e_i f_i = n$.
 \end{theorem}
 \begin{proof}
-The factorisation exists for some $e_i \geq 1$ by \textbf{8.5}. Now $\prod \Nn(P_i)^{e_i} = \Nn((p)) = |\Nn_{K/\Q}((p))| = p^n$, and so $\sum e_i f_i = n$.
+The factorisation exists for some $e_i \geq 1$ by \textbf{8.5}. Now $\prod \Nn(P_i)^{e_i} = \Nn((p)) = |\Nn_{K/\Q}(p)| = p^n$, and so $\sum e_i f_i = n$.
 \end{proof}
 $f_i$ is called the \emph{residue class degree} of $P_i$, and $e_i$ is called the \emph{ramification index/degree} of $P_i$. We say that $p$ is \emph{ramified} in $K$ if some $e_i >1$, and is \emph{totally ramified} if $e_1 = n$, so $r = 1 = f_i$. $p$ is \emph{inert} if $(p)$ is prime so $(r = 1 = e_1, f_1 = n)$, and \emph{splits completely} if $r = n$ and so $(e_i = f_i = 1$ for all $i$).
 
@@ -541,7 +541,7 @@ In the case where $d \nequiv 1 \mod 4$, $(2) = (d, d-\sqrt{d})^2 = P^2$, of norm
 The final case is $p = 2, d \equiv 1 \mod 4$. In this case, take $\theta = \frac{1+\sqrt{d}}{2}$, so $\o_K = \Z[\theta]$. Then $g = m_\theta = x^2-x-\frac{d-1}{4}$, and:
 \begin{itemize}
 \item (2 splits) If $d \equiv 1 \mod 8$, then $\bar{g} = x(x-1)$, hence $(2) = PP'$, where $P = (2, \theta) = (2, \frac{1+\sqrt{d}}{2}), P' = (2, \theta-1) = (2, \frac{1-\sqrt{d}}{2}) \neq P$ of norm $2$.
-\item (2 inert) If $d \equiv 5 \mod 8$,t hen $g \equiv x^2+x+1 \mod 2$ is irreducible mod 2, so $(2)$ is prime.
+\item (2 inert) If $d \equiv 5 \mod 8$, then $g \equiv x^2+x+1 \mod 2$ is irreducible mod 2, so $(2)$ is prime.
 \end{itemize}
 
 Suppose that $\o_K = \Z[\theta]$, and $(p) = P_1 \ldots P_n$ splits completely. Then by Dedekind, $m_\theta$ has $n$ distinct roots mod $p$. So $p \geq n$. In other words, if $p < n$ and $p$ splits completely, then $\o_K \neq \Z[\theta]$ - even more, there does not exist $\theta$ with $p \nmid (\o_K : \Z[\theta])$. It is not hard to find examples of this - see the second examples sheet.
@@ -659,7 +659,7 @@ Let $K = \Q(\sqrt{-d})$ be an imaginary quadratic. Then:
 \begin{enumerate}
 \item $Cl(K)$ is finite.
 \item Every element of $Cl(K)$ contains an ideal of norm $\leq c_K = \frac{2}{\pi}|d_K|^{\frac12}$.
-\item $Cl(K)$ is generated by the class of prime ideals of norm $\leq C_K$.
+\item $Cl(K)$ is generated by the class of prime ideals of norm $\leq c_K$.
 \end{enumerate}
 \end{corollary}
 \begin{proof}
@@ -813,7 +813,7 @@ Hence $Cl(K)$ is cyclic of order 4 generated by $[P_3]$.
 
 \item $K = \Q(\theta)$, for $\theta$ a root of $g = x^5 - x+1$, which is irreducible mod 5 and hence irreducible. We can show that $g$ has 1 real root, so $(r,s) = (1,2)$. The discriminant of $g$ is $2689 = 19\times 151$ is squarefree. So $\o_K = \Z[\theta]$. $c_K = 3.3\ldots$, and so $Cl(K)$ is generated by prime ideals of norm $\leq 3$. Dedekind's criterion says that there is a prime of norm $p$ if and only if $g$ has a root mod $p$. But $g$ has no root mod 2 or mod 3. So $Cl(K)$ is trivial.
 \end{itemize}
-It is known that $\#Cl(\Q(\sqrt{-d})) \to \infty$ as $d \to \infty$, and $Cl(K) \neq \{1\}$ for all $d > 163$). If $K = \Q(\sqrt{d})$, it is thought that there are infinitely many $d$ with $|Cl(K)| = 1$.
+It is known that $\#Cl(\Q(\sqrt{-d})) \to \infty$ as $d \to \infty$, and $Cl(K) \neq \{1\}$ for all $d > 163$. If $K = \Q(\sqrt{d})$, it is thought that there are infinitely many $d$ with $|Cl(K)| = 1$.
 
 \example Compute $Cl(K)$ for $K = \Q(\sqrt{10})$.
 

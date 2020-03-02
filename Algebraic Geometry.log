@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  26 FEB 2020 12:54
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  2 MAR 2020 12:58
  system commands enabled.
 **"Algebraic Geometry.tex"
 ("./Algebraic Geometry.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.954 seconds
+luaotfload | main : initialization completed in 1.215 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1090,17 +1090,22 @@ cmr/m/n/10 ]\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 f\OT1/cmr/m/n/1
 LaTeX Warning: Command \O invalid in math mode on input line 983.
 
 Missing character: There is no Ø (U+00D8) in font cmmi10!
-[25] [26] ("./Algebraic Geometry.aux"))
+[25] [26]
+
+LaTeX Warning: Command \O invalid in math mode on input line 1068.
+
+Missing character: There is no Ø (U+00D8) in font cmmi10!
+[27] [28] ("./Algebraic Geometry.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 32116 strings out of 494305
+ 32139 strings out of 494305
  100000,1144653 words of node,token memory allocated
  537 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 56 glue_spec
 , 10 attribute_list, 2 write nodes
    avail lists: 1:2,2:4178,3:1489,4:90,5:353,6:30,7:3546,8:65,9:403,10:11,11:198
 
- 35221 multiletter control sequences out of 65536+200000
+ 35244 multiletter control sequences out of 65536+200000
  100 fonts using 6987023 bytes
  69i,18n,100p,1090b,2221s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/p
@@ -1137,9 +1142,9 @@ msfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Progr
 am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program F
 iles/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on Algebraic Geometry.pdf (26 pages, 1157285 bytes).
+Output written on Algebraic Geometry.pdf (28 pages, 1174816 bytes).
 
-PDF statistics: 277 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 283 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

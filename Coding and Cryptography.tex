@@ -1317,4 +1317,112 @@ She does not know the key however. Her goal is to recover the plaintext from the
 \item[Level 2:] Known plaintext - she possesses a considerable length of plaintext and matching ciphertext.
 \item[Level 3:] Chosen plaintext - she may acquire the ciphertext for any plaintext she wants to.
 \end{itemize}
+For example, the substitution cipher and Vigen\`ere cipher fail at level 2 for sufficiently random messages. They can in fact fail at level 1, for instance if we know the source is a passage of English text. For modern work, level 3 is desirable.
+
+We model the keys and messages as independent random variables $K, M$ taking values in $\mathcal{K, M}$. Put $C = e(M,K)$. We say a cryptosystem has \emph{perfect secrecy} if $M, C$ are independent, or equivalently if $I(M; C) = 0$.
+
+\begin{lemma}
+If a code has perfect secrecy then $|\mathcal{K}|\geq |\mathcal{M}|$.
+\end{lemma} 
+\begin{proof}
+Pick $m_0 \in \mathcal{M}, k_0 \in \mathcal{K}$, both with strictly positive probability. Then $c_0 = e(m_0, k_0)$ also has strictly positive probability. Then for all $m \in \mathcal{M}$:
+\begin{align*}
+\P(C=c_0) = \P(C=c_0|M=m)
+\end{align*}
+by perfect secrecy. Hence for any $m \in \mathcal{M}$ there is a $k \in \mathcal{K}$ with $e(m,k) = c_0$. If two messages $m_1, m_2$ encrypt to $c_0$ under the same key $k$, then $e(m_1, k) = e(m_2,k) \implies m_1=m_2$. So $\mathcal{M} \to \mathcal{K}$ is injective.
+\end{proof}
+From this we can conclude that perfect secrecy is an unrealistic goal in practice, as it hugely limits the number of messages we can send.
+
+We define the:
+\begin{itemize}
+\item \emph{Message equivocation} to be $H(M|C)$
+\item \emph{Key equivocation} to be $H(K|C)$.
+\end{itemize}
+\begin{proposition}
+$H(M|C) \leq H(K|C)$
+\end{proposition}
+\begin{proof}
+Since $M = d(C, K), H(M|C, K) = 0$. So $H(C,K) = H(M,C,K)$. Hence we have:
+\begin{align*}
+H(K|C) &= H(M,C,K) - H(C)\\
+&= H(M,C,K) - H(M,C) + H(M,C) - H(C)\\
+&= \underbrace{H(K|M, C)}_{\geq 0} + H(M|C)\\
+&\geq H(M|C)
+\end{align*}
+\end{proof}
+Let $\mathcal{M} = \mathcal{C} = \mathscr{A}$, our alphabet. We send $n$ message $M^{(n)} = (M_1, \ldots, M_n)$ encrypted as $C^{(n)} = (C_1, \ldots, C_n)$, using the same key. We define the \emph{unicity distance} to be the least $n$ such that $H(K|C^{(n)}) = 0$, i.e. the smallest number of encrypted messages required to uniquely determine the key (note that uniquely determining the key does not mean that it is easy to find). Now,
+\begin{align*}
+H(K|C^{(n)}) &= H(K,C^{(n)}) - H(C^{(n)})\\
+&= H(K, M^{(n)}) - H(C^{(n)})\\
+&= H(K) + H(M^{(n)}) - H(C^{(n)})
+\end{align*}
+We assume all keys are equally likely so that $H(K) = \log |\mathcal{K}|$; that $H(M^{(n)})\thicksim nH$ for some constant $H$, for sufficiently large $n$\footnote{This is true for many sources including Bernoulli sources. See \textsection 8 for details.}; and that all sequences of ciphertext are equally likely, so that $H(C^{(n)}) = n\log |\mathscr{A}|$. Good cryptosystems should satisfy all of these.
+
+Then $H(K|C^{(n)}) = \log |\mathcal{K}| + nH - n\log|\mathscr{A}| \geq 0$, and so rearranging we have $n \leq U = \frac{\log |\mathcal{K}|}{R\log |\mathscr{A}|}$, where $R = 1-\frac{H}{\log |\mathscr{A}}$, the \emph{redundancy}.
+
+Now $0 \leq H \leq \log|\mathscr{A}|$. To make the unicity distance large we can make $|\mathcal{K}|$ large or use a message source with little redundancy. Many cryptosystems are believed to be secure beyond predicted unicity distance. 
+
+\example Take a simple substitution cipher with $26!$ keys. $\log 26 = 4.7$, and the entropy of English is about 2 bits per symbol. So $U = \frac{\log 26!}{4.7-2} \approx 32$ symbols.
+
+\section{Stream Ciphers}
+A simple way to encipher is to use a \emph{stream cipher}: we have binary plaintext and key streams given by $p_0, p_1, p_2, \ldots$; $k_0, k_2, \ldots$ respectively. Then we generate the ciphertext stream $c_0, c_2, \ldots$ where $c_i = p_i+k_i$. It is a \emph{private key system} - the security depends on a secret $k$ shared between $A, B$.
+
+One example of this is the \emph{one-time pad}: the key stream is a random sequence known only to $A,B$, so that $K_i$ are i.i.d. $Ber(\frac12)$. then $C_i \thicksim Ber(\frac12)$ also, and so in the absence of the key stream deciphering is impossible, and the unicity distance is infinite. This also has perfect secrecy: $\P(M=m, C=c) = \P(M=m, K=c-m) = \P(M=m)\P(K=c-m) =\P(M=m)\frac{1}{2^n}$.
+
+This seems like the perfect code, but we have 2 problems:
+\begin{enumerate}
+\item How do we construct random key sequences?
+\item How do we share the key sequence?
+\end{enumerate}
+(1.) is harder than might appear at first sight, but isn't a problem in practice. (2.) is the same problem we started with! We now have to communicate a key sequence instead of a message sequence. Because of this, in most applications a one-time pad is not practical. Instead we generate $k_0, k_1, \ldots$ using a feedback shift-register of some length $d$, with an initial fill given by the $k_0, \ldots, k_{d-1}$. Then:
+\begin{lemma}
+Let $x_0, x_1, \ldots$ be the stream produced by the shift register of length $d$. Then there exists $N,M \leq 2^d$ with $x_{N+r} = x_r$ for $r \geq M$.
+\end{lemma}
+\begin{proof}
+Note that there are only $2^d$ different states for the shift register to be in, and so there must be times $0\leq M\leq M+N\leq 2^d$ with the shift register in the same state at $M$ as at $M+N$, and then inductively $x_{M+r} = x_{M+N+r}$ for $r \geq 0$.
+\end{proof}
+Note that this tells us the maximum period of a feedback shift register of length $d$ is $2^d$. Playing a similar game with a LFSR, the maximal period is $2^d-1$. One can show using Galois theory that a LFSR attains its maximal period for a non-trivial initial fill when the roots of the feedback polynomial are primitive elements of $\F_2$. However, ciphers using LFSRs fail at level 2 due the Berlekamp-Massey algorithm. If we know a piece of plaintext and corresponding ciphertext, we can compute key sequences from their difference, and B-M tells us how to find the feedback polynomial and hence the key. Some advantages of this system are that it's cheap, fast, easy to use. Messages can be encrypted and decrypted on the fly, and it is error tolerant. 
+
+\subsection{Notes about Linear Recurrence Relations}
+Over $\C$ the general solution is a linear combination of solutions $\alpha^n, n\alpha^n, n^2\alpha^n, \ldots, n^{\ell-1}\alpha^n$ for a root of the auxiliary polynomial $P(x)$ with multiplicity $\ell$. Now, $n^2 \equiv n \mod 2$, so over $\F_2$ we need a couple of modifications:
+\begin{itemize}
+\item Work in a splitting field $K$ for $P(x)$. 
+\item Replace $n^i \alpha^n$ by $\binom{n}{i}\alpha^n$ (See K\"orner's book, \textsection 16).
+\end{itemize}
+We can generate new key streams from old ones:
+\begin{lemma}
+Let $(x_n), (y_n)$ be outputs of LFSRs of lengths $M,N$ respectively. Then:
+\begin{enumerate}
+\item $(x_n+y_n)$ is the output from an LFSR of length $M+N$.
+\item $(x_ny_n)$ is the output from an LFSR of length $MN$
+\end{enumerate}
+\end{lemma}
+\begin{proof}[*Proof]
+Assume the auxiliary polynomials $P(x), Q(x)$ each have distinct roots $\alpha_1, \ldots, \alpha_n, \beta_1, \ldots, \beta_N$ lying in some extension field $K$ of $\F_2$. Then $x_n = \sum_{i=1}^M \lambda_i \alpha_i^n, y_n = \sum_{j=1}^N \mu_j \beta_j^n$ for some $\lambda_i, \mu_j \in K$. Then $x_n+y_n$ is a solution to a difference equation with auxiliary polynomial $P(x)Q(x)$, and $x_ny_n$ to one with auxiliary polynomial $\prod\prod (x-\alpha_i\beta_j)$, lying in $\F_2[x]$, via symmetric function theory.
+\end{proof}
+Note that adding the outputs of two LFSRs is no more economical than producing the same thing with a single LFSR. Multiplying two output streams looks promising until we realise that $x_ny_n = 0$ 75\% of the time.
+
+Non-linear registers look appealing but are hard to analyse.
+
+\section{Asymmetric Ciphers}
+The key is split into two parts:
+\begin{itemize}
+\item A private key for decryption.
+\item A public key for encryption.
+\end{itemize}
+Knowing the encryption and decryption algorithms it should be hard to find the private key or to decrypt messages, implying security at level 3. Also, there is no requirement to exchange keys. We base the system on mathematical problems that are believed to be ``hard":
+\begin{enumerate}
+\item \emph{Factoring} - Let $N = pq$ for $p,q$ large primes. Given $N$, find $p$ and $q$.
+\item \emph{Discrete logarithms} - Let $p$ be a large prime and $g$ a primitive root mod $p$. Given $x$, find $a$ such that $a = g^a \mod p$.
+\end{enumerate}
+We say an algorithm runs in \emph{polynomial time} if the number of operations is less than some constant times the input size raised to some integer power. 
+
+Some polynomial time algorithms include:
+\begin{itemize}
+\item Arithmetic of integers
+\item Computation of GCD
+\item Modular exponentiation using repeated squaring
+\item Primality testing
+\end{itemize}
+Polynomial time algorithms are not known for factoring or discrete logarithms. Some elementary methods for computing them take much longer than polynomial time: dividing my successive primes up to $\sqrt{N}$ take $O(\sqrt{n})$. The baby-step giant-step problem for the discrete logarithm problem, whereby we set $m = \floor{\sqrt{p}}$, write $a = qm+r$. Then $x = g^a \equiv g^{am+r}$, so $g^{qm}\equiv g^{-r}x$. Then list $g^{qm}\mod p$ for $q = 0, 1, \ldots, m-1$, and $g^{-rx} \mod p$ for $r = 0,1, \ldots, m-1$. Then sort these two lists and look for match. This algorithm takes $O(\sqrt{p}\log p)$.
 \end{document}

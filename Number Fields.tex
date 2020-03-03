@@ -962,4 +962,54 @@ So to prove the unit theorem, we will have to show:
 \begin{theorem}
 $\mathscr{L}(\o_K^\ast)$ is a lattice in $\R^{r+s, 0}$.
 \end{theorem}
+Then we will have $r+s-1$ independent units in $K$, proving Dirichlet's unit theorem.
+\begin{proposition}
+Given $1 \leq j leq r+s$, there is a constant $C$ such that, for any $\delta > 0$, there is some $\alpha \in \o_K$ with:
+\begin{enumerate}
+\item $|\Nn_{K/\Q}(\alpha)| \leq C$
+\item $\forall i \neq j, |\sigma_i(\alpha)| \leq \delta$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Consider the set $Y \subset \R^r \times \C^s$ of points $z_i$ given by the inequalities:
+\begin{align*}
+|z_i| \leq \begin{cases} C\delta^{1-n} & i=j \leq r \hspace{0.86cm}(z_i \in \R)\\ \delta & i \neq j \hspace{1.5cm}(z_i \in \C) \end{cases}
+\end{align*}
+Then if $\alpha \in K$ and $\sigma(\alpha) \in Y$, 
+\begin{align*}
+|\Nn_{K/\Q}(\alpha)| = \prod_{i=1}^r |\sigma_i(\alpha)| \times \prod_{i=r+1}^{r+s} |\sigma_i(\alpha)|^2 \leq C
+\end{align*}
+and $\vol Y = 2^r\pi^s C$. Applying Minkowski for $C$ sufficiently large, there is $\alpha \in \o_K \setminus \{0\}$ with $\sigma(\alpha) \in Y$, and so satisfying the conditions. The argument is similar for $r+1 \leq j \leq r+s$.
+\end{proof}
+\begin{corollary}
+Given $1 \leq j \leq r+s$, there exists $\epsilon = \epsilon_j \in \o_K^\ast$ such that $|\sigma_j(\epsilon)| > 1$ and $|\sigma_i(\epsilon)| < 1$ for all $i \neq j$.
+\end{corollary}
+\begin{proof}
+By \textbf{11.10} we can find $\alpha_1, \alpha_2, \ldots \in \o_K$ with $|\Nn_{K/\Q}(\alpha_k)| \leq C$, and such that $|\sigma_i(\alpha_{k+1})| < |\sigma_i(\alpha_k)|$ for all $i \neq j$, choosing $\delta$ sufficiently small each time. So there exist $k, \ell$ with $k < \ell$ and $(\alpha_k) = (\alpha_\ell)$, since there are only finitely many ideals of norm $\leq C$. Then $\epsilon = \alpha_\ell/\alpha_k$ will do.
+\end{proof}
+To complete the proof, we will show that the elements $\mathscr{L}(\epsilon_j)$ for $1 \leq j \leq rs$ span $\R^{r+s, 0}$. Consider the matrix $(\mathscr{L}(\epsilon_j)_k) \in Mat_{r+s, r+s}(\R)$, with entries $(2)\log |\sigma_k(\epsilon_j)|$. The only positive entries lie on the principal diagonal.
+\begin{lemma}
+Let $A \in Mat_{m,m}(\R)$ such that:
+\begin{enumerate}
+\item For all $j \neq k$, $A_{jk} <0$
+\item For all $j, \sum_k A_{j,k} = C$.
+\end{enumerate}
+Then $A$ has rank $m-1$.
+\end{lemma}
+\begin{proof}
+Let $x \in \R^m$. Show that $Ax = 0 \iff x \in \spann(1, \ldots, 1)$.Condition $2$ gives $\impliedby$. To prove $\implies$, suppose that $x_k$ is the largest coordinate of $x$. Then $Ax = 0 \implies \sum_{j \neq  k} A_{kj}(x_k-x_j) = \sum_{j=1}^m A_{kj}x_k - \sum_{j=1}^m A_{kj} x_j = 0$
+
+But $x_k \geq x_j \forall j$, and $A_{kj} <0$, so we must have all $x_j = x_k$.
+\end{proof}
+\section{Application to Diophantine Equations}
+Diophantine equations in $\geq 2$ variables, where we ask for $\Z$ or $\Q$. For example, we might seek solutions to $y^2 + 5= x^3$ where $x,y \in \Z$. 
+
+We can factor this in $\Z[\sqrt{-5}] = \o_{K}$ for $K = \Q(\sqrt{-5})$. Then $x^3 = (y+\sqrt{-5})(y-\sqrt{-5})$. Notice $(x,10) =1$, as if $2|x$ then $y^2+5 \equiv 0 \mod 4$, and if $5|x$ then $5|y \implies 25|x^3-y^2 = 5$.
+
+Since $\Z[\sqrt{-5}]$ is not a UFD we have to use ideals. Suppose $P \subset \o_K$ is prime with $P |(y+\sqrt{-5})$ and $P|(y-\sqrt{-5})$. Then $P | (y+\sqrt{-5}, y-\sqrt{-5}) \supset (2\sqrt{-5})$, so $P |(10)$. But also $P|(x^3)$ and $(x,10) = 1$. So there is no such $P$.
+
+So by unique factorisation of ideals, $(y+\sqrt{-5}) = I^3, (y0\sqrt{-5}) = J^3$ with $IJ = (x)$, as ideals $(y+\sqrt{-5}), (y-\sqrt{-5})$ have no common prime ideal factors. Now we use from earlier, that $Cl(K) \cong \Z/2\Z$. As $I^3$ is principal, we must have that $I$ is principal, so $I = (a+b\sqrt{-5})$ say. So $y+\sqrt{-5} = ($unit$)(a+b\sqrt{-5})^3 = \pm(a+b\sqrt{-5})^3$ as $\o_K^\ast = \{\pm 1\}$. Absorbing the $\pm$ into $a,b$, we have $y+\sqrt{-5} = (a+b\sqrt{-5})^3 = (a^3 - 15ab^2) + (3a^2b-3b^3)\sqrt{-5}$.
+
+So $1 = 3a^2b - 5b^3 = (3a^2-3b^2)b$, so $b = \pm 1$, and there are no solutions in $\Z$.
+
 \end{document}

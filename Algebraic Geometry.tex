@@ -581,14 +581,14 @@ Here however, we will use a slightly different approach:
 \subsection{Segre Embedding}
 The \emph{Segre embedding} is the map:
 \begin{align*}
-\sigma_{n,m}:\P^n_K \times \P^m_K &\to \P^{(n+1)(n+1)-1}_K\\
+\sigma_{n,m}:\P^n_K \times \P^m_K &\to \P^{(n+1)(m+1)-1}_K\\
 ([x_0:\ldots:x_n],[y_0:\ldots:y_m]) &\mapsto [\ldots: x_iy_j:\ldots]
 \end{align*}
 \begin{claim}
 $\sigma_{n,m}$ is injective.
 \end{claim}
 \begin{proof}
-Let $c = [\ldots:C_{ij}:\ldots] \in \Im(\sigma_{n,m})$ and $(a,b) \in \sigma_{n,m}^{-1}(\{c\})$, say $a = [A_0:\ldots:A_n], b = [B_0:\ldots:B_m]$.
+Let $c = [\ldots:C_{ij}:\ldots] \in \Image(\sigma_{n,m})$ and $(a,b) \in \sigma_{n,m}^{-1}(\{c\})$, say $a = [A_0:\ldots:A_n], b = [B_0:\ldots:B_m]$.
 
 We may assume, up to a change of coordinates, that $C_{0,0} = 1$, so $A_0 = B_0 = 1$. This then forces that $B_i = C_{0,i}$ and $A_j = C_{j,0}$, so $a,b$ are unique, so $\sigma_{n,m}$ is injective.
 \end{proof}
@@ -596,7 +596,7 @@ We may assume, up to a change of coordinates, that $C_{0,0} = 1$, so $A_0 = B_0 
 The image of $\sigma_{n,m}$ is closed.
 \end{claim}
 \begin{proof}
-The equations are $\{Z_{ij}Z_{k\ell} - Z_{i\ell}Z_{kj} = 0\}$ for all $i,j,k,\ell$. Checking that $\Im(\sigma_{m,n})$ is equal to the vanishing locus of these equation is a locally affine calculation which is left as an exercise.
+The equations are $\{Z_{ij}Z_{k\ell} - Z_{i\ell}Z_{kj} = 0\}$ for all $i,j,k,\ell$. Checking that $\Image(\sigma_{m,n})$ is equal to the vanishing locus of these equation is a locally affine calculation which is left as an exercise.
 \end{proof}
 Note that the projection maps
 \begin{tikzpicture}

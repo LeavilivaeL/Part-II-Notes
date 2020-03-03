@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  2 MAR 2020 12:58
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  3 MAR 2020 14:36
  system commands enabled.
 **"Algebraic Geometry.tex"
 ("./Algebraic Geometry.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.215 seconds
+luaotfload | main : initialization completed in 1.131 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1045,10 +1045,6 @@ Overfull \hbox (33.46284pt too wide) in paragraph at lines 304--305
 
 [7] [8<./plane.png><./line.png><./circle.png>] [9] [10] [11] [12] [13] [14]
 [15]
-LaTeX Font Info:    Try loading font information for U+euf on input line 591.
- ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/ueuf.fd"
-File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-)
 Package pgfplots info on input line 625: Overriding colorspace to rgb due to xco
 lor configuration.
 Package pgfplots info on input line 642: Overriding colorspace to rgb due to xco
@@ -1098,15 +1094,15 @@ Missing character: There is no Ø (U+00D8) in font cmmi10!
 [27] [28] ("./Algebraic Geometry.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 32139 strings out of 494305
+ 32122 strings out of 494305
  100000,1144653 words of node,token memory allocated
  537 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 56 glue_spec
 , 10 attribute_list, 2 write nodes
-   avail lists: 1:2,2:4178,3:1489,4:90,5:353,6:30,7:3546,8:65,9:403,10:11,11:198
+   avail lists: 1:2,2:4176,3:1489,4:90,5:353,6:30,7:3546,8:65,9:403,10:11,11:198
 
- 35244 multiletter control sequences out of 65536+200000
- 100 fonts using 6987023 bytes
+ 35234 multiletter control sequences out of 65536+200000
+ 94 fonts using 6648175 bytes
  69i,18n,100p,1090b,2221s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/p
 rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman6-regular.otf><c:/progra
@@ -1138,13 +1134,12 @@ onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on Algebraic Geometry.pdf (28 pages, 1174816 bytes).
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on Algebraic Geometry.pdf (28 pages, 1171956 bytes).
 
-PDF statistics: 283 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 279 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

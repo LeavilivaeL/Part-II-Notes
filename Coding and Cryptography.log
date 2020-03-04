@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  2 MAR 2020 09:59
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  4 MAR 2020 11:37
  system commands enabled.
 **"Coding and Cryptography.tex"
 ("./Coding and Cryptography.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.991 seconds
+luaotfload | main : initialization completed in 0.939 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -859,7 +859,20 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 \SOUL@uldp=\dimen262
 \SOUL@ulht=\dimen263
 )
-\c@theorem=\count143
+("C:/Program Files/MiKTeX 2.9/tex/latex/footmisc/footmisc.sty"
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks53
+\footnotemargin=\dimen264
+\c@pp@next@reset=\count143
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924.
+
+)
+\c@theorem=\count144
 )
 ("./Coding and Cryptography.aux")
 \openout1 = Coding and Cryptography.aux
@@ -881,17 +894,17 @@ LaTeX Font Info:    ... okay on input line 5.
 
 ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count144
-\scratchdimen=\dimen264
+\scratchcounter=\count145
+\scratchdimen=\dimen265
 \scratchbox=\box65
-\nofMPsegments=\count145
-\nofMParguments=\count146
-\everyMPshowfont=\toks53
-\MPscratchCnt=\count147
-\MPscratchDim=\dimen265
-\MPnumerator=\count148
-\makeMPintoPDFobject=\count149
-\everyMPtoPDFconversion=\toks54
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks54
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen266
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks55
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -907,7 +920,7 @@ Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks55
+\pdftexcmds@toks=\toks56
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
 8.
@@ -1773,17 +1786,17 @@ n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )$ \TU/lmr/m/n/10 each have dis-tinct r
 oots $\OML/cmm/m/it/10 []; [] ; []; []; [] ; []$
  []
 
-[35] ("./Coding and Cryptography.aux"))
+[35] [36] [37] ("./Coding and Cryptography.aux"))
 
 Here is how much of LuaTeX's memory you used:
- 31733 strings out of 494305
+ 31845 strings out of 494305
  100000,1144653 words of node,token memory allocated
- 708 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 17 glyph, 26 attribute, 55 glue_spe
-c, 26 attribute_list, 2 write nodes
-   avail lists: 1:5,2:2341,3:737,4:57,5:390,6:24,7:3463,8:74,9:600,10:11,11:182
- 34869 multiletter control sequences out of 65536+200000
- 89 fonts using 6536167 bytes
+ 719 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 17 glyph, 27 attribute, 55 glue_spe
+c, 27 attribute_list, 2 write nodes
+   avail lists: 1:5,2:2339,3:737,4:57,5:395,6:24,7:3462,8:74,9:600,10:11,11:182
+ 34974 multiletter control sequences out of 65536+200000
+ 90 fonts using 6582583 bytes
  64i,25n,100p,1095b,1996s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmmono10-regular.otf><<C:\
 Users\Harry\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/doublestroke/dpi600\
@@ -1816,9 +1829,9 @@ C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/public/rsfs/rsfs10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/rsfs/rsfs7.pfb>
-Output written on Coding and Cryptography.pdf (35 pages, 467542 bytes).
+Output written on Coding and Cryptography.pdf (37 pages, 484698 bytes).
 
-PDF statistics: 288 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 294 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

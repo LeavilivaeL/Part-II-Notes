@@ -1397,9 +1397,15 @@ Let $(x_n), (y_n)$ be outputs of LFSRs of lengths $M,N$ respectively. Then:
 \item $(x_ny_n)$ is the output from an LFSR of length $MN$
 \end{enumerate}
 \end{lemma}
-\begin{proof}[*Proof]
+\begin{proof}[Proof*]
 Assume the auxiliary polynomials $P(x), Q(x)$ each have distinct roots $\alpha_1, \ldots, \alpha_n, \beta_1, \ldots, \beta_N$ lying in some extension field $K$ of $\F_2$. Then $x_n = \sum_{i=1}^M \lambda_i \alpha_i^n, y_n = \sum_{j=1}^N \mu_j \beta_j^n$ for some $\lambda_i, \mu_j \in K$. Then $x_n+y_n$ is a solution to a difference equation with auxiliary polynomial $P(x)Q(x)$, and $x_ny_n$ to one with auxiliary polynomial $\prod\prod (x-\alpha_i\beta_j)$, lying in $\F_2[x]$, via symmetric function theory.
 \end{proof}
+\example Suppose we have 3 streams $(x_n), (y_n), (z_n)$ produced by LFSRs. Let:
+\begin{align*}
+k_n = \begin{cases} x_n & z_n = 0 \\ y_n & z_n = 1\end{cases}
+\end{align*}
+Apply \textbf{17.2} by writing $k_n = x_n + z_n(x_n+y_n)$ to see that $k_n$ is again the output from an LFSR. 
+
 Note that adding the outputs of two LFSRs is no more economical than producing the same thing with a single LFSR. Multiplying two output streams looks promising until we realise that $x_ny_n = 0$ 75\% of the time.
 
 Non-linear registers look appealing but are hard to analyse.
@@ -1425,4 +1431,73 @@ Some polynomial time algorithms include:
 \item Primality testing
 \end{itemize}
 Polynomial time algorithms are not known for factoring or discrete logarithms. Some elementary methods for computing them take much longer than polynomial time: dividing my successive primes up to $\sqrt{N}$ take $O(\sqrt{n})$. The baby-step giant-step problem for the discrete logarithm problem, whereby we set $m = \floor{\sqrt{p}}$, write $a = qm+r$. Then $x = g^a \equiv g^{am+r}$, so $g^{qm}\equiv g^{-r}x$. Then list $g^{qm}\mod p$ for $q = 0, 1, \ldots, m-1$, and $g^{-rx} \mod p$ for $r = 0,1, \ldots, m-1$. Then sort these two lists and look for match. This algorithm takes $O(\sqrt{p}\log p)$.
+
+The best known method for solving the factoring problem is called the number field sieve. It has running time $\mathcal{O}(\exp[c(\log n)^{\frac13}(\log\log N)^{\frac23}])$, where $c$ is a known constant. This is closer to polynomial time than $m \log N$ than to exponential time thanks to the exponents $\frac13,\frac23$.
+
+Some revision of modular arithmetic: Given $\varphi(n) = |\{1 \leq a \leq n : (a,n) = 1\}|$, the Euler totient function, we have $\varphi(n) = |(\Z/n\Z)^\ast|$, the size of the group of units in $\Z/n\Z$. Then, for any $a$ coprime to $n$, we have $a^{\varphi(n)} \equiv 1 \mod n$, as $\ord_{\Z/n\Z}(a)|\varphi(n)$ by Lagrange's theorem. In the special case where $n = p$, a prime, $\varphi(p) = p-1$ and $a^{p-1} \equiv 1 \implies a^p \equiv a$, and we have Fermat's little theorem. We also have the Chinese remainder theorem, which tells us that if we have $x \equiv a \mod p, x \equiv b \mod q$ for $(p,q) = 1$, then there is a unique solution for $x$ modulo $pq$.
+
+\begin{lemma}
+Let $p = 4k-1$ be prime. Then for $d \in \Z$, if $x^2 \equiv d \mod p$ has a solution then a solution is $x \equiv d^k \mod p$. In particular, this congruence relation is solvable very quickly.
+\end{lemma}
+\begin{proof}
+Let $x_0$ be a solution. \textsc{wlog} $x_0 \neq 0 \mod p$. Then $d^{2k-1} \equiv x_0^{2(2k-1} \equiv x^{p-1} \equiv 1 mod p$, and so $(d^k)^2 \equiv d \mod p$.
+\end{proof}
+\section{Examples of Public Key Cryptography}
+\subsection{Rabin Cipher, 1979}
+We have a private key consisting of 2 large distinct primes congruent to $3 \mod 4$, and a public key $N = pq$. Then let $\mathcal{M} = \mathcal{C} = \{0,1, \ldots, N-1\}$.
+
+We encrypt $m \in \mathcal{M}$ as $c \equiv m^2 \mod N$, so that the cipher text $c \in \mathcal{C}$ - we avoid $m < \sqrt{N}$, and ensure $(m,N) = 1$. 
+
+Then on receiving $c$, we can use \textbf{18.1} to solve for $x_1, x_2$ such that $x_1^2 \equiv c \mod p$ and $x_2^2 \equiv c \mod q$, and then find the original message using the Chinese remainder theorem.
+
+\begin{lemma}
+\item
+\begin{enumerate}
+\item Let $p$ be an odd prime and $(d,p) = 1$. Then $x^2 \equiv d \mod p$ has zero or two solutions.
+\item Let $N = pq$ for $p,q$ distinct odd primes, and $(d,N) = 1$. Then $x^2 \equiv d \mod N$ has zero or four solutions.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\item
+\begin{itemize}
+\item $x^2 \equiv y^2 \mod p \iff p|(x^2-y^2) \iff (p|x-y)\vee(p|x+y)\iff x \equiv \pm y \mod p$, so if there is a solution, there are two since $p$ is odd.
+\item If $x_0$ is a solution then by CRT there are solutions $x$ with $x\equiv \pm x_0 \mod p, x \equiv \pm x_0 \mod q$, for any of the choices of $\pm$, and these are the only solutions by part \textit{1.}, and they are all distinct.
+\end{itemize}
+\end{proof}
+To decrypt Rabin, we find all four solutions to $x^2 \equiv c \mod N$. Messages should include enough redundancy that only one of these possibilities makes sense.
+
+\begin{theorem}
+Breaking the Rabin cryptosystem is essentially as difficult as factoring $N$.
+\end{theorem}
+\begin{proof}
+We've already seen factoring $N$ allows us to decrypt messages. For the converse, suppose we have an algorithm that can compute square roots mod $N$. Pick $x \mod N$ at random. Use the algorithm to find $y$ such that $x^2 \equiv y^2 \mod N$. With probability $\frac12$, $x \nequiv y \mod N$. So then $\gcd(N, x-y)$ is a non-trivial factor of $N$. If this fails, pick another $x$. After $r$ trials, $\P(\text{failure}) < \frac{1}{2^r} \to 0$.
+\end{proof}
+
+Recall that $N = pq$ for $p,q$ distinct primes. We claim that if we know a multiple $m$ of $\varphi(N) = (p-1)(q-1)$, then factoring $N$ is easy. We write $\ord_p(x)$ to mean the order of $x$ in $(\Z/p\Z)^\ast$. Write $m  = 2^a b$ with $a \geq 1, b$ odd. Then let $\chi = \{x \in (\Z/n\Z)^\ast : \ord_p(x^b) \neq \ord_q(x^b)\}$.
+
+\begin{theorem}
+\item
+\begin{enumerate}
+\item If $x \in X$ then there exists $0 \leq t < a$ such that $\gcd(x^{2^t b}-1, N)$ is a non-trivial factor of $N$.
+\item $|\chi| \geq \frac{1}{2}|(\Z/n\Z)^\ast| = \frac12 \varphi(N)$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By Euler-Fermat, $x^{\varphi(N)}\equiv 1 \mod N \implies x^m \equiv 1 \mod N$. But $m = 2^a b$, so setting $y = x^b \mod N$ we get $y^{2^a} \equiv 1 \mod N$, and so $\ord_p(y)$ and $\ord_q(y)$ are powers of $2$. We're given that $\ord_p(y) \neq \ord_q(y)$, so \textsc{wlog} we assume $\ord_p(y) \leq \ord_q(y)$. Say $\ord_q(x) = 2^t$ for $0\leq t <a$. Then:
+\begin{itemize}
+\item $y^{2^t} \equiv 1 \mod p$.
+\item $y^{2^t} \equiv 1 \mod q$.
+\end{itemize}
+So $\gcd(y^{2^t}-1, N) = p$ is a non-trivial factor.
+
+The second part will come later.
+\end{proof}
+
+\subsection{RSA (Rivest, Shamir, Adleman), 1977\footnote{This was actually first come up with by Clifford Cocks in 1973, but it was classified as he was working for the British government}}
+We have $N = pq$ for $p,q$ distinct primes. Recall that $\varphi(N) = (p-1)(q-1)$. Pick $e$ such that $(e, \varphi(N)) = 1$. We solve for $d$ such that $de \equiv 1 \mod \varphi(N)$. Then we have:
+\begin{itemize}
+\item Public key: $(N,e)$
+\item Private key: $d$
+\end{itemize}
+We then encrypt $m \in \mathcal{M} = \{0,1,\ldots, N-1\}$, as $c = m^e\mod N$. Then decrypt $c \in \mathcal{C}$ as $x = c^d  \mod N$.
 \end{document}

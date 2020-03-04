@@ -1201,5 +1201,59 @@ where $p$ is a formula with free variables $\{t_1, \ldots, t_n, x\}$. We introdu
 (\exists x)(\forall y) \neq (y \in x) \tag{Emp}
 \end{align*}
 By (Ext) the empty set is unique, and we denote it by $\emptyset$. That is, $z \in \emptyset$ is an abbreviation for $((\exists x)(\forall y) \neq (y \in x))\wedge (z \in x)$. Similarly for the notation introduced after (Sep).
+\item \underline{Pair-Set:} ``For any $x,y$, $\{x,y\}$ is a set."
+\begin{align*}
+(\forall x)(\forall y)(\exists z)(\forall u)((u \in z)\iff((u=x)\vee(u=y)))\tag{Pair}
+\end{align*}
+We write $\{x,y\}$ for the set $z$, or just $\{x\}$ if $x=y$. Now we have a lot of sets, like $\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}$ etc.
+\item \underline{Union:} ``For any set $x$, we can take the union of all elements of $x$."
+\begin{align*}
+(\forall x)(\exists y)(\forall z)((z \in y)\iff(\exists u)((u \in x)\wedge(z \in u)))\tag{Un}
+\end{align*}
+We write $\bigcup x$ for the set $y$. If $x = \{a,b\}$, then we write $\bigcup x = a \cup b$.
+\item \underline{Power set:} ``Every set has a power set."
+\begin{align*}
+(\forall x)(\exists y)(\forall z)((z \in y) \iff(\forall u)((u \in z)\implies (u \in x)))\tag{Pow}
+\end{align*}
+We write $\powset{x}$ for the set $y$.
 \end{enumerate}
+These six axioms already let us do a lot. Firstly, for any $t_1, \ldots, t_n$ we can form a set $\{t_1, \ldots, t_n\}$. E.g. if $n=3$, we have $\{t_1,t_2,t_3\} = \bigcup \{\{t_1\},\{t_2,t_3\}\}$.
+ 
+Also don't need a new axiom for intersections, as we can prove that if $x \neq \emptyset$ then there is a set $\bigcap x$ satisfying $(\forall z)((z \in \bigcap x) \iff (\forall w)((w \in x)\implies(z \in w))$, by using (Sep) on the $y \in x$. We can also create ordered pairs $(x,y) = \{\{x\},\{x,y\}\}$.
+
+For functions, we can write ``$f$ is a function" to mean:
+\begin{align*}
+((\forall z \in f)(z\text{ is an ordered pair}))\wedge (\forall x)(\forall y)(\forall y')(((x,y) \in f \wedge (x,y')\in f) \implies (y =y'))
+\end{align*}
+where $(\forall z\in f)p$ is shorthand for $(\forall z)((z \in f) \implies p)$. We write $x = \dom f$ to mean:
+\begin{align*}
+(f\text{ is a function})\wedge (\forall y)((\exists z)((y, z)\in f)\iff (y \in z))
+\end{align*}
+We write $f:x \to y$ to mean:
+\begin{align*}
+(x=\dom f)\wedge (\forall z)(\forall w)(((z,w )\in f) \implies (w \in y))
+\end{align*}
+
+We define $0 = \emptyset$. Then, for any set $x$, we define the \emph{successor} of $x$ to be $x^+ = x \cup \{x\}$. Now for $n \in \N$, we define $s(n)=n^+$. So $0 = \emptyset, 1 = \{0\}, 2 = \{0,1\}, 3 = \{0,1,2\}$. Can we gather $0,1,2,\ldots$ together in ZF into the set of natural numbers? Not yet - nothing in our six axioms forces the existence of an infinite set. It is true that a model $V$ of our current theory must be infinite, but it needn't have a infinite set in it. We need a further axiom. We say ``$x$ is a successor set" to mean $(\emptyset \in x) \wedge (\forall y)((y \in x)\implies (y^+ \in x))$.
+\begin{enumerate}
+\item[7.] \underline{Infinity:} ``There is a successor set."
+\begin{align*}
+(\exists x)((\emptyset \in x)\wedge(\forall y)((y \in x)\implies(y^+ \in x))\tag{Inf}
+\end{align*}
+\end{enumerate}
+Let $\omega$ be the smallest successor set. Then we say $\omega$ is the set of \emph{von Neumann natural numbers.}
+
+We can now prove that:
+\begin{align*}
+(\forall x)((x \subset \omega)\wedge(x\text{ is a successor set}))\implies(x = \omega))
+\end{align*}
+in the context of our model, this says that genuine induction works in the naturals, and not just first-order induction. So $\omega$ is a model for the original Peano axioms. We then say that ``$x$ is finite" means $(\exists y \in \omega)(x\text{ bijects with }y)$, and ``$x$ is countable" means $(x\text{ is finite})\vee(x\text{ bijects with }\omega)$.
+
+It turns out we will also need two more axioms, but its not obvious why. Here they are for the sake of completeness - we'll talk about them later:
+\begin{itemize}
+\item[8.] \underline{Foundation:} (A discussion of this will follow later)
+\begin{align*}
+(\forall x)((x = \emptyset)\vee (\exists y)((y \in x)\wedge (x \cap y = \emptyset))\tag{Fdn}
+\end{align*}
+\end{itemize}
 \end{document}

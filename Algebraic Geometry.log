@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  9 MAR 2020 12:56
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  11 MAR 2020 12:54
  system commands enabled.
 **"Algebraic Geometry.tex"
 ("./Algebraic Geometry.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 3.614 seconds
+luaotfload | main : initialization completed in 1.072 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -1107,7 +1107,7 @@ cmr/m/n/10 ]\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 f\OT1/cmr/m/n/1
 0 ))$
  []
 
-[20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31]
+[20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32]
 ("./Algebraic Geometry.aux")
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1120,7 +1120,7 @@ Here is how much of LuaTeX's memory you used:
  537 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 56 glue_spec
 , 10 attribute_list, 2 write nodes
-   avail lists: 1:2,2:4176,3:1489,4:90,5:353,6:30,7:3546,8:65,9:403,10:11,11:198
+   avail lists: 1:2,2:4176,3:1489,4:90,5:354,6:30,7:3546,8:65,9:403,10:11,11:198
 
  35423 multiletter control sequences out of 65536+200000
  109 fonts using 7582607 bytes
@@ -1158,9 +1158,9 @@ msfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on Algebraic Geometry.pdf (31 pages, 1197772 bytes).
+Output written on Algebraic Geometry.pdf (32 pages, 1206895 bytes).
 
-PDF statistics: 289 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 292 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

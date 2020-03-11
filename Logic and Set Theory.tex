@@ -1319,5 +1319,38 @@ What properties of $\in$ did we use?
 \item Well-foundedness: If $x \neq \emptyset$, it has an $\in$-minimal member.
 \item It is local: for any set $x$, the collection of $y$ with $y \in x$ is a set.
 \end{itemize}
-Suppose now $r$ is a relation on a set $a$ and that $r,s$ are well-defined. Th en  also $r$ is local by separation, so we can prove analogues of these two theorems ($r$-induction/$r$-recursion) for the relation $r$.
+Suppose now $r$ is a relation on a set $a$ and that $r,s$ are well-defined. Then  also $r$ is local by separation, so we can prove analogues of these two theorems ($r$-induction/$r$-recursion) for the relation $r$.
+
+A relation on a set $a$ is \emph{extensional} if:
+\begin{align*}
+(\forall x \in a)(\forall y \in a)((\forall z \in a)((zrx)\iff (zry))\implies (x=y))
+\end{align*}
+i.e. every pair of elements can be distinguished by looking at how the relate to other elements.
+
+\begin{theorem}[Mostowski's Collapsing Theorem]
+Let $r$ be a well-founded extensional relation on a set $a$. Then there is a transitive set $b$ and a bijection $f:a \to b$ such that $x ry$ if and only if $f(x) \in f(y)$. Moreover, $b,f$ are unique.
+\end{theorem}
+\begin{proof}
+Define by $r$-recursion. $f(x) = \{f(z)|zrx\}$ using (Rep), (Sep), and $b = \{f(x)|x \in a\}$. By (Rep), $f$ is a genuine function. Clearly $b$ is transitive and $f$ surjective. For $f$ injective, we show by $r$-induction on $x$ that $(\forall x \in a)(\forall y \in a)((f(x)=f(y)) \implies (x=y))$. Indeed, suppose that $f(x)=f(y)$. Then $\{f(z)|zrx\} = \{f(u)|ury\}$, and so by the inductive hypothesis $\{z|zrx\}=\{u|ury\}$, and by extensionality $x-y$. Finally, $f$ and $b$ are unique by $r$-induction.
+\end{proof}
+\begin{corollary}
+Every well-ordered set is isomorphic to a unique von Neumann ordinal.
+\end{corollary}
+\subsection{The Structure of the Universe. The Cumulative Hierarchy}
+Let $On$ be the class of ordinals. Define $V_\alpha$ for $\alpha in On$ by ordinal recursion. $V_0 = \emptyset, V_{\alpha^+} = \powset V_\alpha$, and for $\lambda$ a non-zero limit, $V_\lambda = \bigcup_{\delta<\lambda} V_\delta$. Note that if $V_\alpha$ is transitive then $V_\alpha \subset V_{\alpha^+}$. Now we can prove:
+\begin{itemize}
+\item $(\forall \alpha \in On)(V_\alpha\text{ is transitive})$
+\item $(\forall \alpha \in On)(\forall \beta \in On)((\alpha \leq \beta) \implies (V_\alpha \subset V_\beta))$
+\item $(\forall x)(\exists \alpha \in On)(x \in V_\alpha)$
+\end{itemize}
+The \emph{rank} of a set $x$ is the least $\alpha \in On$ such that $x \subset V_\alpha$. In general $\rank x = \sup\{\rank(y)^+ : y \in x\}$, so $\rank(\{3,\omega+7\})= \sup\{4, \omega+8\} = \omega+8$. Can we also get cardinals? We cannot do $\card(x) = \{y : y \text{ bijects with } x\}$. This is not a set. Instead, we use \emph{Scott's trick} - let $\alpha(x)$ be the least rank of any set bijecting with $x$. Then set $\card(x) = \{y \subset V_{\alpha(x)} : y \text{ bijects with } x\}$.
+
+\subsection{Consistency}
+Recall that $PA$ is incomplete - there is a sentence $p$ in the language of PA saying ``I cannot be proved". We showed $PA \nvdash p$ and $PA \nvdash \neg p$. Moreover, $p$ is true in $N$: if $p$ is false then $p$ can be proved, so $p$ is true. Why does this not formalize to a proof of $p$ within $PA$. We've used the existence of a model of $PA$.Let $Con(PA)$ be the sentence of $PA$ that says ``$PA$ is consistent". i.e. $\neq(\exists n)(n\text{ codes a proof of }\bot)$. Then $PA \cup\{Con(PA)\} \vdash p$. But we know $PA \nvdash p$. Thus we have:
+\begin{theorem}[G\"odel's Second Incompleteness Theorem For PA]
+$PA \nvdash Con(PA)$.
+\end{theorem}
+Of course $ZF \vdash Con(PA)$ as it gives a model. But is $ZF$ itself consistent? Is it complete? $ZF$ is ``recursively presented", as there is an algorithm to determine its axioms, and it contains a ``recursive interpretation" of $PA$, so we can run the proof of G\"odel 1 on $ZF$. $ZF$ is incomplete. So running the proof of G\"odel 2 on $ZF$, we have $ZF \nvdash Con(ZF)$, assuming that $ZF$ is consistent in the first place.
+
+It should be noted that things don't quite work as stated. This is OK for $PA$, but we've used the fact $PA \vdash p \iff PA \vdash `p \text{ is provable}'$. The forwards direction is fine, but for the reverse direction we've used the existence f a model $\N$. For $ZF$ this doesn't work, as $PA$ doesn't have witnesses. We can have $PA \vdash (\exists x)q$ but $PA \nvdash q[t/x]$ for any closed term $t$. If $T$ is a recursively presented theory containing a recursive interpretation of $PA$, say $T$ is $\omega$-consistent if whenever $q$ is a formula of $PA$ with $FV(q) = \{x\}$ we don't have both $T \vdash (\exists x)(q$ and $T \dashv \neg q[t/x]$ for all closed terms $t$. G\"odel's original proof assumed $ZF$ was $\omega$-consistent - this condition was later dropped.
 \end{document}

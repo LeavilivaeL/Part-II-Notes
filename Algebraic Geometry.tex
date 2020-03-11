@@ -1222,4 +1222,51 @@ Let $X$ be any curve. Then the morphism $\varphi_{3K}:X \to \P^{\ell(3K)-1}$ is 
 $\ell(3K) = (6g-6)-g+1 = 5g-5$, so every genus $g$ curve embeds in $\P^{5g+6}$.
 
 In a low genus, such as $g=1$ for elliptic curves, we have $(E, p_0)$ say. Then we get $\varphi_{3p_0}:E \to \P^2$ of degree 3, so every elliptic curve is a cubic.
+
+Let $E$ be a curve of genus $1$ and $p_0 \in E$ so that $(E, p_0)$ is an elliptic curve.
+
+If $g(X) = 0,1$ then $K_X$ is either negative of zero, so $K_X$ never embeds the curve $X$. If $g(X) = 0$, then $K_X = K_{\P_1} = -2[\infty]$, so $-K_X$ gives an embedding of $\P^1$ into $\P^2$ as a conic. But if $g(X) = 1$, it is not clear how to construct a canonical embedding.
+
+\begin{theorem}
+Any such elliptic curve $(E,p_0)$ can be realized as the vanishing $\V(F) \subseteq \P^2$ where $F \in \mathcal{O}_{\P^2}(3)$, and $F(1,x,y) = y^2+a_1xy+a_3y - (x^3+a_2x^2+a_4x +a_5)$ which we call Weierstrass Normal Form. If $\charr K \neq 2$, we can take $F(1,x,y) = y^2-x(x-1)(x-\lambda)$, which is Legendre normal form.
+\end{theorem}
+\begin{proof}
+Take $D = 3p_0$. Since $g(E) = 1$, if $p \in E$ then $\ell(np) = n$ for all $n \geq 1$ by Riemann-Roch. Then:
+\begin{itemize}
+\item $L(p_0) = K$
+\item $L(2p_0) = k^2 = \angle{1,x}, v_{p_0}(x) = -2$
+\item $L(3p_0) = \angle{1,x,y}, v_{p_0}(y) = -3$
+\item $L(4p_0) = L(3p_0) \oplus K\cdot x^2$
+\item $L(5p_0) = L(4p_0)\oplus K\cdot xy$
+\item $L(6p_0)$ contains both $x^3$ and $y^2$, and $\dim_K(L(6p_0)) = 6$
+\end{itemize}
+So $\{1,x,x^2,x^3,xy,y,y^2\}$ has a linear dependence. So extract $F(1,x,y)$ from this linear dependence to get the Weierstrass form, and call the homogenization $F(z_0, z_1, z_2)$. Then take $E \dashrightarrow \P^2, p \mapsto [1, x(p), y(p)]$ and observe that it satisfies the equation $F(z_0, z_1, z_2) = 0$.
+
+Now since $E$ and $\V(F)$ are both smooth and projective, this rational map extends to an isomorphism.
+
+In $\charr K = 2$, complete the square to get the Legendre form.
+\end{proof}
+
+A \emph{hyperelliptic curve} is a smooth projective curve $X$ of genus $\geq 2$ such that there exists a non-constant morphism of degree 2 from $X \to \P^1$, or equivalently if there exists a divisor $D$ with $\deg D = 2, \ell(D) = 2.$
+\begin{lemma}
+If $g(X) = 2$, then $X$ is hyperelliptic.
+\end{lemma}
+\begin{proof}
+Take $D = K_X$, this has degree $2$ and $\ell(K_X) = 2$ by Riemann-Roch.
+\end{proof}
+For every $g \geq 2$ there is a hyperelliptic curve $X$ with $g(X) = g$. By Riemann-Hurwitz, given a 2-to-1 morphism $X \xrightarrow{f}\P^2$, there are exactly $2g+2$ branch points, i.e. points $p \in \P^1$ such that $f^{-1}(p)$ is a single point.
+
+As a sanity check, if $g = 0$ check that $\P^1 \to \P^1$ via $z \mapsto z^2$ has precisely 2 branching points - 0 and $\infty$.
+
+\begin{theorem}
+Let $X$ be a curve of $g \geq 3$, then the morphism $\varphi_{K_Y} : X \to \P^{g-1}$ is an embedding if and only if $X$ is non-hyperelliptic.
+\end{theorem}
+\begin{proof}
+If $\varphi_K : X \to \P^{g-1}$ is not an embedding, then there exists $p,q \in X$ with $\ell(K_X - p-q) \geq g-1$. Then if $D = p+q$, Riemann-Roch gives $\ell(D)-\ell(K-D) = d-g+1$, and so $\ell(D) \geq 2$, $X$ is hyperelliptic.
+\end{proof}
+We say $X$ has a $g^r_d$ if $X$ admits a map $X \to \P^r$ of degree $d$ with image not contained in a hyperplane.
+\begin{theorem}[Enriques-Babbage]
+If $X$ is a curve of genus $\geq 3$ then if $X$ has no $g^1_2, g^1_3$ or $g^2_5$ then the image of $\varphi_{K_X}:X\injection \P^{g-1}$ is equal to the vanishing of quadrics.
+\end{theorem}
+Not having a $g^1_2, g^1_3$ or $g^2_5$ is a generic behaviour.
 \end{document}

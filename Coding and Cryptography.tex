@@ -129,7 +129,7 @@ A decipherable code with prescribed word lengths exists iff a prefix-free code w
 \end{itemize}
 \end{proof}
 
-\section{Shannon's Noiseless Coding Theorem}
+ \section{Shannon's Noiseless Coding Theorem}
 Entropy is a measure of `randomness' or `uncertainty'. Suppose we have a random variable $X$ that takes values $x_1, \ldots, x_n$ with probabilities $p_1, \ldots, p_n$. Then the \emph{entropy} (roughly speaking) is the expected number of fair coin tosses needed to simulate $X$.
 
 \hspace*{-1em}\underline{Examples:}
@@ -1473,7 +1473,7 @@ Breaking the Rabin cryptosystem is essentially as difficult as factoring $N$.
 We've already seen factoring $N$ allows us to decrypt messages. For the converse, suppose we have an algorithm that can compute square roots mod $N$. Pick $x \mod N$ at random. Use the algorithm to find $y$ such that $x^2 \equiv y^2 \mod N$. With probability $\frac12$, $x \nequiv y \mod N$. So then $\gcd(N, x-y)$ is a non-trivial factor of $N$. If this fails, pick another $x$. After $r$ trials, $\P(\text{failure}) < \frac{1}{2^r} \to 0$.
 \end{proof}
 
-Recall that $N = pq$ for $p,q$ distinct primes. We claim that if we know a multiple $m$ of $\varphi(N) = (p-1)(q-1)$, then factoring $N$ is easy. We write $\ord_p(x)$ to mean the order of $x$ in $(\Z/p\Z)^\ast$. Write $m  = 2^a b$ with $a \geq 1, b$ odd. Then let $\chi = \{x \in (\Z/n\Z)^\ast : \ord_p(x^b) \neq \ord_q(x^b)\}$.
+Recall that $N = pq$ for $p,q$ distinct primes. We claim that if we know a multiple $m$ of $\varphi(N) = (p-1)(q-1)$, then factoring $N$ is easy. We write $\ord_p(x)$ to mean the order of $x$ in $(\Z/p\Z)^\ast$. Write $m  = 2^a b$ with $a \geq 1, b$ odd. Then let $\chi = \{x \in (\Z/N\Z)^\ast : \ord_p(x^b) \neq \ord_q(x^b)\}$.
 
 \begin{theorem}
 \item
@@ -1500,4 +1500,70 @@ We have $N = pq$ for $p,q$ distinct primes. Recall that $\varphi(N) = (p-1)(q-1)
 \item Private key: $d$
 \end{itemize}
 We then encrypt $m \in \mathcal{M} = \{0,1,\ldots, N-1\}$, as $c = m^e\mod N$. Then decrypt $c \in \mathcal{C}$ as $x = c^d  \mod N$.
+\begin{corollary}
+Finding the RA private key from the public key is essentially as difficult as factoring $N$.
+\end{corollary}
+\begin{proof}
+We've seen that factoring $N$ allows us to find $d$. Conversely, if we know $d,c,de\equiv 1 \mod \varphi(N)$. Then $\varphi(N)|(de-1)$. We write $m=de-1=2^ab$, and then use \textbf{19.3} to factor $N$
+\end{proof}
+\begin{proof}[Proof of second part of 19.3]
+We want $|\{x\in (\Z/N\Z)^\times : \ord_p(x)^b) \neq \ord_q(x^b)\}|\geq \frac12|(\Z/N\Z)^\times|$. Using the CRT we have correspondence:
+\begin{align*}
+(\Z/N\Z)^\times \to (\Z/p\Z)^\times \times (\Z/\Z)^\times; x \mapsto (x\mod p, x \mod q)
+\end{align*}
+So it suffices to show that, if we partition $(\Z/p\Z)^\times$ into subsets according to the value of $\ord_p(x^b)$, then each subsets has size $\leq \frac12 |(\Z/p\Z)^\times| = \frac{p-1}{2}$. We do this by showing that some such subset has size $\frac12|(\Z/p\Z)^\times|$. Now $(\Z/p\Z)^\times = \angle{g}$, and by Fermat, $g^{p-1}\equiv 1 \mod p$, so $\ord_p(g^b)|2^a$. So writing $x = g^\delta$ then $x^b = (g^b)^\delta$, so $\ord_p(x^b) = \frac{2^t}{(2^t, \delta)}$, so $\ord_p(g^b)$ for $\delta$odd is $\ord_p(g^b)$, and is less for $\delta$ even. So $\{g^\delta \mod p: \delta $ odd$\}$ is the required set. The remaining $\frac12(p-1)$ values all have strictly smaller size.
+\end{proof}
+\subsection{Diffie-Hellman Key Exchange}
+Let $p$ be a large prime and $g$ a primitive root mod $p$. This data is fixed and known to everyone. $A,B$ wish to agree on a secret key $k \in \Z_p$ to use. $A$ chooses random $\alpha \in \Z_{p-1}$, and sends $g^\alpha \mod p$ to $B$. Similarly, $B$ chooses random $\beta \in \Z_{p-1}$ and sends $g^\beta \mod p$ to $A$. Then they both compute $k \equiv (g^\beta)^\alpha \equiv (g^\alpha)^\beta \mod p$, and use it as their common secret key. If $E$ can compute discrete logarithms efficiently, she can find $\alpha = \log_g(g^\alpha)$ from the published values of $p, g, g^\alpha$. Then $E$ can compute the key as $(g^\beta)^\alpha$. Diffie and Hellman conjectured that finding the key from these public values is as hard as solving the discrete logarithm problem.
+\section{Secret Sharing}
+If CMS is attacked by MIO, the faculty retreats to MR2. Entry involves inputting an integer $S>0$, the \emph{secret}, known only to the ``Leader". Each of the $n$ members of the Faculty knows a certain pair of numbers (their \emph{shadow}), and we require that, in Imre's absence, any $k \leq n$ members of the Faculty can reconstruct $S$ from their shadows but no $k-1$ can. How can we do this? Any solution is known as a \emph{(k,n)-threshold scheme}. Here's one dues to Shamir.
+\begin{itemize}
+\item Choose $S$ such that $0 < S< N$ at random.
+\item Imre chooses a prime $p >N$, then integers $a_1, \ldots, a_{k-1}$ at random, and distinct integers $x_1, \ldots, x_n$ at random with $0 \leq a_j \leq p-1$, $1 \leq x_j \le p-1$, and then sets $a_0 = S$. He computes:
+\begin{align*}
+P(r) = a_0 + a_1 x_r + a_2 x_r^2 +\ldots +a_{k-1}x_r^{k-1} \mod p
+\end{align*}
+for $1 \leq r \leq n$.
+\item He then gives the \emph{shadow pair} ($x_r, P(r)$) to the $r\th$ Faculty member and tells everyone the value of $p$.
+\end{itemize}
+Then $k$ members can solve their systems of equations as the Vandermonde determinant is nonzero, and we find $a_0 = S$, but $k-1$ members don't have enough information.
+\section{Signatures}
+Consider the message $m$ sent by $A$ to $B$. They may be concerned abut:
+\begin{itemize}
+\item Secrecy: $A,B$ are sure no third party has read $m$.
+\item Integrity: $A,B$ are sure no third party has altered $m$.
+\item Authenticity: $B$ is sure $A$ sent $m$.
+\item Non-Repudiation: $B$ can prove to a third party that $A$ sent $m$.
+\end{itemize}
+\example $A$ uses a private key $(N,d)$ to encrypt $m$ using RSA. Anyone can decrypt $m$ using the public key, but they cannot forge messages sent by $A$. $B$ prepares a random message $\mu$ and sends it to $A$. If $B$ then receives a message which, after decryption ends in $\mu$, then he can be sure it came from $A$.
+\example (Homomorphism attack) The bank sends messages of the form $(M_1, M_2)$ where $M_1$ is the client's name and $M_2$ is the amount to be transferred to $M_1$'s account. Messages are encoded using RSA as $(z_1,z_2) = (M_1^e \mod N, M_2^e \mod N)$. If I transfer $£100$ to my account and observe the encrypted message $(z_1, z_2)$, I could then send $(z_1, z_2^3)$, and become a millionaire without breaking RSA, or I could keep sending $(z_1, z_2)$. This can be defeated time-stamping the messages.
+
+A message is signed as $(m,s)$, where $s$ is a function of $m$ and the private key. The \emph{signature} function $s: \mathcal{M}\times \mathcal{K} \to \mathscr{S}$ is designed so that no one without knowledge of the private key can sign messages, but anyone can check the signature is valid.
+
+We can do signatures with RSA - if $A$ has private key $(N,d)$; public key $e$, then $A$ signs $m$ as $(m, m^d \mod N)$, the signature is verified by checking $s^e \equiv m \mod N$. There are some problems - the homomorphism attack still works, and anyone can produce random valid signed messages of the form $(s^e \mod N, s)$. Hopefully these messages won't be meaningful, but they might be.
+
+To solve these problems, we can use a better signature scheme, or sign messages using a hash, i.e. sign $h(m)$ instead of just $m$, for example the md5sum.
+
+\example The ElGamal signature scheme:
+
+$A$ chooses a very large prime $p$, $g$ a primitive root mod $p$, and some random integer $u$. Then the public key is $p, g, y=g^u$, and the private key is $u$. To send $m \in \N, A$ randomly chooses $k$ coprime to $p-1$ and computes $r,s$ satisfying $r = g^k \mod p, m = ur+ks \mod p-1$. $A$ signs $m$ with signature $(r,s)$. Then $g^m = g^{ur+ks}\mod p = (g^u)^r(g^k)^s \mod p = y^r r^s \mod p$. $B$ accepts the signature if $g^m = y^rr^s \mod p$. How do we forge such a signature? The obvious attempts involve solving the discrete logarithm problem.
+
+\begin{lemma}
+Given $a,b,m$, the congruence $ax \equiv b \mod m$ has either $0$ or $\gcd(a,m)$ solutions. 
+\end{lemma}
+\begin{proof}
+Let $d = \gcd(a,m)$. If $d\nmid b$, then there are no solutions. Otherwise, rewrite this equation as $a/d x \equiv b/d \mod m/d$. Then $(a/d,m/d) = 1$, so this has a unique solution by Euclid, and so we have $d$ solutions mod $m$. 
+\end{proof}
+It's important that $A$ chooses a new $k$ to sign each message. Otherwise, suppose messages $m_1, m_2$ have signatures $(r, s_1)$ and $(r, s_2)$, with $m_1 = ur+ks_1, m_2 = ur+ks_2$, giving $m_1-m_2 = k(s_1-s_2)$. Then by the previous lemma we can solve these by running through all possibilities for $k$, and then solve for $u$, allowing us to sign messages.
+
+Several existential forgeries are known, but this can be stopped by replacing $m$ by some collision resistant hash function $h(m)$, so that messages can be verified by checking $g^{h(m)} = y^rr^s$.
+
+\section{Bit Commitment}
+Suppose $A,B$ are playing a board game. They decide who goes first by simulating a coin toss each. If they agree, $A$ goes first and if they're different $B$ goes first. To prevent cheating we could have $A$ put her choice into a sealed envelope before $B$ makes his choice. The aim of this protocol is to achieve a system whereby $A$ can message $B$ such that $B$ cannot read the message until $A$ allows him to, but $A$ cannot change the contents of the message once it has been sent. Applications of this include things like voting, where we want results revealed correctly to all parties only after everyone has voted.
+
+We can do this in (at least) two different methods:
+\begin{enumerate}
+\item \underline{Using a public key cipher:} We have an encryption function $e_A$ published by $A$ and a decryption function $d_A$ kept secret by $A$. Then $A$ makes a choice $m \in \F_2$ and commits $e_A(m)$ to $B$. Then when the message is to be revealed, she sends $B$ $d_A$ and $e_A$, so that $B$ can be sure $d_A$ and $e_A$ are inverse functions.
+\item \underline{Using a noisy channel:} We have two channels from $A \to B$, one which is a BSC with error probability $0<p<\frac12$ corrupting bits independently of $A$ or $B$, and another which is clear. $B$ chooses a binary linear code $C$ with parameters $n,d$ (length, minimum distance). $A$ chooses a random surjective linear map $\theta : C \to \F_2$. To send a bit $m \in \F_2$, $A$ chooses $c \in C$ such that $\theta(c) = m$ and sends $c$ to $B$ over the noisy channel. $B$ receives $r = c+e$ and $d(r,c) = w(e)$ and the expected value of $w(e) \approx np$. Suppose the variance of the BSC is chosen small. Later $A$, sends $c$ via the clear channel, and $B$ can check $d(r,c) \approx np$. $B$ can't read the message early because we choose the minimal distance of $C$ to be much less than $np$. $A$ can't change her choice, as she doesn't know the $r$ received by $B$.
+\end{enumerate}
 \end{document}

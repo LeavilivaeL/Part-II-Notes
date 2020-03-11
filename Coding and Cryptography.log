@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  4 MAR 2020 11:37
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  11 MAR 2020 09:46
  system commands enabled.
 **"Coding and Cryptography.tex"
 ("./Coding and Cryptography.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.939 seconds
+luaotfload | main : initialization completed in 1.031 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -872,6 +872,15 @@ Package footmisc Info: Declaring symbol style lamport* on input line 903.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 924.
 
 )
+("C:/Program Files/MiKTeX 2.9/tex/latex/tools/bm.sty"
+Package: bm 2017/01/16 v1.2c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup8
+\symboldletters=\mathgroup9
+\symboldsymbols=\mathgroup10
+\symboldstmry=\mathgroup11
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
+LaTeX Info: Redefining \bm on input line 207.
+)
 \c@theorem=\count144
 )
 ("./Coding and Cryptography.aux")
@@ -994,6 +1003,10 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 LaTeX Font Info:    Try loading font information for U+stmry on input line 6.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/stmaryrd/ustmry.fd")
+
+LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
+(Font)              using `U/stmry/m/n' instead on input line 6.
+
 
 LaTeX Warning: No \author given.
 
@@ -1786,17 +1799,24 @@ n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )$ \TU/lmr/m/n/10 each have dis-tinct r
 oots $\OML/cmm/m/it/10 []; [] ; []; []; [] ; []$
  []
 
-[35] [36] [37] ("./Coding and Cryptography.aux"))
+[35] [36] [37] [38]
+Missing character: There is no £ (U+00A3) in font cmr10!
+Missing character: There is no £ (U+00A3) in font cmr10!
+ [39] [40] ("./Coding and Cryptography.aux")
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+)
 
 Here is how much of LuaTeX's memory you used:
- 31845 strings out of 494305
+ 31939 strings out of 494305
  100000,1144653 words of node,token memory allocated
  719 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 17 glyph, 27 attribute, 55 glue_spe
 c, 27 attribute_list, 2 write nodes
-   avail lists: 1:5,2:2339,3:737,4:57,5:395,6:24,7:3462,8:74,9:600,10:11,11:182
- 34974 multiletter control sequences out of 65536+200000
- 90 fonts using 6582583 bytes
+   avail lists: 1:6,2:2339,3:737,4:57,5:398,6:25,7:4180,8:74,9:600,10:11,11:218
+ 35061 multiletter control sequences out of 65536+200000
+ 108 fonts using 7703175 bytes
  64i,25n,100p,1095b,1996s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmmono10-regular.otf><<C:\
 Users\Harry\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/doublestroke/dpi600\
@@ -1829,9 +1849,9 @@ C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/public/rsfs/rsfs10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/rsfs/rsfs7.pfb>
-Output written on Coding and Cryptography.pdf (37 pages, 484698 bytes).
+Output written on Coding and Cryptography.pdf (40 pages, 505155 bytes).
 
-PDF statistics: 294 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 303 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

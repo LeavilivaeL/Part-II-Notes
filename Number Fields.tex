@@ -1011,5 +1011,148 @@ Since $\Z[\sqrt{-5}]$ is not a UFD we have to use ideals. Suppose $P \subset \o_
 So by unique factorisation of ideals, $(y+\sqrt{-5}) = I^3, (y0\sqrt{-5}) = J^3$ with $IJ = (x)$, as ideals $(y+\sqrt{-5}), (y-\sqrt{-5})$ have no common prime ideal factors. Now we use from earlier, that $Cl(K) \cong \Z/2\Z$. As $I^3$ is principal, we must have that $I$ is principal, so $I = (a+b\sqrt{-5})$ say. So $y+\sqrt{-5} = ($unit$)(a+b\sqrt{-5})^3 = \pm(a+b\sqrt{-5})^3$ as $\o_K^\ast = \{\pm 1\}$. Absorbing the $\pm$ into $a,b$, we have $y+\sqrt{-5} = (a+b\sqrt{-5})^3 = (a^3 - 15ab^2) + (3a^2b-3b^3)\sqrt{-5}$.
 
 So $1 = 3a^2b - 5b^3 = (3a^2-3b^2)b$, so $b = \pm 1$, and there are no solutions in $\Z$.
+\section{Analytic Class Number Field}
+Let $\Q(\sqrt{-d}) = K$ be an imaginary quadratic field, and let $h_K = \#Cl(K)$. Then we have 2 facts:
+\begin{enumerate}
+\item $h_K \to \infty$ as $d \to \infty$. In fact, $h_K \approx |d_K|^{\frac12}$
+\item If $d = p \equiv 7 \mod 8$. Then $h_K = \#\{\text{quad. residues in }[1, \frac{p-1}{2}]\} - \#\{\text{nonresidues in }[1,\frac{p-1}{2}]\}$.
+\end{enumerate}
+If $\Q(\sqrt{d)} = K$ is a real quadratic, then we have a fundamental unit $\epsilon > 1$, and:
+\begin{enumerate}
+\item[3.] $h_K \log \epsilon \to \infty$ as $d \to \infty$, also $\approx d_K^\frac12$.
+\end{enumerate}
+This implies that, if $h_K = 1$, i.e. $\o_K$ is a PID, and $d$ is large, then $\epsilon$ is large. For example, if we have $\Q(\sqrt{3001})$ has class number 1 - it's ring or integers is a PID. Then its fundamental unit is of the form $a+b\sqrt{3001}$, and $a > 4\times 10^{36}$. All these results are obtained using the analytic class number formula. In particular, 2. is an algebraic statement but the proof requires analysis.
 
+The key ingredient is the Dedekind $\bm{\zeta}$-function. Recall from Part II Number Theory, the \emph{Riemann $\bm{\zeta}$-function} is given by $\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$ for $s$ real $>1$. This diverges at $s = 1$. Moreover:
+\begin{proposition}
+\begin{align*}
+\lim_{s\to 1_+} (s-1)\zeta(s) = 1
+\end{align*}
+\end{proposition}
+\begin{proof}
+Compare $\sum\frac{1}{n^s}$ and $\int_{1}^\infty \frac{1}{x^s}dx = \frac{1}{s-1}$. As $x^{-s}$ is monotonic decreasing for $s>1$, we have:
+\begin{align*}
+\int_{n}^{n+1}\frac{1}{x^s}dx < \frac{1}{n^s} < \int_{n-1}^n \frac{1}{x^s}dx
+\end{align*}
+So, we have the inequalities:
+\begin{align*}
+\frac{1}{s-1} = \int_{1}^\infty \frac{1}{x^s} dx < \sum_{n =1}^{\infty}\frac{1}{n^s} = 1+ \sum_{n=2}^\infty \frac{1}{n^s} < 1+ \int_{1}^\infty \frac{1}{x^s}dx = 1+\frac{1}{s-1}
+\end{align*}
+Multiplying by $s-1$ and taking the limit gives the required result.
+\end{proof}
+Now let $K$ be a number field - the analogue is the \emph{Dedekind $\bm{\zeta}$-function}
+\begin{align*}
+\zeta_K(s) = \sum_{0 \neq I \subset \o_K} \frac{1}{\Nn(I)^s}
+\end{align*}
+If $K = \Q$, this is just $\zeta(s)$, as $\Nn((n)) = n$.
+\begin{theorem}
+$\zeta_K(s)$ converges if $s>1$, and:
+\begin{align*}
+\lim_{s\to 1_+} (s-1)\zeta_K(s) = 2^{r_1+r_2} \pi^{r_2}|d_K|^{-\frac12}\frac{h_K R_K}{w_K}
+\end{align*}
+Where:
+\begin{itemize}
+\item $(r_1,r_2)$ are what we've called $(r,s)$, but we've already got an $s$.
+\item $h_K = \#Cl(K)$.
+\item $w_K$ is the number of roots of unity in $K$.
+\item $R_K$ is the \emph{regulator} of $K$, defined to be $|\det \mathscr{L}(\epsilon_j)_k)_{1\leq j,k\leq r_1+r_2-1}|$, where $\mathscr{L}:\o_K^\ast \to \R^{r_1+r_2,0}$ and $\epsilon_1, \ldots, \epsilon_{r_1+r_2-1}$ are generators for the torsion free part of $\o_K^\ast$.
+\end{itemize}
+\end{theorem}
+For example, if $K = \Q(\sqrt{d})$, $R_K = \log \epsilon$ where $\epsilon$ is the fundamental unit. If $K = \Q$ or $\Q(\sqrt{-d}), \o_K^\ast$ is finite and $R_K = 1$.
+\begin{proof}[Proof in the imaginary quadratic case]
+Let $h = h_K$, and choose ideal $J_1, \ldots, J_h$ representing all the elements of $Cl(K)$. Thin if we have any ideal $\{0\} \neq I \subset \o_K$, there is a unique $i \in \{1, \ldots, h\}$ with $IJ_i = (\alpha)$ is principal, with $\alpha \in J_i$.
+
+Conversely, given $i$ and $0 \neq \alpha \in J_i$, there is a unique ideal $I$ with $IJ_i = (\alpha)$ and $\alpha, \alpha'$ giving the same $I$ if and only if $\alpha' = \alpha\epsilon, \epsilon \in \o_K^\ast$. So far, this works for any field $K$. 
+
+Now $N(I) = N(J_i)^{-1} |\Nn_{K/\Q}(\alpha)|$. If $K = \Q(\sqrt{-d})$, then $\o_K^\ast$ is finite, so each $I$ corresponds to precisely $w_K$ different possible $\alpha.$ So:
+\begin{align*}
+\zeta_K(s)& = \sum_{i=1}^h \sum_{0 \neq \alpha \in J_i} \frac{1}{w_K}\frac{1}{\Nn(J_i)^{-s}|\Nn_{K/\Q}(\alpha)|^s} \\
+&= \frac{1}{w_K} \sum_{i=1}^h \Nn(J_i)^s \sum_{0 \neq \alpha \in J_i} \frac{1}{|\Nn_{K/\Q}(\alpha)|^s}\tag{\ast}
+\end{align*}
+For $K \subset \C$, then $J_i \subset \C \cong \R^2$ is a lattice of covolume $\Nn(J_i) \frac{|d_K|^\frac12}{2}$, and $\alpha \in J_i, \Nn_{K/\Q}(\alpha) = \alpha\bar{\alpha} =  |\alpha|^2$.
+
+We have the following generalisation of \textbf{13.1}
+\begin{theorem}
+If $\Lambda \subset \C$ is any lattice, and $Z(s) = \sum_{0 \neq x \in \Lambda} \frac{1}{|x|^{2s}}$, then $Z(s)$ converges for $s>1$ and:
+\begin{align*}
+\lim_{s \to 1_+} (s-1)Z(s) = \frac{\pi}{\covol \Lambda}
+\end{align*}
+A proof of this will follow next lecture. With this result, we have:
+\begin{align*}
+\lim_{s\to 1_+} \sum_{0 \neq \alpha \in J_i} \frac{1}{|\Nn_{K/\Q}(\alpha)|^s} &= \lim_{s\to 1_+} \sum_{0 \neq \alpha \in J_i} \frac{1}{|\alpha|^{2s}}\\
+&= \frac{\pi}{\frac12 |d_K|^{\frac12}\Nn(J_i)}
+\end{align*}
+Substituting this into $(\ast)$, we have $\Nn(J_i)$ cancels, and:
+\begin{align*}
+\lim_{s\to 1_+} (s-1)\zeta_K(s) = 2\pi |d_K|^{\frac12} \frac{h_K}{w_K}
+\end{align*}
+\end{theorem}
+\end{proof}
+Let $\Lambda \subset \R^n$ be a lattice and $C \subset \R^n$ be a closed convex cone, so that $x \in C, \R \ni a \geq 0 \implies ax \in C$, and $F:\R^n \to R$ be continuously differentiable except perhaps at the origin with $F(ax) =a^nF(x)$ for all $a \geq 0$, and $F(x) > 0$ for all $0 \neq x \in C$. For example, $F(x) = ||x||^n$.
+
+We can then generalise the previous result in the following way: define $C_t = \{x \in C|F(x)\leq t^n\} = tC_1$, closed and bounded. Then let $Z(s) = \sum_{0\neq x \in \Lambda \cap C}\frac{1}{F(x)^s}$. For example, $n=1, \Lambda = \Z, C = \R_{\geq 0}, F(x) = |x| \implies Z(s) = \zeta(s)$.
+\begin{theorem}
+$Z(s)$ converges for $s>1$ and $\lim_{s \to 1_+} (s-1)Z(s) = \mu \coloneqq \frac{\vol C_1}{\covol \Lambda}$
+\end{theorem}
+\begin{proof}
+If we change basis of $\R^n$, $Z(s)$ doesn't change, but both $\vol C_1$ and $\covol \Lambda$ are multiplied by the same constant, which is the determinant of the change of basis matrix. So after making a change of basis, we may assume $\Lambda = \Z^n$, in which case $\mu = \vol C_1$. Let $N(t) = \#(\Z^n \cap C_t) = \#(\frac{1}{t}\Z^n \cap C_1)$. Then $N(t)/t^n \to \vol C_1 = \mu$ as $t \to \infty$, by considering cubes of side $1/t$ attached to each $x \in \frac{1}{t}\Z^n \cap \Lambda$.
+
+Then order points in $\Z^n \cap C$ by increasing $F(x)$. I.e. $\Z^n \cap C = \{0, x_1, x_2, \ldots\}$. Then let $t_k = F(x_k)^{\frac1n}$ Then $\Z^n \cap C_{t_k} \supset \{0, \ldots, x_k\}$, but $x_k \notin C_{t_k-\delta}$ for $\delta >0$. So:
+\begin{align*}
+N(t_k) &> k \geq N(t_k-\delta)\\
+\implies \frac{N(t_k)}{t_k^n} &> \frac{k}{t_k^n} \geq \frac{N(t_k-\delta)}{(t_k-\delta)^n}\cdot \frac{(t_k-\delta)^n}{t_k^n}
+\end{align*}
+And so $\lim_{k \to \infty} \frac{k}{t_k^n} = \lim_{k \to \infty} \frac{N(t_k)}{t_k^n} = \mu$.
+
+Now $Z(s) = \sum_{k \geq 1} \frac{1}{F(x_k)^s} = \sum_{k \geq 1} \frac{1}{t_k^{ns}}$, and for every $\epsilon > 0$, there is some $k_\epsilon$ with $k > k_\epsilon$ gives:
+\begin{align*}
+(\mu-\epsilon)^s\frac{1}{k^s} &< \frac{1}{t_k^{ns}} < (\mu+\epsilon)^s\frac{1}{k^s}\\
+(\mu-\epsilon)^s\sum_{k\geq k_\epsilon}\frac{1}{k^s} &< \sum_{k\geq k_\epsilon} \frac{1}{t_k^{ns}} < (\mu+\epsilon)^s \sum_{k\geq k_{\epsilon}}\frac{1}{k^s}
+\end{align*}
+and $\sum \frac{1}{k^s}$ converges for $s >1$. Hence so does $Z(s)$, and taking the limit as $s \to 1$ we get $\lim_{s \to 1}(s-1)\sum_{k\geq 1}\frac{1}{t_k^{ns}} = \lim_{s\to 1}(s-1)Z(s) = \mu\lim_{s\to 1}(s-1)\zeta(s) = \mu$.
+\end{proof}
+Now let $K = \Q(\sqrt{d})$ real quadratic. Then from last time, $\zeta_K(s) = \sum_{j=1}^h \Nn(J_i)^s \sum_{(\alpha)\subset J_i} \frac{1}{|\Nn_{K/\Q}(\alpha)|^s}$. Then we have $(\sigma_1, \sigma_2) = \sigma:K \injection \R \times \R$. Let $\epsilon > 1$ be the fundamental unit. For $0 \neq \alpha \in \o_K$, put $\sigma(\alpha) = (\alpha, \alpha')$. Then if $m \in \Z, \beta = \epsilon^m \alpha$, and $|\beta/\beta'| = |\alpha/\alpha'|\cdot|\epsilon/\epsilon'|^m = \epsilon^{2m}|\alpha/\alpha'|$, as $\pm 1 = \Nn_{K/\Q}(\epsilon) = \epsilon\epsilon'$.
+
+So any principal $J$ is $(\alpha)$ for some $\alpha$ with $\frac{1}{\epsilon} < |\frac{\alpha}{\alpha'}| \leq \epsilon$, and $\alpha$ is unique up to a sign. This gives:
+\begin{align*}
+\zeta_K(s) = \sum_{j=1}^h \Nn(J_i)^s \frac12 \sum_{0\neq \alpha\in J_i, \frac{1}{\epsilon} < |\frac{\alpha}{\alpha'}|\leq \epsilon}\frac{1}{|\Nn_{K/\Q}(\alpha)|^s}
+\end{align*}
+
+Consider $D = \{(x_1, x_2) \in \R^2 : \epsilon^{-1} < |\frac{x_1}{x_2}| < \epsilon\}$. 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+axis lines=middle, xtick=\empty, ytick=\empty, xticklabels=\empty, yticklabels=\empty, xmin=-3, xmax=3, ymin=-3, ymax=3, xlabel={$x_1$}, ylabel = {$x_2$}, ylabel style={left}, xlabel style={below}
+]
+\fill[red, fill opacity=.2] plot[domain=0.791:1.265] (axis cs:{\x}, {1/\x}) -- (axis cs:0,0) -- cycle;
+\fill[blue, fill opacity=0.2] (axis cs:0,0) -- (axis cs:1.875,3)--(axis cs:3,3) -- (axis cs:3, 1.875) -- cycle;
+\fill[blue, fill opacity=0.2] (axis cs:0,0) -- (axis cs:-1.875,3)--(axis cs:-3,3) -- (axis cs:-3, 1.875) -- cycle;
+\fill[blue, fill opacity=0.2] (axis cs:0,0) -- (axis cs:1.875,-3)--(axis cs:3,-3) -- (axis cs:3, -1.875) -- cycle;
+\fill[blue, fill opacity=0.2] (axis cs:0,0) -- (axis cs:-1.875,-3)--(axis cs:-3,-3) -- (axis cs:-3, -1.875) -- cycle;
+\addplot[blue, thick] (x, {1.6*x});
+\addplot[blue, thick] (x, {0.625*x});
+\addplot[blue, thick] (x, {-1.6*x});
+\addplot[blue, thick] (x, {-0.625*x});
+\addplot[red, thick, domain=0.3:3, samples=50] (x, 1/x);
+\node[blue] at (axis cs:2,2) {$C$};
+\node[red!50!blue] at (axis cs:0.75,0.75) {$C_1$};
+\node[red] at (axis cs:2.4,0.7) {$x_1x_2=1$};
+\end{axis}
+\end{tikzpicture}
+\caption{$D$ is the union of the 4 blue cones}
+\end{figure}
+
+
+Then $\alpha$ occurs in $\sigma$ if and only if $\sigma(\alpha)\in D$ and $\alpha \in J_i$. $D$ is a union of 4 cones in $\R^2_{\geq 0}$, $C$ in the upper right quadrant and it's reflections in the axes, and therefore:
+\begin{align*}
+\sum_{0 \neq \alpha \in J_i}\frac{1}{|\Nn_{K/\Q}(\alpha)|^s} = 4\sum_{0 \neq x \in \sigma(J_i) \cap C}\frac{1}{F(x)^s}\;\;\;F(x) = |x_1x_2|
+\end{align*}
+up to an error term on the boundary given by $\sum_{0 \neq \alpha \in J_i}\frac{1}{|\Nn_{K/\Q}(\alpha)|^s}$ which converges for $s=1$.
+
+Then we use \textbf{13.4}. $\vol C_1 = \log \epsilon$, and so:
+\begin{align*}
+\lim_{s\to 1}(s-1)\zeta_K(s) = 2\frac{h_K \log \epsilon}{|d_K|^{\frac12}}
+\end{align*}
+which is ACNF for $K$.
 \end{document}

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  3 MAR 2020 11:00
+This is LuaTeX, Version 1.10.1 (MiKTeX 2.9.7140 64-bit)  (format=lualatex 2019.9.12)  10 MAR 2020 11:41
  system commands enabled.
 **"Number Fields.tex"
 ("./Number Fields.tex"
@@ -51,7 +51,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 Inserting `luaotfload.aux.set_xheight' at position 4 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 5 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.999 seconds
+luaotfload | main : initialization completed in 0.844 seconds
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size10.clo"
@@ -859,7 +859,29 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 \SOUL@uldp=\dimen262
 \SOUL@ulht=\dimen263
 )
-\c@theorem=\count143
+("C:/Program Files/MiKTeX 2.9/tex/latex/footmisc/footmisc.sty"
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks53
+\footnotemargin=\dimen264
+\c@pp@next@reset=\count143
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924.
+
+)
+("C:/Program Files/MiKTeX 2.9/tex/latex/tools/bm.sty"
+Package: bm 2017/01/16 v1.2c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup8
+\symboldletters=\mathgroup9
+\symboldsymbols=\mathgroup10
+\symboldstmry=\mathgroup11
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
+LaTeX Info: Redefining \bm on input line 207.
+)
+\c@theorem=\count144
 ) ("./Number Fields.aux")
 \openout1 = Number Fields.aux
 
@@ -877,19 +899,19 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
- ("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
+("C:/Program Files/MiKTeX 2.9/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count144
-\scratchdimen=\dimen264
+\scratchcounter=\count145
+\scratchdimen=\dimen265
 \scratchbox=\box65
-\nofMPsegments=\count145
-\nofMParguments=\count146
-\everyMPshowfont=\toks53
-\MPscratchCnt=\count147
-\MPscratchDim=\dimen265
-\MPnumerator=\count148
-\makeMPintoPDFobject=\count149
-\everyMPtoPDFconversion=\toks54
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks54
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen266
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks55
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -905,7 +927,7 @@ Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks55
+\pdftexcmds@toks=\toks56
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 43
 8.
@@ -979,6 +1001,10 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 LaTeX Font Info:    Try loading font information for U+stmry on input line 6.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/stmaryrd/ustmry.fd")
+
+LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
+(Font)              using `U/stmry/m/n' instead on input line 6.
+
 
 LaTeX Warning: No \author given.
 
@@ -1104,19 +1130,41 @@ NOTE: coordinate (0Y0.0e-3],5Y0.0e0]) has been dropped because it is unbounded (
 in y). (see also unbounded coords=jump). 
 NOTE: coordinate (0Y0.0e0],5Y0.0e0]) has been dropped because it is unbounded (i
 n y). (see also unbounded coords=jump). 
-[21] [22] [23] [24] ("./Number Fields.aux"))
+[21] [22] [23]
+Overfull \hbox (5.00151pt too wide) in paragraph at lines 1018--1019
+[]\TU/lmr/m/n/10 If $\OML/cmm/m/it/10 d \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 p \O
+MS/cmsy/m/n/10  \OT1/cmr/m/n/10 7[]  8$\TU/lmr/m/n/10 . Then $\OML/cmm/m/it/10
+ h[] \OT1/cmr/m/n/10 = #\OMS/cmsy/m/n/10 f[]\OT1/cmr/m/n/10 [1\OML/cmm/m/it/10 
+; []\OT1/cmr/m/n/10 ]\OMS/cmsy/m/n/10 g   \OT1/cmr/m/n/10 #\OMS/cmsy/m/n/10 f[]
+\OT1/cmr/m/n/10 [1\OML/cmm/m/it/10 ; []\OT1/cmr/m/n/10 ]\OMS/cmsy/m/n/10 g$\TU/
+lmr/m/n/10 . 
+ []
+
+[24] [25] [26]
+Overfull \hbox (16.05917pt too wide) in paragraph at lines 1114--1115
+[]\TU/lmr/m/n/10 Now let $\OML/cmm/m/it/10 K \OT1/cmr/m/n/10 = \U/msb/m/n/10 Q\
+OT1/cmr/m/n/10 ([])$ \TU/lmr/m/n/10 real quadratic. Then from last time, $\OML/
+cmm/m/it/10 []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s\OT1/cmr/m/n/10 ) = [][] [](\
+OML/cmm/m/it/10 J[]\OT1/cmr/m/n/10 )[] [][] []$\TU/lmr/m/n/10 .
+ []
+
+[27] [28] ("./Number Fields.aux")
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+)
 
 Here is how much of LuaTeX's memory you used:
- 31612 strings out of 494305
+ 31906 strings out of 494305
  100000,1144653 words of node,token memory allocated
  532 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 4 glue, 4 kern, 1 glyph, 10 attribute, 55 glue_spec
 , 10 attribute_list, 2 write nodes
-   avail lists: 1:3,2:2302,3:609,4:104,5:358,6:26,7:3324,8:68,9:528,10:11,11:150
+   avail lists: 1:3,2:2302,3:609,4:104,5:361,6:26,7:3324,8:68,9:543,10:11,11:150
 
- 34748 multiletter control sequences out of 65536+200000
- 95 fonts using 6743903 bytes
- 69i,20n,100p,1085b,2116s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35028 multiletter control sequences out of 65536+200000
+ 116 fonts using 8050911 bytes
+ 69i,20n,100p,1085b,2144s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/program files/miktex 2.9/fonts/opentype/public/lm/lmroman9-regular.otf><c:/p
 rogram files/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/p
 rogram files/miktex 2.9/fonts/opentype/public/lm/lmroman8-regular.otf><c:/progra
@@ -1136,25 +1184,26 @@ rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm7.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam7.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/symbols/msbm5.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/rsfs/rsfs10.pfb>
-Output written on Number Fields.pdf (24 pages, 462661 bytes).
+ic/amsfonts/cm/cmmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
+5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm7.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/symbols/msam7.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/symbols/msbm5.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/symbols/msbm7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/rsfs/rsfs10.pfb>
+Output written on Number Fields.pdf (28 pages, 501988 bytes).
 
-PDF statistics: 269 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 285 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

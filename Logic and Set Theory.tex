@@ -736,7 +736,7 @@ We then define the \emph{cardinality} $\card(X)$ to be the least ordinal with th
 
 If $X, Y$ are sets, then we write $|X|\leq |Y|$ to mean there is an injection from $X$ to $Y$. Clearly $|X|\leq |X|$, and $(|X|\leq |Y|, |Y|\leq |Z|) \implies |X|\leq|Z|$. Moreover, by Cantor-Schr\"oder-Bernstein, if $|X|\leq |Y|$ and $|Y| \leq |X|$, then $|X|=|Y|$.
 
-But then the question is what are the cardinals? We define an ordinal $\alpha$ to be \emph{initial} if for all $\beta \alpha$ there is no bijection $\beta \to \alpha$. For example, 0,1,2,3,\ldots are all initial ordinals. $\omega, \omega_1$ are also initial ordinals. However, no ordinal $\alpha$ with $\omega <\alpha <\omega_1$ is initial.
+But then the question is what are the cardinals? We define an ordinal $\alpha$ to be \emph{initial} if for all $\beta > \alpha$ there is no bijection $\beta \to \alpha$. For example, 0,1,2,3,\ldots are all initial ordinals. $\omega, \omega_1$ are also initial ordinals. However, no ordinal $\alpha$ with $\omega <\alpha <\omega_1$ is initial.
 
 For $\alpha$ an ordinal, we can define $\omega_\alpha$ recursively:
 \begin{itemize}
@@ -785,7 +785,7 @@ Let $\kappa$ be an infinite cardinal. Then $\kappa\kappa =\kappa$.
 \begin{proof}
 We have $\kappa = \aleph_\alpha$ for some ordinal $\alpha$. Think of $\kappa$ as the initial ordinal $\omega_\alpha$, so it is well-ordered.
 
-We then need to show that $\omega_\alpha \times \omega_\alpha$.
+We then need to show that $\card(\omega_\alpha \times \omega_\alpha) = \card(\omega_\alpha)$.
 
 Well order $\omega_\alpha \times \omega_\alpha$ by $(x,y) < (z,w)$ if:
 \begin{itemize}
@@ -842,10 +842,10 @@ Let $\kappa, \lambda$ be infinite cardinals. Then:
 \end{proof}
 \hspace*{-1em}\underline{Examples:}
 \begin{enumerate}
-\item $\card{\R} = \card{\powset(\N)} = 2^{\alpha_0}$.
+\item $\card{\R} = \card{\powset(\N)} = 2^{\aleph_0}$.
 \item Let $X$ be the set of real sequences. What is $\card(X)$? Well, $\card(X) = \card(\R^\N) = (2^{\aleph_0})^{\aleph_0}=2^{\aleph_0\aleph_0}=2^{\aleph_0}$, i.e. there is a bijection from the set of the reals to the set of real sequences.
 \end{enumerate}
-What about exponentiation? This turns out to be \underline{\underline{HARD}}. What is $2^{\aleph_0}$? We know that $2^{\aleph_0} = \aleph_\alpha$ for some $\alpha \geq 1$. We could guess that $2^{\aleph_0} = \alpha_1$, but it is impossible to prove one way or the other, even using the axiom of choice as we have been. We cannot prove that $\R$ has an uncountable subset that doesn't biject with $\R$.
+What about exponentiation? This turns out to be \underline{\underline{HARD}}. What is $2^{\aleph_0}$? We know that $2^{\aleph_0} = \aleph_\alpha$ for some $\alpha \geq 1$. We could guess that $2^{\aleph_0} = \aleph_1$, but it is impossible to prove one way or the other, even using the axiom of choice as we have been. We cannot prove that $\R$ has an uncountable subset that doesn't biject with $\R$.
 
 One thing that is true: for any $\kappa, 2^{\kappa} > \kappa$. This is left as an exercise - show there is no bijection $\powset(X) \to X$ for any $X$.
 
@@ -1256,4 +1256,68 @@ It turns out we will also need two more axioms, but its not obvious why. Here th
 (\forall x)((x = \emptyset)\vee (\exists y)((y \in x)\wedge (x \cap y = \emptyset))\tag{Fdn}
 \end{align*}
 \end{itemize}
+We say a set is \emph{transitive} if $(\forall y)(\forall z)(((y \in x)\wedge(z \in y))\implies (z \in x))$. Equivalently, $\bigcup x \subset x$. A \emph{von Neumann ordinal} is a transitive set well ordered by $\in$.
+
+We have $0,1,2,\ldots$ are von Neumann ordinals. Also, $\omega = \{0,1,2,\ldots\}$. We can also get to $(\omega + n)$ $\omega \cup\{\omega, \omega+1, \ldots\}$. What about $\omega + \omega$? We want $\omega \cup\{\omega, \omega+1, \ldots\}$. The problem is we don't know that $x = \{\omega, \omega+1, \ldots\}$.
+
+The idea is take $x$ as an image of $\omega$ under $n \mapsto \omega + n$. But we don't know that this exists as a function in ZF. Let $V$ be a model of ZF. A \emph{class} is a collection $C$ of elements of $V$ such that for some formula in the language of sets with free variable $x$, $C$ is the collection of $x$ for which $p$ is satisfied. Externally, a class is not a set. Internally, it need not be. For example, if $p$ is $(x=x)$ then all of $V$ is a class, which is not a set in ZF.
+
+If $ZF \vdash (\exists y)(\forall x)((x \in y) \iff p)$, then we shall say $C$ \emph{is a set}, and often identify it with $y$, otherwise $C$ is a \emph{proper class}. Any set $y$ has an associated class: take $p$ as $x \in y$. Write $\{x |p\}$ for the class $C$ and $x \in C$ to mean $x$ satisfies $p$. 
+
+A \emph{function-class} is a collection $F$ of ordered pairs of elements of $V$ such that there is some formula $p$ in the language of sets with free variables $x,y$, and maybe others to act as parameters, with 
+\begin{align*}
+(\forall x)(\forall y)(\forall z)((p \wedge p[z/y])\implies (y=z))
+\end{align*}
+such that $(x,y)$ is in $F$ if and only if $x,y$ satisfy $p$.  This gives us our ninth axiom:
+\begin{enumerate}
+\item[9.] \underline{Replacement:} ``The image of a set under a function-class is a set."
+\begin{align*}
+(\forall t_1)\ldots(\forall t_n)[((\forall x)(\forall y)(\forall z)((p& \wedge p[z/y])\implies(y=z))\implies\tag{Rep}\\
+((\forall u)(\exists v)(\forall y)((y \in r)&\iff(\exists x)(p \wedge (x\in u))))]
+\end{align*}
+\end{enumerate}
+\example $v = \{\omega, \omega+1, \ldots\}$ is the image of the set $\omega$ under the function-class $x \mapsto \omega+x$ and hence exists as a set, provided we can show that $x \mapsto \omega+x$ really is a function class. We want something like $(x\in \omega)\wedge(y$ is an ordinal$)\wedge(\omega \subset y)(\wedge(y\setminus \omega$ bijects with $x)$. We can prove by induction that this is a function class.
+\subsection{Uses of Foundation: $\bm{\in}$-induction and $\bm{\in}$-recursion}
+The axiom of foundation is meant to capture the idea that sets are built up from simpler sets made earlier, and so on until we eventually get back to $\emptyset$. In particular, we don't want $x \in x$ or $a \in b \in c \in a$. Both are forbidden by (Fdn) applied to $\{x\}$ and $\{a,b,c\}$.
+
+What if we apply (Fdn) to a set $x$ on which $\in$ is a total order? It just says $x$ has an $\in$-least element. Applying this to all non-empty subsets of $x$, we see $\in$ well-orders $x$. The aim is to say, given our picture of the universe, we should have a concept of induction over $\in$: when proving $p$ for $x$, we can assume it for all $y \in x$. If it goes wrong, we use (Fdn) to get a smallest counterexample, and find a contradiction.
+
+\begin{lemma}
+Any set $x$ is a subset of some transitive set.
+\end{lemma}
+\begin{proof}
+We shall construct the \emph{transitive closure} of $x$, $TC(x) = \bigcup \{x, \bigcup x, \bigcup\bigcup x, \ldots\}$. Now $TC(x)$ is indeed a set by (Un) and (Rep) as long as $n \mapsto \underbrace{\bigcup\bigcup\ldots\bigcup}_n x$ is a function class with domain $\omega$.
+
+We say $f$ is an attempt to mean $f$ is a function and $\dom f \in \omega$ and $\dom f \neq \emptyset$ and $f(0) = x$ and for all $n \in \omega, n^+ \in \omega \implies f(n^+) = \bigcup f(n)$. Then by $\omega$-induction, for all attempts $f, g$, if $n \in \dom f \cap \dom g$ we must have $f(n)=g(n)$, and there is an attempt $f$ with $n \in \dom f$ for any choice of $n \in \omega$. SO define our function class as $n \mapsto \underbrace{\bigcup\bigcup\ldots\bigcup}_n x$ on $\omega$ by the following formula with free variables $n, y$:
+\begin{align*}
+(\exists f)((f \text{ an attempt}) \wedge ( n \in \dom f)\wedge(f(n)=y)
+\end{align*}
+\end{proof}
+\begin{theorem}[Principle of $\in$-induction]
+Let $p$ be a formula with free variables $\{t_1, \ldots, t_n, x\}$. Then:
+\begin{align*}
+(\forall t_1)\ldots(\forall t_n)(((\forall x)(\forall y)(((y \in x)\implies p[y/x])\implies p)\implies (\forall x)p)
+\end{align*}
+\end{theorem}
+\begin{proof}
+Fix $t_1, \ldots, t_n$. Suppose that $(\forall x)(\forall y)(((y \in x)\implies p[y/x])\implies p)$. Suppose for a contradiction that $(\exists x)\neg p$. Let $t = TC(\{x\})$, and let $u = \{z\in t : \neg p[z/x]\}$. Then $x \in u$, so $u \neq \emptyset$, and by (Fdn) $(\exists y \in u)(y \cap u=\emptyset)$. Then $\neg p[y/x]$, but $(\forall z \in y)p[z/x]$ as $t$ is transitive. \contr
+\end{proof}
+In the presence of the other axioms of ZF, theorem \textbf{41} is equivalent to (Fdn).
+
+\begin{theorem}[Principle of $\in$-recursion]
+Let $G$ be an everywhere defined function class, say by formula $p$ with free variables $x,y$. Then there is an everywhere defined function class $F$ by formula $q$ with free variables $x,y$ such that, for all $x$, $F(x) = G(F|_x)$. Moreover, $F$ is unique. This does make sense as $F|_x$ is a set by (Rep). 
+\end{theorem}
+\begin{proof}
+We say ``$f$ is an attempt" to mean $f$ is a function and $\dom f$ is transitive and $(\forall x \in \dom f)(f(x)=G(f|_x))$. Then by $\in$-induction:
+\begin{align*}
+(\forall x)(\forall f)(\forall g)(((f \text{ attempt})\wedge(g \text{ attempt})\wedge(x \in \dom f \cap \dom g))\implies (f(x)=g(x)))
+\end{align*}
+Suppose $x$ is such that $(\forall y \in x)(\exists f_y)((f_y\text{ attempt})\cap(y \in \dom f_y))$. Then $f = \bigcup_{y \in x}f_y$ is an attempt. If $x \notin \dom f$, extend it to $f' = f\cup\{(x, G(f|_x))\}$ is an attempt defined at $x$. So by $\in$-induction, $(\forall x)(\exists f)((f\text{ attempt}\wedge(x\in \dom f)).$ Uniqueness follows by $\in$-induction.
+\end{proof}
+What properties of $\in$ did we use?
+\begin{itemize}
+\item Well-foundedness: If $x \neq \emptyset$, it has an $\in$-minimal member.
+\item It is local: for any set $x$, the collection of $y$ with $y \in x$ is a set.
+\end{itemize}
+Suppose now $r$ is a relation on a set $a$ and that $r,s$ are well-defined. Th en  also $r$ is local by separation, so we can prove analogues of these two theorems ($r$-induction/$r$-recursion) for the relation $r$.
 \end{document}
